@@ -14,14 +14,14 @@ import java.util.Calendar;
  */
 public class Multa {
     private int codigo;
-    private Usuario uso;
+    private Usuario usu;
     private Calendar fecha_multa;
     private int estado_multa;
     private int tiempo_multa;
 
-    public Multa(int codigo, Usuario uso, Calendar fecha_multa, int estado_multa, int tiempo_multa) {
+    public Multa(int codigo, Usuario usu, Calendar fecha_multa, int estado_multa, int tiempo_multa) {
         this.codigo = codigo;
-        this.uso = uso;
+        this.usu = usu;
         this.fecha_multa = fecha_multa;
         this.estado_multa = estado_multa;
         this.tiempo_multa = tiempo_multa;
@@ -35,12 +35,12 @@ public class Multa {
         this.codigo = codigo;
     }
 
-    public Usuario getUso() {
-        return uso;
+    public Usuario getUsu() {
+        return usu;
     }
 
-    public void setUso(Usuario uso) {
-        this.uso = uso;
+    public void setUsu(Usuario usu) {
+        this.usu = usu;
     }
 
     public Calendar getFecha_multa() {

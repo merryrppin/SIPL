@@ -31,13 +31,13 @@ public class multaDAO {
         try {
             while (rs.next()) {
                 int codigo = rs.getInt("codigo");
-                String uso = rs.getString("cod_usuario");
+                String usu = rs.getString("cod_usuario");
                 Calendar cal= Calendar.getInstance();
                 Timestamp t1=rs.getTimestamp("fecha_multa");
                 cal.setTimeInMillis(t1.getTime());
                 int estado_multa = rs.getInt("estado_multa");
                 int tiempo_multa = rs.getInt("tiempo_multa");
-                Multa mul = new Multa(codigo, usuDAO.getUsuario(codigo), cal, estado_multa, tiempo_multa);
+                Multa mul = new Multa(codigo, usuDAO.getUsuario(usu), cal, estado_multa, tiempo_multa);
                 data.add(mul);
             }
             rs.close();
@@ -52,13 +52,13 @@ public class multaDAO {
         ResultSet rs = con.getQuery("select * from multa where codigo=" + codigo);
         try {
             if (rs.next()) {
-                String uso = rs.getString("cod_usuario");
+                String usu = rs.getString("cod_usuario");
                 Calendar cal= Calendar.getInstance();
                 Timestamp t1=rs.getTimestamp("fecha_multa");
                 cal.setTimeInMillis(t1.getTime());
                 int estado_multa = rs.getInt("estado_multa");
                 int tiempo_multa = rs.getInt("tiempo_multa");
-                mul = new Multa(codigo, usuDAO.getUsuario(codigo), cal, estado_multa, tiempo_multa);
+                mul = new Multa(codigo, usuDAO.getUsuario(usu), cal, estado_multa, tiempo_multa);
             }
             rs.close();
         } catch (SQLException ex) {
@@ -71,7 +71,8 @@ public class multaDAO {
         boolean result = false;
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal1=sdf.format(mul.getFecha_multa().getTime());
-        String sql = "insert into multa (cod_usuario, fecha_multa, estado_multa, tiempo_multa) values ('"+mul.getUso().getCodigo()+"','"+cal1+"'," + mul.getEstado_multa() + ","
+        String sql = "insert into multa (cod_usuario, fecha_multa, estado_multa, tiempo_multa) values ('"
+                +mul.getUsu().getCodigo()+"','"+cal1+"'," + mul.getEstado_multa() + ","
                 + mul.getTiempo_multa() +")";
         int registros = con.setQuery(sql);
         if (registros == 1) {
@@ -84,8 +85,9 @@ public class multaDAO {
         boolean result = false;
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal1=sdf.format(mul.getFecha_multa().getTime());
-        String sql = "update multa set cod_usuario='"+mul.getUso().getCodigo()+"',"
-                + " fecha_multa='"+cal1+"', estado_multa=" + mul.getEstado_multa() + ",tiempo_multa= "+ mul.getTiempo_multa() +" where codigo=" + mul.getCodigo();
+        String sql = "update multa set cod_usuario='"+mul.getUsu().getCodigo()+"',"
+                + " fecha_multa='"+cal1+"', estado_multa=" + mul.getEstado_multa() 
+                + ",tiempo_multa= "+ mul.getTiempo_multa() +" where codigo=" + mul.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
