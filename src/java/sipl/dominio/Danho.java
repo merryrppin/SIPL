@@ -19,14 +19,24 @@ public class Danho {
     private Usuario usu;
     private Calendar fecha_d;
     private Usuario usu_rd;
+    int estado;
 
-    public Danho(int codigo, String descripcion, Material mat, Usuario usu, Calendar fecha_d, Usuario usu_rd) {
+    public Danho(int codigo, String descripcion, Material mat, Usuario usu, Calendar fecha_d, Usuario usu_rd, int estado) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.mat = mat;
         this.usu = usu;
         this.fecha_d = fecha_d;
         this.usu_rd = usu_rd;
+        this.estado = estado;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     public int getCodigo() {
