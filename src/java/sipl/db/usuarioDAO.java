@@ -85,8 +85,7 @@ class usuarioDAO {
     public boolean updateUsuario(Usuario usu) {
         boolean result = false;
         String sql = "update usuario set nombre='" + usu.getNombre() + "',"
-                + " descripcion='" + lab.getDescripcion() + "', ubicacion='" + lab.getUbicacion()
-                + "' where codigo=" + lab.getCodigo();
+                + " apellido='" + usu.getApellido()+ "', telefono="+ usu.getTelefono()+",correo= '"+usu.getCorreo()+"',estado= " + usu.getEstado()+", tipo_usuario= " + usu.getTipo_usuario()+", observaciones='"+usu.getObservaciones()+"', clave='"+usu.getClave()+"',where codigo=" + usu.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;

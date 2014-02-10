@@ -47,8 +47,8 @@ public class multaDAO {
     }
 
     public Multa getMulta(int codigo) {
-        Laboratorio lab = null;
-        ResultSet rs = con.getQuery("select * from laboratorio where codigo=" + codigo);
+        Multa mul = null;
+        ResultSet rs = con.getQuery("select * from multa where codigo=" + codigo);
         try {
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
