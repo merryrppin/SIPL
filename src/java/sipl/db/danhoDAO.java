@@ -9,6 +9,7 @@ package sipl.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import sipl.dominio.Danho;
@@ -74,9 +75,11 @@ public class danhoDAO {
 
     public boolean addDanho(Danho dan) {
         boolean result = false;
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String cal1=sdf.format(dan.getFecha_d().getTime());
         String sql = "insert into danho (descripcion, codigo_mat, codigo_usu, fecha_d, codigo_usu_rd, estado"
                 + ") values ('" + dan.getDescripcion() + "'," + dan.getMat().getCodigo() + ",'" + dan.getUsu().getCodigo() + "',"
-                + "'" + dan + "','" + dan.getUsu_rd().getCodigo() + "'," + dan.getEstado() + ")";
+                + "'" + cal1 + "','" + dan.getUsu_rd().getCodigo() + "'," + dan.getEstado() + ")";
         int registros = con.setQuery(sql);
         if (registros == 1) {
             result = true;
