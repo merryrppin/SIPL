@@ -51,16 +51,19 @@ public class multaDAO {
         ResultSet rs = con.getQuery("select * from multa where codigo=" + codigo);
         try {
             if (rs.next()) {
-                String nombre = rs.getString("nombre");
-                String descripcion = rs.getString("descripcion");
-                String ubicacion = rs.getString("ubicacion");
-                lab = new Laboratorio(codigo, nombre, descripcion, ubicacion);
+                String uso = rs.getString("cod_usuario");
+                Calendar cal= Calendar.getInstance();
+                Timestamp t1=rs.getTimestamp("fecha_multa");
+                cal.setTimeInMillis(t1.getTime());
+                int estado_multa = rs.getInt("estado_multa");
+                int tiempo_multa = rs.getInt("tiempo_multa");
+                mul = new Multa(codigo, usuDAO.getUsuario(codigo), cal, estado_multa, tiempo_multa);
             }
             rs.close();
         } catch (SQLException ex) {
-            lab = null;
+            mul = null;
         }
-        return lab;
+        return mul;
     }
 
     public boolean addLaboratorio(Laboratorio lab) {
