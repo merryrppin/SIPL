@@ -15,8 +15,48 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-eye-open"></span> Bulis fea
-</button>
+        <div class="row">
+            <br><br><br><br><br>
+            <div class="col-xs-6 col-sm-2"></div>
+            <div class="col-xs-6 col-sm-8">
+                <h2 align="center">Bienvenid@ al Sistema de información de Laboratorios</h2>
+                <br><br><br>
+                <form class="form-horizontal" action="validar.jsp" method="POST">
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label" for="login">Usuario</label>
+                                    <div class="controls">
+                                        <input type="text" id="login" placeholder="Usuario" name="login">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <label class="control-label" for="passwd">Contraseña</label>
+                                    <div class="controls">
+                                        <input type="password" id="passwd" placeholder="Contraseña" name="passwd">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <br>
+                                        <button type="submit" class="btn-large btn-info">Ingresar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="col-xs-6 col-sm-2"></div>
+        </div>
     </body>
 </html>
