@@ -39,7 +39,8 @@ public class danhoDAO {
                 Timestamp t1=rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
                 String codigo_usu_rd = rs.getString("codigo_usu_rd");
-                Danho dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1 , usuDAO.getUsuario(codigo_usu_rd));
+                int estado = rs.getInt("estado");
+                Danho dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1 , usuDAO.getUsuario(codigo_usu_rd), estado);
                 data.add(dan);
             }
             rs.close();
@@ -61,7 +62,8 @@ public class danhoDAO {
                 Timestamp t1=rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
                 String codigo_usu_rd = rs.getString("codigo_usu_rd");
-                dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1 , usuDAO.getUsuario(codigo_usu_rd));
+                int estado = rs.getInt("estado");
+                dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1 , usuDAO.getUsuario(codigo_usu_rd), estado);
             }
             rs.close();
         } catch (SQLException ex) {
@@ -72,8 +74,9 @@ public class danhoDAO {
 
     public boolean addDanho(Danho dan) {
         boolean result = false;
-        String sql = "insert into danho (nombre, descripcion, ubicacion) values ('" + lab.getNombre() + "','"
-                + lab.getDescripcion() + "','" + lab.getUbicacion() + "')";
+        String sql = "insert into danho (descripcion, codigo_mat, codigo_usu, fecha_d, codigo_usu_rd, estado"
+                + ") values ('" + dan.getDescripcion() + "'," + dan.getMat().getCodigo() + ",'" + dan.getUsu().getCodigo() + "',"
+                + "'" + dan + "','" + dan.getUsu_rd().getCodigo() + "'," + dan.getEstado() + ")";
         int registros = con.setQuery(sql);
         if (registros == 1) {
             result = true;
@@ -81,11 +84,10 @@ public class danhoDAO {
         return result;
     }
 
-    public boolean updateLaboratorio(Laboratorio lab) {
+    public boolean updateDanho(Danho dan) {
         boolean result = false;
-        String sql = "update laboratorio set nombre='" + lab.getNombre() + "',"
-                + " descripcion='" + lab.getDescripcion() + "', ubicacion='" + lab.getUbicacion()
-                + "' where codigo=" + lab.getCodigo();
+        String sql = "update danho set estado=" + dan.getEstado() + ","
+                + " descripcion='" + dan.getDescripcion() + " where codigo=" + dan.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
