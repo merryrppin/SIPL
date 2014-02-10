@@ -12,9 +12,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import sipl.dominio.Material;
 import sipl.dominio.Prestamo;
-import sipl.dominio.Usuario;
 
 /**
  *
@@ -81,8 +79,8 @@ public class prestamoDAO {
         String cal2=sdf.format(pre.getFecha_prestamo().getTime());
         SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal3=sdf1.format(pre.getFecha_devolucion().getTime());
-        String sql = "insert into prestamo (cod_material, cod_usuario, fecha_prestamo, fecha_devolucion) values ('"+ pre.getMat().getCodigo()+"','"
-                +pre.getUsu().getCodigo()+"','"+cal2+"','"+cal3+"')";
+        String sql = "insert into prestamo (cod_material, cod_usuario, fecha_prestamo, fecha_devolucion) values ("
+                + pre.getMat().getCodigo()+",'"+pre.getUsu().getCodigo()+"','"+cal2+"','"+cal3+"')";
         int registros = con.setQuery(sql);
         if (registros == 1) {
             result = true;
@@ -96,7 +94,7 @@ public class prestamoDAO {
         String cal2=sdf.format(pre.getFecha_prestamo().getTime());
         SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal3=sdf1.format(pre.getFecha_devolucion().getTime());
-        String sql = "update Prestamo set cod_material='"+pre.getMat().getCodigo()+"',cod_usuario='"+pre.getUsu().getCodigo()+"',"
+        String sql = "update prestamo set cod_material="+pre.getMat().getCodigo()+",cod_usuario='"+pre.getUsu().getCodigo()+"',"
                 + " fecha_prestamo='"+cal2+"', fecha_devolucion='"+cal3+"' where codigo=" + pre.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {

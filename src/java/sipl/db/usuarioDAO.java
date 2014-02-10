@@ -9,7 +9,6 @@ package sipl.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import sipl.dominio.Laboratorio;
 import sipl.dominio.Usuario;
 
 /**
