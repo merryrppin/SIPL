@@ -47,11 +47,9 @@ class usuarioDAO {
         return data;
     }
 
-    
-    
     public Usuario getUsuario(String codigo) {
         Usuario usu = null;
-        ResultSet rs = con.getQuery("select * from usuario where codigo=" + codigo);
+        ResultSet rs = con.getQuery("select * from usuario where codigo='" + codigo+"'");
         try {
             if (rs.next()) {
                 String nombre = rs.getString("nombre");
@@ -71,6 +69,27 @@ class usuarioDAO {
         return usu;
     }
 
+    public Usuario getLogin(String codigo, String password) {
+        Usuario usu = null;
+        ResultSet rs = con.getQuery("select * from usuario where codigo='" + codigo+"' and clave='"+password+"'");
+        try {
+            if (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                long telefono = rs.getLong("telefono");
+                String correo = rs.getString("correo");
+                int estado = rs.getInt("estado");
+                int tipo_usuario = rs.getInt("tipo_usuario");
+                String observaciones = rs.getString("observaciones");
+                usu = new Usuario(codigo, nombre,apellido,telefono,correo, estado, tipo_usuario, observaciones, password);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            usu = null;
+        }
+        return usu;
+    }
+    
     public boolean addUsuario(Usuario usu) {
         boolean result = false;
         String sql = "insert into usuario (nombre, apellido, telefono,correo,estado,tipo_usuario,observaciones,clave) values ('" + usu.getNombre() + "','"
@@ -85,7 +104,7 @@ class usuarioDAO {
     public boolean updateUsuario(Usuario usu) {
         boolean result = false;
         String sql = "update usuario set nombre='" + usu.getNombre() + "',"
-                + " apellido='" + usu.getApellido()+ "', telefono="+ usu.getTelefono()+",correo= '"+usu.getCorreo()+"',estado= " + usu.getEstado()+", tipo_usuario= " + usu.getTipo_usuario()+", observaciones='"+usu.getObservaciones()+"', clave='"+usu.getClave()+"',where codigo=" + usu.getCodigo();
+                + " apellido='" + usu.getApellido()+ "', telefono="+ usu.getTelefono()+",correo= '"+usu.getCorreo()+"',estado= " + usu.getEstado()+", tipo_usuario= " + usu.getTipo_usuario()+", observaciones='"+usu.getObservaciones()+"', clave='"+usu.getClave()+"',where codigo='" + usu.getCodigo()+"'";
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
