@@ -9,6 +9,7 @@ package sipl.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import sipl.dominio.Multa;
@@ -66,10 +67,12 @@ public class multaDAO {
         return mul;
     }
 
-    public boolean addLaboratorio(Laboratorio lab) {
+    public boolean addMulta(Multa mul) {
         boolean result = false;
-        String sql = "insert into laboratorio (nombre, descripcion, ubicacion) values ('" + lab.getNombre() + "','"
-                + lab.getDescripcion() + "','" + lab.getUbicacion() + "')";
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String cal1=sdf.format(mul.getFecha_multa().getTime());
+        String sql = "insert into multa (cod_usuario, fecha_multa, estado_multa, tiempo_multa) values ('"+mul.getUso().getCodigo()+"','"+cal1+"'," + mul.getEstado_multa() + ","
+                + mul.getTiempo_multa() +")";
         int registros = con.setQuery(sql);
         if (registros == 1) {
             result = true;
@@ -77,11 +80,12 @@ public class multaDAO {
         return result;
     }
 
-    public boolean updateLaboratorio(Laboratorio lab) {
+    public boolean updateMulta(Multa mul) {
         boolean result = false;
-        String sql = "update laboratorio set nombre='" + lab.getNombre() + "',"
-                + " descripcion='" + lab.getDescripcion() + "', ubicacion='" + lab.getUbicacion()
-                + "' where codigo=" + lab.getCodigo();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String cal1=sdf.format(mul.getFecha_multa().getTime());
+        String sql = "update multa set cod_usuario='"+mul.getUso().getCodigo()+"',"
+                + " fecha_multa='"+cal1+"', estado_multa=" + mul.getEstado_multa() + ",tiempo_multa= "+ mul.getTiempo_multa() +" where codigo=" + mul.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
