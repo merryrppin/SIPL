@@ -24,10 +24,10 @@ public class Material {
     private Calendar ult_fecha_mante;
     private int cantidad;
     private int disponibilidad;
-    private String imagenqr;
     private Laboratorio lab;
+    private String imagenqr;
 
-    public Material(int codigo, String descripcion, String tipo_mat, String marca, String serial, String foto_mat, String num_inventario, int estado, Calendar ult_fecha_mante, int cantidad, int disponibilidad, String imagenqr, Laboratorio lab) {
+    public Material(int codigo, String descripcion, String tipo_mat, String marca, String serial, String foto_mat, String num_inventario, int estado, Calendar ult_fecha_mante, int cantidad, int disponibilidad, Laboratorio lab, String imagenqr) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.tipo_mat = tipo_mat;
@@ -39,8 +39,8 @@ public class Material {
         this.ult_fecha_mante = ult_fecha_mante;
         this.cantidad = cantidad;
         this.disponibilidad = disponibilidad;
-        this.imagenqr = imagenqr;
         this.lab = lab;
+        this.imagenqr = imagenqr;
     }
 
     public int getCodigo() {
@@ -131,14 +131,6 @@ public class Material {
         this.disponibilidad = disponibilidad;
     }
 
-    public String getImagenqr() {
-        return imagenqr;
-    }
-
-    public void setImagenqr(String imagenqr) {
-        this.imagenqr = imagenqr;
-    }
-
     public Laboratorio getLab() {
         return lab;
     }
@@ -146,6 +138,16 @@ public class Material {
     public void setLab(Laboratorio lab) {
         this.lab = lab;
     }
-    
+
+    public String getImagenqr() {
+        return imagenqr;
+    }
+
+    public void setImagenqr(String imagenqr) {
+        this.imagenqr = imagenqr;
+    }
+     
+
+   
     
 }
