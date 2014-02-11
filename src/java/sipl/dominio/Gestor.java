@@ -15,7 +15,7 @@ import sipl.recursos.*;
 public class Gestor {
     private usuarioDAO usuDAO;
     Encri enc = new Encri();
-    
+    QRCode qrC = new QRCode();
     public Gestor(){
         Conexion con = new Conexion();
         usuDAO = new usuarioDAO(con);
@@ -26,5 +26,10 @@ public class Gestor {
     }
     public String encriptar(String palabra){
         return enc.encriptarMD5(palabra);
+    }
+    public void generarQR(String data, String direccion){
+        qrC.QRmini(data, direccion);
+        qrC.QRMedium(data, direccion);
+        qrC.QRHigh(data, direccion);
     }
 }

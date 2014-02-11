@@ -31,7 +31,7 @@
     <body>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="right">
-                <h6><b><%out.print(user.getNombre()+" "+user.getApellido());%></b><a href="logout.jsp">Cerrar sesión</a></h6>
+                <h6><b><%out.print(user.getNombre() + " " + user.getApellido());%></b><a href="logout.jsp">Cerrar sesión</a></h6>
             </div>
         </div>
         <br>
@@ -130,23 +130,21 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="Prestamo">
-                        <div class="container-fluid">
-                            <br>
-                            <div class="row" align="center">
-                                <div class="col-xs-12 col-sm-6 col-md-6">
+                        <table class="table table-hover" align="center">
+                            <tr align ="center">
+                                <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'agregarPrestamo.jsp'">Agregar Préstamo</button>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                </td>
+                                <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'modificarPrestamo.jsp'">Modificar Préstamo</button>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row" align="center">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td colspan="2">
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarPrestamo.jsp'">Listar Préstamos</button>
-                                </div>
-                            </div>
-                        </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="tab-pane" id="Multa">
                         <table align="center" class="table table-hover">
