@@ -32,7 +32,7 @@ public class materialDAO {
             while (rs.next()) {
                 int codigo = rs.getInt("codigo");
                 String descripcion = rs.getString("descripcion");
-                String tipo_mat = rs.getString("tipo_mat");
+                int tipo_mat = rs.getInt("tipo_mat");
                 String marca = rs.getString("marca");
                 String serial = rs.getString("serial");
                 String foto_mat = rs.getString("foto_mat");
@@ -41,11 +41,10 @@ public class materialDAO {
                 Calendar cal1=Calendar.getInstance();
                 Timestamp t1=rs.getTimestamp("ult_fecha_mante");
                 cal1.setTimeInMillis(t1.getTime());
-                int cantidad = rs.getInt("cantidad");
                 int disponibilidad = rs.getInt("disponibilidad");
                 int codigo_lab = rs.getInt("codigo_lab");
                 String imagenqr = rs.getString("imagenqr");
-                Material mat = new Material(codigo, descripcion, tipo_mat, marca, serial, foto_mat, num_inventario, estado, cal1, cantidad, disponibilidad, labDAO.getLaboratorio(codigo_lab), imagenqr);
+                Material mat = new Material(codigo, descripcion, tipo_mat, marca, serial, foto_mat, num_inventario, estado, cal1, disponibilidad, labDAO.getLaboratorio(codigo_lab), imagenqr);
                 data.add(mat);
             }
             rs.close();
@@ -61,7 +60,7 @@ public class materialDAO {
         try {
             if (rs.next()) {
                 String descripcion = rs.getString("descripcion");
-                String tipo_mat = rs.getString("tipo_mat");
+                int tipo_mat = rs.getInt("tipo_mat");
                 String marca = rs.getString("marca");
                 String serial = rs.getString("serial");
                 String foto_mat = rs.getString("foto_mat");
@@ -70,11 +69,10 @@ public class materialDAO {
                 Calendar cal1=Calendar.getInstance();
                 Timestamp t1=rs.getTimestamp("ult_fecha_mante");
                 cal1.setTimeInMillis(t1.getTime());
-                int cantidad = rs.getInt("cantidad");
                 int disponibilidad = rs.getInt("disponibilidad");
                 int codigo_lab = rs.getInt("codigo_lab");
                 String imagenqr = rs.getString("imagenqr");
-                mat = new Material(codigo, descripcion, tipo_mat, marca, serial, foto_mat, num_inventario, estado, cal1, cantidad, disponibilidad, labDAO.getLaboratorio(codigo_lab), imagenqr);
+                mat = new Material(codigo, descripcion, tipo_mat, marca, serial, foto_mat, num_inventario, estado, cal1, disponibilidad, labDAO.getLaboratorio(codigo_lab), imagenqr);
             }
             rs.close();
         } catch (SQLException ex) {
@@ -89,8 +87,8 @@ public class materialDAO {
         String cal1=sdf.format(mat.getUlt_fecha_mante().getTime());
         String sql = "insert into material (descripcion, tipo_mat, marca, serial, foto_mar, num_inventario,"
                 + "estado, ult_fecha_mante, cantidad, disponibilidad, codigo_lab, imagenqr) values ('"+mat.getDescripcion()+"',"
-                + "'"+mat.getTipo_mat()+"','"+mat.getMarca()+"','"+mat.getSerial()+"','"+mat.getFoto_mat()+"',"
-                + "'"+mat.getNum_inventario()+"',"+mat.getEstado()+",'"+cal1+"',"+mat.getCantidad()+","
+                + ""+mat.getTipo_mat()+",'"+mat.getMarca()+"','"+mat.getSerial()+"','"+mat.getFoto_mat()+"',"
+                + "'"+mat.getNum_inventario()+"',"+mat.getEstado()+",'"+cal1+"',"
                 + ""+mat.getDisponibilidad()+","+mat.getLab().getCodigo()+",'"+mat.getImagenqr()+"',)";
         int registros = con.setQuery(sql);
         if (registros == 1) {
@@ -104,12 +102,12 @@ public class materialDAO {
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String cal1=sdf.format(mat.getUlt_fecha_mante().getTime());
         String sql = "update material set descripcion='" + mat.getDescripcion() + "',"
-                + " tipo_mat='" + mat.getTipo_mat() + "', marca='" + mat.getMarca()
-                + "' serial='" + mat.getSerial() + "', foto_mat='" + mat.getFoto_mat()
-                + "' num_inventario='" + mat.getNum_inventario() + "', estado=" + mat.getEstado()
-                + " ult_fecha_mante='" + cal1 + "', cantidad=" + mat.getCantidad()
-                + " disponibilidad=" + mat.getDisponibilidad() + ", codigo_lab=" + mat.getLab().getCodigo()
-                + " imagenqr='" + mat.getImagenqr() + "' where codigo=" + mat.getCodigo();
+                + " tipo_mat=" + mat.getTipo_mat() + ", marca='" + mat.getMarca()
+                + "', serial='" + mat.getSerial() + "', foto_mat='" + mat.getFoto_mat()
+                + "', num_inventario='" + mat.getNum_inventario() + "', estado=" + mat.getEstado()
+                + ", ult_fecha_mante='" + cal1 + "'," + " disponibilidad=" + mat.getDisponibilidad()
+                + ", codigo_lab=" + mat.getLab().getCodigo() + ", imagenqr='" + mat.getImagenqr() 
+                + "' where codigo=" + mat.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;

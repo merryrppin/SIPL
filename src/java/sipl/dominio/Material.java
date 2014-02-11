@@ -15,19 +15,18 @@ import java.util.Calendar;
 public class Material {
     private int codigo;
     private String descripcion;
-    private String tipo_mat;
+    private int tipo_mat;
     private String marca;
     private String serial;
     private String foto_mat;
     private String num_inventario;
     private int estado;
     private Calendar ult_fecha_mante;
-    private int cantidad;
     private int disponibilidad;
     private Laboratorio lab;
     private String imagenqr;
 
-    public Material(int codigo, String descripcion, String tipo_mat, String marca, String serial, String foto_mat, String num_inventario, int estado, Calendar ult_fecha_mante, int cantidad, int disponibilidad, Laboratorio lab, String imagenqr) {
+    public Material(int codigo, String descripcion, int tipo_mat, String marca, String serial, String foto_mat, String num_inventario, int estado, Calendar ult_fecha_mante, int disponibilidad, Laboratorio lab, String imagenqr) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.tipo_mat = tipo_mat;
@@ -37,7 +36,6 @@ public class Material {
         this.num_inventario = num_inventario;
         this.estado = estado;
         this.ult_fecha_mante = ult_fecha_mante;
-        this.cantidad = cantidad;
         this.disponibilidad = disponibilidad;
         this.lab = lab;
         this.imagenqr = imagenqr;
@@ -59,11 +57,11 @@ public class Material {
         this.descripcion = descripcion;
     }
 
-    public String getTipo_mat() {
+    public int getTipo_mat() {
         return tipo_mat;
     }
 
-    public void setTipo_mat(String tipo_mat) {
+    public void setTipo_mat(int tipo_mat) {
         this.tipo_mat = tipo_mat;
     }
 
@@ -113,14 +111,6 @@ public class Material {
 
     public void setUlt_fecha_mante(Calendar ult_fecha_mante) {
         this.ult_fecha_mante = ult_fecha_mante;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public int getDisponibilidad() {
