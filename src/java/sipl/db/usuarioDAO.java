@@ -15,7 +15,7 @@ import sipl.dominio.Usuario;
  *
  * @author Samy
  */
-class usuarioDAO {
+public class usuarioDAO {
    private Conexion con;
 
     public usuarioDAO(Conexion con) {
