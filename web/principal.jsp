@@ -31,7 +31,7 @@
     <body>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="right">
-                <h6><%out.print(user.getNombre()+" "+user.getApellido());%></h6><a href="logout.jsp"><h6>Cerrar sesión</h6></a>
+                <h6><b><%out.print(user.getNombre()+" "+user.getApellido());%></b><a href="logout.jsp">Cerrar sesión</a></h6>
             </div>
         </div>
         <br>
@@ -149,16 +149,123 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="Multa">
-                        <h1>Multa</h1>
+                        <table align="center" class="table table-hover">
+                            <tr align="center">
+                                <td>
+                                    <%
+                                        if (user.getTipo_usuario() == 1) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" disabled="disabled">Dar de baja multa</button>
+                                    <%} else if (user.getTipo_usuario() == 2) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'darBajaM.jsp'">Dar de baja multa</button>
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMultas.jsp'">Listar multas</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="tab-pane" id="Laboratorio">
-                        <h1>Laboratorio</h1>
+                        <table class="table table-hover">
+                            <tr align="center">
+                                <td>
+                                    <%
+                                        if (user.getTipo_usuario() == 1) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" disabled="disabled">Agregar laboratorio</button>
+                                    <%} else if (user.getTipo_usuario() == 2) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarLaboratorio.jsp'">Agregar laboratorio</button>
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                                <td>
+                                    <%
+                                        if (user.getTipo_usuario() == 1) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" disabled="disabled">Modificar Laboratorio</button>
+                                    <%} else if (user.getTipo_usuario() == 2) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarLaboratorio.jsp'">Modificar Laboratorio</button>
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td colspan="2">
+                                    <%
+                                        if (user.getTipo_usuario() == 1) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" disabled="disabled">Listar laboratorios</button>
+                                    <%} else if (user.getTipo_usuario() == 2) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarLaboratorios.jsp'">Listar laboratorios</button>
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="tab-pane" id="Estadistica">
-                        <h1>Estadistica</h1>
+                        <table class="table table-hover">
+                            <tr align="center">
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaPrestamos.jsp'">Préstamos</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMultas.jsp'">Multas</button>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMateriales.jsp'">Materiales</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaDanhos.jsp'">Daños</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="tab-pane" id="Backup">
-                        <h1>Backup</h1>
+                        <table class="table table-hover">
+                            <tr align="center">
+                                <td>
+                                    <%
+                                        if (user.getTipo_usuario() == 1) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" disabled="disabled">Backup</button>
+                                    <%} else if (user.getTipo_usuario() == 2) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'backup.jsp'">Backup</button>
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td>
+                                    <%
+                                        if (user.getTipo_usuario() == 1) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" disabled="disabled">Restore</button>
+                                    <%} else if (user.getTipo_usuario() == 2) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'restore.jsp'">Restore</button>
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
