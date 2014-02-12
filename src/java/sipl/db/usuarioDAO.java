@@ -91,7 +91,7 @@ public class usuarioDAO {
     
     public boolean addUsuario(Usuario usu) {
         boolean result = false;
-        String sql = "insert into usuario (nombre, apellido, telefono,correo,estado,tipo_usuario,observaciones,clave) values ('" + usu.getNombre() + "','"
+        String sql = "insert into usuario (codigo,nombre, apellido, telefono,correo,estado,tipo_usuario,observaciones,clave) values ('"+usu.getCodigo()+"'," + usu.getNombre() + "','"
                 + usu.getApellido() + "',"+ usu.getTelefono()+",'"+usu.getCorreo()+"', " + usu.getEstado()+"," + usu.getTipo_usuario()+",'"+usu.getObservaciones()+"','"+usu.getClave()+"')";
         int registros = con.setQuery(sql);
         if (registros == 1) {
