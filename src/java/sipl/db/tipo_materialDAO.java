@@ -75,7 +75,7 @@ public class tipo_materialDAO {
         boolean result = false;
         String sql = "update tipo_material set nombre='" + tip.getNombre() + "',"
                 + " descripcion='" + tip.getDescripcion() + "',cantidad=" + tip.getCantidad()+",disponibilidad= " + tip.getDisponibilidad() +
-                 "' where id=" + tip.getId();
+                 " where id=" + tip.getId();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;

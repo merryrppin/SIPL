@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class Material {
     private int codigo;
     private String descripcion;
-    private int tipo_mat;
+    private Tipo_material tipo_mat;
     private String marca;
     private String serial;
     private String foto_mat;
@@ -26,7 +26,7 @@ public class Material {
     private Laboratorio lab;
     private String imagenqr;
 
-    public Material(int codigo, String descripcion, int tipo_mat, String marca, String serial, String foto_mat, String num_inventario, int estado, Calendar ult_fecha_mante, int disponibilidad, Laboratorio lab, String imagenqr) {
+    public Material(int codigo, String descripcion, Tipo_material tipo_mat, String marca, String serial, String foto_mat, String num_inventario, int estado, Calendar ult_fecha_mante, int disponibilidad, Laboratorio lab, String imagenqr) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.tipo_mat = tipo_mat;
@@ -57,11 +57,11 @@ public class Material {
         this.descripcion = descripcion;
     }
 
-    public int getTipo_mat() {
+    public Tipo_material getTipo_mat() {
         return tipo_mat;
     }
 
-    public void setTipo_mat(int tipo_mat) {
+    public void setTipo_mat(Tipo_material tipo_mat) {
         this.tipo_mat = tipo_mat;
     }
 
