@@ -29,6 +29,7 @@
         </script>
     </head>
     <body>
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="right">
                 <h6><b><%out.print(user.getNombre() + " " + user.getApellido());%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
