@@ -18,16 +18,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar Usuario</title>
+        <script src="jquery/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <h1>Menú Principal</h1>
+                <h1>Agregar Usuario</h1>
             </div>
         </div>
-        <br><br><br><br><br><br><br>
-        <div class="row"> 
+        <br><br><br><br>
+        <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
                 
@@ -36,40 +39,87 @@
                     <table align="center">
                         <tr>
                             <td>
-                                    <label class="control-label">Codigo</label>
+                                <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
-                                <input type="text" id="login" name="codigo">
+                                <input type="text" id="codigo" name="codigo">
+                            </td>
+                            <td>
+                                <label class="control-label" >Tipo de Usuario</label>
+                            </td>
+                            <td>
+                                <select name="tipo" disabled="disabled">
+                                    <option value="0">
+                                        Estudiante
+                                    </option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div class="control-group">
-                                    <label class="control-label" for="passwd">Contraseña</label>
-                                    <div class="controls">
-                                        <input type="password" id="passwd" placeholder="Contraseña" name="passwd">
-                                    </div>
-                                </div>
+                                <label class="control-label" for="nombre">Nombre</label>
+                            </td>
+                            <td>
+                                <input type="text" id="nombre" name="nombre">
+                            </td>
+                            <td>
+                                <label class="control-label" for="telefono">Telefono</label>
+                            </td>
+                            <td>
+                                <input type="text" id="telefono" name="telefono">
                             </td>
                         </tr>
                         <tr>
                             <td>
+                                <label class="control-label" for="apellidos">Apellidos</label>
+                            </td>
+                            <td>
+                                <input type="text" id="apellidos" name="apellidos">
+                            </td>
+                            <td>
+                                <label class="control-label" for="estado">Estado</label>
+                            </td>
+                            <td>
+                                <select id="estado" name="estado">
+                                    <option value="0">
+                                        Activo
+                                    </option>
+                                    <option value="1">
+                                        Inactivo
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="correo">Correo</label>
+                            </td>
+                            <td colspan="3">
+                                <input type="text" id="correo" name="correo">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="observaciones">Observaciones</label>
+                            </td>
+                            <td colspan="3">
+                                <textarea  id="observaciones" name="observaciones" style='width:500px;'>
+                                    
+                                </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center"> 
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
-                                        <button type="submit" class="btn-large btn-info">Ingresar</button>
+                                        <button type="submit" class="btn-large btn-success">Guardar</button>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     </table>
                 </form>
-                
-                
-                
-                
-                
-                
             </div>
             <div class="col-xs-6 col-sm-1"></div>
         </div>
