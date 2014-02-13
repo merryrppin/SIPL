@@ -17,6 +17,7 @@ public class Gestor {
     private usuarioDAO usuDAO;
     private materialDAO matDAO;
     private tipo_materialDAO tipDAO;
+    private laboratorioDAO labDAO;
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
     public Gestor(){
@@ -24,6 +25,7 @@ public class Gestor {
         usuDAO = new usuarioDAO(con);
         matDAO = new materialDAO(con);
         tipDAO = new tipo_materialDAO(con);
+        labDAO = new laboratorioDAO(con);
     }
     
     public Usuario validarLogin(String login, String clave){
@@ -45,5 +47,8 @@ public class Gestor {
     }
     public ArrayList<Tipo_material> getTiposM(){
         return tipDAO.getTipo_material();
+    }
+    public ArrayList<Laboratorio> getLaboratorios(){
+        return labDAO.getLaboratorios();
     }
 }

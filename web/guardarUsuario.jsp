@@ -51,5 +51,7 @@
             error="datos_incompletos";
             response.sendRedirect("agregarUsuario.jsp?" + error);
         }
+    }else{
+        response.sendRedirect("principal.jsp?error=sin_permisos");
     }
 %>

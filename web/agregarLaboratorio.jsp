@@ -89,4 +89,6 @@
         </div>
     </body>
 </html>
-<%}%>
+<%}else{
+        response.sendRedirect("principal.jsp?error=sin_permisos");
+    }%>
