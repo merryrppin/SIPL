@@ -6,6 +6,7 @@
 
 package sipl.dominio;
 
+import java.util.ArrayList;
 import sipl.db.*;
 import sipl.recursos.*;
 /**
@@ -14,11 +15,15 @@ import sipl.recursos.*;
  */
 public class Gestor {
     private usuarioDAO usuDAO;
+    private materialDAO matDAO;
+    private tipo_materialDAO tipDAO;
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
     public Gestor(){
         Conexion con = new Conexion();
         usuDAO = new usuarioDAO(con);
+        matDAO = new materialDAO(con);
+        tipDAO = new tipo_materialDAO(con);
     }
     
     public Usuario validarLogin(String login, String clave){
@@ -34,5 +39,11 @@ public class Gestor {
     }
     public boolean addUsuario(Usuario usu){
         return usuDAO.addUsuario(usu);
+    }
+    public ArrayList<Material> getMateriales(){
+        return matDAO.getMateriales();
+    }
+    public ArrayList<Tipo_material> getTiposM(){
+        return tipDAO.getTipo_material();
     }
 }
