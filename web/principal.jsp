@@ -31,7 +31,7 @@
     <body>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="right">
-                <h6><b><%out.print(user.getNombre() + " " + user.getApellido());%></b><a href="logout.jsp">Cerrar sesión</a></h6>
+                <h6><b><%out.print(user.getNombre() + " " + user.getApellido());%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
             </div>
         </div>
         <br>
@@ -61,16 +61,16 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" disabled="disabled" type="button">Agregar material</button>
+                                    <button class="btn btn-primary" disabled="disabled" type="button" style='width:200px;'>Agregar material</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarMaterial.jsp'">Agregar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarMaterial.jsp'" style='width:200px;'>Agregar material</button>
                                     <%
                                         }
                                     %>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarReporteD.jsp'">Agregar reporte daño</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarReporteD.jsp'" style='width:200px;'>Agregar reporte daño</button>
                                 </td>
                             </tr>
                             <tr align="center">
@@ -78,24 +78,24 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Modificar material</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Modificar material</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarMaterial.jsp'">Modificar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarMaterial.jsp'" style='width:200px;'>Modificar material</button>
                                     <%
                                         }
                                     %>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarReporteD.jsp'">Modificar reporte daño</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarReporteD.jsp'" style='width:200px;'>Modificar reporte daño</button>
                                 </td>
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMaterial.jsp'">Listar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMaterial.jsp'" style='width:200px;'>Listar material</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp'">Listar reporte daño</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp'" style='width:200px;'>Listar reporte daño</button>
                                 </td>
                             </tr>
                         </table>
@@ -104,16 +104,16 @@
                         <table align="center" class="table table-hover">
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarUsuario.jsp'">Agregar usuario</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarUsuario.jsp'"  style='width:200px;'>Agregar usuario</button>
                                 </td>
                                 <td>
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Asignar Privilegios</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Asignar Privilegios</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarUsuario.jsp?accion=1', this.form">Asignar Privilegios</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarUsuario.jsp?accion=1', this.form" style='width:200px;'>Asignar Privilegios</button>
                                     <%
                                         }
                                     %>
@@ -121,10 +121,10 @@
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarUsuario.jsp?accion=0', this.form">Modificar Usuario</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarUsuario.jsp?accion=0', this.form" style='width:200px;'>Modificar Usuario</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarUsuario.jsp'">Listar Usuario</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarUsuario.jsp'" style='width:200px;'>Listar Usuario</button>
                                 </td>
                             </tr>
                         </table>
@@ -133,15 +133,15 @@
                         <table class="table table-hover" align="center">
                             <tr align ="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarPrestamo.jsp'">Agregar Préstamo</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarPrestamo.jsp'" style='width:200px;'>Agregar Préstamo</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarPrestamo.jsp'">Modificar Préstamo</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarPrestamo.jsp'" style='width:200px;'>Modificar Préstamo</button>
                                 </td>
                             </tr>
                             <tr align="center">
                                 <td colspan="2">
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarPrestamo.jsp'">Listar Préstamos</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarPrestamo.jsp'" style='width:200px;'>Listar Préstamos</button>
                                 </td>
                             </tr>
                         </table>
@@ -153,10 +153,10 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Dar de baja multa</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Dar de baja multa</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'darBajaM.jsp'">Dar de baja multa</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'darBajaM.jsp'"  style='width:200px;'>Dar de baja multa</button>
                                     <%
                                         }
                                     %>
@@ -164,7 +164,7 @@
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMultas.jsp'">Listar multas</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMultas.jsp'" style='width:200px;'>Listar multas</button>
                                 </td>
                             </tr>
                         </table>
@@ -176,10 +176,10 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Agregar laboratorio</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Agregar laboratorio</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarLaboratorio.jsp'">Agregar laboratorio</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarLaboratorio.jsp'" style='width:200px;'>Agregar laboratorio</button>
                                     <%
                                         }
                                     %>
@@ -188,10 +188,10 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Modificar Laboratorio</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Modificar Laboratorio</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarLaboratorio.jsp'">Modificar Laboratorio</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarLaboratorio.jsp'" style='width:200px;'>Modificar Laboratorio</button>
                                     <%
                                         }
                                     %>
@@ -202,10 +202,10 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Listar laboratorios</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled"  style='width:200px;'>Listar laboratorios</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarLaboratorios.jsp'">Listar laboratorios</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarLaboratorios.jsp'" style='width:200px;'>Listar laboratorios</button>
                                     <%
                                         }
                                     %>
@@ -217,18 +217,18 @@
                         <table class="table table-hover">
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaPrestamos.jsp'">Préstamos</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaPrestamos.jsp'" style='width:200px;'>Préstamos</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMultas.jsp'">Multas</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMultas.jsp'" style='width:200px;'>Multas</button>
                                 </td>
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMateriales.jsp'">Materiales</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMateriales.jsp'" style='width:200px;'>Materiales</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaDanhos.jsp'">Daños</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaDanhos.jsp'" style='width:200px;'>Daños</button>
                                 </td>
                             </tr>
                         </table>
@@ -240,10 +240,10 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Backup</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Backup</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'backup.jsp'">Backup</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'backup.jsp'" style='width:200px;'>Backup</button>
                                     <%
                                         }
                                     %>
@@ -254,10 +254,10 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled">Restore</button>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Restore</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'restore.jsp'">Restore</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'restore.jsp'" style='width:200px;'>Restore</button>
                                     <%
                                         }
                                     %>
