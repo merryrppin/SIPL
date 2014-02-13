@@ -36,7 +36,7 @@
                 
                 
                 <form class="form-horizontal" action="guardarUsuario.jsp" method="POST">
-                    <table align="center">
+                    <table align="center"   class="table table-hover">
                         <tr>
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>
@@ -84,7 +84,7 @@
                                 <input type="text" id="nombre" name="nombre">
                             </td>
                             <td>
-                                <label class="control-label" for="telefono">Telefono</label>
+                                <label class="control-label" for="telefono">Teléfono</label>
                             </td>
                             <td>
                                 <input type="text" id="telefono" name="telefono">
