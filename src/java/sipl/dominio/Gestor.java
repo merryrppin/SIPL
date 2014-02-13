@@ -32,4 +32,7 @@ public class Gestor {
         qrC.QRMedium(data, direccion);
         qrC.QRHigh(data, direccion);
     }
+    public boolean addUsuario(Usuario usu){
+        return usuDAO.addUsuario(usu);
+    }
 }

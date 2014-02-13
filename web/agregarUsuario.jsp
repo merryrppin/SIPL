@@ -124,9 +124,7 @@
                                 <label class="control-label" for="observaciones">Observaciones</label>
                             </td>
                             <td colspan="3">
-                                <textarea  id="observaciones" name="observaciones" style='width:500px;'>
-                                    
-                                </textarea>
+                                <textarea  id="observaciones" name="observaciones" style='width:500px;'></textarea>
                             </td>
                         </tr>
                         <tr>
