@@ -45,14 +45,35 @@
                                 <input type="text" id="codigo" name="codigo">
                             </td>
                             <td>
-                                <label class="control-label" >Tipo de Usuario</label>
+                                <label class="control-label" for="tipo">Tipo de Usuario</label>
                             </td>
                             <td>
+                                <%
+                                if(user.getTipo_usuario()==1){
+                                %>
                                 <select name="tipo" disabled="disabled">
                                     <option value="0">
                                         Estudiante
                                     </option>
                                 </select>
+                                <%
+                                }
+                                else if(user.getTipo_usuario()==2){
+                                %>
+                                <select name="tipo" id="tipo">
+                                    <option value="0">
+                                        Estudiante
+                                    </option>
+                                    <option value="1">
+                                        Administrador Local
+                                    </option>
+                                    <option value="2">
+                                        Administrador Global
+                                    </option>
+                                </select>
+                                <%
+                                }
+                                %>
                             </td>
                         </tr>
                         <tr>
