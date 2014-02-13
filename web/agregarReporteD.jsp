@@ -48,10 +48,18 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="nombre">Nombre Estudiante</label>
+                                <label class="control-label" for="nombre">Nombres</label>
                             </td>
                             <td>
                                 <input disabled="disabled" type="text" id="nombre" name="nombre">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="apellido">Apellidos</label>
+                            </td>
+                            <td>
+                                <input disabled="disabled" type="text" id="apellido" name="apellido">
                             </td>
                         </tr>
                         <tr>
