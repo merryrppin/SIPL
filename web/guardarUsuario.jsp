@@ -40,7 +40,8 @@
                             tip = 0;
                         }
                         est = Integer.parseInt(estado);
-                        Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, codigo);
+                        String clave = Gestor.encriptar(codigo);
+                        Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
                         if (Gestor.addUsuario(usu) == true) {
                             response.sendRedirect("listarUsuarios.jsp");
                         } else {
