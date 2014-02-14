@@ -33,8 +33,6 @@
         <div class="row">
             <div class="col-xs-6 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-
-
                 <form class="form-horizontal" action="guardarReporteD.jsp" method="POST">
                     <table align="center"   class="table table-hover">
                         <tr>
@@ -70,7 +68,6 @@
                                 <input type="text" id="codigo" name="codigo">
                             </td>
                         </tr>
-
                         <tr>
                             <td>
                                 <label class="control-label" for="descripcion">Descripción Daño</label>
@@ -80,7 +77,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center"> 
+                            <td colspan="4" align="center">
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>

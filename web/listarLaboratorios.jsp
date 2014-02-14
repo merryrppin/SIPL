@@ -14,6 +14,11 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
         ArrayList<Laboratorio> data = Gestor.getLaboratorios();
+        String accion = request.getParameter("accion");
+        int a = 0;
+        if (accion != null) {
+            a = Integer.parseInt(accion);
+        }
 %>
 <!DOCTYPE html>
 <html>
@@ -35,8 +40,14 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <table class="table table-hover" align="center">
+                <form action="modificarLaboratorio.jsp" method="POST">
+                <table class="table table-hover" align="center" border="1">
                     <tr>
+                        <%
+                            if (a == 2) {
+                                out.print("<td></td>");
+                            }
+                        %>
                         <td>Código</td>
                         <td>Nombre</td>
                         <td>Descripción</td>
@@ -48,6 +59,10 @@
                                 out.print("<td colspan='4' align='center'>No hay Laboratorios</td>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
+                                    if (a == 2) {
+                                        out.print("<td><input type='radio' name='id' value='" + data.get(i).getCodigo() + "' ");
+                                        out.print("checked='checked'/></td>");
+                                    }
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
                                     out.print("<td>" + data.get(i).getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getDescripcion() + "</td>");
@@ -57,11 +72,17 @@
                         %>
                     </tr>
                     <tr>
-                        <td colspan="4" align="center">
+                        <td colspan="5" align="center">
+                            <%
+                            if(a==2){%>
+                                <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
+                            <%}
+                            %>
                             <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:200px;'>Atrás</button>
                         </td>
                     </tr>
                 </table>
+                    </form>
             </div>
             <div class="col-xs-6 col-sm-1"></div>
         </div>

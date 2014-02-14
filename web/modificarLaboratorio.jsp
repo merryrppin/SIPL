@@ -1,7 +1,7 @@
 <%-- 
-    Document   : agregarLaboratorio
-    Created on : 11/02/2014, 11:49:08 PM
-    Author     : Samy
+    Document   : modificarLaboratorio
+    Created on : 13-feb-2014, 23:36:18
+    Author     : WM
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -12,8 +12,10 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
-        ArrayList<Laboratorio> data = Gestor.getLaboratorios();
+    } else if (user.getTipo_usuario() == 2) {
+        String ID = request.getParameter("id");
+        int cod = Integer.parseInt(ID);
+        Laboratorio lab = Gestor.getLaboratorio(cod);
 %>
 <!DOCTYPE html>
 <html>
@@ -43,15 +45,15 @@
             <div class="col-xs-12 col-sm-6">
                 
                 
-                <form class="form-horizontal" action="guardarLaboratorio.jsp" method="POST">
+                <form class="form-horizontal" action="guardarLaboratorio.jsp?accion=2" method="POST">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
-                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(data.size());%>">
-                                <input disabled="disabled" type="text" value="<%out.print(data.size());%>">
+                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(lab.getCodigo());%>">
+                                <input disabled="disabled" type="text" value="<%out.print(lab.getCodigo());%>">
                             </td>
                            
                         </tr>
@@ -60,7 +62,7 @@
                                 <label class="control-label" for="nombre">Nombre</label>
                             </td>
                             <td>
-                                <input type="text" id="nombre" name="nombre">
+                                <input type="text" id="nombre" name="nombre" value="<%out.print(lab.getDescripcion());%>">
                             </td>
                         </tr>
                         <tr>
@@ -68,7 +70,7 @@
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
                            <td colspan="3">
-                                <textarea  id="descripcion" name="descripcion" style='width:500px;'></textarea>
+                                <textarea  id="descripcion" name="descripcion" style='width:500px;'><%out.print(lab.getDescripcion());%></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -76,7 +78,7 @@
                                 <label class="control-label" for="ubicacion">Ubicación</label>
                             </td>
                             <td>
-                                <input type="text" id="ubicacion" name="ubicacion">
+                                <input type="text" id="ubicacion" name="ubicacion" value="<%out.print(lab.getDescripcion());%>">
                             </td>
                             
                         </tr>

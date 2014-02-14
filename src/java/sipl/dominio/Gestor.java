@@ -51,4 +51,10 @@ public class Gestor {
     public ArrayList<Laboratorio> getLaboratorios(){
         return labDAO.getLaboratorios();
     }
+    public Material getMaterial(int codigo){
+        return matDAO.getMaterial(codigo);
+    }
+    public Laboratorio getLaboratorio(int codigo){
+        return labDAO.getLaboratorio(codigo);
+    }
 }
