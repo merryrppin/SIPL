@@ -65,7 +65,7 @@
                                     <button class="btn btn-primary" disabled="disabled" type="button" style='width:200px;'>Agregar material</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarMaterial.jsp'" style='width:200px;'>Agregar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarMaterial .jsp'" style='width:200px;'>Agregar material</button>
                                     <%
                                         }
                                     %>
@@ -82,7 +82,7 @@
                                     <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Modificar material</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarMaterial.jsp'" style='width:200px;'>Modificar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMateriales.jsp?accion=2'" style='width:200px;'>Modificar material</button>
                                     <%
                                         }
                                     %>
@@ -93,7 +93,7 @@
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMaterial.jsp'" style='width:200px;'>Listar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMateriales.jsp?accion=1'" style='width:200px;'>Listar material</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp'" style='width:200px;'>Listar reporte daño</button>

@@ -48,7 +48,7 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
-                                        <button type="submit" class="btn-large btn-info">Ingresar</button>
+                                        <button type="submit" class="btn btn-info">Ingresar</button>
                                     </div>
                                 </div>
                             </td>

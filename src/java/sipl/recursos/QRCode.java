@@ -50,7 +50,7 @@ public class QRCode {
                 image.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
             }
         }
-        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH)) {
+        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH+"mini.png")) {
             ImageIO.write(image, IMAGE_FORMAT, qrCode);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,7 +85,7 @@ public class QRCode {
                 image.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
             }
         }
-        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH)) {
+        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH+"medium.png")) {
             ImageIO.write(image, IMAGE_FORMAT, qrCode);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,7 +120,7 @@ public class QRCode {
                 image.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
             }
         }
-        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH)) {
+        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH+"high.png")) {
             ImageIO.write(image, IMAGE_FORMAT, qrCode);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);

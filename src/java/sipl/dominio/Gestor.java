@@ -60,4 +60,10 @@ public class Gestor {
     public boolean updateLaboratorio(Laboratorio lab){
         return labDAO.updateLaboratorio(lab);
     }
+    public Tipo_material getTipoM(int codigo){
+        return tipDAO.getTipo_material(codigo);
+    }
+    public boolean addMaterial(Material mat){
+        return matDAO.addMaterial(mat);
+    }
 }

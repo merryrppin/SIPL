@@ -27,6 +27,12 @@
         <script type="text/javascript" src="js/calendar-setup.js"></script>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            function fijarURL(url, form) {
+                form.action = url;
+                form.submit();
+            }
+        </script>
     </head>
     <body>
         <br>
@@ -47,8 +53,8 @@
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
-                                <input hidden type="text" id="codigo" value="<%out.print(id);%>">
-                                <input disabled="disabled" type="text"value="<%out.print(id);%>">
+                                <input hidden type="text" name="codigo" id="codigo" value="<%out.print(id);%>">
+                                <input disabled="disabled" type="text" value="<%out.print(id);%>">
                             </td>
                             <td></td>
                         </tr>
