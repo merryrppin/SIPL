@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form class="form-horizontal" action="guardarLaboratorio.jsp" method="POST">
+                <form class="form-horizontal" action="guardarMaterial.jsp?accion=1" method="POST">
                     <table align="center" class="table table-hover">
                         <tr>
                             <td></td>
@@ -47,7 +47,8 @@
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
-                                <input disabled="disabled" type="text" id="codigo" value="<%out.print(id);%>">
+                                <input hidden type="text" id="codigo" value="<%out.print(id);%>">
+                                <input disabled="disabled" type="text"value="<%out.print(id);%>">
                             </td>
                             <td></td>
                         </tr>
@@ -68,7 +69,7 @@
                                 <select id="tipo" name="tipo">
                                     <%
                                         for (int i = 0; i < data.size(); i++) {
-                                            out.print("<option value" + data.get(i).getId() + ">" + data.get(i).getNombre() + "</option>");
+                                            out.print("<option value='" + data.get(i).getId() + "'>" + data.get(i).getNombre() + "</option>");
                                         }
                                     %>
                                 </select>
@@ -107,6 +108,39 @@
                                 </select>
                             </td>
                         </tr>
+                        
+                        
+                        
+                        
+                        <tr>
+                            <td>
+                                <label class="control-label" for="laboratorio">Laboratorio</label>
+                            </td>
+                            <td>
+                                <%
+                                    ArrayList<Laboratorio> data1 = Gestor.getLaboratorios();
+                                    %>
+                                <select id="laboratorio" name="laboratorio">
+                                    <%
+                                        for (int i = 0; i < data1.size(); i++) {
+                                            out.print("<option value='" + data1.get(i).getCodigo() + "'>" + data1.get(i).getNombre() + "</option>");
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="control-label" for="disponibilidad">Disponibilidad</label>
+                            </td>
+                            <td>
+                                <select id="disponibilidad" name="disponibilidad">
+                                    <option value="0">Libre</option>
+                                    <option value="1">Prestado</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        
+                        
                         <tr>
                             <td colspan="2">
                                 <label class="control-label" for="cal-field-1">Última fecha de Matenimiento</label>
@@ -143,7 +177,7 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
-                                        <button type="submit" class="btn-large btn-success">Guardar</button>
+                                        <button type="submit" class="btn btn-success">Guardar</button>
                                     </div>
                                 </div>
                             </td>

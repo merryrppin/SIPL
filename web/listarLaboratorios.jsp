@@ -41,17 +41,17 @@
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
                 <form action="modificarLaboratorio.jsp" method="POST">
-                <table class="table table-hover" align="center" border="1">
+                <table class="table table-hover" align="center">
                     <tr>
                         <%
                             if (a == 2) {
                                 out.print("<td></td>");
                             }
                         %>
-                        <td>Código</td>
-                        <td>Nombre</td>
-                        <td>Descripción</td>
-                        <td>Ubicación</td>
+                        <td><b>Código</b></td>
+                        <td><b>Nombre</b></td>
+                        <td><b>Descripción</b></td>
+                        <td><b>Ubicación</b></td>
                     </tr>
                     <tr>
                         <%
