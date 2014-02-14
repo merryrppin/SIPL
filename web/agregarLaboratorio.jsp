@@ -43,7 +43,7 @@
             <div class="col-xs-12 col-sm-6">
                 
                 
-                <form class="form-horizontal" action="guardarLaboratorio.jsp" method="POST">
+                <form class="form-horizontal" action="guardarLaboratorio.jsp?accion=1" method="POST">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>

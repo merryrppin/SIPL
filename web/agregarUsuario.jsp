@@ -35,7 +35,7 @@
             <div class="col-xs-12 col-sm-10">
                 
                 
-                <form class="form-horizontal" action="guardarUsuario.jsp" method="POST">
+                <form class="form-horizontal" action="guardarUsuario.jsp?accion=1" method="POST">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
