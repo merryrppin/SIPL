@@ -8,13 +8,13 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String error = "";
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
         String accion = request.getParameter("accion");
         int a = Integer.parseInt(accion);
-        String error = "";
         if (a == 1) {
 
         } else if (a == 2) {
@@ -26,9 +26,9 @@
                     && nombre.length() > 0 && descripcion != null && descripcion.length() > 0) {
                 int c = Integer.parseInt(codigo);
                 Laboratorio lab = new Laboratorio(c, nombre, descripcion, ubicacion);
-                if(Gestor.updateLaboratorio(lab)==true){
+                if (Gestor.updateLaboratorio(lab) == true) {
                     response.sendRedirect("listarLaboratorios.jsp");
-                }else{
+                } else {
                     error = "no_agrego";
                 }
             } else {
@@ -38,5 +38,7 @@
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
-    response.sendRedirect("principal.jsp?" + error);
+    if (error.length() > 0) {
+        response.sendRedirect("principal.jsp?" + error);
+    }
 %>

@@ -62,7 +62,7 @@
                                 <label class="control-label" for="nombre">Nombre</label>
                             </td>
                             <td>
-                                <input type="text" id="nombre" name="nombre" value="<%out.print(lab.getDescripcion());%>">
+                                <input type="text" id="nombre" name="nombre" value="<%out.print(lab.getNombre());%>">
                             </td>
                         </tr>
                         <tr>
@@ -78,7 +78,7 @@
                                 <label class="control-label" for="ubicacion">Ubicación</label>
                             </td>
                             <td>
-                                <input type="text" id="ubicacion" name="ubicacion" value="<%out.print(lab.getDescripcion());%>">
+                                <input type="text" id="ubicacion" name="ubicacion" value="<%out.print(lab.getUbicacion());%>">
                             </td>
 
                         </tr>
