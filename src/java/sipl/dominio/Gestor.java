@@ -57,4 +57,7 @@ public class Gestor {
     public Laboratorio getLaboratorio(int codigo){
         return labDAO.getLaboratorio(codigo);
     }
+    public boolean updateLaboratorio(Laboratorio lab){
+        return labDAO.updateLaboratorio(lab);
+    }
 }

@@ -43,8 +43,8 @@
         <div class="row">
             <div class="col-xs-6 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-                
-                
+
+
                 <form class="form-horizontal" action="guardarLaboratorio.jsp?accion=2" method="POST">
                     <table align="center"   class="table table-hover">
                         <tr>
@@ -55,7 +55,7 @@
                                 <input hidden type="text" id="codigo" name="codigo" value="<%out.print(lab.getCodigo());%>">
                                 <input disabled="disabled" type="text" value="<%out.print(lab.getCodigo());%>">
                             </td>
-                           
+
                         </tr>
                         <tr>
                             <td>
@@ -69,7 +69,7 @@
                             <td>
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
-                           <td colspan="3">
+                            <td colspan="3">
                                 <textarea  id="descripcion" name="descripcion" style='width:500px;'><%out.print(lab.getDescripcion());%></textarea>
                             </td>
                         </tr>
@@ -80,9 +80,9 @@
                             <td>
                                 <input type="text" id="ubicacion" name="ubicacion" value="<%out.print(lab.getDescripcion());%>">
                             </td>
-                            
+
                         </tr>
-                   
+
                         <tr>
                             <td colspan="4" align="center"> 
                                 <div class="control-group">
@@ -100,6 +100,6 @@
         </div>
     </body>
 </html>
-<%}else{
+<%} else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }%>
