@@ -4,6 +4,7 @@
     Author     : Samy
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -33,7 +34,7 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <h1>Agregar Laboratorio</h1>
+                <h1>Modificar Reporte Daño</h1>
             </div>
         </div>
         <br><br><br><br>
@@ -42,24 +43,15 @@
             <div class="col-xs-12 col-sm-6">
 
 
-                <form class="form-horizontal" action="guardarLaboratorio.jsp?accion=2" method="POST">
+                <form class="form-horizontal" action="guardarReporteD.jsp?accion=2" method="POST">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
-                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(lab.getCodigo());%>">
-                                <input disabled="disabled" type="text" value="<%out.print(lab.getCodigo());%>">
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="nombre">Nombre</label>
-                            </td>
-                            <td>
-                                <input maxlength="50" type="text" id="nombre" name="nombre" value="<%out.print(lab.getNombre());%>">
+                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(dan.getCodigo());%>">
+                                <input disabled="disabled" type="text" value="<%out.print(dan.getCodigo());%>">
                             </td>
                         </tr>
                         <tr>
@@ -67,18 +59,61 @@
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
                             <td colspan="3">
-                                <textarea  maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(lab.getDescripcion());%></textarea>
+                                <textarea  maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(dan.getDescripcion());%></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="ubicacion">Ubicación</label>
+                                <label class="control-label" for="nombre">Código Material</label>
                             </td>
                             <td>
-                                <input maxlength="50"  type="text" id="ubicacion" name="ubicacion" value="<%out.print(lab.getUbicacion());%>">
+                                <input maxlength="10" type="text" id="nombre" name="nombre" value="<%out.print(dan.getMat().getCodigo());%>">
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td>
+                                <label class="control-label" for="nombre">Código Usuario</label>
+                            </td>
+                            <td>
+                                <input maxlength="10" type="text" id="nombre" name="nombre" value="<%out.print(dan.getUsu().getCodigo());%>">
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td>
+                                <label class="control-label" for="cal-field-1">Fecha Daño</label>
+                            </td>
+                            <td>
+                                <%
+                                String fecha;
+                                Calendar cal1=dan.getFecha_d();
+                                fecha=cal1.get(Calendar.DAY_OF_MONTH)+"/";
+                                int mes=cal1.get(Calendar.MONTH);
+                                mes++;
+                                fecha+=mes+"/";
+                                fecha+=cal1.get(Calendar.YEAR)+"";
+                                %>
+                                <input type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA"/>
+                                <button type="submit" id="cal-button-1"><span class="glyphicon glyphicon-calendar"></span></button>
+                                <script type="text/javascript">
+                                    Calendar.setup({
+                                        inputField: "cal-field-1",
+                                        button: "cal-button-1",
+                                        align: "Tr",
+                                        ifFormat: "%d/%m/%Y"
+                                    });
+                                </script>
+
                             </td>
 
                         </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="nombre">Estado</label>
+                            </td>
+                            <td>
+                                <input maxlength="1" type="text" id="nombre" name="nombre" value="<%out.print(dan.getEstado());%>">
+                            </td>
+                        </tr> 
 
                         <tr>
                             <td colspan="2" align="center"> 

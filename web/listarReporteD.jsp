@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form action="modificarDanho.jsp" method="POST">
+                <form action="modificarReporteD.jsp" method="POST">
                     <table class="table table-striped" align="center">
                         <tr>
                             <%

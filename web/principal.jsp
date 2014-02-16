@@ -96,7 +96,7 @@
                                     %>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarReporteD.jsp'" style='width:200px;'>Modificar reporte daño</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp?accion=2'" style='width:200px;'>Modificar reporte daño</button>
                                 </td>
                             </tr>
                             <tr align="center">
@@ -104,7 +104,7 @@
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarMateriales.jsp?accion=1'" style='width:200px;'>Listar materiales</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp'" style='width:200px;'>Listar reporte daño</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp?accion=1'" style='width:200px;'>Listar reporte daño</button>
                                 </td>
                             </tr>
                             <tr>
