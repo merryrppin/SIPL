@@ -181,18 +181,18 @@
                             </td>
                             <td>
                                 <%
-                                String fecha;
-                                Calendar cal1=mat.getUlt_fecha_mante();
-                                fecha=cal1.get(Calendar.DAY_OF_MONTH)+"/";
-                                int mes=cal1.get(Calendar.MONTH);
-                                mes++;
-                                String m="";
-                                if(mes<10){
-                                    m+="0";
-                                }
-                                m+=mes;
-                                fecha+=m+"/";
-                                fecha+=cal1.get(Calendar.YEAR)+"";
+                                    String fecha;
+                                    Calendar cal1 = mat.getUlt_fecha_mante();
+                                    fecha = cal1.get(Calendar.DAY_OF_MONTH) + "/";
+                                    int mes = cal1.get(Calendar.MONTH);
+                                    mes++;
+                                    String m = "";
+                                    if (mes < 10) {
+                                        m += "0";
+                                    }
+                                    m += mes;
+                                    fecha += m + "/";
+                                    fecha += cal1.get(Calendar.YEAR) + "";
                                 %>
                                 <input type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA" value="<%out.print(fecha);%>"/>
                                 <button type="submit" id="cal-button-1"><span class="glyphicon glyphicon-calendar"></span></button>
@@ -210,17 +210,17 @@
                                 <label class="control-label" for="hora">Hora</label>
                                 <select id="hora" name="hora">
                                     <%
-                                int hora=cal1.get(Calendar.HOUR_OF_DAY);
+                                        int hora = cal1.get(Calendar.HOUR_OF_DAY);
                                         for (int i = 0; i < 24; i++) {
                                             if (i < 10) {
                                                 out.print("<option ");
-                                                if(i==hora){
+                                                if (i == hora) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>0" + i + "</option>");
                                             } else {
-                                                out.print("<option "); 
-                                                if(i==hora){
+                                                out.print("<option ");
+                                                if (i == hora) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>" + i + "</option>");
@@ -235,13 +235,13 @@
                                         for (int i = 0; i < 60; i++) {
                                             if (i < 10) {
                                                 out.print("<option ");
-                                                if(i==minutos){
+                                                if (i == minutos) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>0" + i + "</option>");
                                             } else {
                                                 out.print("<option ");
-                                                if(i==minutos){
+                                                if (i == minutos) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>" + i + "</option>");

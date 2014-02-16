@@ -11,8 +11,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 import sipl.dominio.Material;
 
 /**
@@ -45,7 +43,6 @@ public class materialDAO {
                 String num_inventario = rs.getString("num_inventario");
                 int estado = rs.getInt("estado");
                 Calendar cal1 = Calendar.getInstance();
-                cal1.setTimeZone(TimeZone.getTimeZone("GMT"));
                 Timestamp t1 = rs.getTimestamp("ult_fecha_mante");
                 cal1.setTimeInMillis(t1.getTime());
                 int disponibilidad = rs.getInt("disponibilidad");
