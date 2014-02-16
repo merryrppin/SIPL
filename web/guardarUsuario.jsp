@@ -42,7 +42,7 @@
                         String clave = Gestor.encriptar(codigo);
                         Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
                         if (Gestor.addUsuario(usu) == true) {
-                            response.sendRedirect("listarUsuarios.jsp");
+                            response.sendRedirect("agregarUsuario.jsp");
                         } else {
                             error = "usuario_no_agregado";
                         }
