@@ -58,15 +58,17 @@
                 if(serial.length()==0 || serial == null){
                     serial="ninguna";
                 }
-                fecha +=" "+hora+":"+minutos+":00";
+                String []f=fecha.split("/");
+                String fe=f[2]+"-"+f[1]+"-"+f[0];
+                fe +=" "+hora+":"+minutos+":00";
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    Date myDate = sdf.parse(fecha);
+                    Date myDate = sdf.parse(fe);
                     cal.setTime(myDate);
                 } catch (Exception e) {
                     error= "error_fecha";
-                }                
+                }
                 Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
                         marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
                         Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);

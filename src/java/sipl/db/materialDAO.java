@@ -93,12 +93,18 @@ public class materialDAO {
 
     public boolean addMaterial(Material mat) {
         boolean result = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String cal1 = sdf.format(mat.getUlt_fecha_mante().getTime());
+        Calendar cal1 = mat.getUlt_fecha_mante();
+        int year=cal1.get(Calendar.YEAR);
+        int mes=cal1.get(Calendar.MONTH);
+        mes++;
+        int dia=cal1.get(Calendar.DAY_OF_MONTH);
+        int hora=cal1.get(Calendar.HOUR_OF_DAY);
+        int min=cal1.get(Calendar.MINUTE);
+        String fecha=year+"-"+mes+"-"+dia+" "+hora+":"+min+":00";
         String sql = "insert into material (descripcion, tipo_mat, marca, serial, foto_mat, num_inventario,"
                 + "estado, ult_fecha_mante, disponibilidad, codigo_lab, imagenqr) values ('" + mat.getDescripcion() + "',"
                 + "" + mat.getTipo_mat().getId() + ",'" + mat.getMarca() + "','" + mat.getSerial() + "','" + mat.getFoto_mat() + "',"
-                + "'" + mat.getNum_inventario() + "'," + mat.getEstado() + ",'" + cal1 + "',"
+                + "'" + mat.getNum_inventario() + "'," + mat.getEstado() + ",'" + fecha + "',"
                 + "" + mat.getDisponibilidad() + "," + mat.getLab().getCodigo() + ",'" + mat.getImagenqr() + "')";
         int registros = con.setQuery(sql);
         if (registros == 1) {
