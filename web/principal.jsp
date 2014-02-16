@@ -38,10 +38,16 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
                 <h1>Menú Principal</h1>
             </div>
-        </div>
-        <br><br><br><br><br><br><br>
+            <div align="center">
+            <img src="img/mecatro.jpg" width="700" height="200" alt=".." class="img-rounded">
+            </div>
+            </div>
+        
         <div class="row"> 
             <div class="col-xs-6 col-sm-2"></div>
             <div class="col-xs-12 col-sm-8">
@@ -69,6 +75,7 @@
                                     <%
                                         }
                                     %>
+                                    
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'agregarReporteD.jsp'" style='width:200px;'>Agregar reporte daño</button>
