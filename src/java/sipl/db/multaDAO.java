@@ -23,6 +23,7 @@ public class multaDAO {
     private usuarioDAO usuDAO;
     public multaDAO(Conexion con) {
         this.con = con;
+        usuDAO = new usuarioDAO(con);
     }
 
     public ArrayList<Multa> getMultas() {

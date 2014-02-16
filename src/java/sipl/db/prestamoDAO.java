@@ -24,6 +24,8 @@ public class prestamoDAO {
     private materialDAO matDAO;
     public prestamoDAO(Conexion con) {
         this.con = con;
+        usuDAO = new usuarioDAO(con);
+        matDAO = new materialDAO(con);
     }
 
     public ArrayList<Prestamo> getprestamo() {

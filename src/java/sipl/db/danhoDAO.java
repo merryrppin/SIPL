@@ -25,6 +25,8 @@ public class danhoDAO {
     
     public danhoDAO(Conexion con) {
         this.con = con;
+        usuDAO = new usuarioDAO(con);
+        matDAO = new materialDAO(con);
     }
 
     public ArrayList<Danho> getDanhos() {
