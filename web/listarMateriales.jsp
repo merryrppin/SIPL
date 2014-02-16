@@ -74,8 +74,7 @@
                                         out.print("checked='checked'/></td>");
                                     }
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
-                                    ArrayList<Tipo_material> tipos = Gestor.getTiposM();
-                                    out.print("<td>" + tipos.get(data.get(i).getTipo_mat().getId()).getNombre() + "</td>");
+                                    out.print("<td>" + Gestor.getTipoM(data.get(i).getTipo_mat().getId()).getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getDescripcion() + "</td>");
                                     out.print("<td>" + data.get(i).getMarca() + "</td>");
                                     out.print("<td>" + data.get(i).getSerial() + "</td>");
