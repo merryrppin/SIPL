@@ -12,6 +12,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+        int id=Gestor.getDanhos().size();
 %>
 <!DOCTYPE html>
 <html>
@@ -38,47 +39,96 @@
             <div class="col-xs-12 col-sm-6">
                 <form class="form-horizontal" action="guardarReporteD.jsp" method="POST">
                     <table align="center"   class="table table-hover">
-                        <tr>
+                           <tr>
                             <td>
-                                <label class="control-label" for="codigo">Codigo Estudiante</label>
+                                <label class="control-label" for="codigo">Codigo Reporte</label>
                             </td>
                             <td>
-                                <input type="text" id="codigo" name="codigo">
+                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(id);%>">
+                                <input disabled="disabled" type="text" value="<%out.print(id);%>">
                             </td>
 
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="nombre">Nombres</label>
-                            </td>
-                            <td>
-                                <input maxlength="30" disabled="disabled" type="text" id="nombre" name="nombre">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="apellido">Apellidos</label>
-                            </td>
-                            <td>
-                                <input maxlength="30" disabled="disabled" type="text" id="apellido" name="apellido">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="codigo">Codigo Material</label>
-                            </td>
-                            <td>
-                                <input type="text" id="codigo" name="codigo">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="descripcion">Descripción Daño</label>
+                                <label class="control-label" for="descripciond">Descripción Daño</label>
                             </td>
                             <td colspan="3">
-                                <textarea maxlength="150" id="descripcion" name="descripcion" style='width:500px;'></textarea>
+                                <textarea  maxlength="150" id="descripciond" name="descripciond" style='width:500px;'></textarea>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="codigom">Código Material</label>
+                            </td>
+                            <td>
+                                <input maxlength="10" type="text" id="codigom" name="codigom">
+                            </td>
+                        </tr> 
+                        
+                        <tr>
+                            <td>
+                                <label class="control-label" for="codigou">Codigo Usuario</label>
+                            </td>
+                            <td>
+                                <input maxlength="20" type="text" id="codigou" name="codigou">
+                            </td>
+
+                        </tr>
+              <tr>
+                            <td colspan="2">
+                                <label class="control-label" for="cal-field-1">Fecha Daño</label>
+                            </td>
+                            <td>
+                                <input type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA"/>
+                                <button type="submit" id="cal-button-1"><span class="glyphicon glyphicon-calendar"></span></button>
+                                <script type="text/javascript">
+                                    Calendar.setup({
+                                        inputField: "cal-field-1",
+                                        button: "cal-button-1",
+                                        align: "Tr",
+                                        ifFormat: "%d/%m/%Y"
+                                    });
+                                </script>
+                                
+                            </td>
+                            <td>
+                                <label class="control-label" for="hora">Hora</label>
+                                <select id="hora" name="hora">
+                                    <%
+                                    for(int i=0;i<24;i++){
+                                        if(i<10){
+                                            out.print("<option value='"+i+"'>0"+i+"</option>");
+                                        }else{
+                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        }
+                                        
+                                    }
+                                    %>
+                                </select>
+                                <label class="control-label" for="minutos">Minutos</label>
+                                <select id="minutos" name="minutos">
+                                    <%
+                                    for(int i=0;i<60;i++){
+                                        if(i<10){
+                                            out.print("<option value='"+i+"'>0"+i+"</option>");
+                                        }else{
+                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        }
+                                        
+                                    }
+                                    %>
+                                </select>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="nombre">Estado</label>
+                            </td>
+                            <td>
+                                <input maxlength="1" type="text" id="nombre" name="nombre">
+                            </td>
+                        </tr> 
                         <tr>
                             <td colspan="4" align="center">
                                 <div class="control-group">
