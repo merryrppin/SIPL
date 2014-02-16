@@ -29,6 +29,25 @@
                 form.action = url;
                 form.submit();
             }
+            function validarForm(Usuario) {
+                if (Usuario.codigo.value.length === 0 || /^\s+$/.test(Usuario.codigo.value)) {
+                    Usuario.codigo.focus();
+                    alert('No has llenado el campo del codigo');
+                    return false;
+                } else if (Usuario.nombre.value.length === 0 || /^\s+$/.test(Usuario.nombre.value)) {
+                    Usuario.nombre.focus();
+                    alert('No has llenado el campo del nombre');
+                    return false;
+                } else if (Usuario.apellido.value.length === 0 || /^\s+$/.test(Usuario.apellido.value)) {
+                    Usuario.apellido.focus();
+                    alert('No has llenado el campo del apellido');
+                    return false;
+                } else if (/^\s+$/.test(Usuario.telefono.value)) {
+                    Usuario.telefono.focus();
+                    alert('El valor del telefono no es válido');
+                    return false;
+                }
+            }
         </script>
     </head>
     <body>
@@ -45,7 +64,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-                <form class="form-horizontal" action="guardarTipoM.jsp?accion=1" method="POST">
+                <form name="Material" class="form-horizontal" action="guardarTipoM.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>

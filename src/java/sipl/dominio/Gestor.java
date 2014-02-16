@@ -103,4 +103,10 @@ public class Gestor {
     public boolean updateMaterial(Material mat){
         return matDAO.updateMaterial(mat);
     }
+    public boolean addTipoMaterial(Tipo_material tip){
+        return tipDAO.addTipo_material(tip);
+    }
+    public boolean updateTipoMat(Tipo_material tip){
+        return tipDAO.updateTipo_material(tip);
+    }
 }

@@ -86,6 +86,16 @@
                             marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
                             Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
                     if (Gestor.addMaterial(mat) == true) {
+                        Tipo_material tip = Gestor.getTipoM(Integer.parseInt(tipo));
+                        int disp=tip.getDisponibilidad();
+                        int can=tip.getCantidad();
+                        can++;
+                        if(Integer.parseInt(estado)==0 || Integer.parseInt(estado) == 3){
+                            disp++;
+                        }
+                        tip.setDisponibilidad(disp);
+                        tip.setCantidad(can);
+                        Gestor.updateTipoMat(tip);
                         response.sendRedirect("listarMateriales.jsp?accion=1");
                     } else {
                         error = "no_agrego";
