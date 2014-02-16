@@ -100,5 +100,7 @@ public class Gestor {
     public boolean addDanho(Danho dan){
         return danDAO.addDanho(dan);
     }
-    
+    public boolean updateMaterial(Material mat){
+        return matDAO.updateMaterial(mat);
+    }
 }

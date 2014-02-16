@@ -146,7 +146,7 @@
                     Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
                             marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
                             Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
-                    if (Gestor. (mat) == true) {
+                    if (Gestor.updateMaterial(mat) == true) {
                         response.sendRedirect("listarMateriales.jsp?accion=1");
                     } else {
                         error = "no_agrego";
