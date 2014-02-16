@@ -21,6 +21,15 @@
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript">
+            function validarForm(Usuario) {
+                if (Usuario.codigo.value.length === 0) { //¿Tiene 0 caracteres?
+                    Usuario.codigo.focus();    // Damos el foco al control
+                    alert('No has llenado el campo del codigo'); //Mostramos el mensaje
+                    return false; //devolvemos el foco
+                }
+            }
+        </script>
     </head>
     <body>
         <br>
@@ -35,7 +44,7 @@
             <div class="col-xs-12 col-sm-10">
                 
                 
-                <form class="form-horizontal" action="guardarUsuario.jsp?accion=1" method="POST">
+                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
