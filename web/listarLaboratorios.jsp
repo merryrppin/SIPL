@@ -24,6 +24,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
         <title>Listar Laboratorios</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

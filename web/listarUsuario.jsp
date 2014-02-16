@@ -24,19 +24,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         
         <title>Listar Usuarios</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
+        <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <h1>Listar Usuarios</h1>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
@@ -100,7 +104,9 @@
                             }
                         %>
                     <tr>
-                        <td colspan="5" align="center">
+                        <td colspan="8" align="center">
+                            <br>
+                        <br>
                             <%
                             if(a==2){%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>

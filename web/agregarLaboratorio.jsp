@@ -35,6 +35,9 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
                 <h1>Agregar Laboratorio</h1>
             </div>
         </div>
@@ -61,7 +64,7 @@
                                 <label class="control-label" for="nombre">Nombre</label>
                             </td>
                             <td>
-                                <input type="text" id="nombre" name="nombre">
+                                <input maxlength="50" type="text" id="nombre" name="nombre">
                             </td>
                         </tr>
                         <tr>
@@ -69,7 +72,7 @@
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
                             <td colspan="3">
-                                <textarea  id="descripcion" name="descripcion" style='width:500px;'></textarea>
+                                <textarea maxlength="150" id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -77,7 +80,7 @@
                                 <label class="control-label" for="ubicacion">Ubicación</label>
                             </td>
                             <td>
-                                <input type="text" id="ubicacion" name="ubicacion">
+                                <input maxlength="50" type="text" id="ubicacion" name="ubicacion">
                             </td>
 
                         </tr>

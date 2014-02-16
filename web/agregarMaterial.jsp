@@ -42,6 +42,9 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
                 <h1>Agregar Material</h1>
             </div>
         </div>
@@ -80,13 +83,13 @@
                                 <label class="control-label" for="marca">Marca</label>
                             </td>
                             <td>
-                                <input type="text" id="marca" name="marca">
+                                <input  maxlength="50" type="text" id="marca" name="marca">
                             </td>
                             <td>
                                 <label class="control-label" for="numero">Número de Inventario</label>
                             </td>
                             <td>
-                                <input type="text" id="numero" name="numero">
+                                <input maxlength="50" type="text" id="numero" name="numero">
                             </td>
                         </tr>
                         <tr>
@@ -94,7 +97,7 @@
                                 <label class="control-label" for="serial">Serial</label>
                             </td>
                             <td>
-                                <input type="text" id="serial" name="serial">
+                                <input maxlength="50" type="text" id="serial" name="serial">
                             </td>
                             <td>
                                 <label class="control-label" for="estado">Estado del elemento</label>
@@ -185,7 +188,7 @@
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
                             <td colspan="2">
-                                <textarea  id="descripcion" name="descripcion" style='width:500px;'></textarea>
+                                <textarea maxlength="150" id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                             <td>
                                 <label class="control-label" for="foto">Foto Material</label>
