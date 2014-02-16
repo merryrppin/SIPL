@@ -17,8 +17,7 @@
     <body>
         <div class="row">
             <br><br><br><br><br>
-            <div class="col-xs-6 col-sm-2"></div>
-            <div class="col-xs-6 col-sm-8">
+            <div class="col-xs-6 col-sm-6">
                 <h2 align="center">Bienvenid@ al Sistema de información de Laboratorios</h2>
                 <br><br><br>
                 <form class="form-horizontal" action="validar.jsp" method="POST">
@@ -56,7 +55,9 @@
                     </table>
                 </form>
             </div>
-            <div class="col-xs-6 col-sm-2"></div>
+            <div class="col-xs-6 col-sm-6">
+                <img src="img/logo_unab.jpg" width="300" height="370" align=center class="img-rounded">
+            </div>
         </div>
     </body>
 </html>
