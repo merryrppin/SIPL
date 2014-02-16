@@ -59,6 +59,7 @@
                     <li><a href="#Laboratorio" data-toggle="tab">Laboratorio  <span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a href="#Estadistica" data-toggle="tab">Estadística  <span class="glyphicon glyphicon-stats"></span></a></li>
                     <li><a href="#Backup" data-toggle="tab">Backup  <span class="glyphicon glyphicon-save"></span></a></li>
+                    <li><a href="#Acercade" data-toggle="tab">Acerca de  <span class="glyphicon glyphicon-save"></span></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="Material">

@@ -58,19 +58,18 @@
                 if(serial.length()==0 || serial == null){
                     serial="ninguna";
                 }
-                fecha += hora+":"+minutos+":00";
-                DateFormat formatter;
-                formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                Calendar myGDate = new GregorianCalendar();
+                fecha +=" "+hora+":"+minutos+":00";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    Date myDate = formatter.parse(
+                    Date myDate = sdf.parse(
                             fecha);
-                    myGDate.setTime(myDate);
+                    cal.setTime(myDate);
                 } catch (Exception e) {
                     error= "error_fecha";
-                }
+                }                
                 Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
-                        marca, serial, foto, numero, Integer.parseInt(estado), myGDate, Integer.parseInt(disponibilidad),
+                        marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
                         Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
                 if (Gestor.addMaterial(mat) == true) {
                     response.sendRedirect("listarMateriales.jsp?accion=1");
