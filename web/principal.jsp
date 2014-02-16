@@ -46,13 +46,13 @@
             <div class="col-xs-6 col-sm-2"></div>
             <div class="col-xs-12 col-sm-8">
                 <ul class="nav nav-tabs" id="myTab" >
-                    <li class="active"><a href="#Material" data-toggle="tab">Material  <span class="glyphicon glyphicon-qrcode"></span></a></li>
+                    <li class="active"><a href="#Material" data-toggle="tab">Material  <span class="glyphicon glyphicon-wrench"></span></a></li>
                     <li><a href="#Usuario" data-toggle="tab">Usuario  <span class="glyphicon glyphicon-user"></span></a></li>
-                    <li><a href="#Prestamo" data-toggle="tab">Préstamo  <span class="glyphicon glyphicon-pencil"></span></a></li>
-                    <li><a href="#Multa" data-toggle="tab">Multa  <span class="glyphicon glyphicon-paperclip"></span></a></li>
-                    <li><a href="#Laboratorio" data-toggle="tab">Laboratorio  <span class="glyphicon glyphicon-tower"></span></a></li>
-                    <li><a href="#Estadistica" data-toggle="tab">Estadística  <span class="glyphicon glyphicon-tasks"></span></a></li>
-                    <li><a href="#Backup" data-toggle="tab">Backup  <span class="glyphicon glyphicon-floppy-save"></span></a></li>
+                    <li><a href="#Prestamo" data-toggle="tab">Préstamo  <span class="glyphicon glyphicon-time"></span></a></li>
+                    <li><a href="#Multa" data-toggle="tab">Multa  <span class="glyphicon glyphicon-exclamation-sign"></span></a></li>
+                    <li><a href="#Laboratorio" data-toggle="tab">Laboratorio  <span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="#Estadistica" data-toggle="tab">Estadística  <span class="glyphicon glyphicon-stats"></span></a></li>
+                    <li><a href="#Backup" data-toggle="tab">Backup  <span class="glyphicon glyphicon-save"></span></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="Material">
