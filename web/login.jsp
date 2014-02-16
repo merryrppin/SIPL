@@ -56,7 +56,7 @@
                 </form>
             </div>
             <div class="col-xs-6 col-sm-6">
-                <img src="img/logo_unab.jpg" width="300" height="370" class="img-rounded">
+                <img src="img/logo_unab.jpg" width="300" height="370" alt=".." class="img-rounded">
             </div>
         </div>
     </body>

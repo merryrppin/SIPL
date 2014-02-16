@@ -25,8 +25,12 @@
             function fijarURL(url, form) {
                 form.action = url;
                 form.submit();
-            }
+                }
         </script>
+        <style>
+          html, body { background: black; }
+          .container { background: white; }
+        </style>
     </head>
     <body>
 
