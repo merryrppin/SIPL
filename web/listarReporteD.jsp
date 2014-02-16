@@ -39,11 +39,11 @@
                 <h1>Listar Reporte de Daños en Materiales</h1>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form action="modificarLaboratorio.jsp" method="POST">
+                <form action="modificarDanho.jsp" method="POST">
                 <table class="table table-striped" align="center">
                     <tr>
                         <%
@@ -52,14 +52,20 @@
                             }
                         %>
                         <td><b>Código</b></td>
-                        <td><b>Nombre</b></td>
                         <td><b>Descripción</b></td>
-                        <td><b>Ubicación</b></td>
+                        <td><b>Código Material</b></td>
+                        <td><b>Descripción Material</b></td>
+                        <td><b>Código Usuario</b></td>
+                        <td><b>Nombre Usuario</b></td>
+                        <td><b>Apellidos Usuario</b></td>
+                        <td><b>Fecha Daño</b></td>
+                        <td><b>Daño Reportado por</b></td>
+                        <td><b>Estado</b></td>
                     </tr>
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
-                                out.print("<td colspan='4' align='center'>No hay Laboratorios</td>");
+                                out.print("<td colspan='4' align='center'>No hay Reportes de Daños</td>");
                                 out.print("</tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
@@ -69,9 +75,15 @@
                                         out.print("checked='checked'/></td>");
                                     }
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getUbicacion() + "</td>");
+                                    out.print("<td>" + data.get(i).getMat().getCodigo() + "</td>");
+                                    out.print("<td>" + data.get(i).getMat().getDescripcion() + "</td>");
+                                    out.print("<td>" + data.get(i).getUsu().getCodigo() + "</td>");
+                                    out.print("<td>" + data.get(i).getUsu().getNombre() + "</td>");
+                                     out.print("<td>" + data.get(i).getUsu().getApellido() + "</td>");
+                                    out.print("<td>" + data.get(i).getFecha_d() + "</td>");
+                                    out.print("<td>" + data.get(i).getUsu().getCodigo() + "</td>");
+                                    out.print("<td>" + data.get(i).getEstado() + "</td>");
                                     out.print("</tr>");
                                 }
                             }
