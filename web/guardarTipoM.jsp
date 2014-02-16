@@ -1,6 +1,6 @@
 <%-- 
-    Document   : guardarLaboratorio
-    Created on : 13-feb-2014, 23:49:00
+    Document   : guardarTipoM
+    Created on : 16-feb-2014, 15:40:49
     Author     : WM
 --%>
 

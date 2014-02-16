@@ -39,15 +39,15 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Menú Principal</h1>
             </div>
             <div align="center">
-            <img src="img/mecatro.jpg" width="700" height="200" alt=".." class="img-rounded">
+                <img src="img/mecatro.jpg" width="700" height="200" alt=".." class="img-rounded">
             </div>
-            </div>
-        
+        </div>
+
         <div class="row"> 
             <div class="col-xs-6 col-sm-2"></div>
             <div class="col-xs-12 col-sm-8">
@@ -76,7 +76,7 @@
                                     <%
                                         }
                                     %>
-                                    
+
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'agregarReporteD.jsp'" style='width:200px;'>Agregar reporte daño</button>
@@ -105,6 +105,11 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp'" style='width:200px;'>Listar reporte daño</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarTipoM.jsp'" style='width:200px;'>Agregar Tipo de Material</button>
                                 </td>
                             </tr>
                         </table>

@@ -35,7 +35,7 @@ public class danhoDAO {
         try {
             while (rs.next()) {
                 int codigo = rs.getInt("codigo");
-                String descripcion = rs.getString("descripcion");
+                String descripcion = rs.getString("descripcion_d");
                 int codigo_mat = rs.getInt("codigo_mat");
                 String codigo_usu = rs.getString("codigo_usu");
                 Calendar cal1 = Calendar.getInstance();
@@ -58,7 +58,7 @@ public class danhoDAO {
         ResultSet rs = con.getQuery("select * from danho where codigo=" + codigo);
         try {
             if (rs.next()) {
-                String descripcion = rs.getString("descripcion");
+                String descripcion = rs.getString("descripcion_d");
                 int codigo_mat = rs.getInt("codigo_mat");
                 String codigo_usu = rs.getString("codigo_usu");
                 Calendar cal1 = Calendar.getInstance();
@@ -79,7 +79,7 @@ public class danhoDAO {
         boolean result = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal1 = sdf.format(dan.getFecha_d().getTime());
-        String sql = "insert into danho (descripcion, codigo_mat, codigo_usu, fecha_d, codigo_usu_rd, estado"
+        String sql = "insert into danho (descripcion_d, codigo_mat, codigo_usu, fecha_d, codigo_usu_rd, estado"
                 + ") values ('" + dan.getDescripcion() + "'," + dan.getMat().getCodigo() + ",'" + dan.getUsu().getCodigo() + "',"
                 + "'" + cal1 + "','" + dan.getUsu_rd().getCodigo() + "'," + dan.getEstado() + ")";
         int registros = con.setQuery(sql);
@@ -92,7 +92,7 @@ public class danhoDAO {
     public boolean updateDanho(Danho dan) {
         boolean result = false;
         String sql = "update danho set estado=" + dan.getEstado() + ","
-                + " descripcion='" + dan.getDescripcion() + " where codigo=" + dan.getCodigo();
+                + " descripcion_d='" + dan.getDescripcion() + " where codigo=" + dan.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
