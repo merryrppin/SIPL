@@ -19,6 +19,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agregar Reporte Daño</title>
+        <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue2.css" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript" src="js/calendar.js"></script>
+        <script type="text/javascript" src="js/calendar-en.js"></script>
+        <script type="text/javascript" src="js/calendar-setup.js"></script>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -35,8 +40,8 @@
         </div>
         <br><br>
         <div class="row">
-            <div class="col-xs-6 col-sm-3"></div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-6 col-sm-1"></div>
+            <div class="col-xs-12 col-sm-10">
                 <form class="form-horizontal" action="guardarReporteD.jsp" method="POST">
                     <table align="center"   class="table table-hover">
                            <tr>
@@ -145,7 +150,7 @@
                     </table>
                 </form>
             </div>
-            <div class="col-xs-6 col-sm-3"></div>
+            <div class="col-xs-6 col-sm-1"></div>
         </div>
     </body>
 </html>

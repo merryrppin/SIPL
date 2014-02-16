@@ -23,9 +23,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modificar Reporte Daño</title>
+        <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue2.css" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript" src="js/calendar.js"></script>
+        <script type="text/javascript" src="js/calendar-en.js"></script>
+        <script type="text/javascript" src="js/calendar-setup.js"></script>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
         <style>
