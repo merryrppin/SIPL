@@ -88,10 +88,13 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
-                                        <button type="submit" class="btn-large btn-success">Guardar</button>
+                                        <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                     </div>
                                 </div>
                             </td>
+                            <td colspan="5" align="center">
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                        </td>
                         </tr>
                     </table>
                 </form>
