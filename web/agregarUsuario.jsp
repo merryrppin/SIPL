@@ -20,6 +20,7 @@
         <title>Agregar Usuario</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/alert.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
             function validarForm(Usuario) {
@@ -29,49 +30,34 @@
                     return false; //devolvemos el foco
                 }
             }
-
-
-
-            $("#myModal").on("show", function() {    // wire up the OK button to dismiss the modal when shown
-                $("#myModal a.btn").on("click", function(e) {
-                    console.log("button pressed");   // just as an example...
-                    $("#myModal").modal('hide');     // dismiss the dialog
-                });
-            });
-
-            $("#myModal").on("hide", function() {    // remove the event listeners when the dialog is dismissed
-                $("#myModal a.btn").off("click");
-            });
-
-            $("#myModal").on("hidden", function() {  // remove the actual elements from the DOM when fully hidden
-                $("#myModal").remove();
-            });
-
-            $("#myModal").modal({// wire up the actual modal functionality and show the dialog
-                "backdrop": "static",
-                "keyboard": true,
-                "show": true                     // ensure the modal is shown immediately
-            });
-            
-            bootbox.alert("Hello world!", function() {
-  Example.show("Hello world callback");
-});
         </script>
+        <script type="text/javascript">
+$(function(){
+   $(".close").click(function(){
+      $("#myAlert").alert();
+   });
+});  
+</script> 
+        
     </head>
     <body>
-        <div id="myModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- dialog body -->
-                    <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        Hello world!
-                    </div>
-                    <!-- dialog buttons -->
-                    <div class="modal-footer"><button type="button" class="btn btn-primary">OK</button></div>
-                </div>
-            </div>
-        </div>
+        
+        
+        
+ <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
+        
+        
+        
+        
+        
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
