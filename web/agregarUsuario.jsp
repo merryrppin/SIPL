@@ -29,9 +29,49 @@
                     return false; //devolvemos el foco
                 }
             }
+
+
+
+            $("#myModal").on("show", function() {    // wire up the OK button to dismiss the modal when shown
+                $("#myModal a.btn").on("click", function(e) {
+                    console.log("button pressed");   // just as an example...
+                    $("#myModal").modal('hide');     // dismiss the dialog
+                });
+            });
+
+            $("#myModal").on("hide", function() {    // remove the event listeners when the dialog is dismissed
+                $("#myModal a.btn").off("click");
+            });
+
+            $("#myModal").on("hidden", function() {  // remove the actual elements from the DOM when fully hidden
+                $("#myModal").remove();
+            });
+
+            $("#myModal").modal({// wire up the actual modal functionality and show the dialog
+                "backdrop": "static",
+                "keyboard": true,
+                "show": true                     // ensure the modal is shown immediately
+            });
+            
+            bootbox.alert("Hello world!", function() {
+  Example.show("Hello world callback");
+});
         </script>
     </head>
     <body>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- dialog body -->
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        Hello world!
+                    </div>
+                    <!-- dialog buttons -->
+                    <div class="modal-footer"><button type="button" class="btn btn-primary">OK</button></div>
+                </div>
+            </div>
+        </div>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
@@ -42,8 +82,8 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                
-                
+
+
                 <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
@@ -58,7 +98,7 @@
                             </td>
                             <td>
                                 <%
-                                if(user.getTipo_usuario()==1){
+                                    if (user.getTipo_usuario() == 1) {
                                 %>
                                 <select name="tipo" disabled="disabled">
                                     <option value="0">
@@ -66,8 +106,7 @@
                                     </option>
                                 </select>
                                 <%
-                                }
-                                else if(user.getTipo_usuario()==2){
+                                } else if (user.getTipo_usuario() == 2) {
                                 %>
                                 <select name="tipo" id="tipo">
                                     <option value="0">
@@ -81,7 +120,7 @@
                                     </option>
                                 </select>
                                 <%
-                                }
+                                    }
                                 %>
                             </td>
                         </tr>
@@ -153,6 +192,6 @@
         </div>
     </body>
 </html>
-<%}else{
+<%} else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }%>
