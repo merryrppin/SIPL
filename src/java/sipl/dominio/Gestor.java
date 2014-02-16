@@ -79,4 +79,7 @@ public class Gestor {
     public boolean addMaterial(Material mat) {
         return matDAO.addMaterial(mat);
     }
+    public ArrayList<Usuario> getUsuarios() {
+        return usuDAO.getUsuarios();
+    }
 }

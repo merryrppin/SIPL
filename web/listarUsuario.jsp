@@ -1,7 +1,7 @@
 <%-- 
-    Document   : listarLaboratorios
-    Created on : 13-feb-2014, 18:20:26
-    Author     : WM
+    Document   : listarUsuario
+    Created on : 16/02/2014, 02:37:11 AM
+    Author     : Samy
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -13,7 +13,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
-        ArrayList<Laboratorio> data = Gestor.getLaboratorios();
+        ArrayList<Usuario> data = Gestor.getUsuarios();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -24,7 +24,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar Laboratorios</title>
+        <title>Listar Usuarios</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -33,14 +33,14 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <h1>Listar Laboratorios</h1>
+                <h1>Listar Usuarios</h1>
             </div>
         </div>
         <br><br><br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form action="modificarLaboratorio.jsp" method="POST">
+                <form action="modificarUsuario.jsp" method="POST">
                 <table class="table table-hover" align="center">
                     <tr>
                         <%
@@ -50,14 +50,16 @@
                         %>
                         <td><b>Código</b></td>
                         <td><b>Nombre</b></td>
-                        <td><b>Descripción</b></td>
-                        <td><b>Ubicación</b></td>
+                        <td><b>Apellido</b></td>
+                        <td><b>Teléfono</b></td>
+                        <td><b>Correo</b></td>
+                        <td><b>Estado</b></td>
+                        <td><b>Tipo Usuario</b></td>
+                        <td><b>Observaciones</b></td>
                     </tr>
                         <%
                             if (data.size() == 0) {
-                                out.print("<tr>");
-                                out.print("<td colspan='4' align='center'>No hay Laboratorios</td>");
-                                out.print("</tr>");
+                                out.print("<tr><td colspan='4' align='center'>No hay Usuarios</td></tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
                                     out.print("<tr>");
@@ -67,8 +69,28 @@
                                     }
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
                                     out.print("<td>" + data.get(i).getNombre() + "</td>");
-                                    out.print("<td>" + data.get(i).getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getUbicacion() + "</td>");
+                                    out.print("<td>" + data.get(i).getApellido() + "</td>");
+                                    out.print("<td>" + data.get(i).getTelefono() + "</td>");
+                                    out.print("<td>" + data.get(i).getCorreo() + "</td>");
+                                    if(data.get(i).getEstado()==0){
+                                        out.print("<td>Activo</td>");
+                                    }else if(data.get(i).getEstado()==1){
+                                        out.print("<td>Inactivo</td>");
+                                    }else{
+                                        out.print("<td>Error</td>");
+                                    }
+                                    if(data.get(i).getTipo_usuario()==0){
+                                        out.print("<td>Estudiante</td>");
+                                    }else if(data.get(i).getTipo_usuario()==1){
+                                        out.print("<td>Administrador Local</td>");
+                                    }else if(data.get(i).getTipo_usuario()==2){
+                                        out.print("<td>Administrador Global</td>");   
+                                    }else{
+                                        out.print("<td>Error</td>");
+                                    }
+                                    
+                                   
+                                    out.print("<td>" + data.get(i).getObservaciones() + "</td>");
                                     out.print("</tr>");
                                 }
                             }
