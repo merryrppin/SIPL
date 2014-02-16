@@ -24,9 +24,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
         <title>Listar Laboratorios</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -36,6 +33,9 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
                 <h1>Listar Laboratorios</h1>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
                 <form action="modificarLaboratorio.jsp" method="POST">
-                <table class="table table-hover" align="center">
+                <table class="table table-striped" align="center">
                     <tr>
                         <%
                             if (a == 2) {

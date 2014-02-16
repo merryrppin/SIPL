@@ -25,14 +25,11 @@
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <script type="text/javascript">
-            function fijarURL(url, form) {
-                form.action = url;
-                form.submit();
-            }
-        </script>
     </head>
     <body>
+        <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
@@ -62,7 +59,7 @@
                                 <label class="control-label" for="nombre">Nombre</label>
                             </td>
                             <td>
-                                <input type="text" id="nombre" name="nombre" value="<%out.print(lab.getNombre());%>">
+                                <input maxlength="50" type="text" id="nombre" name="nombre" value="<%out.print(lab.getNombre());%>">
                             </td>
                         </tr>
                         <tr>
@@ -70,7 +67,7 @@
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
                             <td colspan="3">
-                                <textarea  id="descripcion" name="descripcion" style='width:500px;'><%out.print(lab.getDescripcion());%></textarea>
+                                <textarea  maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(lab.getDescripcion());%></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -78,21 +75,23 @@
                                 <label class="control-label" for="ubicacion">Ubicación</label>
                             </td>
                             <td>
-                                <input type="text" id="ubicacion" name="ubicacion" value="<%out.print(lab.getUbicacion());%>">
+                                <input maxlength="50"  type="text" id="ubicacion" name="ubicacion" value="<%out.print(lab.getUbicacion());%>">
                             </td>
 
                         </tr>
 
                         <tr>
-                            <td colspan="4" align="center"> 
+                            <td colspan="2" align="center"> 
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
                                         <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                     </div>
+                                    
                                 </div>
                             </td>
-                            <td colspan="5" align="center">
+                            <td colspan="2" align="center">
+                                <br>
                             <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                         </td>
                         </tr>
