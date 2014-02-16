@@ -91,7 +91,7 @@
                                     fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
                                     fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
                                     out.print("<td>" + fecha + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu().getCodigo() +"</td>");
+                                    out.print("<td>" + data.get(i).getUsu_rd().getCodigo()+": "+Gestor.getUsuario(data.get(i).getUsu_rd().getCodigo()).getNombre() +"</td>");
                                     if (data.get(i).getEstado() == 0) {
                                         out.print("<td>Dañado</td>");
                                     } else if (data.get(i).getEstado() == 0) {

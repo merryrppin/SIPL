@@ -91,4 +91,7 @@ public class Gestor {
     public Danho getDanho(int codigo) {
         return danDAO.getDanho(codigo);
     }
+    public Usuario getUsuario(String codigo){
+        return usuDAO.getUsuario(codigo);
+    }
 }
