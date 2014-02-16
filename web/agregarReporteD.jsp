@@ -80,11 +80,14 @@
                             <td colspan="4" align="center">
                                 <div class="control-group">
                                     <div class="controls">
-                                        <br>
-                                        <button type="submit" class="btn-large btn-success">Guardar</button>
+                                        <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
+                                     <br>
+                                     <br>
+                                        <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                     </div>
                                 </div>
                             </td>
+                           
                         </tr>
                     </table>
                 </form>

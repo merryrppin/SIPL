@@ -78,7 +78,7 @@
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                             <%}
                             %>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:200px;'>Atrás</button>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                         </td>
                     </tr>
                 </table>
