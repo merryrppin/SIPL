@@ -30,29 +30,30 @@
                         && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
                     int tip, est;
-                    try {
-                        tel = Long.parseLong(telefono);
+                    if (telefono.length() > 0 && telefono != null) {
                         try {
-                            tip = Integer.parseInt(tipo);
+                            tel = Long.parseLong(telefono);
                         } catch (Exception e) {
-                            tip = 0;
+                            error = "telefono_incorrecto";
                         }
-                        est = Integer.parseInt(estado);
-                        String clave = Gestor.encriptar(codigo);
-                        Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
-                        if (Gestor.addUsuario(usu) == true) {
-                            response.sendRedirect("agregarUsuario.jsp");
-                        } else {
-                            error = "usuario_no_agregado";
-                        }
+                    }
+                    try {
+                        tip = Integer.parseInt(tipo);
                     } catch (Exception e) {
-                        error = "telefono_incorrecto";
+                        tip = 0;
+                    }
+                    est = Integer.parseInt(estado);
+                    String clave = Gestor.encriptar(codigo);
+                    Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
+                    if (Gestor.addUsuario(usu) == true) {
+                        response.sendRedirect("agregarUsuario.jsp");
+                    } else {
+                        error = "usuario_no_agregado";
                     }
                 } else {
                     error = "datos_incompletos";
                 }
             } else if (a == 2) {
-
             }
         } catch (Exception e) {
             error = "sin_accion";
@@ -60,7 +61,9 @@
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
-    if (error.length() > 0) {
+
+    if (error.length()
+            > 0) {
         response.sendRedirect("agregarUsuario.jsp?" + error);
     }
 %>
