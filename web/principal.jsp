@@ -130,10 +130,10 @@
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarUsuario.jsp?accion=0', this.form" style='width:200px;'>Modificar Usuario</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarUsuarios.jsp?accion=2', this.form" style='width:200px;'>Modificar Usuario</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarUsuario.jsp'" style='width:200px;'>Listar Usuario</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarUsuarios.jsp?accion=1'" style='width:200px;'>Listar Usuarios</button>
                                 </td>
                             </tr>
                         </table>

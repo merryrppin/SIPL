@@ -4,6 +4,7 @@
     Author     : WM
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -43,7 +44,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form action="modificarLaboratorio.jsp" method="POST">
+                <form action="modificarMaterial.jsp" method="POST">
                     <table class="table table-hover" align="center">
                         <tr>
                             <%
@@ -91,7 +92,15 @@
                                     }
                                     out.print("<td>" + data.get(i).getNum_inventario() + "</td>");
                                     out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
-                                    out.print("<td>" + data.get(i).getUlt_fecha_mante() + "</td>");
+                                    Calendar cal1 = data.get(i).getUlt_fecha_mante();
+                                    String fecha=cal1.get(Calendar.YEAR)+"-";
+                                    int mes=cal1.get(Calendar.MONTH);
+                                    mes++;
+                                    fecha+=mes+"-";
+                                    fecha+=cal1.get(Calendar.DAY_OF_MONTH);
+                                    fecha+=" "+cal1.get(Calendar.HOUR_OF_DAY);
+                                    fecha+=":"+cal1.get(Calendar.MINUTE)+":00";
+                                    out.print("<td>" +fecha + "</td>");
                                     out.print("</tr>");
                                 }
                             }
@@ -99,7 +108,7 @@
                         <tr>
                             <td colspan="10" align="center">
                                 <%
-                                if (a == 2) {%>
+                                if (a == 2 && data.size()>0) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                                 <%}
                                 %>

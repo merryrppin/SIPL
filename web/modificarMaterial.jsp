@@ -4,8 +4,8 @@
     Author     : WM
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="application" class="sipl.dominio.Gestor" />
 <%
@@ -13,8 +13,9 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
-        String ID = request.getParameter("codigo");
-        Material mat = Gestor.getMaterial(Integer.parseInt(ID));
+        String ID = request.getParameter("id");
+        try {
+            Material mat = Gestor.getMaterial(Integer.parseInt(ID));
 %>
 <!DOCTYPE html>
 <html>
@@ -28,11 +29,23 @@
         <script type="text/javascript" src="js/calendar-setup.js"></script>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            function validarForm(Material) {
+                if (Material.fecha.value.length === 0) { //¿Tiene 0 caracteres?
+                    Material.fecha.focus();    // Damos el foco al control
+                    alert('No has llenado el campo de la fecha'); //Mostramos el mensaje
+                    return false; //devolvemos el foco
+                }
+            }
+        </script>
     </head>
     <body>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Modificar Material</h1>
             </div>
         </div>
@@ -40,25 +53,15 @@
         <div class="row">
             <div class="col-xs-12 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form class="form-horizontal" action="modificarMaterial.jsp" method="POST">
+                <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center" class="table table-hover">
                         <tr>
-                            <td></td>
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
+                                <input hidden type="text" name="codigo" id="codigo" value="<%out.print(mat.getCodigo());%>">
                                 <input disabled="disabled" type="text" value="<%out.print(mat.getCodigo());%>">
-                                <input hidden type="text" id="codigo" value="<%out.print(mat.getCodigo());%>">
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="nombre">Nombre</label>
-                            </td>
-                            <td>
-                                <input type="text" id="nombre" name="nombre">
                             </td>
                             <td>
                                 <label class="control-label" for="tipo">Tipo de Elemento</label>
@@ -70,7 +73,11 @@
                                 <select id="tipo" name="tipo">
                                     <%
                                         for (int i = 0; i < data.size(); i++) {
-                                            out.print("<option value" + data.get(i).getId() + ">" + data.get(i).getNombre() + "</option>");
+                                            out.print("<option ");
+                                            if (mat.getTipo_mat().getId() == data.get(i).getId()) {
+                                                out.print("selected ");
+                                            }
+                                            out.print("value='" + data.get(i).getId() + "'>" + data.get(i).getNombre() + "</option>");
                                         }
                                     %>
                                 </select>
@@ -81,13 +88,13 @@
                                 <label class="control-label" for="marca">Marca</label>
                             </td>
                             <td>
-                                <input type="text" id="marca" name="marca">
+                                <input  maxlength="50" type="text" id="marca" name="marca" value="<%out.print(mat.getMarca());%>">
                             </td>
                             <td>
                                 <label class="control-label" for="numero">Número de Inventario</label>
                             </td>
                             <td>
-                                <input type="text" id="numero" name="numero">
+                                <input maxlength="50" type="text" id="numero" name="numero" value="<%out.print(mat.getNum_inventario());%>">
                             </td>
                         </tr>
                         <tr>
@@ -95,17 +102,75 @@
                                 <label class="control-label" for="serial">Serial</label>
                             </td>
                             <td>
-                                <input type="text" id="serial" name="serial">
+                                <input maxlength="50" type="text" id="serial" name="serial" value="<%out.print(mat.getSerial());%>">
                             </td>
                             <td>
                                 <label class="control-label" for="estado">Estado del elemento</label>
                             </td>
                             <td>
                                 <select id="estado" name="estado">
-                                    <option value="0">Activo</option>
-                                    <option value="1">Dado de baja</option>
-                                    <option value="2">Dañado</option>
-                                    <option value="3">Reparado</option>
+                                    <%int est = mat.getEstado();
+                                        out.print("<option ");
+                                        if (est == 0) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='0'>Activo</option>");
+                                        out.print("<option ");
+                                        if (est == 1) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='1'>Dado de baja</option>");
+                                        out.print("<option ");
+                                        if (est == 2) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='2'>Dañado</option>");
+                                        out.print("<option ");
+                                        if (est == 3) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='3'>Reparado</option>");
+                                    %>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="laboratorio">Laboratorio</label>
+                            </td>
+                            <td>
+                                <%
+                                    ArrayList<Laboratorio> data1 = Gestor.getLaboratorios();
+                                %>
+                                <select id="laboratorio" name="laboratorio">
+                                    <%
+                                        for (int i = 0; i < data1.size(); i++) {
+                                            out.print("<option ");
+                                            if (mat.getLab().getCodigo() == data1.get(i).getCodigo()) {
+                                                out.print("selected ");
+                                            }
+                                            out.print("value='" + data1.get(i).getCodigo() + "'>" + data1.get(i).getNombre() + "</option>");
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="control-label" for="disponibilidad">Disponibilidad</label>
+                            </td>
+                            <td>
+                                <select id="disponibilidad" name="disponibilidad">
+                                    <%int disp = mat.getDisponibilidad();
+                                        out.print("<option ");
+                                        if (disp == 0) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='0'>Activo</option>");
+                                        out.print("<option ");
+                                        if (disp == 1) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='1'>Dado de baja</option>");
+                                    %>
                                 </select>
                             </td>
                         </tr>
@@ -124,9 +189,35 @@
                                         ifFormat: "%d/%m/%Y"
                                     });
                                 </script>
+
                             </td>
                             <td>
-                                <label class="control-label" for="foto">Foto Material</label>
+                                <label class="control-label" for="hora">Hora</label>
+                                <select id="hora" name="hora">
+                                    <%
+                                        for (int i = 0; i < 24; i++) {
+                                            if (i < 10) {
+                                                out.print("<option value='" + i + "'>0" + i + "</option>");
+                                            } else {
+                                                out.print("<option value='" + i + "'>" + i + "</option>");
+                                            }
+
+                                        }
+                                    %>
+                                </select>
+                                <label class="control-label" for="minutos">Minutos</label>
+                                <select id="minutos" name="minutos">
+                                    <%
+                                        for (int i = 0; i < 60; i++) {
+                                            if (i < 10) {
+                                                out.print("<option value='" + i + "'>0" + i + "</option>");
+                                            } else {
+                                                out.print("<option value='" + i + "'>" + i + "</option>");
+                                            }
+
+                                        }
+                                    %>
+                                </select>
                             </td> 
                         </tr>
                         <tr>
@@ -134,9 +225,10 @@
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
                             <td colspan="2">
-                                <textarea  id="descripcion" name="descripcion" style='width:500px;'></textarea>
+                                <textarea maxlength="150" id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                             <td>
+                                <label class="control-label" for="foto">Foto Material</label>
                                 <input type="file" id="foto" name="foto">
                             </td>
                         </tr>  
@@ -147,12 +239,14 @@
                                         <br>
                                         <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                     </div>
+
                                 </div>
                             </td>
+                        </tr>
+                        <tr>
                             <td colspan="5" align="center">
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                        </td>
-                            
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
                         </tr>
                     </table>
                 </form>
@@ -161,6 +255,9 @@
         </div>
     </body>
 </html>
-<%}else{
+<%} catch (Exception e) {
+            response.sendRedirect("listarMateriales.jsp?accion=2");
+        }
+    } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
-}%>
+    }%>
