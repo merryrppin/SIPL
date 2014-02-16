@@ -24,6 +24,8 @@ import javax.imageio.ImageIO;
  */
 public class QRCode {
 
+    private final String dir = "C:\\Users\\WM\\Pictures\\QR";
+
     public void QRmini(String data, String IMG_PATH) {
         int qr_image_width = 100;
         int qr_image_height = 100;
@@ -50,7 +52,7 @@ public class QRCode {
                 image.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
             }
         }
-        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH+"mini.png")) {
+        try (FileOutputStream qrCode = new FileOutputStream(dir + IMG_PATH + "mini.png")) {
             ImageIO.write(image, IMAGE_FORMAT, qrCode);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +60,7 @@ public class QRCode {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void QRMedium(String data, String IMG_PATH) {
         int qr_image_width = 250;
         int qr_image_height = 250;
@@ -85,7 +87,7 @@ public class QRCode {
                 image.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
             }
         }
-        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH+"medium.png")) {
+        try (FileOutputStream qrCode = new FileOutputStream(dir + IMG_PATH + "medium.png")) {
             ImageIO.write(image, IMAGE_FORMAT, qrCode);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +95,7 @@ public class QRCode {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void QRHigh(String data, String IMG_PATH) {
         int qr_image_width = 450;
         int qr_image_height = 450;
@@ -120,7 +122,7 @@ public class QRCode {
                 image.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
             }
         }
-        try (FileOutputStream qrCode = new FileOutputStream(IMG_PATH+"high.png")) {
+        try (FileOutputStream qrCode = new FileOutputStream(dir + IMG_PATH + "high.png")) {
             ImageIO.write(image, IMAGE_FORMAT, qrCode);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);

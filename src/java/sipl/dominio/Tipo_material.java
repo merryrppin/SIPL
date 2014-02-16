@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 /**
@@ -11,11 +10,12 @@ package sipl.dominio;
  * @author Samy
  */
 public class Tipo_material {
-     private int id;
-     private String nombre;
-     private String descripcion;
-     private int cantidad;
-     private int disponibilidad;
+
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private int cantidad;
+    private int disponibilidad;
 
     public Tipo_material(int id, String nombre, String descripcion, int cantidad, int disponibilidad) {
         this.id = id;
@@ -64,6 +64,5 @@ public class Tipo_material {
     public void setDisponibilidad(int disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
-     
-     
+
 }

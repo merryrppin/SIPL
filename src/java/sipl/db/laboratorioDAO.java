@@ -16,14 +16,14 @@ import sipl.dominio.Laboratorio;
  */
 public class laboratorioDAO {
 
-    private Conexion con;
+    private final Conexion con;
 
     public laboratorioDAO(Conexion con) {
         this.con = con;
     }
 
     public ArrayList<Laboratorio> getLaboratorios() {
-        ArrayList<Laboratorio> data = new ArrayList<Laboratorio>();
+        ArrayList<Laboratorio> data = new ArrayList<>();
         ResultSet rs = con.getQuery("select * from laboratorio");
         try {
             while (rs.next()) {

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.db;
 
 import java.sql.ResultSet;
@@ -16,14 +15,15 @@ import sipl.dominio.Tipo_material;
  * @author Samy
  */
 public class tipo_materialDAO {
-    private Conexion con;
+
+    private final Conexion con;
 
     public tipo_materialDAO(Conexion con) {
         this.con = con;
     }
 
     public ArrayList<Tipo_material> getTipo_material() {
-        ArrayList<Tipo_material> data = new ArrayList<Tipo_material>();
+        ArrayList<Tipo_material> data = new ArrayList<>();
         ResultSet rs = con.getQuery("select * from tipo_material");
         try {
             while (rs.next()) {
@@ -74,8 +74,8 @@ public class tipo_materialDAO {
     public boolean updateTipo_material(Tipo_material tip) {
         boolean result = false;
         String sql = "update tipo_material set nombre='" + tip.getNombre() + "',"
-                + " descripcion='" + tip.getDescripcion() + "',cantidad=" + tip.getCantidad()+",disponibilidad= " + tip.getDisponibilidad() +
-                 " where id=" + tip.getId();
+                + " descripcion='" + tip.getDescripcion() + "',cantidad=" + tip.getCantidad() + ",disponibilidad= " + tip.getDisponibilidad()
+                + " where id=" + tip.getId();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;

@@ -13,7 +13,8 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
-        ArrayList<Laboratorio> data = Gestor.getLaboratorios();
+        int id = Gestor.getLaboratorios().size();
+        id++;
 %>
 <!DOCTYPE html>
 <html>
@@ -41,8 +42,8 @@
         <div class="row">
             <div class="col-xs-6 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-                
-                
+
+
                 <form class="form-horizontal" action="guardarLaboratorio.jsp?accion=1" method="POST">
                     <table align="center"   class="table table-hover">
                         <tr>
@@ -50,10 +51,10 @@
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
-                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(data.size());%>">
-                                <input disabled="disabled" type="text" value="<%out.print(data.size());%>">
+                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(id);%>">
+                                <input disabled="disabled" type="text" value="<%out.print(id);%>">
                             </td>
-                           
+
                         </tr>
                         <tr>
                             <td>
@@ -67,7 +68,7 @@
                             <td>
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
-                           <td colspan="3">
+                            <td colspan="3">
                                 <textarea  id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                         </tr>
@@ -78,9 +79,9 @@
                             <td>
                                 <input type="text" id="ubicacion" name="ubicacion">
                             </td>
-                            
+
                         </tr>
-                   
+
                         <tr>
                             <td colspan="4" align="center"> 
                                 <div class="control-group">
@@ -98,6 +99,6 @@
         </div>
     </body>
 </html>
-<%}else{
+<%} else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }%>

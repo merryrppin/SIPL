@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.db;
 
 import java.sql.ResultSet;
@@ -19,10 +18,11 @@ import sipl.dominio.Danho;
  * @author WM
  */
 public class danhoDAO {
-    private Conexion con;
-    private usuarioDAO usuDAO;
-    private materialDAO matDAO;
-    
+
+    private final Conexion con;
+    private final usuarioDAO usuDAO;
+    private final materialDAO matDAO;
+
     public danhoDAO(Conexion con) {
         this.con = con;
         usuDAO = new usuarioDAO(con);
@@ -30,7 +30,7 @@ public class danhoDAO {
     }
 
     public ArrayList<Danho> getDanhos() {
-        ArrayList<Danho> data = new ArrayList<Danho>();
+        ArrayList<Danho> data = new ArrayList<>();
         ResultSet rs = con.getQuery("select * from danho");
         try {
             while (rs.next()) {
@@ -38,12 +38,12 @@ public class danhoDAO {
                 String descripcion = rs.getString("descripcion");
                 int codigo_mat = rs.getInt("codigo_mat");
                 String codigo_usu = rs.getString("codigo_usu");
-                Calendar cal1=Calendar.getInstance();
-                Timestamp t1=rs.getTimestamp("fecha_d");
+                Calendar cal1 = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
                 String codigo_usu_rd = rs.getString("codigo_usu_rd");
                 int estado = rs.getInt("estado");
-                Danho dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1 , usuDAO.getUsuario(codigo_usu_rd), estado);
+                Danho dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1, usuDAO.getUsuario(codigo_usu_rd), estado);
                 data.add(dan);
             }
             rs.close();
@@ -61,12 +61,12 @@ public class danhoDAO {
                 String descripcion = rs.getString("descripcion");
                 int codigo_mat = rs.getInt("codigo_mat");
                 String codigo_usu = rs.getString("codigo_usu");
-                Calendar cal1=Calendar.getInstance();
-                Timestamp t1=rs.getTimestamp("fecha_d");
+                Calendar cal1 = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
                 String codigo_usu_rd = rs.getString("codigo_usu_rd");
                 int estado = rs.getInt("estado");
-                dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1 , usuDAO.getUsuario(codigo_usu_rd), estado);
+                dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1, usuDAO.getUsuario(codigo_usu_rd), estado);
             }
             rs.close();
         } catch (SQLException ex) {
@@ -77,8 +77,8 @@ public class danhoDAO {
 
     public boolean addDanho(Danho dan) {
         boolean result = false;
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String cal1=sdf.format(dan.getFecha_d().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String cal1 = sdf.format(dan.getFecha_d().getTime());
         String sql = "insert into danho (descripcion, codigo_mat, codigo_usu, fecha_d, codigo_usu_rd, estado"
                 + ") values ('" + dan.getDescripcion() + "'," + dan.getMat().getCodigo() + ",'" + dan.getUsu().getCodigo() + "',"
                 + "'" + cal1 + "','" + dan.getUsu_rd().getCodigo() + "'," + dan.getEstado() + ")";

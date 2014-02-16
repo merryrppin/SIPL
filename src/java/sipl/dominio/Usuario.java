@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 /**
@@ -11,6 +10,7 @@ package sipl.dominio;
  * @author WM
  */
 public class Usuario {
+
     private String codigo;
     private String nombre;
     private String apellido;
@@ -32,9 +32,7 @@ public class Usuario {
         this.observaciones = observaciones;
         this.clave = clave;
     }
-    
-    
-    
+
     public String getCodigo() {
         return codigo;
     }
@@ -106,7 +104,5 @@ public class Usuario {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
-    
-    
+
 }

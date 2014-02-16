@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 import java.util.Calendar;
@@ -13,6 +12,7 @@ import java.util.Calendar;
  * @author Samy
  */
 public class Material {
+
     private int codigo;
     private String descripcion;
     private Tipo_material tipo_mat;
@@ -136,8 +136,5 @@ public class Material {
     public void setImagenqr(String imagenqr) {
         this.imagenqr = imagenqr;
     }
-     
 
-   
-    
 }

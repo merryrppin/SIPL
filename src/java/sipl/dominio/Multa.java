@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 import java.util.Calendar;
@@ -13,6 +12,7 @@ import java.util.Calendar;
  * @author Samy
  */
 public class Multa {
+
     private int codigo;
     private Usuario usu;
     private Calendar fecha_multa;
@@ -66,5 +66,5 @@ public class Multa {
     public void setTiempo_multa(int tiempo_multa) {
         this.tiempo_multa = tiempo_multa;
     }
-   
+
 }

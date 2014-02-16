@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.db;
 
 import java.sql.Connection;
@@ -17,6 +16,7 @@ import java.sql.Statement;
  * @author Samy
  */
 public class Conexion {
+
     private Connection con;
     private final String driver = "com.mysql.jdbc.Driver";
     private final String dbName = "siprelab";
@@ -27,38 +27,33 @@ public class Conexion {
     public Conexion() {
         try {
             Class.forName(driver);
-            con=DriverManager.getConnection(url+dbName, user, passwd);
-        } catch (ClassNotFoundException cne) {
-            cne.printStackTrace();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            con = DriverManager.getConnection(url + dbName, user, passwd);
+        } catch (ClassNotFoundException | SQLException cne) {
         }
     }
-    
+
     public ResultSet getQuery(String sql) {
         ResultSet rs = null;
         try {
             Statement stm = con.createStatement();
             rs = stm.executeQuery(sql);
         } catch (SQLException ex) {
-            ex.printStackTrace();
         }
         return rs;
     }
-    
+
     public int setQuery(String sql) {
         int result = -1;
         try {
             Statement stm = con.createStatement();
             result = stm.executeUpdate(sql);
         } catch (SQLException ex) {
-            ex.printStackTrace();
         }
         return result;
     }
-    
-    public static void main(String [] args) {
+
+    public static void main(String[] args) {
         Conexion c = new Conexion();
     }
-    
+
 }

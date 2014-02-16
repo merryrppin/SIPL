@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 import java.util.Calendar;
@@ -13,6 +12,7 @@ import java.util.Calendar;
  * @author Samy
  */
 public class Danho {
+
     private int codigo;
     private String descripcion;
     private Material mat;
