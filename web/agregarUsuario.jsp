@@ -57,6 +57,9 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
                 <h1>Agregar Usuario</h1>
             </div>
         </div>
@@ -109,13 +112,13 @@
                                 <label class="control-label" for="nombre">Nombre</label>
                             </td>
                             <td>
-                                <input type="text" id="nombre" name="nombre">
+                                <input maxlength="30" type="text" id="nombre" name="nombre">
                             </td>
                             <td>
                                 <label class="control-label" for="telefono">Teléfono</label>
                             </td>
                             <td>
-                                <input type="text" id="telefono" name="telefono">
+                                <input maxlength="15" type="text" id="telefono" name="telefono">
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +126,7 @@
                                 <label class="control-label" for="apellidos">Apellidos</label>
                             </td>
                             <td>
-                                <input type="text" id="apellidos" name="apellidos">
+                                <input maxlength="30" type="text" id="apellidos" name="apellidos">
                             </td>
                             <td>
                                 <label class="control-label" for="estado">Estado</label>
@@ -144,7 +147,7 @@
                                 <label class="control-label" for="correo">Correo</label>
                             </td>
                             <td colspan="3">
-                                <input type="text" id="correo" name="correo">
+                                <input maxlength="50" type="text" id="correo" name="correo">
                             </td>
                         </tr>
                         <tr>
@@ -152,7 +155,7 @@
                                 <label class="control-label" for="observaciones">Observaciones</label>
                             </td>
                             <td colspan="3">
-                                <textarea  id="observaciones" name="observaciones" style='width:500px;'></textarea>
+                                <textarea  maxlength="200" id="observaciones" name="observaciones" style='width:500px;'></textarea>
                             </td>
                         </tr>
                         <tr>

@@ -26,10 +26,13 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
                 <h1>Agregar Reporte Daño</h1>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
@@ -49,7 +52,7 @@
                                 <label class="control-label" for="nombre">Nombres</label>
                             </td>
                             <td>
-                                <input disabled="disabled" type="text" id="nombre" name="nombre">
+                                <input maxlength="30" disabled="disabled" type="text" id="nombre" name="nombre">
                             </td>
                         </tr>
                         <tr>
@@ -57,7 +60,7 @@
                                 <label class="control-label" for="apellido">Apellidos</label>
                             </td>
                             <td>
-                                <input disabled="disabled" type="text" id="apellido" name="apellido">
+                                <input maxlength="30" disabled="disabled" type="text" id="apellido" name="apellido">
                             </td>
                         </tr>
                         <tr>
@@ -73,7 +76,7 @@
                                 <label class="control-label" for="descripcion">Descripción Daño</label>
                             </td>
                             <td colspan="3">
-                                <textarea  id="descripcion" name="descripcion" style='width:500px;'></textarea>
+                                <textarea maxlength="150" id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                         </tr>
                         <tr>
