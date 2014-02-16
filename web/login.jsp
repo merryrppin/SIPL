@@ -18,7 +18,10 @@
         <div class="row">
             <br><br><br><br><br>
             <div class="col-xs-6 col-sm-6">
-                <h2 align="center">Bienvenid@ al Sistema de información de Laboratorios</h2>
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
+               <h2 align="center"><b>Bienvenid@ al SILAB - Sistema de Información de Laboratorios</b></h2>
                 <br><br><br>
                 <form class="form-horizontal" action="validar.jsp" method="POST">
                     <table align="center">
@@ -45,9 +48,9 @@
                         <tr>
                             <td>
                                 <div class="control-group">
-                                    <div class="controls">
+                                    <div align="center" class="controls">
                                         <br>
-                                        <button type="submit" class="btn btn-info">Ingresar</button>
+                                        <button type="submit" class="btn btn-warning"><b>Ingresar</b></button>
                                     </div>
                                 </div>
                             </td>
@@ -56,7 +59,8 @@
                 </form>
             </div>
             <div class="col-xs-6 col-sm-6">
-                <img src="img/logo_unab.jpg" width="300" height="370" alt=".." class="img-rounded">
+                <br>    
+                <img src="img/unab12.png" width="400" height="290" alt=".." class="img-rounded">
             </div>
         </div>
     </body>
