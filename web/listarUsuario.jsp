@@ -41,7 +41,7 @@
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
                 <form action="modificarUsuario.jsp" method="POST">
-                <table class="table table-hover" align="center">
+                <table class="table table-striped" align="center">
                     <tr>
                         <%
                             if (a == 2) {
@@ -70,7 +70,11 @@
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
                                     out.print("<td>" + data.get(i).getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getApellido() + "</td>");
-                                    out.print("<td>" + data.get(i).getTelefono() + "</td>");
+                                    if(data.get(i).getTelefono()>0){
+                                        out.print("<td>" + data.get(i).getTelefono() + "</td>");
+                                    }else{
+                                        out.print("<td> </td>");
+                                    }
                                     out.print("<td>" + data.get(i).getCorreo() + "</td>");
                                     if(data.get(i).getEstado()==0){
                                         out.print("<td>Activo</td>");

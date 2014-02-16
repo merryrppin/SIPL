@@ -50,7 +50,7 @@
             <div class="col-xs-12 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
                 <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
-                    <table align="center" class="table table-hover" border="1">
+                    <table align="center" class="table table-hover">
                         <tr>
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>

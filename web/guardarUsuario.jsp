@@ -44,11 +44,15 @@
                     }
                     est = Integer.parseInt(estado);
                     String clave = Gestor.encriptar(codigo);
-                    Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
-                    if (Gestor.addUsuario(usu) == true) {
-                        response.sendRedirect("listarUsuario.jsp");
+                    if (tel > 0) {
+                        Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
+                        if (Gestor.addUsuario(usu) == true) {
+                            response.sendRedirect("listarUsuario.jsp");
+                        } else {
+                            error = "usuario_no_agregado";
+                        }
                     } else {
-                        error = "usuario_no_agregado";
+                        error = "telefono_invalido";
                     }
                 } else {
                     error = "datos_incompletos";
@@ -61,7 +65,6 @@
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
-
     if (error.length()
             > 0) {
         response.sendRedirect("agregarUsuario.jsp?" + error);
