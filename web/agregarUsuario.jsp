@@ -23,22 +23,25 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
             function validarForm(Usuario) {
-                if (Usuario.codigo.value.length === 0) {
+                if (Usuario.codigo.value.length === 0 || /^\s+$/.test(Usuario.codigo.value)) {
                     Usuario.codigo.focus();
                     alert('No has llenado el campo del codigo');
                     return false;
-                } else if (Usuario.nombre.value.length === 0) {
+                } else if (Usuario.nombre.value.length === 0 || /^\s+$/.test(Usuario.nombre.value)) {
                     Usuario.nombre.focus();
                     alert('No has llenado el campo del nombre');
                     return false;
-                } else if (Usuario.apellido.value.length === 0) {
+                } else if (Usuario.apellido.value.length === 0 || /^\s+$/.test(Usuario.apellido.value)) {
                     Usuario.apellido.focus();
                     alert('No has llenado el campo del apellido');
                     return false;
+                } else if (/^\s+$/.test(Usuario.telefono.value)) {
+                    Usuario.telefono.focus();
+                    alert('El valor del telefono no es válido');
+                    return false;
                 }
             }
-            function check()
-            {
+            function check() {
                 var phone = Usuario.telefono.value;
                 if (isNaN(phone)) {
                     alert("El numero telefónico debe ser con valores numéricos");
