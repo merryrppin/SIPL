@@ -47,10 +47,7 @@ public class materialDAO {
                 Calendar cal1 = Calendar.getInstance();
                 cal1.setTimeZone(TimeZone.getTimeZone("GMT"));
                 Timestamp t1 = rs.getTimestamp("ult_fecha_mante");
-                Date date = new Date(t1.getTime());
-                System.out.println("date " + date.toString());
                 cal1.setTimeInMillis(t1.getTime());
-                System.out.println("cal " + cal1.toString());
                 int disponibilidad = rs.getInt("disponibilidad");
                 int codigo_lab = rs.getInt("codigo_lab");
                 String imagenqr = rs.getString("imagenqr");

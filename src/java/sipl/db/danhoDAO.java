@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TimeZone;
 import sipl.dominio.Danho;
 
 /**
@@ -39,9 +40,10 @@ public class danhoDAO {
                 int codigo_mat = rs.getInt("codigo_mat");
                 String codigo_usu = rs.getString("codigo_usu");
                 Calendar cal1 = Calendar.getInstance();
+                cal1.setTimeZone(TimeZone.getTimeZone("GMT"));
                 Timestamp t1 = rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
-                String codigo_usu_rd = rs.getString("codigo_usu_rd");
+                String codigo_usu_rd = rs.getString("cod_usu_rd");
                 int estado = rs.getInt("estado");
                 Danho dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1, usuDAO.getUsuario(codigo_usu_rd), estado);
                 data.add(dan);
@@ -64,7 +66,7 @@ public class danhoDAO {
                 Calendar cal1 = Calendar.getInstance();
                 Timestamp t1 = rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
-                String codigo_usu_rd = rs.getString("codigo_usu_rd");
+                String codigo_usu_rd = rs.getString("cod_usu_rd");
                 int estado = rs.getInt("estado");
                 dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1, usuDAO.getUsuario(codigo_usu_rd), estado);
             }
@@ -79,7 +81,7 @@ public class danhoDAO {
         boolean result = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal1 = sdf.format(dan.getFecha_d().getTime());
-        String sql = "insert into danho (descripcion_d, codigo_mat, codigo_usu, fecha_d, codigo_usu_rd, estado"
+        String sql = "insert into danho (descripcion_d, codigo_mat, codigo_usu, fecha_d, cod_usu_rd, estado"
                 + ") values ('" + dan.getDescripcion() + "'," + dan.getMat().getCodigo() + ",'" + dan.getUsu().getCodigo() + "',"
                 + "'" + cal1 + "','" + dan.getUsu_rd().getCodigo() + "'," + dan.getEstado() + ")";
         int registros = con.setQuery(sql);
