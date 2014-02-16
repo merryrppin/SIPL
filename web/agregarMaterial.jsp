@@ -29,9 +29,12 @@
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script type="text/javascript">
-            function fijarURL(url, form) {
-                form.action = url;
-                form.submit();
+            function validarForm(Material) {
+                if (Material.fecha.value.length === 0) { //¿Tiene 0 caracteres?
+                    Material.fecha.focus();    // Damos el foco al control
+                    alert('No has llenado el campo de la fecha'); //Mostramos el mensaje
+                    return false; //devolvemos el foco
+                }
             }
         </script>
     </head>
@@ -46,25 +49,15 @@
         <div class="row">
             <div class="col-xs-12 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form class="form-horizontal" action="guardarMaterial.jsp?accion=1" method="POST">
-                    <table align="center" class="table table-hover">
+                <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                    <table align="center" class="table table-hover" border="1">
                         <tr>
-                            <td></td>
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
                                 <input hidden type="text" name="codigo" id="codigo" value="<%out.print(id);%>">
                                 <input disabled="disabled" type="text" value="<%out.print(id);%>">
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label" for="nombre">Nombre</label>
-                            </td>
-                            <td>
-                                <input type="text" id="nombre" name="nombre">
                             </td>
                             <td>
                                 <label class="control-label" for="tipo">Tipo de Elemento</label>
@@ -115,10 +108,6 @@
                                 </select>
                             </td>
                         </tr>
-                        
-                        
-                        
-                        
                         <tr>
                             <td>
                                 <label class="control-label" for="laboratorio">Laboratorio</label>
@@ -145,9 +134,6 @@
                                 </select>
                             </td>
                         </tr>
-                        
-                        
-                        
                         <tr>
                             <td colspan="2">
                                 <label class="control-label" for="cal-field-1">Última fecha de Matenimiento</label>
@@ -163,9 +149,35 @@
                                         ifFormat: "%d/%m/%Y"
                                     });
                                 </script>
+                                
                             </td>
                             <td>
-                                <label class="control-label" for="foto">Foto Material</label>
+                                <label class="control-label" for="hora">Hora</label>
+                                <select id="hora" name="hora">
+                                    <%
+                                    for(int i=0;i<24;i++){
+                                        if(i<10){
+                                            out.print("<option value='"+i+"'>0"+i+"</option>");
+                                        }else{
+                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        }
+                                        
+                                    }
+                                    %>
+                                </select>
+                                <label class="control-label" for="minutos">Minutos</label>
+                                <select id="minutos" name="minutos">
+                                    <%
+                                    for(int i=0;i<60;i++){
+                                        if(i<10){
+                                            out.print("<option value='"+i+"'>0"+i+"</option>");
+                                        }else{
+                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        }
+                                        
+                                    }
+                                    %>
+                                </select>
                             </td> 
                         </tr>
                         <tr>
@@ -176,6 +188,7 @@
                                 <textarea  id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                             <td>
+                                <label class="control-label" for="foto">Foto Material</label>
                                 <input type="file" id="foto" name="foto">
                             </td>
                         </tr>  

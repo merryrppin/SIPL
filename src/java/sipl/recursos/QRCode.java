@@ -24,7 +24,8 @@ import javax.imageio.ImageIO;
  */
 public class QRCode {
 
-    private final String dir = "C:\\Users\\WM\\Pictures\\QR";
+    private final String dir = "";
+    //private final String dir = "C:\\Users\\WM\\Pictures\\QR";
 
     public void QRmini(String data, String IMG_PATH) {
         int qr_image_width = 100;

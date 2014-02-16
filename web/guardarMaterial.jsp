@@ -35,8 +35,14 @@
                 String descripcion = request.getParameter("descripcion");
                 String laboratorio = request.getParameter("laboratorio");
                 String disponibilidad = request.getParameter("disponibilidad");
+                String hora = request.getParameter("hora");
+                String minutos = request.getParameter("minutos");
                 String direccion = "C:/Users/WM/Desktop/QR/" + codigo;
-                Gestor.generarQR(codigo, direccion);
+                try{
+                    Gestor.generarQR(codigo, direccion);
+                }catch(Exception e){
+                    error="QR_error";
+                }
                 if(foto.length()==0 || foto == null){
                     foto="ninguna";
                 }
@@ -52,7 +58,7 @@
                 if(serial.length()==0 || serial == null){
                     serial="ninguna";
                 }
-                fecha += " 00:00:00";
+                fecha += hora+":"+minutos+":00";
                 DateFormat formatter;
                 formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Calendar myGDate = new GregorianCalendar();

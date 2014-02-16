@@ -27,8 +27,7 @@
                 String correo = request.getParameter("correo");
                 String observaciones = request.getParameter("observaciones");
                 if (codigo != null && codigo.length() > 0 && nombre != null
-                        && nombre.length() > 0 && telefono != null && telefono.length() > 0
-                        && apellidos != null && apellidos.length() > 0 && correo != null && correo.length() > 0) {
+                        && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
                     int tip, est;
                     try {
