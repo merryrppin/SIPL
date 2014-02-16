@@ -65,7 +65,7 @@
                                     <button class="btn btn-primary" disabled="disabled" type="button" style='width:200px;'>Agregar material</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarMaterial .jsp'" style='width:200px;'>Agregar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarMaterial.jsp'" style='width:200px;'>Agregar material</button>
                                     <%
                                         }
                                     %>

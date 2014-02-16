@@ -18,7 +18,7 @@
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {
-
+                
             } else if (a == 2) {
                 String codigo = request.getParameter("codigo");
                 String nombre = request.getParameter("nombre");

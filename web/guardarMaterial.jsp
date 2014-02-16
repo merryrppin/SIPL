@@ -36,7 +36,7 @@
                 String laboratorio = request.getParameter("laboratorio");
                 String disponibilidad = request.getParameter("disponibilidad");
                 String direccion = "C:/Users/WM/Desktop/QR/" + codigo;
-                //Gestor.generarQR(codigo, direccion);
+                Gestor.generarQR(codigo, direccion);
                 if(foto.length()==0 || foto == null){
                     foto="ninguna";
                 }
