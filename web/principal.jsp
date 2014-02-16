@@ -101,7 +101,7 @@
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMateriales.jsp?accion=1'" style='width:200px;'>Listar material</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarMateriales.jsp?accion=1'" style='width:200px;'>Listar materiales</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp'" style='width:200px;'>Listar reporte daño</button>
