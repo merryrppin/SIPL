@@ -63,6 +63,14 @@
                     serial = "ninguna";
                 }
                 try {
+                    int h=Integer.parseInt(hora);
+                    if(h<10){
+                        hora="0"+h;
+                    }
+                    int m=Integer.parseInt(minutos);
+                    if(m<10){
+                        minutos="0"+m;
+                    }
                     String[] f = fecha.split("/");
                     String fe = f[2] + "-" + f[1] + "-" + f[0];
                     fe += " " + hora + ":" + minutos + ":00";
@@ -86,7 +94,7 @@
                     error = "fecha_error";
                 }
             } else if (a == 2) {
-
+                
             }
         } catch (Exception e) {
             error = "sin_accion";

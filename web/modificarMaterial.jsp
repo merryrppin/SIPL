@@ -54,7 +54,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
                     <table align="center" class="table table-hover">
                         <tr>
                             <td>
@@ -186,10 +186,15 @@
                                 fecha=cal1.get(Calendar.DAY_OF_MONTH)+"/";
                                 int mes=cal1.get(Calendar.MONTH);
                                 mes++;
-                                fecha+=mes+"/";
+                                String m="";
+                                if(mes<10){
+                                    m+="0";
+                                }
+                                m+=mes;
+                                fecha+=m+"/";
                                 fecha+=cal1.get(Calendar.YEAR)+"";
                                 %>
-                                <input type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA"/>
+                                <input type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA" value="<%out.print(fecha);%>"/>
                                 <button type="submit" id="cal-button-1"><span class="glyphicon glyphicon-calendar"></span></button>
                                 <script type="text/javascript">
                                     Calendar.setup({
@@ -216,11 +221,10 @@
                                             } else {
                                                 out.print("<option "); 
                                                 if(i==hora){
-                                                    out.print("selected");
+                                                    out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>" + i + "</option>");
                                             }
-
                                         }
                                     %>
                                 </select>
