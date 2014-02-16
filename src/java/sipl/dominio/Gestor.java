@@ -88,4 +88,7 @@ public class Gestor {
     public ArrayList<Danho> getDanhos() {
         return danDAO.getDanhos();
     }
+    public Danho getDanho(int codigo) {
+        return danDAO.getDanho(codigo);
+    }
 }
