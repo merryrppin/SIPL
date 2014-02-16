@@ -94,4 +94,11 @@ public class Gestor {
     public Usuario getUsuario(String codigo){
         return usuDAO.getUsuario(codigo);
     }
+    public boolean updateDanho(Danho dan){
+        return danDAO.updateDanho(dan);
+    }
+    public boolean addDanho(Danho dan){
+        return danDAO.addDanho(dan);
+    }
+    
 }
