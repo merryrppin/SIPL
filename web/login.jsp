@@ -59,11 +59,13 @@
                 </form>
             </div>
             <div class="col-xs-6 col-sm-6">
-                <br>   
+                <br>  
+                <br> 
+                <br> 
                 <table align="center">
                     <tr>
                         <td>
-                            <img src="img/unab12.png" width="400" height="290" alt=".." class="img-rounded">
+                            <img src="img/unab12.png" width="400" height="250" alt=".." class="img-rounded">
                         </td>
                     </tr>
                 </table>
