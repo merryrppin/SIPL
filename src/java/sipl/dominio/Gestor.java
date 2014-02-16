@@ -42,6 +42,7 @@ public class Gestor {
         qrC.QRmini(data, direccion);
         qrC.QRMedium(data, direccion);
         qrC.QRHigh(data, direccion);
+        qrC.QRsmall(data, direccion);
     }
 
     public boolean addUsuario(Usuario usu) {
