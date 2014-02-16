@@ -23,10 +23,10 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
             function validarForm(Usuario) {
-                if (Usuario.codigo.value.length === 0) { //¿Tiene 0 caracteres?
-                    Usuario.codigo.focus();    // Damos el foco al control
-                    alert('No has llenado el campo del codigo'); //Mostramos el mensaje
-                    return false; //devolvemos el foco
+                if (Usuario.codigo.value.length === 0) {
+                    Usuario.codigo.focus();
+                    alert('No has llenado el campo del codigo');
+                    return false;
                 } else if (Usuario.nombre.value.length === 0) {
                     Usuario.nombre.focus();
                     alert('No has llenado el campo del nombre');
@@ -35,6 +35,17 @@
                     Usuario.apellido.focus();
                     alert('No has llenado el campo del apellido');
                     return false;
+                }
+            }
+            function check()
+            {
+                var phone = Usuario.telefono.value;
+                if (isNaN(phone)) {
+                    alert("El numero telefónico debe ser con valores numéricos");
+                    return false;
+                }
+                else {
+                    return true;
                 }
             }
         </script>
@@ -50,7 +61,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
@@ -146,7 +157,7 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
-                                        <button type="submit" class="btn btn-success">Guardar</button>
+                                        <button type="submit" class="btn btn-success" onclick="return check();">Guardar</button>
                                     </div>
                                 </div>
                             </td>

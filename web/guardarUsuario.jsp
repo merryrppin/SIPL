@@ -35,6 +35,7 @@
                             tel = Long.parseLong(telefono);
                         } catch (Exception e) {
                             error = "telefono_incorrecto";
+                            tel=-1;
                         }
                     }
                     try {
@@ -44,7 +45,7 @@
                     }
                     est = Integer.parseInt(estado);
                     String clave = Gestor.encriptar(codigo);
-                    if (tel > 0) {
+                    if (tel > -1) {
                         Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
                         if (Gestor.addUsuario(usu) == true) {
                             response.sendRedirect("listarUsuario.jsp");
@@ -65,8 +66,7 @@
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
-    if (error.length()
-            > 0) {
+    if (error.length()> 0) {
         response.sendRedirect("agregarUsuario.jsp?" + error);
     }
 %>
