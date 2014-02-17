@@ -94,7 +94,7 @@ public class danhoDAO {
     public boolean updateDanho(Danho dan) {
         boolean result = false;
         String sql = "update danho set estado=" + dan.getEstado() + ","
-                + " descripcion_d='" + dan.getDescripcion() + " where codigo=" + dan.getCodigo();
+                + " descripcion_d='" + dan.getDescripcion()+ "' where codigo=" + dan.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;

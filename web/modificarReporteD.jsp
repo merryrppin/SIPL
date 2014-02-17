@@ -43,8 +43,8 @@
         </div>
         <br><br>
         <div class="row">
-            <div class="col-xs-6 col-sm-3"></div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-6 col-sm-1"></div>
+            <div class="col-xs-12 col-sm-10">
 
 
                 <form class="form-horizontal" action="guardarReporteD.jsp?accion=2" method="POST">
@@ -68,18 +68,18 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="nombre">Código Material</label>
+                                <label class="control-label" for="codigo_material">Código Material</label>
                             </td>
                             <td>
-                                <input maxlength="10" type="text" id="nombre" name="nombre" value="<%out.print(dan.getMat().getCodigo());%>">
+                                <input disabled maxlength="10" type="text" id="codigo_material" name="codigo_material" value="<%out.print(dan.getMat().getCodigo());%>">
                             </td>
                         </tr> 
                         <tr>
                             <td>
-                                <label class="control-label" for="nombre">Código Usuario</label>
+                                <label class="control-label" for="codigo_usuario">Código Usuario</label>
                             </td>
                             <td>
-                                <input maxlength="10" type="text" id="nombre" name="nombre" value="<%out.print(dan.getUsu().getCodigo());%>">
+                                <input disabled maxlength="10" type="text" id="codigo_usuario" name="codigo_usuario" value="<%out.print(dan.getUsu().getCodigo());%>">
                             </td>
                         </tr> 
                         <tr>
@@ -101,21 +101,13 @@
                                 fecha+=m+"/";
                                 fecha+=cal1.get(Calendar.YEAR)+"";
                                 %>
-                                <input type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA" value="<%out.print(fecha);%>"/>
-                                <button type="submit" id="cal-button-1"><span class="glyphicon glyphicon-calendar"></span></button>
-                                <script type="text/javascript">
-                                    Calendar.setup({
-                                        inputField: "cal-field-1",
-                                        button: "cal-button-1",
-                                        align: "Tr",
-                                        ifFormat: "%d/%m/%Y"
-                                    });
-                                </script>
+                                <input disabled type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA" value="<%out.print(fecha);%>"/>
+                                
 
                             </td>
                             <td>
                                 <label class="control-label" for="hora">Hora</label>
-                                <select id="hora" name="hora">
+                                <select disabled="disabled" id="hora" name="hora">
                                     <%
                                 int hora=cal1.get(Calendar.HOUR_OF_DAY);
                                         for (int i = 0; i < 24; i++) {
@@ -136,7 +128,7 @@
                                     %>
                                 </select>
                                 <label class="control-label" for="minutos">Minutos</label>
-                                <select id="minutos" name="minutos">
+                                <select disabled="disabled" id="minutos" name="minutos">
                                     <%
                                         int minutos = cal1.get(Calendar.MINUTE);
                                         for (int i = 0; i < 60; i++) {
@@ -162,10 +154,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="nombre">Estado</label>
+                                <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
-                                <input maxlength="1" type="text" id="nombre" name="nombre" value="<%out.print(dan.getEstado());%>">
+                                <input maxlength="1" type="text" id="estado" name="estado" value="<%out.print(dan.getEstado());%>">
                             </td>
                         </tr> 
 
@@ -187,7 +179,7 @@
                     </table>
                 </form>
             </div>
-            <div class="col-xs-6 col-sm-3"></div>
+            <div class="col-xs-6 col-sm-1"></div>
         </div>
     </body>
 </html>

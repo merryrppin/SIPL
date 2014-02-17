@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form class="form-horizontal" action="guardarReporteD.jsp" method="POST">
+                <form class="form-horizontal" action="guardarReporteD.jsp?accion=1" method="POST">
                     <table align="center"   class="table table-hover">
                            <tr>
                             <td>
@@ -56,32 +56,32 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="descripciond">Descripción Daño</label>
+                                <label class="control-label" for="descripcion">Descripción Daño</label>
                             </td>
                             <td colspan="3">
-                                <textarea  maxlength="150" id="descripciond" name="descripciond" style='width:500px;'></textarea>
+                                <textarea  maxlength="150" id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="codigom">Código Material</label>
+                                <label class="control-label" for="codigo_material">Código Material</label>
                             </td>
                             <td>
-                                <input maxlength="10" type="text" id="codigom" name="codigom">
+                                <input maxlength="10" type="text" id="codigo_material" name="codigo_material">
                             </td>
                         </tr> 
                         
                         <tr>
                             <td>
-                                <label class="control-label" for="codigou">Codigo Usuario</label>
+                                <label class="control-label" for="codigo_usuario">Codigo Usuario</label>
                             </td>
                             <td>
-                                <input maxlength="20" type="text" id="codigou" name="codigou">
+                                <input maxlength="20" type="text" id="codigo_usuario" name="codigo_usuario">
                             </td>
 
-                        </tr>
-              <tr>
-                            <td colspan="2">
+                            </tr>
+                            <tr>
+                            <td>
                                 <label class="control-label" for="cal-field-1">Fecha Daño</label>
                             </td>
                             <td>
@@ -95,7 +95,6 @@
                                         ifFormat: "%d/%m/%Y"
                                     });
                                 </script>
-                                
                             </td>
                             <td>
                                 <label class="control-label" for="hora">Hora</label>
@@ -128,10 +127,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="nombre">Estado</label>
+                                <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
-                                <input maxlength="1" type="text" id="nombre" name="nombre">
+                                <input maxlength="1" type="text" id="estado" name="estado">
                             </td>
                         </tr> 
                         <tr>
