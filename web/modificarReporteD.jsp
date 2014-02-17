@@ -153,11 +153,30 @@
 
                         </tr>
                         <tr>
-                            <td>
+                               <td>
                                 <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
-                                <input maxlength="1" type="text" id="estado" name="estado" value="<%out.print(dan.getEstado());%>">
+                                <select id="estado" name="estado">
+                                    <%int est = dan.getEstado();
+                                        out.print("<option ");
+                                        if (est == 0) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='0'>Dañado</option>");
+                                        out.print("<option ");
+                                        if (est == 1) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='1'>Reparado</option>");
+                                        out.print("<option ");
+                                        if (est == 2) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='2'>Dado de baja</option>");
+    
+                                    %>
+                                </select>
                             </td>
                         </tr> 
 

@@ -127,10 +127,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label" for="estado">Estado</label>
+                        <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
-                                <input maxlength="1" type="text" id="estado" name="estado">
+                                <select id="estado" name="estado">
+                                    <option value="0">Dañado</option>
+                                    <option value="1">Reparado</option>
+                                    <option value="2">Dado de baja</option>
+                                </select>
                             </td>
                         </tr> 
                         <tr>

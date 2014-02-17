@@ -94,9 +94,9 @@
                                     out.print("<td>" + data.get(i).getUsu_rd().getCodigo()+": "+Gestor.getUsuario(data.get(i).getUsu_rd().getCodigo()).getNombre() +"</td>");
                                     if (data.get(i).getEstado() == 0) {
                                         out.print("<td>Dañado</td>");
-                                    } else if (data.get(i).getEstado() == 0) {
+                                    } else if (data.get(i).getEstado() == 1) {
                                         out.print("<td>Reparado</td>");
-                                    } else if (data.get(i).getEstado() == 0) {
+                                    } else if (data.get(i).getEstado() == 2) {
                                         out.print("<td>Dado de baja</td>");
                                     } else {
                                         out.print("<td>Error</td>");
