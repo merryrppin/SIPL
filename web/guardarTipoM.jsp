@@ -21,11 +21,11 @@
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {
-                if(descripcion.length()==0 || descripcion==null){
-                    descripcion="ninguno";
+                if (descripcion.length() == 0 || descripcion == null) {
+                    descripcion = "ninguno";
                 }
                 if (codigo != null && codigo.length() > 0 && nombre != null
-                        && nombre.length() > 0 && descripcion != null && descripcion.length() > 0) {
+                        && nombre.length() > 0) {
                     int c = Integer.parseInt(codigo);
                     Tipo_material tip = new Tipo_material(c, nombre, descripcion, 0, 0);
                     if (Gestor.addTipoMaterial(tip) == true) {
@@ -37,7 +37,7 @@
                     error = "datos_incompletos";
                 }
             } else if (a == 2) {
-                
+
             }
         } catch (Exception e) {
 

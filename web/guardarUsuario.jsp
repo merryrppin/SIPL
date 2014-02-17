@@ -16,16 +16,16 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
         try {
+            String codigo = request.getParameter("codigo");
+            String tipo = request.getParameter("tipo");
+            String nombre = request.getParameter("nombre");
+            String telefono = request.getParameter("telefono");
+            String apellidos = request.getParameter("apellidos");
+            String estado = request.getParameter("estado");
+            String correo = request.getParameter("correo");
+            String observaciones = request.getParameter("observaciones");
             a = Integer.parseInt(accion);
             if (a == 1) {
-                String codigo = request.getParameter("codigo");
-                String tipo = request.getParameter("tipo");
-                String nombre = request.getParameter("nombre");
-                String telefono = request.getParameter("telefono");
-                String apellidos = request.getParameter("apellidos");
-                String estado = request.getParameter("estado");
-                String correo = request.getParameter("correo");
-                String observaciones = request.getParameter("observaciones");
                 if (codigo != null && codigo.length() > 0 && nombre != null
                         && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
@@ -35,7 +35,7 @@
                             tel = Long.parseLong(telefono);
                         } catch (Exception e) {
                             error = "telefono_incorrecto";
-                            tel=-1;
+                            tel = -1;
                         }
                     }
                     try {
@@ -59,6 +59,44 @@
                     error = "datos_incompletos";
                 }
             } else if (a == 2) {
+                
+                
+                
+                if (nombre != null && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
+                    long tel = 0;
+                    int est;
+                    if (telefono.length() > 0 && telefono != null) {
+                        try {
+                            tel = Long.parseLong(telefono);
+                        } catch (Exception e) {
+                            error = "telefono_incorrecto";
+                            tel = -1;
+                        }
+                    }
+                    Usuario u = Gestor.getUsuario(codigo);
+                    if(u.getTipo_usuario()!=2){
+                        est = Integer.parseInt(estado);
+                    }else{
+                        est=0;
+                    }
+                    if (tel > -1) {
+                        u.setTelefono(tel);
+                        u.setEstado(est);
+                        u.setNombre(nombre);
+                        u.setApellido(apellidos);
+                        u.setObservaciones(observaciones);
+                        u.setCorreo(correo);
+                        if (Gestor.updateUsuario(u) == true) {
+                            response.sendRedirect("listarUsuario.jsp");
+                        } else {
+                            error = "usuario_no_agregado";
+                        }
+                    } else {
+                        error = "telefono_invalido";
+                    }
+                } else {
+                    error = "datos_incompletos";
+                }
             }
         } catch (Exception e) {
             error = "sin_accion";
@@ -66,7 +104,7 @@
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
-    if (error.length()> 0) {
+    if (error.length() > 0) {
         response.sendRedirect("agregarUsuario.jsp?" + error);
     }
 %>

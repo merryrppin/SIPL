@@ -1,7 +1,7 @@
 <%-- 
-    Document   : agregarUsuario
-    Created on : 12/02/2014, 10:27:31 PM
-    Author     : Samy
+    Document   : modificarUsuario
+    Created on : 16-feb-2014, 18:40:59
+    Author     : WM
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +12,10 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+        String ID = request.getParameter("id");
+        if (ID.length() > 0 && ID != null) {
+            Usuario usu = Gestor.getUsuario(ID);
+            if (usu != null) {
 %>
 <!DOCTYPE html>
 <html>
@@ -58,8 +62,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Agregar Usuario</h1>
             </div>
         </div>
@@ -67,58 +71,21 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jspaccion=2" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
-                                <label class="control-label" for="codigo">Codigo</label>
-                            </td>
-                            <td>
-                                <input type="text" id="codigo" name="codigo">
-                            </td>
-                            <td>
-                                <label class="control-label" for="tipo">Tipo de Usuario</label>
-                            </td>
-                            <td>
-                                <%
-                                    if (user.getTipo_usuario() == 1) {
-                                %>
-                                <select name="tipo" disabled="disabled">
-                                    <option value="0">
-                                        Estudiante
-                                    </option>
-                                </select>
-                                <%
-                                } else if (user.getTipo_usuario() == 2) {
-                                %>
-                                <select name="tipo" id="tipo">
-                                    <option value="0">
-                                        Estudiante
-                                    </option>
-                                    <option value="1">
-                                        Administrador Local
-                                    </option>
-                                    <option value="2">
-                                        Administrador Global
-                                    </option>
-                                </select>
-                                <%
-                                    }
-                                %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                                <input type="text" id="codigo" name="codigo" hidden value="<%out.print(usu.getCodigo());%>">
                                 <label class="control-label" for="nombre">Nombre</label>
                             </td>
                             <td>
-                                <input maxlength="30" type="text" id="nombre" name="nombre">
+                                <input maxlength="30" type="text" id="nombre" name="nombre" value="<%out.print(usu.getNombre());%>">
                             </td>
                             <td>
                                 <label class="control-label" for="telefono">Teléfono</label>
                             </td>
                             <td>
-                                <input maxlength="15" type="text" id="telefono" name="telefono">
+                                <input maxlength="15" type="text" id="telefono" name="telefono" value="<%out.print(usu.getTelefono());%>">
                             </td>
                         </tr>
                         <tr>
@@ -126,28 +93,42 @@
                                 <label class="control-label" for="apellidos">Apellidos</label>
                             </td>
                             <td>
-                                <input maxlength="30" type="text" id="apellidos" name="apellidos">
+                                <input maxlength="30" type="text" id="apellidos" name="apellidos" value="<%out.print(usu.getApellido());%>">
                             </td>
+                            <%
+                            if(usu.getTipo_usuario()==0 || usu.getTipo_usuario()==1){
+                                int est=usu.getEstado();
+                                %>
                             <td>
                                 <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
                                 <select id="estado" name="estado">
-                                    <option value="0">
+                                    <option value="0"
+                                        <%if(est==0){
+                                            out.print(" selected ");
+                                        }%>>
                                         Activo
                                     </option>
-                                    <option value="1">
+                                    <option value="1"
+                                        <%if(est==1){
+                                            out.print(" selected ");
+                                        }%>
+                                            >
                                         Inactivo
                                     </option>
                                 </select>
                             </td>
+                            <%
+                            }
+                            %>
                         </tr>
                         <tr>
                             <td>
                                 <label class="control-label" for="correo">Correo</label>
                             </td>
                             <td colspan="3">
-                                <input maxlength="50" type="text" id="correo" name="correo">
+                                <input maxlength="50" type="text" id="correo" name="correo" value="<%out.print(usu.getCorreo());%>">
                             </td>
                         </tr>
                         <tr>
@@ -155,7 +136,7 @@
                                 <label class="control-label" for="observaciones">Observaciones</label>
                             </td>
                             <td colspan="3">
-                                <textarea  maxlength="200" id="observaciones" name="observaciones" style='width:500px;'></textarea>
+                                <textarea  maxlength="200" id="observaciones" name="observaciones" style='width:500px;'><%out.print(usu.getObservaciones());%></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -176,5 +157,11 @@
     </body>
 </html>
 <%} else {
+                response.sendRedirect("principal.jsp?error=no_existe");
+            }
+        } else {
+            response.sendRedirect("principal.jsp?error=sin_ID");
+        }
+    } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }%>

@@ -109,4 +109,7 @@ public class Gestor {
     public boolean updateTipoMat(Tipo_material tip){
         return tipDAO.updateTipo_material(tip);
     }
+    public boolean updateUsuario(Usuario usu){
+        return usuDAO.updateUsuario(usu);
+    }
 }
