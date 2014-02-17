@@ -48,7 +48,7 @@
                     if (tel > -1) {
                         Usuario usu = new Usuario(codigo, nombre, apellidos, tel, correo, est, tip, observaciones, clave);
                         if (Gestor.addUsuario(usu) == true) {
-                            response.sendRedirect("listarUsuario.jsp");
+                            response.sendRedirect("listarUsuarios.jsp?accion=1");
                         } else {
                             error = "usuario_no_agregado";
                         }
@@ -87,9 +87,9 @@
                         u.setObservaciones(observaciones);
                         u.setCorreo(correo);
                         if (Gestor.updateUsuario(u) == true) {
-                            response.sendRedirect("listarUsuario.jsp");
+                            response.sendRedirect("listarUsuarios.jsp?accion=2");
                         } else {
-                            error = "usuario_no_agregado";
+                            error = "usuario_no_modificado";
                         }
                     } else {
                         error = "telefono_invalido";

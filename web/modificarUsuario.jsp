@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jspaccion=2" method="POST" onsubmit="return validarForm(this);">
+                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
