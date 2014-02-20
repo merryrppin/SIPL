@@ -26,7 +26,16 @@
                 form.submit();
             }
             function mensaje() {
-                alert('Recuerde que esta acción no se puede deshacer y tendrá que iniciar sesión nuevamente');
+                alert('Tendrá que iniciar sesión nuevamente');
+            }
+            function validar(Restore) {
+                if (Restore.restore.value.length === 0 || Restore.restore.value.length === 'null') {
+                    alert('No has seleccionado ningun archivo');
+                    return false;
+                } else {
+                    mensaje();
+                    return true;
+                }
             }
         </script>
     </head>
@@ -42,7 +51,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <form name="Restore" class="form-horizontal" action="aplicarRestore.jsp" method="POST" enctype="multipart/form-data">
+                <form name="Restore" class="form-horizontal" action="aplicarRestore.jsp" method="POST" enctype="multipart/form-data" onsubmit="return validar(this);">
                     <table class="table-hover" align="center">
                         <tr>
                             <td>
@@ -53,12 +62,14 @@
                         <tr>
                             <td>
                                 <br>
-                                <button type="submit" class="btn btn-success" style='width:200px;' onclick="mensaje();">Restore</button>
+                                <button type="submit" class="btn btn-success" style='width:200px;'>Restore</button>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>
                 </form>
+                <br>
+                <div class="alert alert-warning">  <strong>Warning!</strong> Recuerde que esta acción no puede deshacerse y se perderá la información que esté guardada en la Base de Datos y que no halla sido salvada en un Backup </div>
             </div>
             <div class="col-xs-6 col-sm-2"></div>
         </div>

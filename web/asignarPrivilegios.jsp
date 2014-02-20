@@ -97,9 +97,9 @@
                         %>
                         <tr>
                             <td colspan="9" align="center">
-                                <input class="btn btn-info" type="button" value="Estudiante" onclick="fijarURL('guardarUsuario.jsp?accion=3',this.form)" style='width:200px;'/>
-                                <input class="btn btn-info" type="button" value="Administrador Local" onclick="fijarURL('guardarUsuario.jsp?accion=4',this.form)" style='width:200px;'/>
-                                <input class="btn btn-info" type="button" value="Administrador Global" onclick="fijarURL('guardarUsuario.jsp?accion=5',this.form)" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Estudiante" onclick="fijarURL('guardarUsuario.jsp?accion=3', this.form)" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Administrador Local" onclick="fijarURL('guardarUsuario.jsp?accion=4', this.form)" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Administrador Global" onclick="fijarURL('guardarUsuario.jsp?accion=5', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>
