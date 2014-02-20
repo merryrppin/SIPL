@@ -5,7 +5,11 @@
  */
 package sipl.dominio;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import sipl.db.*;
 import sipl.recursos.*;
 
@@ -31,50 +35,39 @@ public class Gestor {
         labDAO = new laboratorioDAO(con);
         danDAO = new danhoDAO(con);
     }
-
     public Usuario validarLogin(String login, String clave) {
         return usuDAO.getLogin(login, clave);
     }
-
     public String encriptar(String palabra) {
         return enc.encriptarMD5(palabra);
     }
-
     public void generarQR(String data, String direccion) {
         qrC.QRmini(data, direccion);
         qrC.QRMedium(data, direccion);
         qrC.QRHigh(data, direccion);
         qrC.QRsmall(data, direccion);
     }
-
     public boolean addUsuario(Usuario usu) {
         return usuDAO.addUsuario(usu);
     }
-
     public ArrayList<Material> getMateriales() {
         return matDAO.getMateriales();
     }
-
     public ArrayList<Tipo_material> getTiposM() {
         return tipDAO.getTipo_material();
     }
-
     public ArrayList<Laboratorio> getLaboratorios() {
         return labDAO.getLaboratorios();
     }
-
     public Material getMaterial(int codigo) {
         return matDAO.getMaterial(codigo);
     }
-
     public Laboratorio getLaboratorio(int codigo) {
         return labDAO.getLaboratorio(codigo);
     }
-
     public boolean updateLaboratorio(Laboratorio lab) {
         return labDAO.updateLaboratorio(lab);
     }
-
     public Tipo_material getTipoM(int codigo) {
         return tipDAO.getTipo_material(codigo);
     }

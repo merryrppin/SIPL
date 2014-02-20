@@ -58,10 +58,7 @@
                 } else {
                     error = "datos_incompletos";
                 }
-            } else if (a == 2) {
-                
-                
-                
+            } else if (a == 2) {                
                 if (nombre != null && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
                     int est;
@@ -97,6 +94,18 @@
                 } else {
                     error = "datos_incompletos";
                 }
+            }else if((a == 3 || a == 4 || a == 5) && user.getTipo_usuario()==2){
+                String ID = request.getParameter("id");
+                Usuario usu = Gestor.getUsuario(ID);
+                if(a==3){
+                    usu.setTipo_usuario(0);
+                }else if(a==4){
+                    usu.setTipo_usuario(1);
+                }else if(a==5){
+                    usu.setTipo_usuario(2);
+                }
+                Gestor.updateUsuario(usu);
+                response.sendRedirect("asignarPrivilegios.jsp");
             }
         } catch (Exception e) {
             error = "sin_accion";

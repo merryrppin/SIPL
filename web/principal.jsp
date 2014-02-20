@@ -127,7 +127,7 @@
                                     <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Asignar Privilegios</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarUsuario.jsp?accion=1', this.form" style='width:200px;'>Asignar Privilegios</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'asignarPrivilegios.jsp', this.form" style='width:200px;'>Asignar Privilegios</button>
                                     <%
                                         }
                                     %>
