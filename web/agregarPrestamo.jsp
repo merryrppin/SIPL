@@ -21,10 +21,6 @@
         <title>Agregar Préstamo</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue2.css" />
-        <script type="text/javascript" src="js/calendar.js"></script>
-        <script type="text/javascript" src="js/calendar-en.js"></script>
-        <script type="text/javascript" src="js/calendar-setup.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
             var counter = 1;
