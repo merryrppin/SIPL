@@ -14,12 +14,12 @@ import java.util.Calendar;
 public class Prestamo {
 
     private int codigo;
-    private Material mat;
+    private String mat;
     private Usuario usu;
     private Calendar fecha_prestamo;
     private Calendar fecha_devolucion;
 
-    public Prestamo(int codigo, Material mat, Usuario usu, Calendar fecha_prestamo, Calendar fecha_devolucion) {
+    public Prestamo(int codigo, String mat, Usuario usu, Calendar fecha_prestamo, Calendar fecha_devolucion) {
         this.codigo = codigo;
         this.mat = mat;
         this.usu = usu;
@@ -35,11 +35,11 @@ public class Prestamo {
         this.codigo = codigo;
     }
 
-    public Material getMat() {
+    public String getMat() {
         return mat;
     }
 
-    public void setMat(Material mat) {
+    public void setMat(String mat) {
         this.mat = mat;
     }
 
