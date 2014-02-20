@@ -5,11 +5,7 @@
  */
 package sipl.dominio;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import sipl.db.*;
 import sipl.recursos.*;
 
@@ -71,7 +67,6 @@ public class Gestor {
     public Tipo_material getTipoM(int codigo) {
         return tipDAO.getTipo_material(codigo);
     }
-
     public boolean addMaterial(Material mat) {
         return matDAO.addMaterial(mat);
     }
