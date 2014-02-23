@@ -279,6 +279,15 @@
                             </tr>
                         </table>
                     </div>
+                    <div class="tab-pane" id="Acercade">
+                        <table class="table table-hover" align="center">
+                            <tr>
+                                <td align="center">
+                                    Acerca de mi bulis
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-2"></div>
