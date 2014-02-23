@@ -38,6 +38,16 @@
                     return false;
                 }
             }
+            function fijarURL(url, form) {
+                if (form.codigo.value.length === 0) { //¿Tiene 0 caracteres?
+                    form.codigo.focus();    // Damos el foco al control
+                    alert('No has llenado el campo del código'); //Mostramos el mensaje
+                    return false; //devolvemos el foco
+                } else {
+                    form.action = url;
+                    form.submit();
+                }
+            }
         </script>
     </head>
     <body>
@@ -60,14 +70,32 @@
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
+                            <%
+                            String cod = "";
+                            String accion= request.getParameter("accion");
+                            int a= Integer.parseInt(accion);
+                            if(a==1){
+                                cod = request.getParameter("codigo");
+                            }
+                            %>
                             <td>
-                                <input type="text" id="codigo" name="codigo">
+                                <input type="text" id="codigo" name="codigo"
+                                       <%if(cod.length()>0 && cod != null){
+                                           out.print("value='"+cod+"'");
+                                       }%>
+                                       >
                             </td>
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
                             <td>
                                 <input type="text" id="nombre" disabled size="50">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center">
+                                <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return fijarURL('verificarMulta.jsp', this.form)" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return fijarURL('verificarReserva.jsp', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>

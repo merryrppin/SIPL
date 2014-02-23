@@ -1,15 +1,9 @@
 <%-- 
-    Document   : guardarMaterial
-    Created on : 14-feb-2014, 0:32:24
+    Document   : verificarMulta
+    Created on : 22-feb-2014, 22:12:28
     Author     : WM
 --%>
 
-<%@page import="java.util.GregorianCalendar"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.DateFormat"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.lang.Exception"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
@@ -22,19 +16,6 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
         String codigo = request.getParameter("codigo");
-        String tipo = request.getParameter("tipo");
-        String marca = request.getParameter("marca");
-        String numero = request.getParameter("numero");
-        String serial = request.getParameter("serial");
-        String estado = request.getParameter("estado");
-        String fecha = request.getParameter("fecha");
-        String foto = request.getParameter("foto");
-        String descripcion = request.getParameter("descripcion");
-        String laboratorio = request.getParameter("laboratorio");
-        String disponibilidad = request.getParameter("disponibilidad");
-        String hora = request.getParameter("hora");
-        String minutos = request.getParameter("minutos");
-        String direccion = "C:/Users/WM/Desktop/QR/" + codigo;
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {
@@ -104,6 +85,11 @@
                     error = "fecha_error";
                 }
             } else if (a == 2) {
+                
+                
+                
+                
+                
                 try {
                     Gestor.generarQR(codigo, direccion);
                 } catch (Exception e) {
@@ -159,6 +145,15 @@
                 } catch (Exception e) {
                     error = "fecha_error";
                 }
+            
+                
+                
+                
+                
+                
+                
+                
+                
             }
         } catch (Exception e) {
             error = "sin_accion";
@@ -170,3 +165,4 @@
         response.sendRedirect("agregarMaterial.jsp?" + error);
     }
 %>
+

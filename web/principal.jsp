@@ -147,7 +147,7 @@
                         <table class="table table-hover" align="center">
                             <tr align ="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarPrestamo.jsp'" style='width:200px;'>Agregar Préstamo</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'agregarPrestamo.jsp?accion=0'" style='width:200px;'>Agregar Préstamo</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'modificarPrestamo.jsp'" style='width:200px;'>Modificar Préstamo</button>
