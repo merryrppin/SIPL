@@ -34,12 +34,22 @@
         String disponibilidad = request.getParameter("disponibilidad");
         String hora = request.getParameter("hora");
         String minutos = request.getParameter("minutos");
-        String direccion = "C:/Users/WM/Desktop/QR/" + codigo;
+        
+        
+        String direccion = this.getServletContext().getRealPath("/QR/");
+                            String d []= direccion.split("build");
+                            String a1=d[0];
+                            String b1=d[1];
+                            String c1= a1.substring(a1.length()-1, a1.length());
+                            String A = a1.substring(0, a1.length()-1);
+                            String dir = A+b1+c1+codigo;
+        
+        
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {
                 try {
-                    Gestor.generarQR(codigo, direccion);
+                    Gestor.generarQR(codigo, dir);
                 } catch (Exception e) {
                     error = "QR_error";
                 }
@@ -84,19 +94,19 @@
                     }
                     Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
                             marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
-                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
+                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), dir);
                     if (Gestor.addMaterial(mat) == true) {
                         Tipo_material tip = Gestor.getTipoM(Integer.parseInt(tipo));
-                        int disp=tip.getDisponibilidad();
-                        int can=tip.getCantidad();
+                        int disp = tip.getDisponibilidad();
+                        int can = tip.getCantidad();
                         can++;
-                        if(Integer.parseInt(estado)==0 || Integer.parseInt(estado) == 3){
+                        if (Integer.parseInt(estado) == 0 || Integer.parseInt(estado) == 3) {
                             disp++;
                         }
                         tip.setDisponibilidad(disp);
                         tip.setCantidad(can);
                         Gestor.updateTipoMat(tip);
-                        response.sendRedirect("listarMateriales.jsp?accion=1");
+                        response.sendRedirect("verMaterial.jsp?id="+mat.getCodigo());
                     } else {
                         error = "no_agrego";
                     }
@@ -105,7 +115,7 @@
                 }
             } else if (a == 2) {
                 try {
-                    Gestor.generarQR(codigo, direccion);
+                    Gestor.generarQR(codigo, dir);
                 } catch (Exception e) {
                     error = "QR_error";
                 }
@@ -150,12 +160,12 @@
                     }
                     Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
                             marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
-                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
+                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), dir);
                     if (Gestor.updateMaterial(mat) == true) {
-                        response.sendRedirect("listarMateriales.jsp?accion=1");
-                    } else {
-                        error = "no_agrego";
-                    }
+                     response.sendRedirect("listarMateriales.jsp?accion=1");
+                     } else {
+                     error = "no_agrego";
+                     }
                 } catch (Exception e) {
                     error = "fecha_error";
                 }

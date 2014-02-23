@@ -59,9 +59,6 @@
                                 <input hidden type="text" name="codigo" id="codigo" value="<%out.print(id);%>">
                             </td>
                             <td>
-                                <img src="..." alt="..." class="img-rounded">
-                            </td>
-                            <td>
                                 <label class="control-label" for="tipo">Tipo de Elemento</label>
                             </td>
                             <td>

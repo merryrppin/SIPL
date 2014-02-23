@@ -32,6 +32,12 @@
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript">
+            function fijarURL(url, form) {
+                form.action = url;
+                form.submit();
+            }
+        </script>
     </head>
     <body>
         <br>
@@ -70,10 +76,8 @@
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
                                     out.print("<tr>");
-                                    if (a == 2 && user.getTipo_usuario() == 2) {
-                                        out.print("<td><input type='radio' name='id' value='" + data.get(i).getCodigo() + "' ");
-                                        out.print("checked='checked'/></td>");
-                                    }
+                                    out.print("<td><input type='radio' name='id' value='" + data.get(i).getCodigo() + "' ");
+                                    out.print("checked='checked'/></td>");
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
                                     out.print("<td>" + Gestor.getTipoM(data.get(i).getTipo_mat().getId()).getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getDescripcion() + "</td>");
@@ -93,14 +97,14 @@
                                     out.print("<td>" + data.get(i).getNum_inventario() + "</td>");
                                     out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
                                     Calendar cal1 = data.get(i).getUlt_fecha_mante();
-                                    String fecha=cal1.get(Calendar.YEAR)+"-";
-                                    int mes=cal1.get(Calendar.MONTH);
+                                    String fecha = cal1.get(Calendar.YEAR) + "-";
+                                    int mes = cal1.get(Calendar.MONTH);
                                     mes++;
-                                    fecha+=mes+"-";
-                                    fecha+=cal1.get(Calendar.DAY_OF_MONTH);
-                                    fecha+=" "+cal1.get(Calendar.HOUR_OF_DAY);
-                                    fecha+=":"+cal1.get(Calendar.MINUTE)+":00";
-                                    out.print("<td>" +fecha + "</td>");
+                                    fecha += mes + "-";
+                                    fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                                    fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                                    fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+                                    out.print("<td>" + fecha + "</td>");
                                     out.print("</tr>");
                                 }
                             }
@@ -108,8 +112,13 @@
                         <tr>
                             <td colspan="10" align="center">
                                 <%
-                                if (a == 2 && data.size()>0) {%>
+                                    if (a == 2 && data.size() > 0) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
+                                <%}
+                                %>
+                                <%
+                                    if (data.size() > 0) {%>
+                                <input class="btn btn-info" type="button" value="Ver Material" onclick="fijarURL('verMaterial.jsp', this.form)" style='width:200px;'/>
                                 <%}
                                 %>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
