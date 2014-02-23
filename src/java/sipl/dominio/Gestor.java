@@ -20,6 +20,7 @@ public class Gestor {
     private final tipo_materialDAO tipDAO;
     private final laboratorioDAO labDAO;
     private final danhoDAO danDAO;
+    private final prestamoDAO preDAO;
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
 
@@ -30,6 +31,7 @@ public class Gestor {
         tipDAO = new tipo_materialDAO(con);
         labDAO = new laboratorioDAO(con);
         danDAO = new danhoDAO(con);
+        preDAO = new prestamoDAO(con);
     }
     public Usuario validarLogin(String login, String clave) {
         return usuDAO.getLogin(login, clave);
@@ -40,7 +42,6 @@ public class Gestor {
     public void generarQR(String data, String direccion) {
         qrC.QRmini(data, direccion);
         qrC.QRMedium(data, direccion);
-        qrC.QRHigh(data, direccion);
         qrC.QRsmall(data, direccion);
     }
     public boolean addUsuario(Usuario usu) {
@@ -99,5 +100,8 @@ public class Gestor {
     }
     public boolean updateUsuario(Usuario usu){
         return usuDAO.updateUsuario(usu);
+    }
+    public boolean addPrestamo(Prestamo pre){
+        return preDAO.addPrestamo(pre);
     }
 }

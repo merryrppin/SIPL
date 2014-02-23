@@ -43,8 +43,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Agregar Material</h1>
             </div>
         </div>
@@ -114,7 +114,7 @@
                             <td>
                                 <%
                                     ArrayList<Laboratorio> data1 = Gestor.getLaboratorios();
-                                    %>
+                                %>
                                 <select id="laboratorio" name="laboratorio">
                                     <%
                                         for (int i = 0; i < data1.size(); i++) {
@@ -148,33 +148,33 @@
                                         ifFormat: "%d/%m/%Y"
                                     });
                                 </script>
-                                
+
                             </td>
                             <td>
                                 <label class="control-label" for="hora">Hora</label>
                                 <select id="hora" name="hora">
                                     <%
-                                    for(int i=0;i<24;i++){
-                                        if(i<10){
-                                            out.print("<option value='"+i+"'>0"+i+"</option>");
-                                        }else{
-                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        for (int i = 0; i < 24; i++) {
+                                            if (i < 10) {
+                                                out.print("<option value='" + i + "'>0" + i + "</option>");
+                                            } else {
+                                                out.print("<option value='" + i + "'>" + i + "</option>");
+                                            }
+
                                         }
-                                        
-                                    }
                                     %>
                                 </select>
                                 <label class="control-label" for="minutos">Minutos</label>
                                 <select id="minutos" name="minutos">
                                     <%
-                                    for(int i=0;i<60;i++){
-                                        if(i<10){
-                                            out.print("<option value='"+i+"'>0"+i+"</option>");
-                                        }else{
-                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        for (int i = 0; i < 60; i++) {
+                                            if (i < 10) {
+                                                out.print("<option value='" + i + "'>0" + i + "</option>");
+                                            } else {
+                                                out.print("<option value='" + i + "'>" + i + "</option>");
+                                            }
+
                                         }
-                                        
-                                    }
                                     %>
                                 </select>
                             </td> 
@@ -198,15 +198,15 @@
                                         <br>
                                         <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                     </div>
-                                    
+
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                        <td colspan="5" align="center">
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                        </td>
-                          </tr>
+                            <td colspan="5" align="center">
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
+                        </tr>
                     </table>
                 </form>
             </div>
@@ -214,6 +214,6 @@
         </div>
     </body>
 </html>
-<%}else{
+<%} else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
-}%>
+    }%>

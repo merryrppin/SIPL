@@ -57,10 +57,9 @@
                     <table align="center" class="table table-hover">
                         <tr>
                             <%
-                            
                             %>
                             <td>
-                                <img src="QR/<%out.print(mat.getCodigo()+"medium.png");%>" alt="...">
+                                <img src="QR/<%out.print(mat.getCodigo() + "medium.png");%>" alt="...">
                             </td>
                             <td>
                                 <img data-src="holder.js/100%x180" alt="...">
@@ -105,18 +104,18 @@
                                 <label>Estado actual del elemento</label>
                             </td>
                             <%
-                            String estado="";
-                            if(mat.getEstado()==0){
-                                estado="Activo";
-                            }else if(mat.getEstado()==0){
-                                estado="Dado de baja";
-                            }else if(mat.getEstado()==0){
-                                estado="Dañado";
-                            }else if(mat.getEstado()==0){
-                                estado="Reparado";
-                            }else{
-                                estado="Error";
-                            }
+                                String estado = "";
+                                if (mat.getEstado() == 0) {
+                                    estado = "Activo";
+                                } else if (mat.getEstado() == 0) {
+                                    estado = "Dado de baja";
+                                } else if (mat.getEstado() == 0) {
+                                    estado = "Dañado";
+                                } else if (mat.getEstado() == 0) {
+                                    estado = "Reparado";
+                                } else {
+                                    estado = "Error";
+                                }
                             %>
                             <td><input disabled="disabled" type="text" value="<%out.print(estado);%>">
                             </td>
@@ -132,16 +131,16 @@
                                 <label>Disponibilidad</label>
                             </td>
                             <td>
-                                   <%
-                            String disp="";
-                            if(mat.getEstado()==0){
-                                disp="Libre";
-                            }else if(mat.getEstado()==0){
-                                disp="Prestado";
-                            }else{
-                                estado="Error";
-                            }
-                            %>
+                                <%
+                                    String disp = "";
+                                    if (mat.getEstado() == 0) {
+                                        disp = "Libre";
+                                    } else if (mat.getEstado() == 0) {
+                                        disp = "Prestado";
+                                    } else {
+                                        estado = "Error";
+                                    }
+                                %>
                                 <input disabled="disabled" type="text" value="<%out.print(disp);%>">
                             </td>
                         </tr>

@@ -34,17 +34,14 @@
         String disponibilidad = request.getParameter("disponibilidad");
         String hora = request.getParameter("hora");
         String minutos = request.getParameter("minutos");
-        
-        
         String direccion = this.getServletContext().getRealPath("/QR/");
-                            String d []= direccion.split("build");
-                            String a1=d[0];
-                            String b1=d[1];
-                            String c1= a1.substring(a1.length()-1, a1.length());
-                            String A = a1.substring(0, a1.length()-1);
-                            String dir = A+b1+c1+codigo;
-        
-        
+        String d[] = direccion.split("build");
+        String a1 = d[0];
+        String b1 = d[1];
+        String c1 = a1.substring(a1.length() - 1, a1.length());
+        String A = a1.substring(0, a1.length() - 1);
+        String dir = A + b1 + c1 + codigo;
+
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {
@@ -106,7 +103,7 @@
                         tip.setDisponibilidad(disp);
                         tip.setCantidad(can);
                         Gestor.updateTipoMat(tip);
-                        response.sendRedirect("verMaterial.jsp?id="+mat.getCodigo());
+                        response.sendRedirect("verMaterial.jsp?id=" + mat.getCodigo());
                     } else {
                         error = "no_agrego";
                     }
@@ -162,10 +159,10 @@
                             marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
                             Gestor.getLaboratorio(Integer.parseInt(laboratorio)), dir);
                     if (Gestor.updateMaterial(mat) == true) {
-                     response.sendRedirect("listarMateriales.jsp?accion=1");
-                     } else {
-                     error = "no_agrego";
-                     }
+                        response.sendRedirect("listarMateriales.jsp?accion=1");
+                    } else {
+                        error = "no_agrego";
+                    }
                 } catch (Exception e) {
                     error = "fecha_error";
                 }

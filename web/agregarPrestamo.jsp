@@ -48,6 +48,18 @@
                     form.submit();
                 }
             }
+            function validarForm(Material) {
+                if (Material.codigo.value.length === 0 || /^\s+$/.test(Material.codigo.value)) {
+                    Material.codigo.focus();
+                    alert('No has llenado el campo del codigo');
+                    return false;
+                }
+                if (Material.mat1.value.length === 0 || /^\s+$/.test(Material.mat1.value)) {
+                    Material.mat1.focus();
+                    alert('El campo del código del material es obligatorio');
+                    return false;
+                }
+            }
         </script>
     </head>
     <body>
@@ -71,18 +83,22 @@
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <%
-                            String cod = "";
-                            String accion= request.getParameter("accion");
-                            int a= Integer.parseInt(accion);
-                            if(a==1){
-                                cod = request.getParameter("codigo");
-                            }
+                                String cod = "";
+                                String accion = request.getParameter("accion");
+                                int a = 0;
+                                try {
+                                    a = Integer.parseInt(accion);
+                                } catch (Exception e) {
+                                }
+                                if (a == 1) {
+                                    cod = request.getParameter("codigo");
+                                }
                             %>
                             <td>
                                 <input type="text" id="codigo" name="codigo"
-                                       <%if(cod.length()>0 && cod != null){
-                                           out.print("value='"+cod+"'");
-                                       }%>
+                                       <%if (cod.length() > 0 && cod != null) {
+                                               out.print("value='" + cod + "'");
+                                           }%>
                                        >
                             </td>
                             <td>
@@ -94,8 +110,8 @@
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
-                                <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return fijarURL('verificarMulta.jsp', this.form)" style='width:200px;'/>
-                                <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return fijarURL('verificarReserva.jsp', this.form)" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return fijarURL('verificarEstadoUsu.jsp?accion=4', this.form)" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return fijarURL('verificarReserva.jsp?accion=3', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>
