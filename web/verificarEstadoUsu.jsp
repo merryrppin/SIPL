@@ -36,7 +36,7 @@
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
     if (error.length() > 0) {
-        response.sendRedirect("agregarMaterial.jsp?" + error);
+        response.sendRedirect("agregarPrestamo.jsp?" + error);
     }
 %>
 

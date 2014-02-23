@@ -104,8 +104,8 @@
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
-                            <td>
-                                <input type="text" id="nombre" disabled size="50">
+                            <td id="nombre" >
+                                
                             </td>
                         </tr>
                         <tr>
