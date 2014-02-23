@@ -56,11 +56,10 @@
                     <table align="center" class="table table-hover">
                         <tr>
                             <td>
-                                <label class="control-label" for="codigo">Codigo</label>
+                                <input hidden type="text" name="codigo" id="codigo" value="<%out.print(id);%>">
                             </td>
                             <td>
-                                <input hidden type="text" name="codigo" id="codigo" value="<%out.print(id);%>">
-                                <input disabled="disabled" type="text" value="<%out.print(id);%>">
+                                <img src="..." alt="..." class="img-rounded">
                             </td>
                             <td>
                                 <label class="control-label" for="tipo">Tipo de Elemento</label>
@@ -100,7 +99,7 @@
                                 <input maxlength="50" type="text" id="serial" name="serial">
                             </td>
                             <td>
-                                <label class="control-label" for="estado">Estado del elemento</label>
+                                <label class="control-label" for="estado">Estado actual del elemento</label>
                             </td>
                             <td>
                                 <select id="estado" name="estado">

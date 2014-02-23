@@ -106,7 +106,7 @@
                                 <input maxlength="50" type="text" id="serial" name="serial" value="<%out.print(mat.getSerial());%>">
                             </td>
                             <td>
-                                <label class="control-label" for="estado">Estado del elemento</label>
+                                <label class="control-label" for="estado">Estado actual del elemento</label>
                             </td>
                             <td>
                                 <select id="estado" name="estado">
@@ -271,8 +271,13 @@
                                         <br>
                                         <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                     </div>
-
+                                           
                                 </div>
+                            </td>
+                        </tr>
+                        <tr>
+                             <td colspan="4" align="center">
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'generarQR.jsp'" style='width:150px;'>Generar Código QR</button>
                             </td>
                         </tr>
                         <tr>

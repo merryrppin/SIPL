@@ -57,7 +57,7 @@
                             <td><b>Descripción</b></td>
                             <td><b>Marca</b></td>
                             <td><b>Serial</b></td>
-                            <td><b>Estado</b></td>
+                            <td><b>Estado actual del elemento</b></td>
                             <td><b>Nro Inventario</b></td>
                             <td><b>Foto</b></td>
                             <td><b>Ult. Fecha Mantenimiento</b></td>
