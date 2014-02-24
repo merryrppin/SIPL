@@ -96,4 +96,26 @@ public class multaDAO {
         }
         return result;
     }
+    
+    public ArrayList<Multa> getRangoFecha_multa(String fecha1, String fecha2) {
+        ArrayList<Multa> data = new ArrayList<>();
+        ResultSet rs = con.getQuery("select * from multa where fecha_multa between '"+fecha1+"' and '"+fecha2+"'");
+        try {
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String usu = rs.getString("cod_usuario");
+                Calendar cal = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_multa");
+                cal.setTimeInMillis(t1.getTime());
+                int estado_multa = rs.getInt("estado_multa");
+                int tiempo_multa = rs.getInt("tiempo_multa");
+                Multa mul = new Multa(codigo, usuDAO.getUsuario(usu), cal, estado_multa, tiempo_multa);
+                data.add(mul);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            data = null;
+        }
+        return data;
+    }
 }

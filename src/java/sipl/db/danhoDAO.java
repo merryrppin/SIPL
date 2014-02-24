@@ -101,4 +101,29 @@ public class danhoDAO {
         }
         return result;
     }
+    
+    public ArrayList<Danho> getRangoFecha_danhos(String fecha1, String fecha2) {
+        ArrayList<Danho> data = new ArrayList<>();
+        ResultSet rs = con.getQuery("select * from danho where fecha_d between '"+fecha1+"' and '"+fecha2+"'");
+        try {
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String descripcion = rs.getString("descripcion_d");
+                int codigo_mat = rs.getInt("codigo_mat");
+                String codigo_usu = rs.getString("codigo_usu");
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTimeZone(TimeZone.getTimeZone("GMT"));
+                Timestamp t1 = rs.getTimestamp("fecha_d");
+                cal1.setTimeInMillis(t1.getTime());
+                String codigo_usu_rd = rs.getString("cod_usu_rd");
+                int estado = rs.getInt("estado");
+                Danho dan = new Danho(codigo, descripcion, matDAO.getMaterial(codigo_mat), usuDAO.getUsuario(codigo_usu), cal1, usuDAO.getUsuario(codigo_usu_rd), estado);
+                data.add(dan);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            data = null;
+        }
+        return data;
+    }
 }

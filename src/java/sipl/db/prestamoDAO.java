@@ -102,4 +102,28 @@ public class prestamoDAO {
         }
         return result;
     }
+    
+     public ArrayList<Prestamo> getRangoFecha_prestamo(String fecha1, String fecha2) {
+        ArrayList<Prestamo> data = new ArrayList<>();
+        ResultSet rs = con.getQuery("select * from prestamo where fecha_prestamo between '"+fecha1+"' and '"+fecha2+"'");
+        try {
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String mat = rs.getString("cod_material");
+                String usu = rs.getString("cod_usuario");
+                Calendar cal = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_prestamo");
+                cal.setTimeInMillis(t1.getTime());
+                Calendar cal1 = Calendar.getInstance();
+                Timestamp t2 = rs.getTimestamp("fecha_devolucion");
+                cal1.setTimeInMillis(t2.getTime());
+                Prestamo pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1);
+                data.add(pre);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            data = null;
+        }
+        return data;
+    }
 }
