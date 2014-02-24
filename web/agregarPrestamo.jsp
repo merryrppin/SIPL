@@ -60,6 +60,13 @@
                     return false;
                 }
             }
+            function getUsuario(){
+                alert('Cambio');
+                var code=$("#codigo").val(); //.. y se obtiene el valor
+                //llama al servlet con el parametro seleccionado
+                $("#nombre").load("UsuarioServlet", {productCode:code})
+                return false;
+            }
         </script>
     </head>
     <body>
@@ -95,7 +102,7 @@
                                 }
                             %>
                             <td>
-                                <input type="text" id="codigo" name="codigo"
+                                <input type="text" id="codigo" name="codigo" onchange="return getUsuario();"
                                        <%if (cod.length() > 0 && cod != null) {
                                                out.print("value='" + cod + "'");
                                            }%>
@@ -104,8 +111,10 @@
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
-                            <td id="nombre" >
-                                
+                            <td >
+                                <select id="nombre" >
+                                    
+                                </select>
                             </td>
                         </tr>
                         <tr>
