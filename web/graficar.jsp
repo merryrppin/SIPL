@@ -84,31 +84,31 @@
                         <td>
                             <table class="table table-striped">
                                 <%
-                                if (orden.equals("TipoMaterial.jpg")) {%>
+                                    if (orden.equals("TipoMaterial.jpg")) {%>
                                 <tr>
-                                    <td><b>Id</b></td>
+                                    <td><b>Cat.</b></td>
                                     <td><b>Nombre</b></td>
-                                    <td><b>Descripcion</b></td>
+                                    <td><b>Descripción</b></td>
                                     <td><b>Cantidad</b></td>
                                     <td><b>Disponibilidad</b></td>
                                 </tr>
-                                    <%
-                                    ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
-                                    if(Tipos.size()==0){
-                                    out.print("<td>No hay Tipos de Material</td>");
-                                    }else{
-                                        for(int i=0; i<Tipos.size();i++){
-                                            out.print("<tr>");
-                                            out.print("<td>"+Tipos.get(i).getId()+"</td>");
-                                            out.print("<td>"+Tipos.get(i).getNombre()+"</td>");
-                                            out.print("<td>"+Tipos.get(i).getDescripcion()+"</td>");
-                                            out.print("<td>"+Tipos.get(i).getCantidad()+"</td>");
-                                            out.print("<td>"+Tipos.get(i).getDisponibilidad()+"</td>");
-                                            out.print("</tr>");
+                                <%
+                                        ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
+                                        if (Tipos.size() == 0) {
+                                            out.print("<td>No hay Tipos de Material</td>");
+                                        } else {
+                                            for (int i = 0; i < Tipos.size(); i++) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + Tipos.get(i).getId() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                                out.print("</tr>");
+                                            }
                                         }
+
                                     }
-                                
-                                }
                                 %>
                             </table>
                         </td>

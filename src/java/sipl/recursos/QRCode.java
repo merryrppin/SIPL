@@ -61,7 +61,7 @@ public class QRCode {
             Logger.getLogger(QRCode.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void QRsmall(String data, String IMG_PATH) {
         int qr_image_width = 100;
         int qr_image_height = 100;
