@@ -27,7 +27,7 @@ public class prestamoDAO {
         usuDAO = new usuarioDAO(con);
     }
 
-    public ArrayList<Prestamo> getprestamo() {
+    public ArrayList<Prestamo> getprestamos() {
         ArrayList<Prestamo> data = new ArrayList<>();
         ResultSet rs = con.getQuery("select * from prestamo");
         try {

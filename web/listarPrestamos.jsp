@@ -13,7 +13,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
-        ArrayList<Laboratorio> data = Gestor.getLaboratorios();
+        ArrayList<Prestamo> data = Gestor.();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form action="modificarLaboratorio.jsp" method="POST">
+                <form action="modificarPrestamo.jsp" method="POST">
                 <table class="table table-striped" align="center">
                     <tr>
                         <%
