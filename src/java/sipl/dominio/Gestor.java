@@ -109,8 +109,7 @@ public class Gestor {
     public void Graficar(ArrayList<Tipo_material> data, String direccion) throws IOException{
         gra.TipoMaterial(data, direccion);
     }
-    
     public ArrayList<Prestamo> getPrestamos() {
-        return preDAO..getLaboratorios();
+        return preDAO.getprestamos();
     }
 }
