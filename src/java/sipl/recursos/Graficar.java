@@ -37,7 +37,7 @@ public class Graficar {
 
     public void TipoMaterial(ArrayList<Tipo_material> TM, String direccion) throws IOException {
         DefaultPieDataset data = new DefaultPieDataset();
-        for (int i = 1; i < TM.size(); i++) {
+        for (int i = 0; i < TM.size(); i++) {
             data.setValue("Cat." + TM.get(i).getId(), TM.get(i).getCantidad());
         }
         JFreeChart chart = ChartFactory.createPieChart("Cantidad de materiales por categoría", data, true, true, true);
