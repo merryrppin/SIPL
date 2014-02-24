@@ -5,6 +5,7 @@
  */
 package sipl.dominio;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import sipl.db.*;
 import sipl.recursos.*;
@@ -23,6 +24,7 @@ public class Gestor {
     private final prestamoDAO preDAO;
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
+    Graficar gra = new Graficar();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -103,5 +105,8 @@ public class Gestor {
     }
     public boolean addPrestamo(Prestamo pre){
         return preDAO.addPrestamo(pre);
+    }
+    public void Graficar(ArrayList<Tipo_material> data, String direccion) throws IOException{
+        gra.TipoMaterial(data, direccion);
     }
 }
