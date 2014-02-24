@@ -155,11 +155,11 @@ public class Graficar {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<TM.size();i++){
             Tipo_material mat = TM.get(i);
-            dataset.addValue(mat.getCantidad(), ""+mat.getCantidad(), mat.getNombre());
+            dataset.addValue(mat.getCantidad(), ""+mat.getCantidad(), ""+mat.getId());
         }
-        JFreeChart chart = ChartFactory.createBarChart("Grafico por cantidad de Materiale", "", "Grafico por cantidad de Materiales", dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createBarChart("Grafico por cantidad de Materiales", "", "Grafico por cantidad de Materiales", dataset, PlotOrientation.VERTICAL, true, true, false);
         try {
-            ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 800, 600);
+            ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 450, 350);
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
         }
