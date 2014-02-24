@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar Material</title>
+        <title>Reportes</title>
         <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue2.css" />
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script src="jquery/jquery-1.10.2.min.js"></script>
@@ -63,7 +63,13 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>Agregar Material</h1>
+                <%
+            String titulo="";
+                if(orden.equals("TipoMaterial.jpg")){
+                    titulo="Reporte de Cantidad de Materiales por Categoría";
+                }
+                %>
+                <h1><%out.print(titulo);%></h1>
             </div>
         </div>
         <br><br><br><br>
