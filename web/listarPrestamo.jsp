@@ -4,6 +4,7 @@
     Author     : Samy
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -13,7 +14,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
-        ArrayList<Prestamo> data = Gestor.();
+        ArrayList<Prestamo> data = Gestor.getPrestamos();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -51,15 +52,18 @@
                                 out.print("<td></td>");
                             }
                         %>
-                        <td><b>Código</b></td>
-                        <td><b>Nombre</b></td>
-                        <td><b>Descripción</b></td>
-                        <td><b>Ubicación</b></td>
+                        <td><b>Código Préstamo</b></td>
+                        <td><b>Códigos Materiales</b></td>
+                        <td><b>Nombre Usuario</b></td>
+                        <td><b>Apellido Usuario</b></td>
+                        <td><b>Fecha Préstamo</b></td>
+                        <td><b>Fecha Devolución</b></td>
+                        <td><b>Estado del Préstamo</b></td>
                     </tr>
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
-                                out.print("<td colspan='4' align='center'>No hay Laboratorios</td>");
+                                out.print("<td colspan='4' align='center'>No hay Préstamos</td>");
                                 out.print("</tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
@@ -69,9 +73,34 @@
                                         out.print("checked='checked'/></td>");
                                     }
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getNombre() + "</td>");
-                                    out.print("<td>" + data.get(i).getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getUbicacion() + "</td>");
+                                    out.print("<td>" + data.get(i).getMat() + "</td>");
+                                    out.print("<td>" + data.get(i).getUsu().getNombre() + "</td>");
+                                    out.print("<td>" + data.get(i).getUsu().getApellido() + "</td>");
+                                    Calendar cal1 = data.get(i).getFecha_prestamo();
+                                    String fecha = cal1.get(Calendar.YEAR) + "-";
+                                    int mes = cal1.get(Calendar.MONTH);
+                                    mes++;
+                                    fecha += mes + "-";
+                                    fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                                    fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                                    fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+                                    out.print("<td>" + fecha + "</td>");
+                                    Calendar cal2 = data.get(i).getFecha_devolucion();
+                                    String fecha1 = cal2.get(Calendar.YEAR) + "-";
+                                    int mes1 = cal2.get(Calendar.MONTH);
+                                    mes1++;
+                                    fecha1 += mes1 + "-";
+                                    fecha1 += cal2.get(Calendar.DAY_OF_MONTH);
+                                    fecha1 += " " + cal2.get(Calendar.HOUR_OF_DAY);
+                                    fecha1 += ":" + cal2.get(Calendar.MINUTE) + ":00";
+                                    out.print("<td>" + fecha1 + "</td>");
+                                    if (data.get(i).getEstado() == 0) {
+                                        out.print("<td>Activo</td>");
+                                    } else if (data.get(i).getEstado() == 1) {
+                                        out.print("<td>Inactivo</td>");
+                                    } else {
+                                        out.print("<td>Error</td>");
+                                    }
                                     out.print("</tr>");
                                 }
                             }

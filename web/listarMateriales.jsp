@@ -58,6 +58,7 @@
                                     out.print("<td></td>");
                                 }
                             %>
+                            <td><b></b></td>
                             <td><b>Código</b></td>
                             <td><b>Tipo</b></td>
                             <td><b>Descripción</b></td>
@@ -85,11 +86,11 @@
                                     out.print("<td>" + data.get(i).getSerial() + "</td>");
                                     if (data.get(i).getEstado() == 0) {
                                         out.print("<td>Activo</td>");
-                                    } else if (data.get(i).getEstado() == 0) {
+                                    } else if (data.get(i).getEstado() == 1) {
                                         out.print("<td>Dado de baja</td>");
-                                    } else if (data.get(i).getEstado() == 0) {
+                                    } else if (data.get(i).getEstado() == 2) {
                                         out.print("<td>Dañado</td>");
-                                    } else if (data.get(i).getEstado() == 0) {
+                                    } else if (data.get(i).getEstado() == 3) {
                                         out.print("<td>Reparado</td>");
                                     } else {
                                         out.print("<td>Error</td>");

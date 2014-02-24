@@ -41,7 +41,8 @@ public class prestamoDAO {
                 Calendar cal1 = Calendar.getInstance();
                 Timestamp t2 = rs.getTimestamp("fecha_devolucion");
                 cal1.setTimeInMillis(t2.getTime());
-                Prestamo pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1);
+                int est = rs.getInt("estado");
+                Prestamo pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1, est);
                 data.add(pre);
             }
             rs.close();
@@ -64,7 +65,8 @@ public class prestamoDAO {
                 Calendar cal1 = Calendar.getInstance();
                 Timestamp t2 = rs.getTimestamp("fecha_devolucion");
                 cal1.setTimeInMillis(t2.getTime());
-                pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1);
+                int est = rs.getInt("estado");
+                pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1, est);
             }
             rs.close();
         } catch (SQLException ex) {
@@ -79,8 +81,8 @@ public class prestamoDAO {
         String cal2 = sdf.format(pre.getFecha_prestamo().getTime());
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal3 = sdf1.format(pre.getFecha_devolucion().getTime());
-        String sql = "insert into prestamo (cod_material, cod_usuario, fecha_prestamo, fecha_devolucion) values ('"
-                + pre.getMat() + "','" + pre.getUsu().getCodigo() + "','" + cal2 + "','" + cal3 + "')";
+        String sql = "insert into prestamo (cod_material, cod_usuario, fecha_prestamo, fecha_devolucion, estado) values ('"
+                + pre.getMat() + "','" + pre.getUsu().getCodigo() + "','" + cal2 + "','" + cal3 + "',"+pre.getEstado()+")";
         int registros = con.setQuery(sql);
         if (registros == 1) {
             result = true;
@@ -95,7 +97,7 @@ public class prestamoDAO {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal3 = sdf1.format(pre.getFecha_devolucion().getTime());
         String sql = "update prestamo set cod_material='" + pre.getMat() + "',cod_usuario='" + pre.getUsu().getCodigo() + "',"
-                + " fecha_prestamo='" + cal2 + "', fecha_devolucion='" + cal3 + "' where codigo=" + pre.getCodigo();
+                + " fecha_prestamo='" + cal2 + "', fecha_devolucion='" + cal3 + "',"+pre.getEstado()+" where codigo=" + pre.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
@@ -117,7 +119,8 @@ public class prestamoDAO {
                 Calendar cal1 = Calendar.getInstance();
                 Timestamp t2 = rs.getTimestamp("fecha_devolucion");
                 cal1.setTimeInMillis(t2.getTime());
-                Prestamo pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1);
+                int est = rs.getInt("estado");
+                Prestamo pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1,est);
                 data.add(pre);
             }
             rs.close();

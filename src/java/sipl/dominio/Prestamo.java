@@ -18,14 +18,26 @@ public class Prestamo {
     private Usuario usu;
     private Calendar fecha_prestamo;
     private Calendar fecha_devolucion;
+    private int estado;
 
-    public Prestamo(int codigo, String mat, Usuario usu, Calendar fecha_prestamo, Calendar fecha_devolucion) {
+    public Prestamo(int codigo, String mat, Usuario usu, Calendar fecha_prestamo, Calendar fecha_devolucion, int estado) {
         this.codigo = codigo;
         this.mat = mat;
         this.usu = usu;
         this.fecha_prestamo = fecha_prestamo;
         this.fecha_devolucion = fecha_devolucion;
+        this.estado = estado;
     }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+   
 
     public int getCodigo() {
         return codigo;

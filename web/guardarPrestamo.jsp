@@ -121,7 +121,7 @@
                     } catch (Exception e) {
                     }
                     if (disp == 0 && esta == 0) {
-                        Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal2);
+                        Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal2,0);
                         if (Gestor.addPrestamo(pre) == true) {
                             try {
                                 if (mat1.length() > 0 && mat1 != null) {
