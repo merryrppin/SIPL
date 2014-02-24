@@ -151,18 +151,37 @@ public class Graficar {
             System.err.println("Error al crear al chart.");
         }
     }
-    public void TipoMaterial(ArrayList<Tipo_material> TM, String direccion) throws IOException {
+    public void Tipo_Material(ArrayList<Tipo_material> TM, String direccion) throws IOException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i=0;i<TM.size();i++){
             Tipo_material mat = TM.get(i);
             dataset.addValue(mat.getCantidad(), ""+mat.getCantidad(), ""+mat.getId());
         }
-        JFreeChart chart = ChartFactory.createBarChart("Cantidad de materiales por categoría", "Categoria(x)", "Cantidad(y)", dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createBarChart("Cantidad de materiales por categoría", "Categoría(Y)", "Cantidad(X)", dataset, PlotOrientation.HORIZONTAL, true, true, false);
         try {
-            ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 450, 350);
+            ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 800, 400);
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
         }
+    }
+    
+    public void TipoMaterial(ArrayList<Tipo_material> TM, String direccion) throws IOException {
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (int i = 1; i <TM.size(); i++) {
+            data.setValue("Categoría "+TM.get(i).getId(),TM.get(i).getCantidad());
+        }
+        JFreeChart chart = ChartFactory.createPieChart("Cantidad de materiales por categoría", data, true, true, true);
+//JFreeChart chart = ChartFactory.createPieChart3D("Gráfico", data, true, true, true);
+
+        try {
+            ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+        } catch (IOException e) {
+            System.out.println("Error al abrir el archivo");
+        }
+
+//ChartFrame frame = new ChartFrame("Mi primer chart", chart);
+//frame.pack();
+//frame.setVisible(true);
     }
 
 }
