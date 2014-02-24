@@ -157,7 +157,7 @@ public class Graficar {
             Tipo_material mat = TM.get(i);
             dataset.addValue(mat.getCantidad(), ""+mat.getCantidad(), ""+mat.getId());
         }
-        JFreeChart chart = ChartFactory.createBarChart("Grafico por cantidad de Materiales", "", "Grafico por cantidad de Materiales", dataset, PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart = ChartFactory.createBarChart("Cantidad de materiales por categoría", "Categoria(x)", "Cantidad(y)", dataset, PlotOrientation.VERTICAL, true, true, false);
         try {
             ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 450, 350);
         } catch (IOException e) {
