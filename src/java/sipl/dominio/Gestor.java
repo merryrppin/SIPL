@@ -22,6 +22,7 @@ public class Gestor {
     private final laboratorioDAO labDAO;
     private final danhoDAO danDAO;
     private final prestamoDAO preDAO;
+    private final multaDAO mulDAO;
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
     Graficar gra = new Graficar();
@@ -34,6 +35,7 @@ public class Gestor {
         labDAO = new laboratorioDAO(con);
         danDAO = new danhoDAO(con);
         preDAO = new prestamoDAO(con);
+        mulDAO = new multaDAO(con);
     }
     public Usuario validarLogin(String login, String clave) {
         return usuDAO.getLogin(login, clave);
@@ -114,5 +116,8 @@ public class Gestor {
     }
     public ArrayList<Prestamo> getPrestamosFecha(String fecha1, String fecha2){
         return preDAO.getRangoFecha_prestamo(fecha1, fecha2);
+    }
+    public ArrayList<Multa> getMultas() {
+        return mulDAO.getMultas();
     }
 }
