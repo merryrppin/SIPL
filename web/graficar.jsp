@@ -54,7 +54,18 @@
                 Gestor.Graficar(data, dir);
                 response.sendRedirect("graficar.jsp?orden=TipoMaterial.jpg");
             } else if (a == 2) {
-
+                String fecha=request.getParameter("fecha");
+                String fecha2=request.getParameter("fecha2");
+                String hora=request.getParameter("hora");
+                String hora2=request.getParameter("hora2");
+                ArrayList<Prestamo> data = Gestor.getPrestamosFecha(fecha, fecha2);
+                String rango = request.getParameter("rango");
+                int [] values = new int[data.size()];
+                int [] tiempo = new int[data.size()];
+                for(int i=0;i<data.size();i++){
+                    Prestamo pres = data.get(i);
+                    
+                }
             } else {%>
     <body>
         <br>

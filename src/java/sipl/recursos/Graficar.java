@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -48,4 +49,21 @@ public class Graficar {
         }
     }
 
+    public void draw_bar(int[] values, int[] fecha, int n, String direccion) {
+        try {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+            for (int j = 0; j < n; j++) {
+                dataset.addValue(values[j], "" + fecha[j], "x");
+            }
+            JFreeChart chart = ChartFactory.createLineChart("Assets", "X", "Y", dataset, PlotOrientation.VERTICAL, true, true, true);
+            try {
+                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+            } catch (IOException e) {
+                System.out.println("Error al abrir el archivo");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

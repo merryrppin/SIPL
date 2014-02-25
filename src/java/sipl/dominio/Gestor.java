@@ -112,4 +112,7 @@ public class Gestor {
     public ArrayList<Prestamo> getPrestamos() {
         return preDAO.getprestamos();
     }
+    public ArrayList<Prestamo> getPrestamosFecha(String fecha1, String fecha2){
+        return preDAO.getRangoFecha_prestamo(fecha1, fecha2);
+    }
 }

@@ -231,7 +231,7 @@
                         <table class="table table-hover">
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaPrestamos.jsp'" style='width:200px;'>Préstamos</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaPrestamo.jsp'" style='width:200px;'>Préstamos</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMultas.jsp'" style='width:200px;'>Multas</button>
