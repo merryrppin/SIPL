@@ -53,7 +53,6 @@
                 response.sendRedirect("graficar.jsp?orden=TipoMaterial.jpg");
             } else if (a == 2) {
                 String titulo="Préstamos entre el ";
-                dir += "Prestamos.jpg";
                 String fecha = request.getParameter("fecha");
                 String fecha2 = request.getParameter("fecha2");
                 String f[] = fecha.split("/");
@@ -63,13 +62,74 @@
                 titulo+=fecha+" al "+fecha2;
                 ArrayList<Prestamo> data = Gestor.getPrestamosFecha(fe, fe2);
                 String rango = request.getParameter("rango");
-                if (rango.equals("Año")) {
-
+                if (rango.equals("Anho")) {
+                    // pendiente revisar que aún no funciona bien
+                   int rest;
+                    rest=Integer.parseInt(f[2])-Integer.parseInt(f[1]);
+                    dir += "PrestamosAnho.jpg";
+                    int[] values = new int[Integer.parseInt(f[1])+4];
+                    int[] tiempo = new int[Integer.parseInt(f[1])+4];
+                    for (int i = 0; i < Integer.parseInt(f[1])+4; i++) {
+                       tiempo[i] = i;
+                     }
+                    for (int j = 0; j < Integer.parseInt(f[1])+4; j++) {
+                        values[j] = 0;
+                    }
+                    for (int k = 0; k < data.size(); k++) {
+                        int t = data.get(k).getFecha_prestamo().get(Calendar.YEAR);
+                       int cant = values[t];
+                        cant++;
+                        values[t] = cant;
+                   }
+                    Gestor.GraficarPrestamos(values, tiempo, Integer.parseInt(f[1])+4 , dir, "Años", titulo);
+                    response.sendRedirect("graficar.jsp?orden=PrestamoAnho.jpg");
+                    
                 } else if (rango.equals("Mes")) {
 
+                    dir += "PrestamosMes.jpg";
+                    int[] values = new int[12];
+                    int[] tiempo = new int[12];
+                    for (int i = 0; i < 12; i++) {
+                        int gj=i;
+                        gj++;
+                        tiempo[i] = gj;
+                    }
+                    for (int j = 0; j < 12; j++) {
+                        values[j] = 0;
+                    }
+                    for (int k = 0; k < data.size(); k++) {
+                        int t = data.get(k).getFecha_prestamo().get(Calendar.MONTH);
+                        int cant = values[t];
+                        cant++;
+                        values[t] = cant;
+                    }
+                    Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Meses", titulo);
+                    response.sendRedirect("graficar.jsp?orden=PrestamoMes.jpg");
+                    
                 } else if (rango.equals("Dia")) {
-
+                        dir += "PrestamosDia.jpg";
+                    int[] values = new int[31];
+                    int[] tiempo = new int[31];
+                    for (int i = 0; i < 31; i++) {
+                        int gj=i;
+                        gj++;
+                        tiempo[i] = gj;
+                    }
+                    for (int j = 0; j < 31; j++) {
+                        values[j] = 0;
+                    }
+                    for (int k = 0; k < data.size(); k++) {
+                        int t = data.get(k).getFecha_prestamo().get(Calendar.DAY_OF_MONTH);
+                        int gj=t;
+                        gj--;
+                        int cant = values[gj];
+                        cant++;
+                        values[gj] = cant;
+                    }
+                    Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
+                    response.sendRedirect("graficar.jsp?orden=PrestamoDia.jpg");
                 } else if (rango.equals("Hor")) {
+                    dir += "PrestamosHora.jpg";
                     int[] values = new int[24];
                     int[] tiempo = new int[24];
                     for (int i = 0; i < 24; i++) {
@@ -85,7 +145,7 @@
                         values[t] = cant;
                     }
                     Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
-                    response.sendRedirect("graficar.jsp?orden=Prestamo.jpg");
+                    response.sendRedirect("graficar.jsp?orden=PrestamoHora.jpg");
                 } else if (rango.equals("Min")) {
 
                 }
