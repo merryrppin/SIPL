@@ -4,6 +4,7 @@
     Author     : WM
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -56,12 +57,33 @@
             } else if (a == 2) {
                 String fecha=request.getParameter("fecha");
                 String fecha2=request.getParameter("fecha2");
-                String hora=request.getParameter("hora");
-                String hora2=request.getParameter("hora2");
                 ArrayList<Prestamo> data = Gestor.getPrestamosFecha(fecha, fecha2);
                 String rango = request.getParameter("rango");
                 int [] values = new int[data.size()];
                 int [] tiempo = new int[data.size()];
+                if(rango.equals("Año")){
+                    
+                }else if(rango.equals("Mes")){
+                    
+                }else if(rango.equals("Dia")){
+                    
+                }else if(rango.equals("Hor")){
+                    for(int i=0;i<24;i++){
+                        tiempo[i]=i;
+                    }
+                    for(int j=0;j<24;j++){
+                        values[j]=0;
+                    }
+                    for(int k=0;k<data.size();k++){
+                        int t=data.get(k).getFecha_prestamo().get(Calendar.HOUR_OF_DAY);
+                        int cant=values[t];
+                        cant++;
+                        values[t]=cant;
+                    }
+                    
+                }else if(rango.equals("Min")){
+                    
+                }
                 for(int i=0;i<data.size();i++){
                     Prestamo pres = data.get(i);
                     

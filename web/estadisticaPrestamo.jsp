@@ -75,21 +75,6 @@
                                 </script>
 
                             </td>
-                            <td>
-                                <label class="control-label" for="hora">Hora</label>
-                                <select id="hora" name="hora">
-                                    <%
-                                        for (int i = 0; i < 24; i++) {
-                                            if (i < 10) {
-                                                out.print("<option value='" + i + "'>0" + i + "</option>");
-                                            } else {
-                                                out.print("<option value='" + i + "'>" + i + "</option>");
-                                            }
-
-                                        }
-                                    %>
-                                </select>
-                            </td> 
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -108,24 +93,9 @@
                                 </script>
 
                             </td>
-                            <td>
-                                <label class="control-label" for="hora2">Hora</label>
-                                <select id="hora2" name="hora2">
-                                    <%
-                                        for (int i = 0; i < 23; i++) {
-                                            if (i < 10) {
-                                                out.print("<option value='" + i + "'>0" + i + "</option>");
-                                            } else {
-                                                out.print("<option value='" + i + "'>" + i + "</option>");
-                                            }
-                                        }
-                                        out.print("<option selected value='23'>" + 23 + "</option>");
-                                    %>
-                                </select>
-                            </td> 
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
+                            <td colspan="3" align="center">
                                 <label class="control-label" for="r">Rango</label>
                                 <select name="rango" id="r">
                                     <option value="Año">Año</option>
@@ -137,7 +107,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center"> 
+                            <td colspan="3" align="center"> 
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
