@@ -108,7 +108,7 @@ public class Gestor {
     public boolean addPrestamo(Prestamo pre){
         return preDAO.addPrestamo(pre);
     }
-    public void Graficar(ArrayList<Tipo_material> data, String direccion) throws IOException{
+    public void GraficarTipoMat(ArrayList<Tipo_material> data, String direccion) throws IOException{
         gra.TipoMaterial(data, direccion);
     }
     public ArrayList<Prestamo> getPrestamos() {
@@ -119,5 +119,8 @@ public class Gestor {
     }
     public ArrayList<Multa> getMultas() {
         return mulDAO.getMultas();
+    }
+    public void GraficarPrestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo){
+        gra.Prestamos(values, fecha, n, direccion, tiempo, titulo);
     }
 }

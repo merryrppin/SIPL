@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-                <form name="Estadistica" class="form-horizontal" action="Graficar.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
+                <form name="Estadistica" class="form-horizontal" action="graficar.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
                     <table align="center" class="table table-hover">
                         <tr>
                             <td colspan="2">

@@ -49,16 +49,15 @@ public class Graficar {
         }
     }
 
-    public void draw_bar(int[] values, int[] fecha, int n, String direccion) {
+    public void Prestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
         try {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
             for (int j = 0; j < n; j++) {
-                dataset.addValue(values[j], "" + fecha[j], "x");
+                dataset.addValue(values[j], "Cantidad de Préstamos", "" + fecha[j]);
             }
-            JFreeChart chart = ChartFactory.createLineChart("Assets", "X", "Y", dataset, PlotOrientation.VERTICAL, true, true, true);
+            JFreeChart chart = ChartFactory.createLineChart(titulo, tiempo, "Cantidad", dataset, PlotOrientation.VERTICAL, true, true, true);
             try {
-                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 700, 500);
             } catch (IOException e) {
                 System.out.println("Error al abrir el archivo");
             }

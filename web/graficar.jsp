@@ -19,12 +19,9 @@
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script type="text/javascript">
-            function validarForm(Material) {
-                if (Material.fecha.value.length === 0) { //¿Tiene 0 caracteres?
-                    Material.fecha.focus();    // Damos el foco al control
-                    alert('No has llenado el campo de la fecha'); //Mostramos el mensaje
-                    return false; //devolvemos el foco
-                }
+            function fijarURL(url, form) {
+                form.action = url;
+                form.submit();
             }
         </script>
     </head>
@@ -52,41 +49,45 @@
             if (a == 1) {
                 ArrayList<Tipo_material> data = Gestor.getTiposM();
                 dir += "TipoMaterial.jpg";
-                Gestor.Graficar(data, dir);
+                Gestor.GraficarTipoMat(data, dir);
                 response.sendRedirect("graficar.jsp?orden=TipoMaterial.jpg");
             } else if (a == 2) {
-                String fecha=request.getParameter("fecha");
-                String fecha2=request.getParameter("fecha2");
-                ArrayList<Prestamo> data = Gestor.getPrestamosFecha(fecha, fecha2);
+                String titulo="Préstamos entre el ";
+                dir += "Prestamos.jpg";
+                String fecha = request.getParameter("fecha");
+                String fecha2 = request.getParameter("fecha2");
+                String f[] = fecha.split("/");
+                String fe=f[2]+"/"+f[1]+"/"+f[0]+" 00:00:00";
+                String f2[] = fecha2.split("/");
+                String fe2=f2[2]+"/"+f2[1]+"/"+f2[0]+" 00:00:00";
+                titulo+=fecha+" al "+fecha2;
+                ArrayList<Prestamo> data = Gestor.getPrestamosFecha(fe, fe2);
                 String rango = request.getParameter("rango");
-                int [] values = new int[data.size()];
-                int [] tiempo = new int[data.size()];
-                if(rango.equals("Año")){
-                    
-                }else if(rango.equals("Mes")){
-                    
-                }else if(rango.equals("Dia")){
-                    
-                }else if(rango.equals("Hor")){
-                    for(int i=0;i<24;i++){
-                        tiempo[i]=i;
+                if (rango.equals("Año")) {
+
+                } else if (rango.equals("Mes")) {
+
+                } else if (rango.equals("Dia")) {
+
+                } else if (rango.equals("Hor")) {
+                    int[] values = new int[24];
+                    int[] tiempo = new int[24];
+                    for (int i = 0; i < 24; i++) {
+                        tiempo[i] = i;
                     }
-                    for(int j=0;j<24;j++){
-                        values[j]=0;
+                    for (int j = 0; j < 24; j++) {
+                        values[j] = 0;
                     }
-                    for(int k=0;k<data.size();k++){
-                        int t=data.get(k).getFecha_prestamo().get(Calendar.HOUR_OF_DAY);
-                        int cant=values[t];
+                    for (int k = 0; k < data.size(); k++) {
+                        int t = data.get(k).getFecha_prestamo().get(Calendar.HOUR_OF_DAY);
+                        int cant = values[t];
                         cant++;
-                        values[t]=cant;
+                        values[t] = cant;
                     }
-                    
-                }else if(rango.equals("Min")){
-                    
-                }
-                for(int i=0;i<data.size();i++){
-                    Prestamo pres = data.get(i);
-                    
+                    Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
+                    response.sendRedirect("graficar.jsp?orden=Prestamo.jpg");
+                } else if (rango.equals("Min")) {
+
                 }
             } else {%>
     <body>
