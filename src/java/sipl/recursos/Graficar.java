@@ -65,4 +65,21 @@ public class Graficar {
             System.out.println(e);
         }
     }
+    
+     public void PrestamosY(int[][] values, int n, String direccion, String tiempo, String titulo) {
+        try {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for (int j = 0; j < n; j++) {
+                dataset.addValue(values[j][1], "Cantidad de Préstamos", "" + values[j][0]);
+            }
+            JFreeChart chart = ChartFactory.createLineChart(titulo, tiempo, "Cantidad", dataset, PlotOrientation.VERTICAL, true, true, true);
+            try {
+                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 700, 500);
+            } catch (IOException e) {
+                System.out.println("Error al abrir el archivo");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

@@ -123,4 +123,7 @@ public class Gestor {
     public void GraficarPrestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo){
         gra.Prestamos(values, fecha, n, direccion, tiempo, titulo);
     }
+    public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo){
+        gra.PrestamosY(values, n, direccion, tiempo, titulo);
+    }
 }
