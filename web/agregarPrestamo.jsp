@@ -32,17 +32,17 @@
                 }
                 else {
                     var newdiv = document.createElement('tr');
-                    newdiv.innerHTML = "<td><input type='text' name='mat" + (counter + 1) + "'></td>";
+                    newdiv.innerHTML = "<td><input type='text' name='mat" + (counter + 1) + "' id='mat" + (counter + 1) + "' onchange='return getMaterial" + (counter + 1) + "();'></td>";
                     document.getElementById(divName).appendChild(newdiv);
                     counter++;
                     return false;
                 }
             }
             function fijarURL(url, form) {
-                if (form.codigo.value.length === 0) { //¿Tiene 0 caracteres?
-                    form.codigo.focus();    // Damos el foco al control
-                    alert('No has llenado el campo del código'); //Mostramos el mensaje
-                    return false; //devolvemos el foco
+                if (form.codigo.value.length === 0) {
+                    form.codigo.focus();
+                    alert('No has llenado el campo del código');
+                    return false;
                 } else {
                     form.action = url;
                     form.submit();
@@ -61,45 +61,33 @@
                 }
             }
             function getUsuario() {
-                var code = $("#codigo").val(); //.. y se obtiene el valor
-                //llama al servlet con el parametro seleccionado
+                var code = $("#codigo").val();
                 $("#nombre").load("UsuarioServlet", {productCode: code});
-                alert(code);
                 return false;
             }
             function getMaterial1() {
-                var code = $("#mat1").val(); //.. y se obtiene el valor
-                //llama al servlet con el parametro seleccionado
-                $("#materialito").load("MaterialServlet", {id_material: code});
-                alert(code);
+                var code = $("#mat1").val();
+                $("#r1").load("MaterialServlet", {id_material: code});
                 return false;
             }
             function getMaterial2() {
-                var code = $("#mat2").val(); //.. y se obtiene el valor
-                //llama al servlet con el parametro seleccionado
-                $("#materialito").load("MaterialServlet", {id_material: code});
-                alert(code);
+                var code = $("#mat2").val();
+                $("#r2").load("MaterialServlet", {id_material: code});
                 return false;
             }
             function getMaterial3() {
-                var code = $("#mat3").val(); //.. y se obtiene el valor
-                //llama al servlet con el parametro seleccionado
-                $("#materialito").load("MaterialServlet", {id_material: code});
-                alert(code);
+                var code = $("#mat3").val();
+                $("#r3").load("MaterialServlet", {id_material: code});
                 return false;
             }
             function getMaterial4() {
-                var code = $("#mat4").val(); //.. y se obtiene el valor
-                //llama al servlet con el parametro seleccionado
-                $("#materialito").load("MaterialServlet", {id_material: code});
-                alert(code);
+                var code = $("#mat4").val();
+                $("#r4").load("MaterialServlet", {id_material: code});
                 return false;
             }
             function getMaterial5() {
-                var code = $("#mat5").val(); //.. y se obtiene el valor
-                //llama al servlet con el parametro seleccionado
-                $("#materialito").load("MaterialServlet", {id_material: code});
-                alert(code);
+                var code = $("#mat5").val();
+                $("#r5").load("MaterialServlet", {id_material: code});
                 return false;
             }
         </script>
@@ -185,23 +173,35 @@
                         <tr>
                             <td colspan="4">
                                 <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th><button onClick="return addInput('dynamicInput');"><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
-                                            <th><label class="control-label">Tipo de Elemento</label></th>
-                                            <th><label class="control-label">Descripción del Elemento</label></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody  id="dynamicInput">
-                                        <tr>
-                                            <td>
-                                                <input type="text" name="mat1" id="mat1" onchange="return getMaterial1();">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table class="table table-striped" id="materialito">
-                                    
+                                    <tr>
+                                        <th><button onClick="return addInput('dynamicInput');"><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
+                                        <th><label class="control-label">Tipo de Elemento</label></th>
+                                        <th><label class="control-label">Descripción del Elemento</label></th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table class="table table-striped">
+                                                <tbody  id="dynamicInput">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="text" name="mat1" id="mat1" onchange="return getMaterial1();">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td colspan="2">
+                                            <table class="table table-striped" id="materialito">
+                                                <tbody>
+                                                    <tr id="r1"></tr>
+                                                    <tr id="r2"></tr>
+                                                    <tr id="r3"></tr>
+                                                    <tr id="r4"></tr>
+                                                    <tr id="r5"></tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>

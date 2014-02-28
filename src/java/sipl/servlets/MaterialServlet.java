@@ -39,10 +39,8 @@ public class MaterialServlet extends HttpServlet {
         materialDAO matDAO = new materialDAO(con);
         String id_material = request.getParameter("id_material");
         Material mat = matDAO.getMaterial(Integer.parseInt(id_material));
-        out.print("<tr>");
-        out.print("<td>"+mat.getTipo_mat().getNombre()+"</td>");
+        out.print("<td height='42px'>"+mat.getTipo_mat().getNombre()+"</td>");
         out.print("<td>"+mat.getDescripcion()+"</td>");
-        out.print("</tr>");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package sipl.servlets;
 
 import java.io.IOException;
@@ -38,7 +39,6 @@ public class UsuarioServlet extends HttpServlet {
         usuarioDAO usuDAO = new usuarioDAO(con);
         String productCode = request.getParameter("productCode");
         Usuario usu = usuDAO.getUsuario(productCode);
-        //out.printf("<option value='%1s'>%2s</option>", usu.getNombre(), usu.getApellido());
         out.print(usu.getNombre() + " " + usu.getApellido());
     }
 
