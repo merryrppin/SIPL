@@ -14,7 +14,7 @@ import java.io.IOException;
 public class RestoreMySQL {
 
     public String Restore(String direccion) {
-        String resultado = "";
+        String resultado;
         String error = "";
         try {
             Process child = Runtime.getRuntime().exec("cmd /c mysql --password=12345 --user=root --databases siprelab < " + direccion);

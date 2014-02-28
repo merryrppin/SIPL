@@ -15,18 +15,18 @@ import java.io.IOException;
 public class GenerarBackupMySQL {
 
     public String GenerarBackupMySQL(String direccion) {
-        String resultado="";
+        String resultado = "";
         try {
             int processComplete;
             Process runtimeProcess = Runtime.getRuntime().exec("C:\\Program Files (x86)\\MySQL\\MySQL Server 5.5\\bin\\mysqldump "
-                    + "--opt --password=12345 --user=root --databases siprelab -r "+direccion);
+                    + "--opt --password=12345 --user=root --databases siprelab -r " + direccion);
             processComplete = runtimeProcess.waitFor();
             if (processComplete == 1) {
-                resultado="Backup Fallido";
+                resultado = "Backup Fallido";
             } else if (processComplete == 0) {
-                resultado="Backup creado satisfactoriamente...";
+                resultado = "Backup creado satisfactoriamente...";
             }
-        } catch (HeadlessException | IOException | InterruptedException e) {            
+        } catch (HeadlessException | IOException | InterruptedException e) {
         }
         return resultado;
     }
