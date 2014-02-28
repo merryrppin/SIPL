@@ -17,6 +17,6 @@
     String A = a1.substring(0, a1.length() - 1);
     String dir = A + b1 + c1;
     dir+=dire;
-    String resultado=Gestor.RestoreMysql(dir);
+    //String resultado=Gestor.RestoreMysql(dir);
 %>
-<h1><%out.print(resultado);%></h1>
+<h1><%out.print("");%></h1>

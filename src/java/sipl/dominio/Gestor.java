@@ -127,7 +127,7 @@ public class Gestor {
     }
     public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo){
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
-        gra.PrestamosY_Barra(values, n, direccion, tiempo, titulo);
+        //gra.PrestamosY_Barra(values, n, direccion, tiempo, titulo);
     }
     public Prestamo getPrestamoCodUsu(String codigo){
         return preDAO.getPrestamoCodUsu(codigo);
@@ -147,7 +147,7 @@ public class Gestor {
     public String GenerarBackup(String direccion){
         return gen.GenerarBackupMySQL(direccion);
     }
-    public String RestoreMysql(String direccion) throws InterruptedException{
+    /*public String RestoreMysql(String direccion) throws InterruptedException{
         return res.Restore(direccion);
-    }
+    }*/
 }

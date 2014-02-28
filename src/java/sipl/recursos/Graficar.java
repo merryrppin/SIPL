@@ -84,7 +84,7 @@ public class Graficar {
     
     
     
-
+/*
     public void PrestamosY_Barra(int[][] values, int n, String direccion, String tiempo, String titulo) {
         //Crear el dataset...
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -99,6 +99,6 @@ public class Graficar {
         } catch (IOException e) {
             System.err.println("Error al crear al chart.");
         }
-    }
+    }*/
 
 }
