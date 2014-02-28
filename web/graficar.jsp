@@ -52,7 +52,7 @@
                 Gestor.GraficarTipoMat(data, dir);
                 response.sendRedirect("graficar.jsp?orden=TipoMaterial.jpg");
             } else if (a == 2) {
-                String titulo = "Préstamos entre el ";
+                String titulo = "Préstamos entre el  ";
                 String fecha = request.getParameter("fecha");
                 String fecha2 = request.getParameter("fecha2");
                 String f[] = fecha.split("/");
@@ -67,7 +67,7 @@
                     int rest;
                     rest = Integer.parseInt(f2[2]) - Integer.parseInt(f[2]);
                     rest++;
-                    dir += "PrestamosAnho.jpg";
+                    dir += "PrestamoAnho.jpg";
                     int[][] y = new int[rest][2];
                     int y1 = Integer.parseInt(f[2]);
                     for (int i = 0; i < rest; i++) {
@@ -110,7 +110,7 @@
                         values[t] = cant;
                     }
                     Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Meses", titulo);
-                    response.sendRedirect("graficar.jsp?orden=PrestamoMes.jpg");
+                    response.sendRedirect("graficar.jsp?orden=PrestamosMes.jpg");
 
                 } else if (rango.equals("Dia")) {
                     dir += "PrestamosDia.jpg";
@@ -133,7 +133,7 @@
                         values[gj] = cant;
                     }
                     Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
-                    response.sendRedirect("graficar.jsp?orden=PrestamoDia.jpg");
+                    response.sendRedirect("graficar.jsp?orden=PrestamosDia.jpg");
                 } else if (rango.equals("Hor")) {
                     dir += "PrestamosHora.jpg";
                     int[] values = new int[24];
@@ -151,7 +151,7 @@
                         values[t] = cant;
                     }
                     Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
-                    response.sendRedirect("graficar.jsp?orden=PrestamoHora.jpg");
+                    response.sendRedirect("graficar.jsp?orden=PrestamosHora.jpg");
                 } else if (rango.equals("Min")) {
 
                 }
@@ -167,6 +167,15 @@
                     String titulo = "";
                     if (orden.equals("TipoMaterial.jpg")) {
                         titulo = "Reporte de Cantidad de Materiales por Categoría";
+                    }
+                    else if(orden.equals("PrestamoAnho.jpg")){
+                        titulo = "Reporte de Préstamos por año";
+                    }else if (orden.equals("PrestamosMes.jpg")){
+                        titulo = "Reporte de Préstamos por mes";
+                    }else if (orden.equals("PrestamosDia.jpg")){
+                        titulo = "Reporte de Préstamos por día";
+                    }else if (orden.equals("PrestamosHora.jpg")){
+                        
                     }
                 %>
                 <h1><%out.print(titulo);%></h1>
@@ -208,6 +217,29 @@
                                             }
                                         }
 
+                                    }else if(orden.equals("PrestamoAnho.jpg")){%>
+                                <tr>
+                                    <td><b>Fecha </b></td>
+                                    <td><b>Nombre</b></td>
+                                    <td><b>Descripción</b></td>
+                                    <td><b>Cantidad</b></td>
+                                    <td><b>Disponibilidad</b></td>
+                                </tr>
+                                <%
+                                        ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
+                                        if (Tipos.size() == 0) {
+                                            out.print("<td>No hay Tipos de Material</td>");
+                                        } else {
+                                            for (int i = 0; i < Tipos.size(); i++) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + Tipos.get(i).getId() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                                out.print("</tr>");
+                                            }
+                                        }
                                     }
                                 %>
                             </table>
