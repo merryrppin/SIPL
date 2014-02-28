@@ -125,6 +125,7 @@ public class Gestor {
     }
     public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo){
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
+        gra.PrestamosY_Barra(values, n, direccion, tiempo, titulo);
     }
     public Prestamo getPrestamoCodUsu(String codigo){
         return preDAO.getPrestamoCodUsu(codigo);

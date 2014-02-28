@@ -236,13 +236,13 @@
                                             
                                             for (int i = 0; i < data.size(); i++) {
                                                 String [] M = data.get(i).getMat().split(";");
-                                                out.print("<tr>");
+                                                /*out.print("<tr>");
                                                 out.print("<td>" + data.get(i).getFecha_prestamo() + "</td>");
                                                 out.print("<td>" + data.get(i).get + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
-                                                out.print("</tr>");
+                                                out.print("</tr>");*/
                                             }
                                         }
                                     }else if(orden.equals("PrestamosMes.jpg")){%>

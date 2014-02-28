@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -65,8 +64,8 @@ public class Graficar {
             System.out.println(e);
         }
     }
-    
-     public void PrestamosY(int[][] values, int n, String direccion, String tiempo, String titulo) {
+
+    public void PrestamosY(int[][] values, int n, String direccion, String tiempo, String titulo) {
         try {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             for (int j = 0; j < n; j++) {
@@ -82,4 +81,24 @@ public class Graficar {
             System.out.println(e);
         }
     }
+    
+    
+    
+
+    public void PrestamosY_Barra(int[][] values, int n, String direccion, String tiempo, String titulo) {
+        //Crear el dataset...
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int i = 1; i < n; i++) {
+            if (n != 0) {
+                dataset.addValue(values[i][1], "Cantidad de Préstamos", "" + values[i][0]);
+            }
+        }
+        JFreeChart chart = ChartFactory.createBarChart(titulo, tiempo, "Cantidad", dataset, PlotOrientation.VERTICAL, true, true, false);
+        try {
+            ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+        } catch (IOException e) {
+            System.err.println("Error al crear al chart.");
+        }
+    }
+
 }
