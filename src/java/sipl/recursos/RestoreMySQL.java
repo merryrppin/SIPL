@@ -13,20 +13,22 @@ import java.io.IOException;
  */
 public class RestoreMySQL {
 
-    public String Restore(String direccion) {
-        String resultado;
-        String error = "";
+    public String Restore(String direccion) throws InterruptedException {
+        String resultado = null;
+        int processComplete = 1;
         try {
-            Process child = Runtime.getRuntime().exec("cmd /c mysql --password=12345 --user=root --databases siprelab < " + direccion);
+            //Process child = Runtime.getRuntime().exec("cmd /c mysql --password=12345 --user=root --databases siprelab < " + direccion);
+            Process runtimeProcess = Runtime.getRuntime().exec("mysql -u root -p 12345 -e source " +direccion);
+            processComplete = runtimeProcess.waitFor();
         } catch (IOException e) {
-            error = "Error no se actualizo la DB por el siguiente motivo: " + e.getMessage();
+            String error = "Error no se actualizo la DB por el siguiente motivo: " + e.getMessage();
         }
-        if (error.length() == 0) {
-            resultado = "Base de Datos Actualizada";
-            return resultado;
-        } else {
-            return error;
-        }
+        if (processComplete == 1) {
+                resultado = "Backup Fallido";
+            } else if (processComplete == 0) {
+                resultado = "Backup creado satisfactoriamente...";
+            }
+        return resultado;
     }
 
 }

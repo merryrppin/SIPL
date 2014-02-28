@@ -147,7 +147,7 @@ public class Gestor {
     public String GenerarBackup(String direccion){
         return gen.GenerarBackupMySQL(direccion);
     }
-    public String RestoreMysql(String direccion){
+    public String RestoreMysql(String direccion) throws InterruptedException{
         return res.Restore(direccion);
     }
 }
