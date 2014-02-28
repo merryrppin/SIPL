@@ -35,11 +35,11 @@
             Usuario usuario = Gestor.getUsuario(codigo);
             if (usuario != null) {
                 if (usuario.getEstado() == 2) {
-                    error= "usuario_prestamo";
+                    error = "usuario_prestamo";
                 } else if (usuario.getEstado() == 3) {
-                    error= "usuario_reserva";
+                    error = "usuario_reserva";
                 } else if (usuario.getEstado() == 4) {
-                    error= "usuario_multa";
+                    error = "usuario_multa";
                 } else if (usuario.getEstado() == 1) {
                     error = "usuario_inactivo";
                 } else if (usuario.getEstado() == 0) {
@@ -121,7 +121,7 @@
                     } catch (Exception e) {
                     }
                     if (disp == 0 && esta == 0) {
-                        Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal2,0);
+                        Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal2, 0);
                         if (Gestor.addPrestamo(pre) == true) {
                             try {
                                 if (mat1.length() > 0 && mat1 != null) {
@@ -175,63 +175,58 @@
             }
         } else if (a == 2) {
             Usuario usu = Gestor.getUsuario(codigo);
-            if(usu.getEstado()==2){
-                Prestamo pre=null;
+            if (usu.getEstado() == 2) {
+                Prestamo pre = null;
                 pre = Gestor.getPrestamoCodUsu(codigo);
-                if(pre!=null){
-                    String [] cadena = pre.getMat().split(";");
+                if (pre != null) {
+                    String[] cadena = pre.getMat().split(";");
                     Material mate1 = null, mate2 = null, mate3 = null,
                             mate4 = null, mate5 = null;
-                    if(cadena.length==1){
-                        mate1=Gestor.getMaterial(Integer.parseInt(cadena[0]));
+                    if (cadena.length >= 1) {
+                        mate1 = Gestor.getMaterial(Integer.parseInt(cadena[0]));
                     }
-                    if(cadena.length==2){
-                        mate2=Gestor.getMaterial(Integer.parseInt(cadena[1]));
+                    if (cadena.length >= 2) {
+                        mate2 = Gestor.getMaterial(Integer.parseInt(cadena[1]));
                     }
-                    if(cadena.length==3){
-                        mate3=Gestor.getMaterial(Integer.parseInt(cadena[2]));
+                    if (cadena.length >= 3) {
+                        mate3 = Gestor.getMaterial(Integer.parseInt(cadena[2]));
                     }
-                    if(cadena.length==4){
-                        mate4=Gestor.getMaterial(Integer.parseInt(cadena[3]));
+                    if (cadena.length >= 4) {
+                        mate4 = Gestor.getMaterial(Integer.parseInt(cadena[3]));
                     }
-                    if(cadena.length==5){
-                        mate5=Gestor.getMaterial(Integer.parseInt(cadena[4]));
+                    if (cadena.length >= 5) {
+                        mate5 = Gestor.getMaterial(Integer.parseInt(cadena[4]));
                     }
                     try {
-                        if (mat1.length() > 0 && mat1 != null) {
-                            mate1 = Gestor.getMaterial(Integer.parseInt(mat1));
+                        if (mate1 != null) {
                             mate1.setDisponibilidad(0);
                             Gestor.updateMaterial(mate1);
                         }
                     } catch (Exception e) {
                     }
                     try {
-                        if (mat2.length() > 0 && mat2 != null) {
-                            mate2 = Gestor.getMaterial(Integer.parseInt(mat2));
+                        if (mate2 != null) {
                             mate2.setDisponibilidad(0);
                             Gestor.updateMaterial(mate2);
                         }
                     } catch (Exception e) {
                     }
                     try {
-                        if (mat3.length() > 0 && mat3 != null) {
-                            mate3 = Gestor.getMaterial(Integer.parseInt(mat3));
+                        if (mate3 != null) {
                             mate3.setDisponibilidad(0);
                             Gestor.updateMaterial(mate3);
                         }
                     } catch (Exception e) {
                     }
                     try {
-                        if (mat4.length() > 0 && mat4 != null) {
-                            mate4 = Gestor.getMaterial(Integer.parseInt(mat4));
+                        if (mate4 != null) {
                             mate4.setDisponibilidad(0);
                             Gestor.updateMaterial(mate4);
                         }
                     } catch (Exception e) {
                     }
                     try {
-                        if (mat5.length() > 0 && mat5 != null) {
-                            mate5 = Gestor.getMaterial(Integer.parseInt(mat5));
+                        if (mate5 != null) {
                             mate5.setDisponibilidad(0);
                             Gestor.updateMaterial(mate5);
                         }
@@ -239,32 +234,33 @@
                     }
                     usu.setEstado(0);
                     Calendar cal = Calendar.getInstance();
-                    Calendar cal2=pre.getFecha_prestamo();
+                    Calendar cal2 = pre.getFecha_prestamo();
                     long time1 = cal.getTimeInMillis();
                     long time2 = cal2.getTimeInMillis();
-                    long dias3=259200000;
-                    time2-=dias3;
-                    if(time2>time1){
+                    long dias3 = 259200000;
+                    time1 -= dias3;
+                    if (time1 > time2) {
                         usu.setEstado(4);
                         Multa mul = new Multa(0, usu, cal, 0, 3);
                         Gestor.addMulta(mul);
                     }
-                    Gestor.updateUsuario(usu);
                     pre.setEstado(1);
+                    pre.setFecha_devolucion(cal);
+                    Gestor.updateUsuario(usu);
                     Gestor.updatePrestamo(pre);
-                    response.sendRedirect("principal.jsp");
-                }else{
-                    error="prestamo_null";
-                }              
-            }else{
-                error="NO_prestamo";
+                    response.sendRedirect("listarPrestamos.jsp");
+                } else {
+                    error = "prestamo_null";
+                }
+            } else {
+                error = "NO_prestamo";
             }
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
     if (error.length() > 0) {
-        response.sendRedirect("modificarPrestamo.jsp?" + error);
+        response.sendRedirect("principal.jsp?" + error);
     }
 %>
 

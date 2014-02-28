@@ -233,10 +233,12 @@
                                             out.print("<td>No hay préstamos en ese rango de fecha</td>");
                                             out.print("</tr>");
                                         } else {
+                                            
                                             for (int i = 0; i < data.size(); i++) {
+                                                String [] M = data.get(i).getMat().split(";");
                                                 out.print("<tr>");
                                                 out.print("<td>" + data.get(i).getFecha_prestamo() + "</td>");
-                                                out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
+                                                out.print("<td>" + data.get(i).get + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");

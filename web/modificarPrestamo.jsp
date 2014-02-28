@@ -41,7 +41,7 @@
                 }
             }
             function getUsuario(){
-                alert('Cambio');
+                //alert('Cambio');
                 var code=$("#codigo").val(); //.. y se obtiene el valor
                 //llama al servlet con el parametro seleccionado
                 $("#nombre").load("UsuarioServlet", {productCode:code})
@@ -128,14 +128,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label"> Fecha de préstamo</label>
-                            </td>
-                            <td colspan="3">
-                                <input disabled>
                             </td>
                         </tr>
                         <tr>

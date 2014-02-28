@@ -93,7 +93,11 @@
                                     fecha1 += cal2.get(Calendar.DAY_OF_MONTH);
                                     fecha1 += " " + cal2.get(Calendar.HOUR_OF_DAY);
                                     fecha1 += ":" + cal2.get(Calendar.MINUTE) + ":00";
+                                    if(data.get(i).getEstado()==0){
+                                        out.print("<td>Sin devolver</td>");
+                                    }else{
                                     out.print("<td>" + fecha1 + "</td>");
+                                    }
                                     if (data.get(i).getEstado() == 0) {
                                         out.print("<td>Activo</td>");
                                     } else if (data.get(i).getEstado() == 1) {

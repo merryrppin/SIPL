@@ -138,4 +138,7 @@ public class Gestor {
     public Multa getMulta(int codigo) {
         return mulDAO.getMulta(codigo);
     }
+    public boolean updateMulta(Multa mul){
+        return mulDAO.updateMulta(mul);
+    }
 }

@@ -122,7 +122,7 @@ public class prestamoDAO {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal3 = sdf1.format(pre.getFecha_devolucion().getTime());
         String sql = "update prestamo set cod_material='" + pre.getMat() + "',cod_usuario='" + pre.getUsu().getCodigo() + "',"
-                + " fecha_prestamo='" + cal2 + "', fecha_devolucion='" + cal3 + "',"+pre.getEstado()+" where codigo=" + pre.getCodigo();
+                + " fecha_prestamo='" + cal2 + "', fecha_devolucion='" + cal3 + "',estado="+pre.getEstado()+" where codigo=" + pre.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;

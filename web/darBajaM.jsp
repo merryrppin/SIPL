@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form action="DarbajaMulta.jsp" method="POST">
+                <form action="darBajaMulta.jsp" method="POST">
                 <table class="table table-striped" align="center">
                     <tr>
                         <%
@@ -97,7 +97,7 @@
                             }
                         %>
                     <tr>
-                        <td colspan="6" align="center">
+                        <td colspan="7" align="center">
                             <%
                             if(a==2){%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Dar de baja multa</button>
