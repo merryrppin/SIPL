@@ -206,6 +206,31 @@
                                         if (Tipos.size() == 0) {
                                             out.print("<td>No hay Tipos de Material</td>");
                                         } else {
+                                            int cont=0;
+                                            for (int i = 0; i < Tipos.size(); i++) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + Tipos.get(i).getId() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                                out.print("</tr>");
+                                                cont+=Tipos.get(i).getCantidad();
+                                            }
+                                            out.print("<tr><td><td><td><b>Total Materiales</b><td><b>"+cont+"</b></td></td></td></td></tr>");
+                                        }
+
+                                    }else if(orden.equals("PrestamoAnho.jpg")){%>
+                                <tr>
+                                    <td><b>Fecha Préstamo</b></td>
+                                   <td><b>Categoria Material</b></td>
+                                    <td><b>Cantidad Material</b></td>
+                                </tr>
+                                <%
+                                        ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
+                                        if (Tipos.size() == 0) {
+                                            out.print("<td>No hay préstamos en ese rango de fecha</td>");
+                                        } else {
                                             for (int i = 0; i < Tipos.size(); i++) {
                                                 out.print("<tr>");
                                                 out.print("<td>" + Tipos.get(i).getId() + "</td>");
@@ -216,19 +241,58 @@
                                                 out.print("</tr>");
                                             }
                                         }
-
-                                    }else if(orden.equals("PrestamoAnho.jpg")){%>
+                                    }else if(orden.equals("PrestamosMes.jpg")){%>
                                 <tr>
-                                    <td><b>Fecha </b></td>
-                                    <td><b>Nombre</b></td>
-                                    <td><b>Descripción</b></td>
-                                    <td><b>Cantidad</b></td>
-                                    <td><b>Disponibilidad</b></td>
+                                    <td><b>Fecha Préstamo</b></td>
+                                    <td><b>Categoria Material</b></td>
+                                    <td><b>Cantidad Material</b></td>
                                 </tr>
                                 <%
                                         ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
                                         if (Tipos.size() == 0) {
-                                            out.print("<td>No hay Tipos de Material</td>");
+                                            out.print("<td>No hay préstamos en ese rango de fecha</td>");
+                                        } else {
+                                            for (int i = 0; i < Tipos.size(); i++) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + Tipos.get(i).getId() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                                out.print("</tr>");
+                                            }
+                                        }
+                                    }else if(orden.equals("PrestamosDia.jpg")){%>
+                                <tr>
+                                    <td><b>Fecha Préstamo</b></td>
+                                    <td><b>Categoria Material</b></td>
+                                    <td><b>Cantidad Material</b></td>
+                                </tr>
+                                <%
+                                        ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
+                                        if (Tipos.size() == 0) {
+                                            out.print("<td>No hay préstamos en ese rango de fecha</td>");
+                                        } else {
+                                            for (int i = 0; i < Tipos.size(); i++) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + Tipos.get(i).getId() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
+                                                out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                                out.print("</tr>");
+                                            }
+                                        }
+                                    }else if(orden.equals("PrestamosHora.jpg")){%>
+                                <tr>
+                                    <td><b>Fecha Préstamo</b></td>
+                                    <td><b>Categoria Material</b></td>
+                                    <td><b>Cantidad Material</b></td>
+                                </tr>
+                                <%
+                                        ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
+                                        if (Tipos.size() == 0) {
+                                            out.print("<td>No hay préstamos en ese rango de fecha</td>");
                                         } else {
                                             for (int i = 0; i < Tipos.size(); i++) {
                                                 out.print("<tr>");
