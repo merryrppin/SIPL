@@ -1,15 +1,17 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package sipl.recursos;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -17,7 +19,7 @@ import sipl.dominio.Tipo_material;
 
 /**
  *
- * @author Wilmar
+ * @author WM
  */
 public class Graficar {
 
@@ -84,7 +86,7 @@ public class Graficar {
     
     
     
-/*
+
     public void PrestamosY_Barra(int[][] values, int n, String direccion, String tiempo, String titulo) {
         //Crear el dataset...
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -99,6 +101,7 @@ public class Graficar {
         } catch (IOException e) {
             System.err.println("Error al crear al chart.");
         }
-    }*/
+    }
 
 }
+

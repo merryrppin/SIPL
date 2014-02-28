@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author WM
  */
 public class RestoreMySQL {
-/*
+
     public String Restore(String direccion) throws InterruptedException {
         String resultado = null;
         int processComplete = 1;
@@ -29,6 +29,6 @@ public class RestoreMySQL {
                 resultado = "Backup creado satisfactoriamente...";
             }
         return resultado;
-    }*/
+    }
 
 }

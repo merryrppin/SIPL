@@ -25,7 +25,6 @@
         String mat3 = request.getParameter("mat3");
         String mat4 = request.getParameter("mat4");
         String mat5 = request.getParameter("mat5");
-        String laboratorio = request.getParameter("laboratorio");
         try {
             a = Integer.parseInt(accion);
         } catch (Exception e) {

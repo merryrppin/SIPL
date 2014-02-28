@@ -23,6 +23,7 @@ public class Gestor {
     private final danhoDAO danDAO;
     private final prestamoDAO preDAO;
     private final multaDAO mulDAO;
+    private final variableSisDAO varDAO;
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
     Graficar gra = new Graficar();
@@ -38,6 +39,7 @@ public class Gestor {
         danDAO = new danhoDAO(con);
         preDAO = new prestamoDAO(con);
         mulDAO = new multaDAO(con);
+        varDAO = new variableSisDAO(con);
     }
     public Usuario validarLogin(String login, String clave) {
         return usuDAO.getLogin(login, clave);
@@ -147,7 +149,10 @@ public class Gestor {
     public String GenerarBackup(String direccion){
         return gen.GenerarBackupMySQL(direccion);
     }
-    /*public String RestoreMysql(String direccion) throws InterruptedException{
+    public String RestoreMysql(String direccion) throws InterruptedException{
         return res.Restore(direccion);
-    }*/
+    }
+    public VariableSis getVariable(int id){
+        return varDAO.getTipo_variable(id);
+    }
 }

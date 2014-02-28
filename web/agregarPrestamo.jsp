@@ -145,32 +145,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <%
-                                ArrayList<Laboratorio> lab = Gestor.getLaboratorios();
-                            %>
-                            <td colspan="2">
-                                <label class="control-label" for="laboratorio">Laboratorio</label>
-                                <select id="laboratorio" name="laboratorio">
-                                    <%
-                                        for (int i = 0; i < lab.size(); i++) {
-                                            out.print("<option value='" + lab.get(i).getCodigo() + "'>" + lab.get(i).getNombre()
-                                                    + "</option>");
-                                        }
-                                    %>
-                                </select>
-                            </td>
-                            <td colspan="2">
-                                <label class="control-label" for="dias">Días para la devolución</label>
-                                <select name="dias" id="dias">
-                                    <option value="1"> 1 </option>
-                                    <option value="1"> 2 </option>
-                                    <option value="1"> 3 </option>
-                                    <option value="1"> 4 </option>
-                                    <option value="1"> 5 </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
                             <td colspan="4">
                                 <table class="table table-striped">
                                     <tr>
