@@ -170,7 +170,7 @@
                                     <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Dar de baja multa</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'darBajaM.jsp'"  style='width:200px;'>Dar de baja multa</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'darBajaM.jsp?accion=2'"  style='width:200px;'>Dar de baja multa</button>
                                     <%
                                         }
                                     %>
@@ -288,7 +288,8 @@
                                     <p class="bg-success"> <em> <b>Versión 1.0 </b><br><br>
                                             El Sistema de Información para el Control de Materiales de los Laboratorios de la Facultad de Ingenierías Físico-Mecánicas de la UNAB,
                                             fue elaborado como proyecto de grado por los estudiantes <b>Sandra Milena Vera Gómez</b> y <b>Wilmar González Franco</b> de la 
-                                            Facultad de Ingeniería de Sistemas de la UNAB, bajo la supervisión y tutoría del docente <b>Juan Carlos García Ojeda</b>, siendo los evaluadores <b>Freddy Mendez Ortiz</b> y <b>Daniel Arenas Seleey</b>.
+                                            Facultad de Ingeniería de Sistemas de la UNAB, bajo la supervisión y tutoría del docente <b>Juan Carlos García Ojeda</b> y el docente <b>Freddy Mendez Ortiz</b>, 
+                                            siendo los evaluadores <b>Freddy Mendez Ortiz</b> y <b>Daniel Arenas Seleey</b>.
                                         </em></p></td>
                             </tr>
                         </table>
