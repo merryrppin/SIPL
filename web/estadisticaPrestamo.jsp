@@ -96,8 +96,8 @@
                         </tr>
                         <tr>
                             <td colspan="3" align="center">
-                                <label class="control-label" for="r">Rango</label>
-                                <select name="rango" id="r">
+                                <label class="control-label" for="rango">Rango</label>
+                                <select name="rango" id="rango">
                                     <option value="Anho">Año</option>
                                     <option value="Mes">Mes</option>
                                     <option value="Dia">Día</option>
