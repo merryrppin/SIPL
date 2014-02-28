@@ -26,6 +26,8 @@ public class Gestor {
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
     Graficar gra = new Graficar();
+    GenerarBackupMySQL gen = new GenerarBackupMySQL();
+    RestoreMySQL res= new RestoreMySQL();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -141,5 +143,11 @@ public class Gestor {
     }
     public boolean updateMulta(Multa mul){
         return mulDAO.updateMulta(mul);
+    }
+    public String GenerarBackup(String direccion){
+        return gen.GenerarBackupMySQL(direccion);
+    }
+    public String RestoreMysql(String direccion){
+        return res.Restore(direccion);
     }
 }

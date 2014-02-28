@@ -51,7 +51,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <form name="Restore" class="form-horizontal" action="aplicarRestore.jsp" method="POST" enctype="multipart/form-data" onsubmit="return validar(this);">
+                <form name="Restore" class="form-horizontal" action="aplicarRestore.jsp" method="POST" onsubmit="return validar(this);">
                     <table class="table-hover" align="center">
                         <tr>
                             <td>
