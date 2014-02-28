@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package sipl.servlets;
 
 import java.io.IOException;
@@ -12,14 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sipl.db.Conexion;
-import sipl.db.usuarioDAO;
-import sipl.dominio.Usuario;
+import sipl.db.materialDAO;
+import sipl.dominio.Material;
 
 /**
  *
  * @author WM
  */
-public class UsuarioServlet extends HttpServlet {
+public class MaterialServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,14 +33,16 @@ public class UsuarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Conexion con = new Conexion();
-        usuarioDAO usuDAO = new usuarioDAO(con);
-        String productCode = request.getParameter("productCode");
-        Usuario usu = usuDAO.getUsuario(productCode);
-        //out.printf("<option value='%1s'>%2s</option>", usu.getNombre(), usu.getApellido());
-        out.print(usu.getNombre() + " " + usu.getApellido());
+        materialDAO matDAO = new materialDAO(con);
+        String id_material = request.getParameter("id_material");
+        Material mat = matDAO.getMaterial(Integer.parseInt(id_material));
+        out.print("<tr>");
+        out.print("<td>"+mat.getTipo_mat().getNombre()+"</td>");
+        out.print("<td>"+mat.getDescripcion()+"</td>");
+        out.print("</tr>");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

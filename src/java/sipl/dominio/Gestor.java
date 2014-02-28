@@ -126,4 +126,13 @@ public class Gestor {
     public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo){
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
     }
+    public Prestamo getPrestamoCodUsu(String codigo){
+        return preDAO.getPrestamoCodUsu(codigo);
+    }
+    public boolean updatePrestamo(Prestamo pre){
+        return preDAO.updatePrestamo(pre);
+    }
+    public boolean addMulta(Multa mul){
+        return mulDAO.addMulta(mul);
+    }
 }

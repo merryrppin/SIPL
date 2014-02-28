@@ -31,8 +31,8 @@
                     return false;
                 }
                 else {
-                    var newdiv = document.createElement('div');
-                    newdiv.innerHTML = "<input type='text' name='mat" + (counter + 1) + "'>";
+                    var newdiv = document.createElement('tr');
+                    newdiv.innerHTML = "<td><input type='text' name='mat" + (counter + 1) + "'></td>";
                     document.getElementById(divName).appendChild(newdiv);
                     counter++;
                     return false;
@@ -60,11 +60,46 @@
                     return false;
                 }
             }
-            function getUsuario(){
-                alert('Cambio');
-                var code=$("#codigo").val(); //.. y se obtiene el valor
+            function getUsuario() {
+                var code = $("#codigo").val(); //.. y se obtiene el valor
                 //llama al servlet con el parametro seleccionado
-                $("#nombre").load("UsuarioServlet", {productCode:code})
+                $("#nombre").load("UsuarioServlet", {productCode: code});
+                alert(code);
+                return false;
+            }
+            function getMaterial1() {
+                var code = $("#mat1").val(); //.. y se obtiene el valor
+                //llama al servlet con el parametro seleccionado
+                $("#materialito").load("MaterialServlet", {id_material: code});
+                alert(code);
+                return false;
+            }
+            function getMaterial2() {
+                var code = $("#mat2").val(); //.. y se obtiene el valor
+                //llama al servlet con el parametro seleccionado
+                $("#materialito").load("MaterialServlet", {id_material: code});
+                alert(code);
+                return false;
+            }
+            function getMaterial3() {
+                var code = $("#mat3").val(); //.. y se obtiene el valor
+                //llama al servlet con el parametro seleccionado
+                $("#materialito").load("MaterialServlet", {id_material: code});
+                alert(code);
+                return false;
+            }
+            function getMaterial4() {
+                var code = $("#mat4").val(); //.. y se obtiene el valor
+                //llama al servlet con el parametro seleccionado
+                $("#materialito").load("MaterialServlet", {id_material: code});
+                alert(code);
+                return false;
+            }
+            function getMaterial5() {
+                var code = $("#mat5").val(); //.. y se obtiene el valor
+                //llama al servlet con el parametro seleccionado
+                $("#materialito").load("MaterialServlet", {id_material: code});
+                alert(code);
                 return false;
             }
         </script>
@@ -111,10 +146,8 @@
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
-                            <td >
-                                <select id="nombre" >
-                                    
-                                </select>
+                            <td id="nombre">
+
                             </td>
                         </tr>
                         <tr>
@@ -159,15 +192,16 @@
                                             <th><label class="control-label">Descripción del Elemento</label></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody  id="dynamicInput">
                                         <tr>
                                             <td>
-                                                <div id="dynamicInput">
-                                                    <input type="text" name="mat1">
-                                                </div>
+                                                <input type="text" name="mat1" id="mat1" onchange="return getMaterial1();">
                                             </td>
                                         </tr>
                                     </tbody>
+                                </table>
+                                <table class="table table-striped" id="materialito">
+                                    
                                 </table>
                             </td>
                         </tr>

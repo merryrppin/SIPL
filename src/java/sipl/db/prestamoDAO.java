@@ -52,6 +52,31 @@ public class prestamoDAO {
         return data;
     }
 
+    
+    public Prestamo getPrestamoCodUsu(String codigo) {
+        Prestamo pre = null;
+        ResultSet rs = con.getQuery("select * from prestamo where cod_usuario='" + codigo+"' and estado=0");
+        try {
+            if (rs.next()) {
+                int cod = rs.getInt("codigo");
+                String mat = rs.getString("cod_material");
+                String usu = rs.getString("cod_usuario");
+                Calendar cal = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_prestamo");
+                cal.setTimeInMillis(t1.getTime());
+                Calendar cal1 = Calendar.getInstance();
+                Timestamp t2 = rs.getTimestamp("fecha_devolucion");
+                cal1.setTimeInMillis(t2.getTime());
+                int est = rs.getInt("estado");
+                pre = new Prestamo(cod, mat, usuDAO.getUsuario(usu), cal, cal1, est);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            pre = null;
+        }
+        return pre;
+    }
+    
     public Prestamo getPrestamo(int codigo) {
         Prestamo pre = null;
         ResultSet rs = con.getQuery("select * from prestamo where codigo=" + codigo);

@@ -155,7 +155,7 @@
                             </tr>
                             <tr align="center">
                                 <td colspan="2">
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarPrestamo.jsp'" style='width:200px;'>Listar Préstamos</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarPrestamos.jsp'" style='width:200px;'>Listar Préstamos</button>
                                 </td>
                             </tr>
                         </table>

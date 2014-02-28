@@ -174,13 +174,97 @@
                 error = "usuario_inexistente";
             }
         } else if (a == 2) {
-
+            Usuario usu = Gestor.getUsuario(codigo);
+            if(usu.getEstado()==2){
+                Prestamo pre=null;
+                pre = Gestor.getPrestamoCodUsu(codigo);
+                if(pre!=null){
+                    String [] cadena = pre.getMat().split(";");
+                    Material mate1 = null, mate2 = null, mate3 = null,
+                            mate4 = null, mate5 = null;
+                    if(cadena.length==1){
+                        mate1=Gestor.getMaterial(Integer.parseInt(cadena[0]));
+                    }
+                    if(cadena.length==2){
+                        mate2=Gestor.getMaterial(Integer.parseInt(cadena[1]));
+                    }
+                    if(cadena.length==3){
+                        mate3=Gestor.getMaterial(Integer.parseInt(cadena[2]));
+                    }
+                    if(cadena.length==4){
+                        mate4=Gestor.getMaterial(Integer.parseInt(cadena[3]));
+                    }
+                    if(cadena.length==5){
+                        mate5=Gestor.getMaterial(Integer.parseInt(cadena[4]));
+                    }
+                    try {
+                        if (mat1.length() > 0 && mat1 != null) {
+                            mate1 = Gestor.getMaterial(Integer.parseInt(mat1));
+                            mate1.setDisponibilidad(0);
+                            Gestor.updateMaterial(mate1);
+                        }
+                    } catch (Exception e) {
+                    }
+                    try {
+                        if (mat2.length() > 0 && mat2 != null) {
+                            mate2 = Gestor.getMaterial(Integer.parseInt(mat2));
+                            mate2.setDisponibilidad(0);
+                            Gestor.updateMaterial(mate2);
+                        }
+                    } catch (Exception e) {
+                    }
+                    try {
+                        if (mat3.length() > 0 && mat3 != null) {
+                            mate3 = Gestor.getMaterial(Integer.parseInt(mat3));
+                            mate3.setDisponibilidad(0);
+                            Gestor.updateMaterial(mate3);
+                        }
+                    } catch (Exception e) {
+                    }
+                    try {
+                        if (mat4.length() > 0 && mat4 != null) {
+                            mate4 = Gestor.getMaterial(Integer.parseInt(mat4));
+                            mate4.setDisponibilidad(0);
+                            Gestor.updateMaterial(mate4);
+                        }
+                    } catch (Exception e) {
+                    }
+                    try {
+                        if (mat5.length() > 0 && mat5 != null) {
+                            mate5 = Gestor.getMaterial(Integer.parseInt(mat5));
+                            mate5.setDisponibilidad(0);
+                            Gestor.updateMaterial(mate5);
+                        }
+                    } catch (Exception e) {
+                    }
+                    usu.setEstado(0);
+                    Calendar cal = Calendar.getInstance();
+                    Calendar cal2=pre.getFecha_prestamo();
+                    long time1 = cal.getTimeInMillis();
+                    long time2 = cal2.getTimeInMillis();
+                    long dias3=259200000;
+                    time2-=dias3;
+                    if(time2>time1){
+                        usu.setEstado(4);
+                        Multa mul = new Multa(0, usu, cal, 0, 3);
+                        Gestor.addMulta(mul);
+                    }
+                    Gestor.updateUsuario(usu);
+                    pre.setEstado(1);
+                    Gestor.updatePrestamo(pre);
+                    response.sendRedirect("principal.jsp");
+                }else{
+                    error="prestamo_null";
+                }              
+            }else{
+                error="NO_prestamo";
+            }
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
     if (error.length() > 0) {
-        response.sendRedirect("agregarPrestamo.jsp?" + error);
+        response.sendRedirect("modificarPrestamo.jsp?" + error);
     }
 %>
 
