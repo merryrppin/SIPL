@@ -74,7 +74,7 @@
                         y[i][0] = y1;
                         y1++;
                     }
-                    for (int j = 0; j < Integer.parseInt(f[1]) + 4; j++) {
+                    for (int j = 0; j < rest; j++) {
                         y[j][1] = 0;
                     }
                     for (int k = 0; k < data.size(); k++) {
@@ -88,10 +88,8 @@
                         }
                     }
                     Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
-                    response.sendRedirect("graficar.jsp?orden=PrestamoAnho.jpg");
-
+                    response.sendRedirect("graficar.jsp?orden=PrestamoAnho.jpg;"+f2[2]+";"+f[2]);
                 } else if (rango.equals("Mes")) {
-
                     dir += "PrestamosMes.jpg";
                     int[] values = new int[12];
                     int[] tiempo = new int[12];
@@ -111,7 +109,6 @@
                     }
                     Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Meses", titulo);
                     response.sendRedirect("graficar.jsp?orden=PrestamosMes.jpg");
-
                 } else if (rango.equals("Dia")) {
                     dir += "PrestamosDia.jpg";
                     int[] values = new int[31];
@@ -153,7 +150,7 @@
                     Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
                     response.sendRedirect("graficar.jsp?orden=PrestamosHora.jpg");
                 } else if (rango.equals("Min")) {
-
+                    
                 }
             } else {%>
     <body>
@@ -165,17 +162,17 @@
                 </style>
                 <%
                     String titulo = "";
-                    if (orden.equals("TipoMaterial.jpg")) {
+                    String []o=orden.split(";");
+                    if (o[0].equals("TipoMaterial.jpg")) {
                         titulo = "Reporte de Cantidad de Materiales por Categoría";
-                    }
-                    else if(orden.equals("PrestamoAnho.jpg")){
+                    }else if(o[0].equals("PrestamoAnho.jpg")){
                         titulo = "Reporte de Préstamos por año";
-                    }else if (orden.equals("PrestamosMes.jpg")){
+                    }else if (o[0].equals("PrestamosMes.jpg")){
                         titulo = "Reporte de Préstamos por mes";
-                    }else if (orden.equals("PrestamosDia.jpg")){
+                    }else if (o[0].equals("PrestamosDia.jpg")){
                         titulo = "Reporte de Préstamos por día";
-                    }else if (orden.equals("PrestamosHora.jpg")){
-                        
+                    }else if (o[0].equals("PrestamosHora.jpg")){
+                        titulo = "Reporte de Préstamos por Hora";
                     }
                 %>
                 <h1><%out.print(titulo);%></h1>
@@ -204,7 +201,9 @@
                                 <%
                                         ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
                                         if (Tipos.size() == 0) {
+                                            out.print("<tr>");
                                             out.print("<td>No hay Tipos de Material</td>");
+                                            out.print("</tr>");
                                         } else {
                                             int cont=0;
                                             for (int i = 0; i < Tipos.size(); i++) {
@@ -227,9 +226,12 @@
                                     <td><b>Cantidad Material</b></td>
                                 </tr>
                                 <%
-                                        ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
+                                        
+                                        ArrayList<Prestamo> data = 
                                         if (Tipos.size() == 0) {
+                                            out.print("<tr>");
                                             out.print("<td>No hay préstamos en ese rango de fecha</td>");
+                                            out.print("</tr>");
                                         } else {
                                             for (int i = 0; i < Tipos.size(); i++) {
                                                 out.print("<tr>");
