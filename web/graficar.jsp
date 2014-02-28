@@ -227,15 +227,15 @@
                                 </tr>
                                 <%
                                         
-                                        ArrayList<Prestamo> data = 
-                                        if (Tipos.size() == 0) {
+                                        ArrayList<Prestamo> data = Gestor.getPrestamosFecha(o[2], o[1]);
+                                        if (data.size() == 0) {
                                             out.print("<tr>");
                                             out.print("<td>No hay préstamos en ese rango de fecha</td>");
                                             out.print("</tr>");
                                         } else {
-                                            for (int i = 0; i < Tipos.size(); i++) {
+                                            for (int i = 0; i < data.size(); i++) {
                                                 out.print("<tr>");
-                                                out.print("<td>" + Tipos.get(i).getId() + "</td>");
+                                                out.print("<td>" + data.get(i).getFecha_prestamo() + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
                                                 out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
