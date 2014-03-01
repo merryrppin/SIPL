@@ -88,7 +88,7 @@
                         }
                     }
                     Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
-                    response.sendRedirect("graficar.jsp?orden=PrestamoAnho.jpg;" + f2[2] + ";" + f[2]);
+                    response.sendRedirect("graficar.jsp?orden=PrestamoAnho.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
                 } else if (rango.equals("Mes")) {
                     dir += "PrestamosMes.jpg";
                     int[] values = new int[12];
@@ -226,7 +226,9 @@
                                 </tr>
                                 <%
                                     //La fecha enviada en o[2] y o [1] no son correctas hace falta el mes, dia, hora...
-                                    ArrayList<Prestamo> data = Gestor.getPrestamosFecha(o[2], o[1]);
+                                    String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
+                                    String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 00:00:00";
+                                    ArrayList<Prestamo> data = Gestor.getPrestamosFecha(f1, f2);
                                     ArrayList<Material> tipos = Gestor.getMateriales();
                                     int T[][] = new int[tipos.size()][2];
                                     for (int i = 0; i < tipos.size(); i++) {
@@ -259,6 +261,40 @@
                                                 out.print("<td>" + T[i][1] + "</td>");
                                                 out.print("</tr>");
                                             }
+                                        }
+                                    }%>
+                                <tr>
+                                    <td><b>Año</b></td>
+                                    <td><b>Cantidad Préstamos</b></td>
+                                </tr>
+                                <%
+                                    int dif = Integer.parseInt(o[1]) - Integer.parseInt(o[4]);
+                                    int tamY[][] = new int[dif][2];
+                                    int u = Integer.parseInt(o[4]);
+                                    for (int i = 0; i < dif; i++) {
+                                        tamY[i][0] = u;
+                                        u++;
+                                    }
+
+                                    for (int j = 0; j < dif; j++) {
+                                        tamY[j][1] = 0;
+                                    }
+                                    for (int k = 0; k < data.size(); k++) {
+                                        int t = data.get(k).getFecha_prestamo().get(Calendar.YEAR);
+                                        for (int l = 0; l < dif; l++) {
+                                            if (tamY[l][0] == t) {
+                                                int cant = tamY[l][1];
+                                                cant++;
+                                                tamY[l][1] = cant;
+                                            }
+                                        }
+                                    }
+                                    for (int i = 0; i < dif; i++) {
+                                        if (tamY[i][1] > 0) {
+                                            out.print("<tr>");
+                                            out.print("<td>" + tamY[i][0] + "</td>");
+                                            out.print("<td>" + tamY[i][1] + "</td>");
+                                            out.print("</tr>");
                                         }
                                     }
                                 } else if (orden.equals("PrestamosMes.jpg")) {%>
