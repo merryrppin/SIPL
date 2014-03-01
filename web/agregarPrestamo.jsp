@@ -62,7 +62,7 @@
             }
             function getUsuario() {
                 var code = $("#codigo").val();
-                $("#nombre").load("UsuarioServlet", {productCode: code});
+                $("#nombre").load("UsuarioServlet", {Code: code});
                 return false;
             }
             function getMaterial1() {

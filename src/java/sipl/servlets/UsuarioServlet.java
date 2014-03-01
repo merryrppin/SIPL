@@ -37,8 +37,8 @@ public class UsuarioServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Conexion con = new Conexion();
         usuarioDAO usuDAO = new usuarioDAO(con);
-        String productCode = request.getParameter("productCode");
-        Usuario usu = usuDAO.getUsuario(productCode);
+        String codigo = request.getParameter("Code");
+        Usuario usu = usuDAO.getUsuario(codigo);
         out.print(usu.getNombre() + " " + usu.getApellido());
     }
 

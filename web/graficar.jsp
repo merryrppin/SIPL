@@ -256,8 +256,10 @@
                                     } else {
                                         for (int i = 0; i < tipos.size(); i++) {
                                             if (T[i][1] > 0) {
+                                                Material mat = Gestor.getMaterial(T[i][0]);
+                                                Tipo_material tip = mat.getTipo_mat();
                                                 out.print("<tr>");
-                                                out.print("<td>" + T[i][0] + "</td>");
+                                                out.print("<td>" + tip.getNombre() + "</td>");
                                                 out.print("<td>" + T[i][1] + "</td>");
                                                 out.print("</tr>");
                                             }
@@ -275,7 +277,6 @@
                                         tamY[i][0] = u;
                                         u++;
                                     }
-
                                     for (int j = 0; j < dif; j++) {
                                         tamY[j][1] = 0;
                                     }
