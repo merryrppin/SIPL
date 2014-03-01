@@ -37,7 +37,8 @@ public class Graficar {
         }
     }
 
-    public void TipoMaterial(ArrayList<Tipo_material> TM, String direccion) throws IOException {
+    public boolean TipoMaterial(ArrayList<Tipo_material> TM, String direccion) throws IOException {
+        boolean flag=false;
         DefaultPieDataset data = new DefaultPieDataset();
         for (int i = 0; i < TM.size(); i++) {
             data.setValue("Cat." + TM.get(i).getId(), TM.get(i).getCantidad());
@@ -45,9 +46,11 @@ public class Graficar {
         JFreeChart chart = ChartFactory.createPieChart("Cantidad de materiales por categoría", data, true, true, true);
         try {
             ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+            flag=true;
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
         }
+        return flag;
     }
 
     public void Prestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
