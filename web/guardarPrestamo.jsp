@@ -19,7 +19,6 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
         String codigo = request.getParameter("codigo");
-        String dias = request.getParameter("dias");
         String mat1 = request.getParameter("mat1");
         String mat2 = request.getParameter("mat2");
         String mat3 = request.getParameter("mat3");
@@ -47,7 +46,7 @@
                     Calendar cal2 = Calendar.getInstance();
                     cal2.setTimeInMillis(i);
                     int dia = cal.get(Calendar.DAY_OF_MONTH);
-                    dia += Integer.parseInt(dias);
+                    dia += 3;
                     cal2.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), dia);
                     String materiales = "";
                     int disp = 0;

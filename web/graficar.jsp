@@ -254,13 +254,31 @@
                                         out.print("<td>No hay préstamos en ese rango de fecha</td>");
                                         out.print("</tr>");
                                     } else {
+                                        ArrayList<Tipo_material> tm = Gestor.getTiposM();
+                                        int TM [][]=new int [2][tm.size()];
+                                        for(int i=0; i<TM.length;i++){
+                                            TM[0][i]=tipos.get(i).getCodigo();
+                                            TM[1][i]=0;
+                                        }
+                                        for(int i=0; i<T.length;i++){
+                                            for(int j=0; j<tm.size();j++){
+                                                int c=0;
+                                                Material mat = Gestor.getMaterial(T[0][i]);
+                                                if(tm.get(i).getId()==mat.getTipo_mat().getId()){
+                                                    c=TM[1][j];
+                                                    c+=T[1][i];
+                                                    TM[1][j]=c;
+                                                    j=tm.size();
+                                                }
+                                            }
+                                        }
                                         for (int i = 0; i < tipos.size(); i++) {
-                                            if (T[i][1] > 0) {
-                                                Material mat = Gestor.getMaterial(T[i][0]);
+                                            if (TM[i][1] > 0) {
+                                                Material mat = Gestor.getMaterial(TM[i][0]);
                                                 Tipo_material tip = mat.getTipo_mat();
                                                 out.print("<tr>");
                                                 out.print("<td>" + tip.getNombre() + "</td>");
-                                                out.print("<td>" + T[i][1] + "</td>");
+                                                out.print("<td>" + TM[i][1] + "</td>");
                                                 out.print("</tr>");
                                             }
                                         }

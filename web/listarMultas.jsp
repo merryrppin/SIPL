@@ -62,7 +62,7 @@
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
-                                out.print("<td colspan='4' align='center'>No hay Multas</td>");
+                                out.print("<td colspan='7' align='center'>No hay Multas</td>");
                                 out.print("</tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
