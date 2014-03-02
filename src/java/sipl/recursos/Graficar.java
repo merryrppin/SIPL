@@ -61,7 +61,7 @@ public class Graficar {
             }
             JFreeChart chart = ChartFactory.createLineChart(titulo, tiempo, "Cantidad", dataset, PlotOrientation.VERTICAL, true, true, true);
             try {
-                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 700, 500);
             } catch (IOException e) {
                 System.out.println("Error al abrir el archivo");
             }

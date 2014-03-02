@@ -4,6 +4,7 @@
     Author     : WM
 --%>
 
+<%@page import="java.io.File"%>
 <%@page import="javax.script.ScriptEngine"%>
 <%@page import="javax.script.Invocable"%>
 <%@page import="javax.script.ScriptEngineManager"%>
@@ -70,7 +71,7 @@
                     ArrayList<Tipo_material> data = Gestor.getTiposM();
                     dir += "TipoMaterial.jpg";
                     Gestor.GraficarTipoMat(data, dir);
-                    response.sendRedirect("graficar.jsp?orden=TipoMaterial.jpg");
+                    response.sendRedirect("paginaCarga.jsp?orden=TipoMaterial.jpg");
                 } else if (a == 2) {
                     String titulo = "Préstamos entre el  ";
                     String fecha = request.getParameter("fecha");
@@ -83,7 +84,6 @@
                     ArrayList<Prestamo> data = Gestor.getPrestamosFecha(fe, fe2);
                     String rango = request.getParameter("rango");
                     if (rango.equals("Anho")) {
-                        // pendiente revisar que aún no funciona bien
                         int rest;
                         rest = Integer.parseInt(f2[2]) - Integer.parseInt(f[2]);
                         rest++;
@@ -107,7 +107,9 @@
                                 }
                             }
                         }
-                        Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
+                        File fichero = new File(dir+"PrestamoAnho.jpg");
+                        fichero.delete();
+                        //Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=PrestamoAnho.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
                     } else if (rango.equals("Mes")) {
                         dir += "PrestamosMes.jpg";
@@ -127,7 +129,8 @@
                             cant++;
                             values[t] = cant;
                         }
-                        response.sendRedirect("graficar.jsp?orden=PrestamosMes.jpg");
+                        Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosMes.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
                     } else if (rango.equals("Dia")) {
                         dir += "PrestamosDia.jpg";
                         int[] values = new int[31];
@@ -149,7 +152,7 @@
                             values[gj] = cant;
                         }
                         Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
-                        response.sendRedirect("graficar.jsp?orden=PrestamosDia.jpg");
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosDia.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
                     } else if (rango.equals("Hor")) {
                         dir += "PrestamosHora.jpg";
                         int[] values = new int[24];
@@ -167,7 +170,7 @@
                             values[t] = cant;
                         }
                         Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
-                        response.sendRedirect("graficar.jsp?orden=PrestamosHora.jpg");
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosHora.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
                     } else if (rango.equals("Min")) {
 
                     }
@@ -203,7 +206,7 @@
                 <table>
                     <tr>
                         <td>
-                            <img src="Grafica/<%out.print(orden);%>" alt="...">
+                            <img src="Grafica/<%out.print(o[0]);%>" alt="<%out.print(titulo);%>">
                         </td>
                         <td>
                             <table class="table table-striped">
@@ -243,7 +246,6 @@
                                     <td><b>Cantidad Material</b></td>
                                 </tr>
                                 <%
-                                    //La fecha enviada en o[2] y o [1] no son correctas hace falta el mes, dia, hora...
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
                                     ArrayList<Prestamo> prestamos = Gestor.getPrestamosFecha(f1, f2);
@@ -336,22 +338,97 @@
                                     }
                                 } else if (orden.equals("PrestamosMes.jpg")) {%>
                                 <tr>
-                                    <td><b>Fecha Préstamo</b></td>
                                     <td><b>Categoria Material</b></td>
                                     <td><b>Cantidad Material</b></td>
                                 </tr>
                                 <%
-                                    ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
-                                    if (Tipos.size() == 0) {
+                                    String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
+                                    String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    ArrayList<Prestamo> prestamos = Gestor.getPrestamosFecha(f1, f2);
+                                    ArrayList<Material> materiales = Gestor.getMateriales();
+                                    int T[][] = new int[materiales.size()][2];
+                                    for (int i = 0; i < materiales.size(); i++) {
+                                        T[i][0] = materiales.get(i).getCodigo();
+                                        T[i][1] = 0;
+                                    }
+                                    for (int i = 0; i < prestamos.size(); i++) {
+                                        String[] P = prestamos.get(i).getMat().split(";");
+                                        for (int j = 0; j < P.length; j++) {
+                                            for (int k = 0; k < materiales.size(); k++) {
+                                                int c = 0;
+                                                if (T[k][0] == Integer.parseInt(P[j])) {
+                                                    c = T[k][1];
+                                                    c++;
+                                                    T[k][1] = c;
+                                                    k = materiales.size();
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (prestamos.size() == 0) {
+                                        out.print("<tr>");
                                         out.print("<td>No hay préstamos en ese rango de fecha</td>");
+                                        out.print("</tr>");
                                     } else {
-                                        for (int i = 0; i < Tipos.size(); i++) {
+                                        ArrayList<Tipo_material> tm = Gestor.getTiposM();
+                                        int TM[][] = new int[tm.size()][2];
+                                        for (int i = 0; i < tm.size(); i++) {
+                                            TM[i][0] = tm.get(i).getId();
+                                            TM[i][1] = 0;
+                                        }
+                                        for (int i = 0; i < T.length; i++) {
+                                            int c = 0;
+                                            Material mat = Gestor.getMaterial(T[i][0]);
+                                            for (int j = 0; j < TM.length; j++) {
+                                                if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                                    c = TM[j][1];
+                                                    c += T[i][1];
+                                                    TM[j][1] = c;
+                                                    j = tm.size();
+                                                }
+                                            }
+                                        }
+                                        for (int i = 0; i < TM.length; i++) {
+                                            if (TM[i][1] > 0) {
+                                                Tipo_material tip = Gestor.getTipoM(TM[i][0]);
+                                                out.print("<tr>");
+                                                out.print("<td>" + tip.getNombre() + "</td>");
+                                                out.print("<td>" + TM[i][1] + "</td>");
+                                                out.print("</tr>");
+                                            }
+                                        }
+                                    }%>
+                                <tr>
+                                    <td><b>Año</b></td>
+                                    <td><b>Cantidad Préstamos</b></td>
+                                </tr>
+                                <%
+                                    int dif = Integer.parseInt(o[1]) - Integer.parseInt(o[4]);
+                                    dif++;
+                                    int tamY[][] = new int[dif][2];
+                                    int u = Integer.parseInt(o[4]);
+                                    for (int i = 0; i < dif; i++) {
+                                        tamY[i][0] = u;
+                                        u++;
+                                    }
+                                    for (int j = 0; j < dif; j++) {
+                                        tamY[j][1] = 0;
+                                    }
+                                    for (int k = 0; k < prestamos.size(); k++) {
+                                        int t = prestamos.get(k).getFecha_prestamo().get(Calendar.YEAR);
+                                        for (int l = 0; l < dif; l++) {
+                                            if (tamY[l][0] == t) {
+                                                int cant = tamY[l][1];
+                                                cant++;
+                                                tamY[l][1] = cant;
+                                            }
+                                        }
+                                    }
+                                    for (int i = 0; i < dif; i++) {
+                                        if (tamY[i][1] > 0) {
                                             out.print("<tr>");
-                                            out.print("<td>" + Tipos.get(i).getId() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                            out.print("<td>" + tamY[i][0] + "</td>");
+                                            out.print("<td>" + tamY[i][1] + "</td>");
                                             out.print("</tr>");
                                         }
                                     }

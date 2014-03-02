@@ -17,9 +17,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style>
-            html,body{ background: #e0e0e0; }   
-        </style>
         <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue2.css" />
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script src="jquery/jquery-1.10.2.min.js"></script>
@@ -46,9 +43,17 @@
                 document.getElementById('btnNext').style.visibility = "hidden";
             }
         </script>
-        <title>JSP Page</title>
+        <title>Página de Carga</title>
     </head>
     <body onload="ocultar();">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+          html,body{ background: #e0e0e0; }   
+               </style>
+                <h1>Página de Carga</h1>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-3" align="center">
             </div>
