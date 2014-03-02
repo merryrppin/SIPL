@@ -55,7 +55,7 @@
                         <tr>
                             <%
                                 if (a == 2 && user.getTipo_usuario() == 2) {
-                                    out.print("<td></td>");
+                                    
                                 }
                             %>
                             <td><b></b></td>

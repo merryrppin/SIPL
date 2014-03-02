@@ -55,13 +55,11 @@
                 <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center" class="table table-hover">
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 <input hidden type="text" name="codigo" id="codigo" value="<%out.print(id);%>">
-                            </td>
-                            <td>
                                 <label class="control-label" for="tipo">Tipo de Elemento</label>
                             </td>
-                            <td>
+                            <td colspan="2">
                                 <%
                                     ArrayList<Tipo_material> data = Gestor.getTiposM();
                                 %>
