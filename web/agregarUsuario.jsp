@@ -74,7 +74,7 @@
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <td>
-                                <input type="text" id="codigo" name="codigo">
+                                <input maxlength="20" type="text" id="codigo" name="codigo">
                             </td>
                             <td>
                                 <label class="control-label" for="tipo">Tipo de Usuario</label>

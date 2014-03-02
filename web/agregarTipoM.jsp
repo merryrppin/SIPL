@@ -88,7 +88,7 @@
                                 <label class="control-label" for="descripcion">Descripción</label>
                             </td>
                             <td colspan="3">
-                                <textarea maxlength="150" id="descripcion" name="descripcion" style='width:500px;'></textarea>
+                                <textarea maxlength="250" id="descripcion" name="descripcion" style='width:500px;'></textarea>
                             </td>
                         </tr>
                         <tr>
