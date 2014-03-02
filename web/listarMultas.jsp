@@ -25,6 +25,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            html,body{ background: #e0e0e0; }   
+        </style>
         <title>Listar Multas</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -34,9 +37,6 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
                 <h1>Listar Multas</h1>
             </div>
         </div>
@@ -45,20 +45,20 @@
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
                 <form action="DarbajaMulta.jsp" method="POST">
-                <table class="table table-striped" align="center">
-                    <tr>
-                        <%
-                            if (a == 2) {
-                                out.print("<td></td>");
-                            }
-                        %>
-                        <td><b>Código Usuario</b></td>
-                        <td><b>Nombre Usuario</b></td>
-                        <td><b>Apellido Usuario</b></td>
-                        <td><b>Fecha Multa</b></td>
-                        <td><b>Estado Multa</b></td>
-                        <td><b>Tiempo Multa</b></td>
-                    </tr>
+                    <table class="table table-striped" align="center">
+                        <tr>
+                            <%
+                                if (a == 2) {
+                                    out.print("<td></td>");
+                                }
+                            %>
+                            <td><b>Código Usuario</b></td>
+                            <td><b>Nombre Usuario</b></td>
+                            <td><b>Apellido Usuario</b></td>
+                            <td><b>Fecha Multa</b></td>
+                            <td><b>Estado Multa</b></td>
+                            <td><b>Tiempo Multa</b></td>
+                        </tr>
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
@@ -95,18 +95,18 @@
                                 }
                             }
                         %>
-                    <tr>
-                        <td colspan="6" align="center">
-                            <%
-                            if(a==2){%>
+                        <tr>
+                            <td colspan="6" align="center">
+                                <%
+                                if (a == 2) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
-                            <%}
-                            %>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                        </td>
-                    </tr>
-                </table>
-                    </form>
+                                <%}
+                                %>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
             <div class="col-xs-6 col-sm-1"></div>
         </div>

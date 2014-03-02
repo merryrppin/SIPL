@@ -108,7 +108,7 @@
                             }
                         }
                         Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
-                        response.sendRedirect("graficar.jsp?orden=PrestamoAnho.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamoAnho.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
                     } else if (rango.equals("Mes")) {
                         dir += "PrestamosMes.jpg";
                         int[] values = new int[12];
@@ -171,7 +171,7 @@
                     } else if (rango.equals("Min")) {
 
                     }
-        } else {%>
+                } else {%>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
