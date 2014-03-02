@@ -4,6 +4,9 @@
     Author     : WM
 --%>
 
+<%@page import="javax.script.ScriptEngine"%>
+<%@page import="javax.script.Invocable"%>
+<%@page import="javax.script.ScriptEngineManager"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -124,7 +127,6 @@
                             cant++;
                             values[t] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Meses", titulo);
                         response.sendRedirect("graficar.jsp?orden=PrestamosMes.jpg");
                     } else if (rango.equals("Dia")) {
                         dir += "PrestamosDia.jpg";
@@ -169,23 +171,7 @@
                     } else if (rango.equals("Min")) {
 
                     }
-        %>
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-3" align="center">
-
-            </div>
-            <div class="col-xs-12 col-sm-6" align="center">
-                <div class="progress">
-                    <div class="progress-bar" style="float: left; width: 0%; " data-percentage="100"></div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-3" align="center">
-
-            </div>
-        </div>
-        <%
-    } else {%>
+        } else {%>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
