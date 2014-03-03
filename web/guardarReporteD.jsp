@@ -56,8 +56,20 @@
                         error = "error_fecha";
                     }
                     if (codigo_material != null && codigo_material.length() > 0) {
-
-                        Danho dan = new Danho(Integer.parseInt(codigo), descripcion, Gestor.getMaterial(Integer.parseInt(codigo_material)), Gestor.getUsuario(codigo_usuario), cal, user, Integer.parseInt(estado));
+                        Material mat = Gestor.getMaterial(Integer.parseInt(codigo_material));
+                        int e=0;
+                        if(Integer.parseInt(estado)==0){
+                            e=2;
+                        }else if(Integer.parseInt(estado)==1){
+                            e=3;
+                        }else{
+                            e=1;
+                        }
+                        mat.setEstado(e);
+                        Gestor.updateMaterial(mat);
+                        Danho dan = new Danho(Integer.parseInt(codigo), descripcion, 
+                                Gestor.getMaterial(Integer.parseInt(codigo_material)), 
+                                Gestor.getUsuario(codigo_usuario), cal, user, Integer.parseInt(estado));
                         if (Gestor.addDanho(dan) == true) {
                             response.sendRedirect("listarReporteD.jsp?accion=1");
                         } else {

@@ -40,11 +40,11 @@
                     return false;
                 }
             }
-            function getUsuario(){
-                //alert('Cambio');
-                var code=$("#codigo").val(); //.. y se obtiene el valor
-                //llama al servlet con el parametro seleccionado
-                $("#nombre").load("UsuarioServlet", {productCode:code})
+            function getDatos() {
+                var code = $("#codigo").val();
+                $("#nombre").load("UsuarioServlet", {Code: code});
+                $("#materiales").load("MaterialesPrestamoServlet", {Code: code});
+                $("#fechaPrestamo").load("FechaPrestamoServlet", {Code: code});
                 return false;
             }
         </script>
@@ -89,7 +89,7 @@
                                 }
                             %>
                             <td>
-                                <input type="text" id="codigo" name="codigo" onchange="return getUsuario();"
+                                <input type="text" id="codigo" name="codigo" onchange="return getDatos();"
                                        <%if (cod.length() > 0 && cod != null) {
                                                out.print("value='" + cod + "'");
                                            }%>
@@ -98,14 +98,8 @@
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
-                            <td >
-                                <input disabled>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <label class="control-label">Laboratorio</label>
-                                <input disabled>
+                            <td id="nombre">
+
                             </td>
                         </tr>
                         <tr>
@@ -114,18 +108,12 @@
                                     <thead>
                                         <tr>
                                             <th>Código elemento</th>
-                                            <th>Nombre elemento</th>
-                                            <th>Cantidad</th>
+                                            <th>Tipo elemento</th>
                                             <th>Descripcion</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                    <tbody id="materiales">
+                                        
                                     </tbody>
                                 </table>
                             </td>
@@ -134,8 +122,8 @@
                             <td>
                                 <label class="control-label"> Fecha de préstamo</label>
                             </td>
-                            <td colspan="2">
-                                <input disabled>
+                            <td id="fechaPrestamo" colspan="2">
+                                
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-success" style='width:150px;'>Finalizar Préstamo</button>

@@ -8,6 +8,14 @@
         <servlet-name>UsuarioServlet</servlet-name>
         <servlet-class>sipl.servlets.UsuarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MaterialesPrestamoServlet</servlet-name>
+        <servlet-class>sipl.servlets.MaterialesPrestamoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FechaPrestamoServlet</servlet-name>
+        <servlet-class>sipl.servlets.FechaPrestamoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MaterialServlet</servlet-name>
         <url-pattern>/MaterialServlet</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/UsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaterialesPrestamoServlet</servlet-name>
+        <url-pattern>/MaterialesPrestamoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FechaPrestamoServlet</servlet-name>
+        <url-pattern>/FechaPrestamoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

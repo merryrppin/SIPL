@@ -237,16 +237,53 @@
                     long time2 = cal2.getTimeInMillis();
                     long dias3 = 259200000;
                     time1 -= dias3;
+                    int m = 0;
                     if (time1 > time2) {
                         usu.setEstado(4);
                         Multa mul = new Multa(0, usu, cal, 0, 3);
                         Gestor.addMulta(mul);
+                        m++;
                     }
                     pre.setEstado(1);
                     pre.setFecha_devolucion(cal);
                     Gestor.updateUsuario(usu);
                     Gestor.updatePrestamo(pre);
-                    response.sendRedirect("listarPrestamos.jsp");
+                    if (m > 0) {%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title></title>
+        <script src="jquery/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#myModal").modal('show');
+            });
+        </script>
+    </head>
+    <body>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Multa</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>El usuario no ha devuelto los materiales a tiempo</p>
+                        <p class="text-warning"><small>Se ha generado una multa</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'listarPrestamos.jsp'" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>  
+<%}
                 } else {
                     error = "prestamo_null";
                 }
@@ -261,4 +298,3 @@
         response.sendRedirect("principal.jsp?" + error);
     }
 %>
-

@@ -41,7 +41,6 @@
         String c1 = a1.substring(a1.length() - 1, a1.length());
         String A = a1.substring(0, a1.length() - 1);
         String dir = A + b1 + c1 + codigo;
-
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {

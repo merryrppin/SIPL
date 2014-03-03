@@ -277,7 +277,7 @@
                         </tr>
                         <tr>
                              <td colspan="4" align="center">
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'generarQR.jsp'" style='width:150px;'>Generar Código QR</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'generarQR.jsp?codigo=<%out.print(mat.getCodigo());%>'" style='width:150px;'>Generar Código QR</button>
                             </td>
                         </tr>
                         <tr>

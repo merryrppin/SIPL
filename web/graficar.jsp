@@ -107,9 +107,7 @@
                                 }
                             }
                         }
-                        File fichero = new File(dir+"PrestamoAnho.jpg");
-                        fichero.delete();
-                        //Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
+                        Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=PrestamoAnho.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
                     } else if (rango.equals("Mes")) {
                         dir += "PrestamosMes.jpg";

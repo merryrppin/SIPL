@@ -52,10 +52,9 @@ public class prestamoDAO {
         return data;
     }
 
-    
     public Prestamo getPrestamoCodUsu(String codigo) {
         Prestamo pre = null;
-        ResultSet rs = con.getQuery("select * from prestamo where cod_usuario='" + codigo+"' and estado=0");
+        ResultSet rs = con.getQuery("select * from prestamo where cod_usuario='" + codigo + "' and estado=0");
         try {
             if (rs.next()) {
                 int cod = rs.getInt("codigo");
@@ -76,7 +75,7 @@ public class prestamoDAO {
         }
         return pre;
     }
-    
+
     public Prestamo getPrestamo(int codigo) {
         Prestamo pre = null;
         ResultSet rs = con.getQuery("select * from prestamo where codigo=" + codigo);
@@ -107,7 +106,7 @@ public class prestamoDAO {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal3 = sdf1.format(pre.getFecha_devolucion().getTime());
         String sql = "insert into prestamo (cod_material, cod_usuario, fecha_prestamo, fecha_devolucion, estado) values ('"
-                + pre.getMat() + "','" + pre.getUsu().getCodigo() + "','" + cal2 + "','" + cal3 + "',"+pre.getEstado()+")";
+                + pre.getMat() + "','" + pre.getUsu().getCodigo() + "','" + cal2 + "','" + cal3 + "'," + pre.getEstado() + ")";
         int registros = con.setQuery(sql);
         if (registros == 1) {
             result = true;
@@ -122,17 +121,17 @@ public class prestamoDAO {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal3 = sdf1.format(pre.getFecha_devolucion().getTime());
         String sql = "update prestamo set cod_material='" + pre.getMat() + "',cod_usuario='" + pre.getUsu().getCodigo() + "',"
-                + " fecha_prestamo='" + cal2 + "', fecha_devolucion='" + cal3 + "',estado="+pre.getEstado()+" where codigo=" + pre.getCodigo();
+                + " fecha_prestamo='" + cal2 + "', fecha_devolucion='" + cal3 + "',estado=" + pre.getEstado() + " where codigo=" + pre.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
         }
         return result;
     }
-    
-     public ArrayList<Prestamo> getRangoFecha_prestamo(String fecha1, String fecha2) {
+
+    public ArrayList<Prestamo> getRangoFecha_prestamo(String fecha1, String fecha2) {
         ArrayList<Prestamo> data = new ArrayList<>();
-        ResultSet rs = con.getQuery("select * from prestamo where fecha_prestamo between '"+fecha1+"' and '"+fecha2+"'");
+        ResultSet rs = con.getQuery("select * from prestamo where fecha_prestamo between '" + fecha1 + "' and '" + fecha2 + "'");
         try {
             while (rs.next()) {
                 int codigo = rs.getInt("codigo");
@@ -145,7 +144,7 @@ public class prestamoDAO {
                 Timestamp t2 = rs.getTimestamp("fecha_devolucion");
                 cal1.setTimeInMillis(t2.getTime());
                 int est = rs.getInt("estado");
-                Prestamo pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1,est);
+                Prestamo pre = new Prestamo(codigo, mat, usuDAO.getUsuario(usu), cal, cal1, est);
                 data.add(pre);
             }
             rs.close();
