@@ -28,7 +28,7 @@ public class Gestor {
     QRCode qrC = new QRCode();
     Graficar gra = new Graficar();
     GenerarBackupMySQL gen = new GenerarBackupMySQL();
-    RestoreMySQL res= new RestoreMySQL();
+    RestoreMySQL res = new RestoreMySQL();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -41,118 +41,159 @@ public class Gestor {
         mulDAO = new multaDAO(con);
         varDAO = new variableSisDAO(con);
     }
+
     public Usuario validarLogin(String login, String clave) {
         return usuDAO.getLogin(login, clave);
     }
+
     public String encriptar(String palabra) {
         return enc.encriptarMD5(palabra);
     }
+
     public void generarQR(String data, String direccion) {
         qrC.QRmini(data, direccion);
         qrC.QRMedium(data, direccion);
         qrC.QRsmall(data, direccion);
     }
+
     public boolean addUsuario(Usuario usu) {
         return usuDAO.addUsuario(usu);
     }
+
     public ArrayList<Material> getMateriales() {
         return matDAO.getMateriales();
     }
+
     public ArrayList<Tipo_material> getTiposM() {
         return tipDAO.getTipo_material();
     }
+
     public ArrayList<Laboratorio> getLaboratorios() {
         return labDAO.getLaboratorios();
     }
+
     public Material getMaterial(int codigo) {
         return matDAO.getMaterial(codigo);
     }
+
     public Laboratorio getLaboratorio(int codigo) {
         return labDAO.getLaboratorio(codigo);
     }
+
     public boolean updateLaboratorio(Laboratorio lab) {
         return labDAO.updateLaboratorio(lab);
     }
+
     public Tipo_material getTipoM(int codigo) {
         return tipDAO.getTipo_material(codigo);
     }
+
     public boolean addMaterial(Material mat) {
         return matDAO.addMaterial(mat);
     }
+
     public ArrayList<Usuario> getUsuarios() {
         return usuDAO.getUsuarios();
     }
+
     public ArrayList<Danho> getDanhos() {
         return danDAO.getDanhos();
     }
+
     public Danho getDanho(int codigo) {
         return danDAO.getDanho(codigo);
     }
-    public Usuario getUsuario(String codigo){
+
+    public Usuario getUsuario(String codigo) {
         return usuDAO.getUsuario(codigo);
     }
-    public boolean updateDanho(Danho dan){
+
+    public boolean updateDanho(Danho dan) {
         return danDAO.updateDanho(dan);
     }
-    public boolean addDanho(Danho dan){
+
+    public boolean addDanho(Danho dan) {
         return danDAO.addDanho(dan);
     }
-    public boolean updateMaterial(Material mat){
+
+    public boolean updateMaterial(Material mat) {
         return matDAO.updateMaterial(mat);
     }
-    public boolean addTipoMaterial(Tipo_material tip){
+
+    public boolean addTipoMaterial(Tipo_material tip) {
         return tipDAO.addTipo_material(tip);
     }
-    public boolean updateTipoMat(Tipo_material tip){
+
+    public boolean updateTipoMat(Tipo_material tip) {
         return tipDAO.updateTipo_material(tip);
     }
-    public boolean updateUsuario(Usuario usu){
+
+    public boolean updateUsuario(Usuario usu) {
         return usuDAO.updateUsuario(usu);
     }
-    public boolean addPrestamo(Prestamo pre){
+
+    public boolean addPrestamo(Prestamo pre) {
         return preDAO.addPrestamo(pre);
     }
-    public boolean GraficarTipoMat(ArrayList<Tipo_material> data, String direccion) throws IOException{
+
+    public boolean GraficarTipoMat(ArrayList<Tipo_material> data, String direccion) throws IOException {
         return gra.TipoMaterial(data, direccion);
     }
+
     public ArrayList<Prestamo> getPrestamos() {
         return preDAO.getprestamos();
     }
-    public ArrayList<Prestamo> getPrestamosFecha(String fecha1, String fecha2){
+
+    public ArrayList<Prestamo> getPrestamosFecha(String fecha1, String fecha2) {
         return preDAO.getRangoFecha_prestamo(fecha1, fecha2);
     }
+
     public ArrayList<Multa> getMultas() {
         return mulDAO.getMultas();
     }
-    public void GraficarPrestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo){
+
+    public void GraficarPrestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
         gra.Prestamos(values, fecha, n, direccion, tiempo, titulo);
     }
-    public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo){
+
+    public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
         //gra.PrestamosY_Barra(values, n, direccion, tiempo, titulo);
     }
-    public Prestamo getPrestamoCodUsu(String codigo){
+
+    public Prestamo getPrestamoCodUsu(String codigo) {
         return preDAO.getPrestamoCodUsu(codigo);
     }
-    public boolean updatePrestamo(Prestamo pre){
+
+    public boolean updatePrestamo(Prestamo pre) {
         return preDAO.updatePrestamo(pre);
     }
-    public boolean addMulta(Multa mul){
+
+    public boolean addMulta(Multa mul) {
         return mulDAO.addMulta(mul);
     }
+
     public Multa getMulta(int codigo) {
         return mulDAO.getMulta(codigo);
     }
-    public boolean updateMulta(Multa mul){
+
+    public boolean updateMulta(Multa mul) {
         return mulDAO.updateMulta(mul);
     }
-    public String GenerarBackup(String direccion){
+
+    public String GenerarBackup(String direccion) {
         return gen.GenerarBackupMySQL(direccion);
     }
-    public String RestoreMysql(String direccion) throws InterruptedException{
+
+    public String RestoreMysql(String direccion) throws InterruptedException {
         return res.Restore(direccion);
     }
-    public VariableSis getVariable(int id){
+
+    public VariableSis getVariable(int id) {
         return varDAO.getTipo_variable(id);
+    }
+
+    public void updateFoto(String data) {
+
     }
 }

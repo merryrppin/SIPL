@@ -16,6 +16,10 @@
         <servlet-name>FechaPrestamoServlet</servlet-name>
         <servlet-class>sipl.servlets.FechaPrestamoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <servlet-class>sipl.servlets.FileUploadServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MaterialServlet</servlet-name>
         <url-pattern>/MaterialServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>FechaPrestamoServlet</servlet-name>
         <url-pattern>/FechaPrestamoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileUploadServlet</servlet-name>
+        <url-pattern>/FileUploadServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

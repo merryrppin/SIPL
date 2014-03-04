@@ -69,9 +69,13 @@
                 String dir = A + b1 + c1;
                 if (a == 1) {
                     ArrayList<Tipo_material> data = Gestor.getTiposM();
-                    dir += "TipoMaterial.jpg";
+                    Calendar cal = Calendar.getInstance();
+                    String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
+                            + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
+                            + cal.get(Calendar.SECOND));
+                    dir += nom + ".jpg";
                     Gestor.GraficarTipoMat(data, dir);
-                    response.sendRedirect("paginaCarga.jsp?orden=TipoMaterial.jpg");
+                    response.sendRedirect("paginaCarga.jsp?orden=TipoMaterial;;;;;;;" + nom + ".jpg");
                 } else if (a == 2) {
                     String titulo = "Préstamos entre el  ";
                     String fecha = request.getParameter("fecha");
@@ -87,7 +91,11 @@
                         int rest;
                         rest = Integer.parseInt(f2[2]) - Integer.parseInt(f[2]);
                         rest++;
-                        dir += "PrestamoAnho.jpg";
+                        Calendar cal = Calendar.getInstance();
+                        String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
+                                + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
+                                + cal.get(Calendar.SECOND));
+                        dir += nom + "Y.jpg";
                         int[][] y = new int[rest][2];
                         int y1 = Integer.parseInt(f[2]);
                         for (int i = 0; i < rest; i++) {
@@ -108,9 +116,8 @@
                             }
                         }
                         Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
-                        response.sendRedirect("paginaCarga.jsp?orden=PrestamoAnho.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamoAnho;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "Y.jpg");
                     } else if (rango.equals("Mes")) {
-                        dir += "PrestamosMes.jpg";
                         int[] values = new int[12];
                         int[] tiempo = new int[12];
                         for (int i = 0; i < 12; i++) {
@@ -127,10 +134,17 @@
                             cant++;
                             values[t] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
-                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosMes.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
+                        Calendar cal = Calendar.getInstance();
+                        String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
+                                + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
+                                + cal.get(Calendar.SECOND));
+                        dir += nom + "M.jpg";
+                        Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Mes", titulo);
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosMes;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "M.jpg");
                     } else if (rango.equals("Dia")) {
-                        dir += "PrestamosDia.jpg";
+                        String nom = f[2] + "" + f[1] + "" + f[0] + "" + f2[2] + "" + f2[1] + "" + f2[0];
+                        nom.replace(" ", "");
+                        dir += nom + "D.jpg";
                         int[] values = new int[31];
                         int[] tiempo = new int[31];
                         for (int i = 0; i < 31; i++) {
@@ -150,9 +164,13 @@
                             values[gj] = cant;
                         }
                         Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
-                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosDia.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosDia;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "D.jpg");
                     } else if (rango.equals("Hor")) {
-                        dir += "PrestamosHora.jpg";
+                        Calendar cal = Calendar.getInstance();
+                        String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
+                                + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
+                                + cal.get(Calendar.SECOND));
+                        dir += nom + "H.jpg";
                         int[] values = new int[24];
                         int[] tiempo = new int[24];
                         for (int i = 0; i < 24; i++) {
@@ -168,7 +186,7 @@
                             values[t] = cant;
                         }
                         Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
-                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosHora.jpg;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0]);
+                        response.sendRedirect("paginaCarga.jsp?orden=PrestamosHora;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "H.jpg");
                     } else if (rango.equals("Min")) {
 
                     }
@@ -182,15 +200,15 @@
                 <%
                     String titulo = "";
                     String[] o = orden.split(";");
-                    if (o[0].equals("TipoMaterial.jpg")) {
+                    if (o[0].equals("TipoMaterial")) {
                         titulo = "Reporte de Cantidad de Materiales por Categoría";
-                    } else if (o[0].equals("PrestamoAnho.jpg")) {
+                    } else if (o[0].equals("PrestamoAnho")) {
                         titulo = "Reporte de Préstamos por año";
-                    } else if (o[0].equals("PrestamosMes.jpg")) {
+                    } else if (o[0].equals("PrestamosMes")) {
                         titulo = "Reporte de Préstamos por mes";
-                    } else if (o[0].equals("PrestamosDia.jpg")) {
+                    } else if (o[0].equals("PrestamosDia")) {
                         titulo = "Reporte de Préstamos por día";
-                    } else if (o[0].equals("PrestamosHora.jpg")) {
+                    } else if (o[0].equals("PrestamosHora")) {
                         titulo = "Reporte de Préstamos por Hora";
                     }
                 %>
@@ -204,12 +222,12 @@
                 <table>
                     <tr>
                         <td>
-                            <img src="Grafica/<%out.print(o[0]);%>" alt="<%out.print(titulo);%>">
+                            <img src="Grafica/<%out.print(o[7]);%>" alt="<%out.print(titulo);%>">
                         </td>
                         <td>
                             <table class="table table-striped">
                                 <%
-                                    if (o[0].equals("TipoMaterial.jpg")) {%>
+                                    if (o[0].equals("TipoMaterial")) {%>
                                 <tr>
                                     <td><b>Cat.</b></td>
                                     <td><b>Nombre</b></td>
@@ -238,7 +256,7 @@
                                         out.print("<tr><td><td><td><b>Total Materiales</b><td><b>" + cont + "</b></td></td></td></td></tr>");
                                     }
 
-                                } else if (o[0].equals("PrestamoAnho.jpg")) {%>
+                                } else if (o[0].equals("PrestamoAnho")) {%>
                                 <tr>
                                     <td><b>Categoria Material</b></td>
                                     <td><b>Cantidad Material</b></td>
@@ -334,7 +352,7 @@
                                             out.print("</tr>");
                                         }
                                     }
-                                } else if (orden.equals("PrestamosMes.jpg")) {%>
+                                } else if (orden.equals("PrestamosMes")) {%>
                                 <tr>
                                     <td><b>Categoria Material</b></td>
                                     <td><b>Cantidad Material</b></td>
@@ -430,7 +448,7 @@
                                             out.print("</tr>");
                                         }
                                     }
-                                } else if (orden.equals("PrestamosDia.jpg")) {%>
+                                } else if (orden.equals("PrestamosDia")) {%>
                                 <tr>
                                     <td><b>Fecha Préstamo</b></td>
                                     <td><b>Categoria Material</b></td>
@@ -451,7 +469,7 @@
                                             out.print("</tr>");
                                         }
                                     }
-                                } else if (orden.equals("PrestamosHora.jpg")) {%>
+                                } else if (orden.equals("PrestamosHora")) {%>
                                 <tr>
                                     <td><b>Fecha Préstamo</b></td>
                                     <td><b>Categoria Material</b></td>

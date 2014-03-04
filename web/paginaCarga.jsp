@@ -49,8 +49,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Página de Carga</h1>
             </div>
         </div>
