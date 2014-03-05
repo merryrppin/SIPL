@@ -255,7 +255,7 @@
                                             out.print("</tr>");
                                             cont += Tipos.get(i).getCantidad();
                                         }
-                                        out.print("<tr><td><td><td><b>Total Materiales</b><td><b>" + cont + "</b></td></td></td></td></tr>");
+                                        out.print("<tr><td><td><td><b>Total Materiales</b><td><b>" + cont + "</b></td></td></td></td><td></td></tr>");
                                     }
 
                                 } else if (o[0].equals("PrestamoAnho")) {%>
@@ -449,43 +449,185 @@
                                     }
                                 } else if (o[0].equals("PrestamosDia")) {%>
                                 <tr>
-                                    <td><b>Fecha Préstamo</b></td>
                                     <td><b>Categoria Material</b></td>
                                     <td><b>Cantidad Material</b></td>
                                 </tr>
                                 <%
-                                    ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
-                                    if (Tipos.size() == 0) {
+                                    String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
+                                    String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    ArrayList<Prestamo> prestamos = Gestor.getPrestamosFecha(f1, f2);
+                                    ArrayList<Material> materiales = Gestor.getMateriales();
+                                    int T[][] = new int[materiales.size()][2];
+                                    for (int i = 0; i < materiales.size(); i++) {
+                                        T[i][0] = materiales.get(i).getCodigo();
+                                        T[i][1] = 0;
+                                    }
+                                    for (int i = 0; i < prestamos.size(); i++) {
+                                        String[] P = prestamos.get(i).getMat().split(";");
+                                        for (int j = 0; j < P.length; j++) {
+                                            for (int k = 0; k < materiales.size(); k++) {
+                                                int c = 0;
+                                                if (T[k][0] == Integer.parseInt(P[j])) {
+                                                    c = T[k][1];
+                                                    c++;
+                                                    T[k][1] = c;
+                                                    k = materiales.size();
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (prestamos.size() == 0) {
+                                        out.print("<tr>");
                                         out.print("<td>No hay préstamos en ese rango de fecha</td>");
+                                        out.print("</tr>");
                                     } else {
-                                        for (int i = 0; i < Tipos.size(); i++) {
+                                        ArrayList<Tipo_material> tm = Gestor.getTiposM();
+                                        int TM[][] = new int[tm.size()][2];
+                                        for (int i = 0; i < tm.size(); i++) {
+                                            TM[i][0] = tm.get(i).getId();
+                                            TM[i][1] = 0;
+                                        }
+                                        for (int i = 0; i < T.length; i++) {
+                                            int c = 0;
+                                            Material mat = Gestor.getMaterial(T[i][0]);
+                                            for (int j = 0; j < TM.length; j++) {
+                                                if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                                    c = TM[j][1];
+                                                    c += T[i][1];
+                                                    TM[j][1] = c;
+                                                    j = tm.size();
+                                                }
+                                            }
+                                        }
+                                        for (int i = 0; i < TM.length; i++) {
+                                            if (TM[i][1] > 0) {
+                                                Tipo_material tip = Gestor.getTipoM(TM[i][0]);
+                                                out.print("<tr>");
+                                                out.print("<td>" + tip.getNombre() + "</td>");
+                                                out.print("<td>" + TM[i][1] + "</td>");
+                                                out.print("</tr>");
+                                            }
+                                        }
+                                    }%>
+                                <tr>
+                                    <td><b>Día del mes</b></td>
+                                    <td><b>Cantidad Préstamos</b></td>
+                                </tr>
+                                <%
+                                    int tamY[][] = new int[32][2];
+                                    for (int i = 0; i < 32; i++) {
+                                        tamY[i][0] = i;
+                                    }
+                                    for (int j = 0; j < 32; j++) {
+                                        tamY[j][1] = 0;
+                                    }
+                                    for (int k = 0; k < prestamos.size(); k++) {
+                                        int t = prestamos.get(k).getFecha_prestamo().get(Calendar.DAY_OF_MONTH);
+                                        for (int l = 0; l < 32; l++) {
+                                            if (tamY[l][0] == t) {
+                                                int cant = tamY[l][1];
+                                                cant++;
+                                                tamY[l][1] = cant;
+                                            }
+                                        }
+                                    }
+                                    for (int i = 0; i < 32; i++) {
+                                        if (tamY[i][1] > 0) {
                                             out.print("<tr>");
-                                            out.print("<td>" + Tipos.get(i).getId() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
-                                            out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                            out.print("<td>" + i + "</td>");
+                                            out.print("<td>" + tamY[i][1] + "</td>");
                                             out.print("</tr>");
                                         }
                                     }
                                 } else if (o[0].equals("PrestamosHora")) {%>
                                 <tr>
-                                    <td><b>Fecha Préstamo</b></td>
                                     <td><b>Categoria Material</b></td>
                                     <td><b>Cantidad Material</b></td>
                                 </tr>
                                 <%
-                                        ArrayList<Tipo_material> Tipos = Gestor.getTiposM();
-                                        if (Tipos.size() == 0) {
-                                            out.print("<td>No hay préstamos en ese rango de fecha</td>");
-                                        } else {
-                                            for (int i = 0; i < Tipos.size(); i++) {
+                                    String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
+                                    String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    ArrayList<Prestamo> prestamos = Gestor.getPrestamosFecha(f1, f2);
+                                    ArrayList<Material> materiales = Gestor.getMateriales();
+                                    int T[][] = new int[materiales.size()][2];
+                                    for (int i = 0; i < materiales.size(); i++) {
+                                        T[i][0] = materiales.get(i).getCodigo();
+                                        T[i][1] = 0;
+                                    }
+                                    for (int i = 0; i < prestamos.size(); i++) {
+                                        String[] P = prestamos.get(i).getMat().split(";");
+                                        for (int j = 0; j < P.length; j++) {
+                                            for (int k = 0; k < materiales.size(); k++) {
+                                                int c = 0;
+                                                if (T[k][0] == Integer.parseInt(P[j])) {
+                                                    c = T[k][1];
+                                                    c++;
+                                                    T[k][1] = c;
+                                                    k = materiales.size();
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (prestamos.size() == 0) {
+                                        out.print("<tr>");
+                                        out.print("<td>No hay préstamos en ese rango de fecha</td>");
+                                        out.print("</tr>");
+                                    } else {
+                                        ArrayList<Tipo_material> tm = Gestor.getTiposM();
+                                        int TM[][] = new int[tm.size()][2];
+                                        for (int i = 0; i < tm.size(); i++) {
+                                            TM[i][0] = tm.get(i).getId();
+                                            TM[i][1] = 0;
+                                        }
+                                        for (int i = 0; i < T.length; i++) {
+                                            int c = 0;
+                                            Material mat = Gestor.getMaterial(T[i][0]);
+                                            for (int j = 0; j < TM.length; j++) {
+                                                if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                                    c = TM[j][1];
+                                                    c += T[i][1];
+                                                    TM[j][1] = c;
+                                                    j = tm.size();
+                                                }
+                                            }
+                                        }
+                                        for (int i = 0; i < TM.length; i++) {
+                                            if (TM[i][1] > 0) {
+                                                Tipo_material tip = Gestor.getTipoM(TM[i][0]);
                                                 out.print("<tr>");
-                                                out.print("<td>" + Tipos.get(i).getId() + "</td>");
-                                                out.print("<td>" + Tipos.get(i).getNombre() + "</td>");
-                                                out.print("<td>" + Tipos.get(i).getDescripcion() + "</td>");
-                                                out.print("<td>" + Tipos.get(i).getCantidad() + "</td>");
-                                                out.print("<td>" + Tipos.get(i).getDisponibilidad() + "</td>");
+                                                out.print("<td>" + tip.getNombre() + "</td>");
+                                                out.print("<td>" + TM[i][1] + "</td>");
+                                                out.print("</tr>");
+                                            }
+                                        }
+                                    }%>
+                                <tr>
+                                    <td><b>Hora del día</b></td>
+                                    <td><b>Cantidad Préstamos</b></td>
+                                </tr>
+                                <%
+                                        int tamY[][] = new int[24][2];
+                                        for (int i = 0; i < 24; i++) {
+                                            tamY[i][0] = i;
+                                        }
+                                        for (int j = 0; j < 24; j++) {
+                                            tamY[j][1] = 0;
+                                        }
+                                        for (int k = 0; k < prestamos.size(); k++) {
+                                            int t = prestamos.get(k).getFecha_prestamo().get(Calendar.HOUR_OF_DAY);
+                                            for (int l = 0; l < 24; l++) {
+                                                if (tamY[l][0] == t) {
+                                                    int cant = tamY[l][1];
+                                                    cant++;
+                                                    tamY[l][1] = cant;
+                                                }
+                                            }
+                                        }
+                                        for (int i = 0; i < 24; i++) {
+                                            if (tamY[i][1] > 0) {
+                                                out.print("<tr>");
+                                                out.print("<td>" + i + "</td>");
+                                                out.print("<td>" + tamY[i][1] + "</td>");
                                                 out.print("</tr>");
                                             }
                                         }

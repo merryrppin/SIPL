@@ -35,8 +35,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Listar Préstamos</h1>
             </div>
         </div>
@@ -45,21 +45,21 @@
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
                 <form action="modificarPrestamo.jsp" method="POST">
-                <table class="table table-striped" align="center">
-                    <tr>
-                        <%
-                            if (a == 2) {
-                                out.print("<td></td>");
-                            }
-                        %>
-                        <td><b>Código Préstamo</b></td>
-                        <td><b>Códigos Materiales</b></td>
-                        <td><b>Nombre Usuario</b></td>
-                        <td><b>Apellido Usuario</b></td>
-                        <td><b>Fecha Préstamo</b></td>
-                        <td><b>Fecha Devolución</b></td>
-                        <td><b>Estado del Préstamo</b></td>
-                    </tr>
+                    <table class="table table-striped" align="center">
+                        <tr>
+                            <%
+                                if (a == 2) {
+                                    out.print("<td></td>");
+                                }
+                            %>
+                            <td><b>Código Préstamo</b></td>
+                            <td><b>Códigos Materiales</b></td>
+                            <td><b>Nombre Usuario</b></td>
+                            <td><b>Apellido Usuario</b></td>
+                            <td><b>Fecha Préstamo</b></td>
+                            <td><b>Fecha Devolución</b></td>
+                            <td><b>Estado del Préstamo</b></td>
+                        </tr>
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
@@ -93,10 +93,10 @@
                                     fecha1 += cal2.get(Calendar.DAY_OF_MONTH);
                                     fecha1 += " " + cal2.get(Calendar.HOUR_OF_DAY);
                                     fecha1 += ":" + cal2.get(Calendar.MINUTE) + ":00";
-                                    if(data.get(i).getEstado()==0){
+                                    if (data.get(i).getEstado() == 0) {
                                         out.print("<td>Sin devolver</td>");
-                                    }else{
-                                    out.print("<td>" + fecha1 + "</td>");
+                                    } else {
+                                        out.print("<td>" + fecha1 + "</td>");
                                     }
                                     if (data.get(i).getEstado() == 0) {
                                         out.print("<td>Activo</td>");
@@ -109,18 +109,18 @@
                                 }
                             }
                         %>
-                    <tr>
-                        <td colspan="7" align="center">
-                            <%
-                            if(a==2){%>
+                        <tr>
+                            <td colspan="7" align="center">
+                                <%
+                                if (a == 2) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
-                            <%}
-                            %>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                        </td>
-                    </tr>
-                </table>
-                    </form>
+                                <%}
+                                %>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
             <div class="col-xs-6 col-sm-1"></div>
         </div>

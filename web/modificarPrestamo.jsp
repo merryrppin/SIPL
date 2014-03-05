@@ -113,7 +113,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="materiales">
-                                        
+
                                     </tbody>
                                 </table>
                             </td>
@@ -123,7 +123,7 @@
                                 <label class="control-label"> Fecha de préstamo</label>
                             </td>
                             <td id="fechaPrestamo" colspan="2">
-                                
+
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-success" style='width:150px;'>Finalizar Préstamo</button>

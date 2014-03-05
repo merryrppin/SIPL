@@ -125,6 +125,12 @@
                                 if (mat1.length() > 0 && mat1 != null) {
                                     mate1.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate1);
+                                    Tipo_material tip = mate1.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d--;
+                                    tip.setDisponibilidad(d);
+                                    Gestor.updateTipoMat(tip);
+
                                 }
                             } catch (Exception e) {
                             }
@@ -132,6 +138,11 @@
                                 if (mat2.length() > 0 && mat2 != null) {
                                     mate2.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate2);
+                                    Tipo_material tip = mate2.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d--;
+                                    tip.setDisponibilidad(d);
+                                    Gestor.updateTipoMat(tip);
                                 }
                             } catch (Exception e) {
                             }
@@ -139,6 +150,11 @@
                                 if (mat3.length() > 0 && mat3 != null) {
                                     mate3.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate3);
+                                    Tipo_material tip = mate3.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d--;
+                                    tip.setDisponibilidad(d);
+                                    Gestor.updateTipoMat(tip);
                                 }
                             } catch (Exception e) {
                             }
@@ -146,6 +162,11 @@
                                 if (mat4.length() > 0 && mat4 != null) {
                                     mate4.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate4);
+                                    Tipo_material tip = mate4.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d--;
+                                    tip.setDisponibilidad(d);
+                                    Gestor.updateTipoMat(tip);
                                 }
                             } catch (Exception e) {
                             }
@@ -153,6 +174,11 @@
                                 if (mat5.length() > 0 && mat5 != null) {
                                     mate5.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate5);
+                                    Tipo_material tip = mate5.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d--;
+                                    tip.setDisponibilidad(d);
+                                    Gestor.updateTipoMat(tip);
                                 }
                             } catch (Exception e) {
                             }
@@ -199,6 +225,11 @@
                         if (mate1 != null) {
                             mate1.setDisponibilidad(0);
                             Gestor.updateMaterial(mate1);
+                            Tipo_material tip = mate1.getTipo_mat();
+                            int d = tip.getDisponibilidad();
+                            d++;
+                            tip.setDisponibilidad(d);
+                            Gestor.updateTipoMat(tip);
                         }
                     } catch (Exception e) {
                     }
@@ -206,6 +237,11 @@
                         if (mate2 != null) {
                             mate2.setDisponibilidad(0);
                             Gestor.updateMaterial(mate2);
+                            Tipo_material tip = mate2.getTipo_mat();
+                            int d = tip.getDisponibilidad();
+                            d++;
+                            tip.setDisponibilidad(d);
+                            Gestor.updateTipoMat(tip);
                         }
                     } catch (Exception e) {
                     }
@@ -213,6 +249,11 @@
                         if (mate3 != null) {
                             mate3.setDisponibilidad(0);
                             Gestor.updateMaterial(mate3);
+                            Tipo_material tip = mate3.getTipo_mat();
+                            int d = tip.getDisponibilidad();
+                            d++;
+                            tip.setDisponibilidad(d);
+                            Gestor.updateTipoMat(tip);
                         }
                     } catch (Exception e) {
                     }
@@ -220,6 +261,11 @@
                         if (mate4 != null) {
                             mate4.setDisponibilidad(0);
                             Gestor.updateMaterial(mate4);
+                            Tipo_material tip = mate4.getTipo_mat();
+                            int d = tip.getDisponibilidad();
+                            d++;
+                            tip.setDisponibilidad(d);
+                            Gestor.updateTipoMat(tip);
                         }
                     } catch (Exception e) {
                     }
@@ -227,6 +273,11 @@
                         if (mate5 != null) {
                             mate5.setDisponibilidad(0);
                             Gestor.updateMaterial(mate5);
+                            Tipo_material tip = mate5.getTipo_mat();
+                            int d = tip.getDisponibilidad();
+                            d++;
+                            tip.setDisponibilidad(d);
+                            Gestor.updateTipoMat(tip);
                         }
                     } catch (Exception e) {
                     }
@@ -283,7 +334,9 @@
         </div>
     </body>
 </html>  
-<%}
+<%} else {
+                        response.sendRedirect("listarPrestamos.jsp");
+                    }
                 } else {
                     error = "prestamo_null";
                 }
