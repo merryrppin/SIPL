@@ -21,7 +21,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar Usuario</title>
+        <title>Modificar Usuario</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -64,7 +64,7 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>Agregar Usuario</h1>
+                <h1>Modificar Usuario</h1>
             </div>
         </div>
         <br><br><br><br>
@@ -96,31 +96,31 @@
                                 <input maxlength="30" type="text" id="apellidos" name="apellidos" value="<%out.print(usu.getApellido());%>">
                             </td>
                             <%
-                            if(usu.getTipo_usuario()==0 || usu.getTipo_usuario()==1){
-                                int est=usu.getEstado();
-                                %>
+                                if (usu.getTipo_usuario() == 0 || usu.getTipo_usuario() == 1) {
+                                    int est = usu.getEstado();
+                            %>
                             <td>
                                 <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
                                 <select id="estado" name="estado">
                                     <option value="0"
-                                        <%if(est==0){
-                                            out.print(" selected ");
-                                        }%>>
+                                            <%if (est == 0) {
+                                                out.print(" selected ");
+                                            }%>>
                                         Activo
                                     </option>
                                     <option value="1"
-                                        <%if(est==1){
-                                            out.print(" selected ");
-                                        }%>
+                                            <%if (est == 1) {
+                                                out.print(" selected ");
+                                            }%>
                                             >
                                         Inactivo
                                     </option>
                                 </select>
                             </td>
                             <%
-                            }
+                                }
                             %>
                         </tr>
                         <tr>
@@ -141,12 +141,13 @@
                         </tr>
                         <tr>
                             <td colspan="4" align="center"> 
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <br>
-                                        <button type="submit" class="btn btn-success" onclick="return check();">Guardar</button>
-                                    </div>
-                                </div>
+                                <button type="submit" class="btn btn-success" style='width:150px;' onclick="return check();">Guardar</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center">
+                                <button class="btn btn-toolbar" type="button" onclick="location.href = 'cambiarClave.jsp?id=<%out.print(usu.getCodigo());%>'" style='width:200px;'><b>Cambiar Contraseña</b></button>
                             </td>
                         </tr>
                     </table>

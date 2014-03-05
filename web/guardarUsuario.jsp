@@ -58,7 +58,7 @@
                 } else {
                     error = "datos_incompletos";
                 }
-            } else if (a == 2) {                
+            } else if (a == 2) {
                 if (nombre != null && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
                     int est;
@@ -71,10 +71,10 @@
                         }
                     }
                     Usuario u = Gestor.getUsuario(codigo);
-                    if(u.getTipo_usuario()!=2){
+                    if (u.getTipo_usuario() != 2) {
                         est = Integer.parseInt(estado);
-                    }else{
-                        est=0;
+                    } else {
+                        est = 0;
                     }
                     if (tel > -1) {
                         u.setTelefono(tel);
@@ -94,18 +94,26 @@
                 } else {
                     error = "datos_incompletos";
                 }
-            }else if((a == 3 || a == 4 || a == 5) && user.getTipo_usuario()==2){
+            } else if ((a == 3 || a == 4 || a == 5) && user.getTipo_usuario() == 2) {
                 String ID = request.getParameter("id");
                 Usuario usu = Gestor.getUsuario(ID);
-                if(a==3){
+                if (a == 3) {
                     usu.setTipo_usuario(0);
-                }else if(a==4){
+                } else if (a == 4) {
                     usu.setTipo_usuario(1);
-                }else if(a==5){
+                } else if (a == 5) {
                     usu.setTipo_usuario(2);
                 }
                 Gestor.updateUsuario(usu);
                 response.sendRedirect("asignarPrivilegios.jsp");
+            } else if (a == 6) {
+                String ID = request.getParameter("codigo");
+                Usuario usu = Gestor.getUsuario(ID);
+                String clave = request.getParameter("clave1");
+                String c = Gestor.encriptar(clave);
+                usu.setClave(c);
+                Gestor.updateUsuario(usu);
+                response.sendRedirect("modificarUsuario.jsp?id=" + ID);
             }
         } catch (Exception e) {
             error = "sin_accion";
@@ -114,6 +122,6 @@
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
     if (error.length() > 0) {
-        response.sendRedirect("agregarUsuario.jsp?" + error);
+        response.sendRedirect("principal.jsp?" + error);
     }
 %>

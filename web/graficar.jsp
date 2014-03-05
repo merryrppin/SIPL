@@ -142,8 +142,10 @@
                         Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Mes", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=PrestamosMes;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "M.jpg");
                     } else if (rango.equals("Dia")) {
-                        String nom = f[2] + "" + f[1] + "" + f[0] + "" + f2[2] + "" + f2[1] + "" + f2[0];
-                        nom.replace(" ", "");
+                        Calendar cal = Calendar.getInstance();
+                        String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
+                                + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
+                                + cal.get(Calendar.SECOND));
                         dir += nom + "D.jpg";
                         int[] values = new int[31];
                         int[] tiempo = new int[31];
@@ -352,7 +354,7 @@
                                             out.print("</tr>");
                                         }
                                     }
-                                } else if (orden.equals("PrestamosMes")) {%>
+                                } else if (o[0].equals("PrestamosMes")) {%>
                                 <tr>
                                     <td><b>Categoria Material</b></td>
                                     <td><b>Cantidad Material</b></td>
@@ -415,24 +417,21 @@
                                         }
                                     }%>
                                 <tr>
-                                    <td><b>Año</b></td>
+                                    <td><b>Mes</b></td>
                                     <td><b>Cantidad Préstamos</b></td>
                                 </tr>
                                 <%
-                                    int dif = Integer.parseInt(o[1]) - Integer.parseInt(o[4]);
-                                    dif++;
-                                    int tamY[][] = new int[dif][2];
-                                    int u = Integer.parseInt(o[4]);
-                                    for (int i = 0; i < dif; i++) {
-                                        tamY[i][0] = u;
-                                        u++;
+                                    String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+                                    int tamY[][] = new int[12][2];
+                                    for (int i = 0; i < 12; i++) {
+                                        tamY[i][0] = i;
                                     }
-                                    for (int j = 0; j < dif; j++) {
+                                    for (int j = 0; j < 12; j++) {
                                         tamY[j][1] = 0;
                                     }
                                     for (int k = 0; k < prestamos.size(); k++) {
-                                        int t = prestamos.get(k).getFecha_prestamo().get(Calendar.YEAR);
-                                        for (int l = 0; l < dif; l++) {
+                                        int t = prestamos.get(k).getFecha_prestamo().get(Calendar.MONTH);
+                                        for (int l = 0; l < 12; l++) {
                                             if (tamY[l][0] == t) {
                                                 int cant = tamY[l][1];
                                                 cant++;
@@ -440,15 +439,15 @@
                                             }
                                         }
                                     }
-                                    for (int i = 0; i < dif; i++) {
+                                    for (int i = 0; i < 12; i++) {
                                         if (tamY[i][1] > 0) {
                                             out.print("<tr>");
-                                            out.print("<td>" + tamY[i][0] + "</td>");
+                                            out.print("<td>" + meses[i] + "</td>");
                                             out.print("<td>" + tamY[i][1] + "</td>");
                                             out.print("</tr>");
                                         }
                                     }
-                                } else if (orden.equals("PrestamosDia")) {%>
+                                } else if (o[0].equals("PrestamosDia")) {%>
                                 <tr>
                                     <td><b>Fecha Préstamo</b></td>
                                     <td><b>Categoria Material</b></td>
@@ -469,7 +468,7 @@
                                             out.print("</tr>");
                                         }
                                     }
-                                } else if (orden.equals("PrestamosHora")) {%>
+                                } else if (o[0].equals("PrestamosHora")) {%>
                                 <tr>
                                     <td><b>Fecha Préstamo</b></td>
                                     <td><b>Categoria Material</b></td>

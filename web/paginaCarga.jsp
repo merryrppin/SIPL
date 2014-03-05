@@ -66,7 +66,7 @@
                         <tr>
                             <td>
                                 <h2>
-                                    Espere mientras los datos son procesados y se genera la gráfica
+                                    Debe esperar un momento mientras los datos son procesados y se genera la gráfica correctamente.
                                 </h2>
                             </td>
                         </tr>

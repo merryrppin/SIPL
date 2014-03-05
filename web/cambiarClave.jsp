@@ -1,0 +1,158 @@
+<%-- 
+    Document   : cambiarClave
+    Created on : 04-mar-2014, 23:17:29
+    Author     : WM
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="sipl.dominio.*"%>
+<jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
+<%
+    Usuario user = (Usuario) session.getAttribute("user");
+    if (user == null) {
+        response.sendRedirect("login.jsp?error=No_usuario");
+    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+        String ID = request.getParameter("id");
+        if (ID.length() > 0 && ID != null) {
+            Usuario usu = Gestor.getUsuario(ID);
+            if (usu != null) {
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Cambiar clave</title>
+        <script src="jquery/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript">
+            function validarForm(Usuario) {
+                if (Usuario.clave1.value.length === 0 || /^\s+$/.test(Usuario.clave1.value)) {
+                    Usuario.clave1.focus();
+                    alert('No has llenado el campo de la contraseña');
+                    return false;
+                } else if (Usuario.clave2.value.length === 0 || /^\s+$/.test(Usuario.clave2.value)) {
+                    Usuario.clave2.focus();
+                    alert('No has llenado el campo de la contraseña');
+                    return false;
+                } else if (Usuario.clave2.value !==  Usuario.clave1.value) {
+                    alert('Las contraseñas no coinciden');
+                    return false;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <br>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                <style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
+                <h1>Cambiar clave</h1>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="row">
+            <div class="col-xs-6 col-sm-1"></div>
+            <div class="col-xs-12 col-sm-10">
+                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=6" method="POST" onsubmit="return validarForm(this);">
+                    <table align="center"   class="table table-hover">
+                        <tr>
+                            <td>
+                                <input type="text" id="codigo" name="codigo" hidden value="<%out.print(usu.getCodigo());%>">
+                                <label class="control-label">Nombre</label>
+                            </td>
+                            <td>
+                                <%out.print(usu.getNombre());%>
+                            </td>
+                            <td>
+                                <label class="control-label">Teléfono</label>
+                            </td>
+                            <td>
+                                <%out.print(usu.getTelefono());%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Apellidos</label>
+                            </td>
+                            <td>
+                                <%out.print(usu.getApellido());%>
+                            </td>
+                            <%
+                                if (usu.getTipo_usuario() == 0 || usu.getTipo_usuario() == 1) {
+                                    int est = usu.getEstado();
+                            %>
+                            <td>
+                                <label class="control-label">Estado</label>
+                            </td>
+                            <td>
+                                <%if (est == 0) {
+                                        out.print("Activo");
+                                    } else if (est == 1) {
+                                                    out.print("Inactivo");
+                                                }%>
+                            </td>
+                            <%
+                                }
+                            %>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Correo</label>
+                            </td>
+                            <td colspan="3">
+                                <%out.print(usu.getCorreo());%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Observaciones</label>
+                            </td>
+                            <td colspan="3">
+                                <textarea disabled="disabled" maxlength="200" id="observaciones" name="observaciones" style='width:500px;'><%out.print(usu.getObservaciones());%></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <label class="control-label" for="clave1">Contraseña</label>
+                            </td>
+                            <td>
+                                <input maxlength="100" type="password" id="clave1" name="clave1">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <label class="control-label" for="clave2">Repetir Contraseña</label>
+                            </td>
+                            <td>
+                                <input maxlength="100" type="password" id="clave2" name="clave2">
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center"> 
+                                <button type="submit" class="btn btn-success" style='width:150px;' onclick="return check();">Guardar</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'modificarUsuario.jsp?id=<%out.print(usu.getCodigo());%>'" style='width:150px;'>Atrás</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="col-xs-6 col-sm-1"></div>
+        </div>
+    </body>
+</html>
+<%} else {
+                response.sendRedirect("principal.jsp?error=no_existe");
+            }
+        } else {
+            response.sendRedirect("principal.jsp?error=sin_ID");
+        }
+    } else {
+        response.sendRedirect("principal.jsp?error=sin_permisos");
+    }%>

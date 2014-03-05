@@ -163,7 +163,8 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <br>
-                                        <button type="submit" class="btn btn-success" onclick="return check();">Guardar</button>
+                                        <button type="submit" class="btn btn-success" onclick="return check();" style='width:150px;'>Guardar</button>
+                                        <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                     </div>
                                 </div>
                             </td>

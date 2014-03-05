@@ -66,7 +66,7 @@
                             <td><b>Serial</b></td>
                             <td><b>Estado actual del elemento</b></td>
                             <td><b>Nro Inventario</b></td>
-                            <td><b>Foto</b></td>
+                            <td><b>Disponibilidad</b></td>
                             <td><b>Ult. Fecha Mantenimiento</b></td>
                         </tr>
                         <%
@@ -96,7 +96,11 @@
                                         out.print("<td>Error</td>");
                                     }
                                     out.print("<td>" + data.get(i).getNum_inventario() + "</td>");
-                                    out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
+                                    if (data.get(i).getDisponibilidad() == 0) {
+                                        out.print("<td>Libre</td>");
+                                    } else if (data.get(i).getDisponibilidad() == 1) {
+                                        out.print("<td>Prestado</td>");
+                                    }
                                     Calendar cal1 = data.get(i).getUlt_fecha_mante();
                                     String fecha = cal1.get(Calendar.YEAR) + "-";
                                     int mes = cal1.get(Calendar.MONTH);
