@@ -125,7 +125,16 @@
                     }
                     if (disp == 0 && esta == 0) {
                         Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal2, 0);
-                        if (Gestor.addPrestamo(pre) == true) {
+                        boolean flag = false;
+                        if (mate1 != null || mate2 != null || mate3 != null || mate4 != null
+                                || mate5 != null) {
+                            flag = true;
+                        }
+                        if (error.length() > 0) {
+                            flag = false;
+                        }
+                        if (flag == true) {
+                            Gestor.addPrestamo(pre);
                             try {
                                 if (mat1.length() > 0 && mat1 != null) {
                                     mate1.setDisponibilidad(1);

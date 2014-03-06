@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.servlets;
 
 import java.io.IOException;
@@ -33,14 +32,19 @@ public class MaterialServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Conexion con = new Conexion();
         materialDAO matDAO = new materialDAO(con);
         String id_material = request.getParameter("id_material");
         Material mat = matDAO.getMaterial(Integer.parseInt(id_material));
-        out.print("<td height='42px'>"+mat.getTipo_mat().getNombre()+"</td>");
-        out.print("<td>"+mat.getDescripcion()+"</td>");
+        if (mat != null) {
+            out.print("<td height='42px'>" + mat.getTipo_mat().getNombre() + "</td>");
+            out.print("<td>" + mat.getDescripcion() + "</td>");
+        } else {
+            out.print("<td height='42px' colspan='2'><b>Este material no existe, "
+                    + "se recomienda verificar el código</b></td>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

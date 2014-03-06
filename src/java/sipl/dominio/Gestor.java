@@ -179,8 +179,8 @@ public class Gestor {
         return mulDAO.updateMulta(mul);
     }
 
-    public String GenerarBackup(String direccion) {
-        return gen.GenerarBackupMySQL(direccion);
+    public String GenerarBackup(String nombre) {
+        return gen.GenerarBackupMySQL(nombre);
     }
 
     public String RestoreMysql(String direccion) throws InterruptedException {
@@ -198,4 +198,5 @@ public class Gestor {
     public Multa getMultaUsu(String cod){
         return mulDAO.getMultaUsu(cod);
     }
+    
 }

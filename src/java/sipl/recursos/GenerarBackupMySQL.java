@@ -7,6 +7,8 @@ package sipl.recursos;
 
 import java.awt.HeadlessException;
 import java.io.IOException;
+import sipl.dominio.Gestor;
+import sipl.dominio.VariableSis;
 
 /**
  *
@@ -14,12 +16,20 @@ import java.io.IOException;
  */
 public class GenerarBackupMySQL {
 
-    public String GenerarBackupMySQL(String direccion) {
+    public String GenerarBackupMySQL(String nombre) {
         String resultado = "";
+        Gestor gestor = new Gestor();
+        VariableSis vs = gestor.getVariable(2);
+        VariableSis vs2 = gestor.getVariable(1);
+        VariableSis vs3 = gestor.getVariable(3);
+        VariableSis vs4 = gestor.getVariable(4);
+        String direccion=vs2.getDatos();
+        direccion+="Backup\\";
+        direccion+=nombre;
         try {
             int processComplete;
-            Process runtimeProcess = Runtime.getRuntime().exec("C:\\Program Files (x86)\\MySQL\\MySQL Server 5.5\\bin\\mysqldump "
-                    + "--opt --password=12345 --user=root --databases siprelab -r " + direccion);
+            Process runtimeProcess = Runtime.getRuntime().exec(vs.getDatos() 
+                    + " --opt --password="+vs4.getDatos()+" --user="+vs3.getDatos()+" --databases siprelab -r " + direccion);
             processComplete = runtimeProcess.waitFor();
             if (processComplete == 1) {
                 resultado = "Backup Fallido";
