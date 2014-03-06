@@ -20,6 +20,14 @@
         <servlet-name>FileUploadServlet</servlet-name>
         <servlet-class>sipl.servlets.FileUploadServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MultaUsuarioServlet</servlet-name>
+        <servlet-class>sipl.servlets.MultaUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReservaUsuarioServlet</servlet-name>
+        <servlet-class>sipl.servlets.ReservaUsuarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MaterialServlet</servlet-name>
         <url-pattern>/MaterialServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/FileUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MultaUsuarioServlet</servlet-name>
+        <url-pattern>/MultaUsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReservaUsuarioServlet</servlet-name>
+        <url-pattern>/ReservaUsuarioServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

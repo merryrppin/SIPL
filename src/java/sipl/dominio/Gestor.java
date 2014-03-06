@@ -52,9 +52,7 @@ public class Gestor {
     }
 
     public void generarQR(String data, String direccion) {
-        //qrC.QRmini(data, direccion);
         qrC.QR(data, direccion);
-        //qrC.QRsmall(data, direccion);
     }
 
     public boolean addUsuario(Usuario usu) {
@@ -159,7 +157,6 @@ public class Gestor {
 
     public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
-        //gra.PrestamosY_Barra(values, n, direccion, tiempo, titulo);
     }
 
     public Prestamo getPrestamoCodUsu(String codigo) {
@@ -196,5 +193,9 @@ public class Gestor {
 
     public void agregarTextoImagen(String dir, String text, int ubi) throws Exception{
         tei.addTextoImagen(dir, text, ubi);
+    }
+    
+    public Multa getMultaUsu(String cod){
+        return mulDAO.getMultaUsu(cod);
     }
 }

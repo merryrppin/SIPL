@@ -46,6 +46,18 @@
             if (a == 1) {
                 try {
                     Gestor.generarQR(codigo, dir);
+                    int num = Integer.parseInt(codigo);
+                    int ubi = 0;
+                    if (num < 10) {
+                        ubi = 50;
+                    } else if (num < 99) {
+                        ubi = 44;
+                    } else if (num < 999) {
+                        ubi = 38;
+                    } else {
+                        ubi = 32;
+                    }
+                    Gestor.agregarTextoImagen(dir, codigo, ubi);
                 } catch (Exception e) {
                     error = "QR_error";
                 }
@@ -112,6 +124,18 @@
             } else if (a == 2) {
                 try {
                     Gestor.generarQR(codigo, dir);
+                    int num = Integer.parseInt(codigo);
+                    int ubi = 0;
+                    if (num < 10) {
+                        ubi = 50;
+                    } else if (num < 99) {
+                        ubi = 44;
+                    } else if (num < 999) {
+                        ubi = 38;
+                    } else {
+                        ubi = 32;
+                    }
+                    Gestor.agregarTextoImagen(dir, codigo, ubi);
                 } catch (Exception e) {
                     error = "QR_error";
                 }

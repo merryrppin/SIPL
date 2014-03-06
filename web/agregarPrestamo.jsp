@@ -4,6 +4,7 @@
     Author     : WM
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -60,6 +61,17 @@
                     return false;
                 }
             }
+
+            function getMulta() {
+                var code = $("#codigo").val();
+                $("#verificar").load("MultaUsuarioServlet", {Code: code});
+                return false;
+            }
+            function getReserva() {
+                var code = $("#codigo").val();
+                $("#verificar").load("ReservaUsuarioServlet", {Code: code});
+                return false;
+            }
             function getUsuario() {
                 var code = $("#codigo").val();
                 $("#nombre").load("UsuarioServlet", {Code: code});
@@ -113,6 +125,24 @@
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <%
+                                ArrayList<Multa> data = Gestor.getMultas();
+                                for (int i = 0; i < data.size(); i++) {
+                                    Calendar cal1 = data.get(i).getFecha_multa();
+                                    if (data.get(i).getEstado_multa() == 0) {
+                                        Calendar hoy = Calendar.getInstance();
+                                        long tiempo1 = hoy.getTimeInMillis();
+                                        long tiempo2 = cal1.getTimeInMillis();
+                                        if (tiempo1 - tiempo2 >= 259200000) {
+                                            Multa mul = Gestor.getMultaUsu(data.get(i).getUsu().getCodigo());
+                                            mul.setEstado_multa(1);
+                                            Usuario usu = Gestor.getUsuario(mul.getUsu().getCodigo());
+                                            usu.setEstado(0);
+                                            Gestor.updateUsuario(usu);
+                                            Gestor.updateMulta(mul);
+                                        }
+                                    }
+                                }
+
                                 String cod = "";
                                 String accion = request.getParameter("accion");
                                 int a = 0;
@@ -140,8 +170,13 @@
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
-                                <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return fijarURL('verificarEstadoUsu.jsp?accion=4', this.form)" style='width:200px;'/>
-                                <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return fijarURL('verificarReserva.jsp?accion=3', this.form)" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return getMulta();" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return getReserva();" style='width:200px;'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="verificar" colspan="4" align="center">
+
                             </td>
                         </tr>
                         <tr>

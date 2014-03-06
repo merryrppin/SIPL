@@ -68,6 +68,27 @@ public class multaDAO {
         }
         return mul;
     }
+    
+    public Multa getMultaUsu(String cod) {
+        Multa mul = null;
+        ResultSet rs = con.getQuery("select * from multa where cod_usuario='" + cod+"' and estado_multa=0");
+        try {
+            if (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String usu = rs.getString("cod_usuario");
+                Calendar cal = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_multa");
+                cal.setTimeInMillis(t1.getTime());
+                int estado_multa = rs.getInt("estado_multa");
+                int tiempo_multa = rs.getInt("tiempo_multa");
+                mul = new Multa(codigo, usuDAO.getUsuario(usu), cal, estado_multa, tiempo_multa);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            mul = null;
+        }
+        return mul;
+    }
 
     public boolean addMulta(Multa mul) {
         boolean result = false;

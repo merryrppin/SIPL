@@ -22,18 +22,18 @@
         String dir = A + b1 + c1 + codigo;
         Gestor.generarQR(codigo, dir);
         int num = Integer.parseInt(codigo);
-        int ubi=0;
-        if(num<10){
-            ubi=50;
-        }else if(num <99){
-            ubi=44;
-        }else if(num <999){
-            ubi=38;
-        }else{
-            ubi=32;
+        int ubi = 0;
+        if (num < 10) {
+            ubi = 50;
+        } else if (num < 99) {
+            ubi = 44;
+        } else if (num < 999) {
+            ubi = 38;
+        } else {
+            ubi = 32;
         }
         Gestor.agregarTextoImagen(dir, codigo, ubi);
-        response.sendRedirect("verMaterial.jsp?id="+codigo);
+        response.sendRedirect("verMaterial.jsp?id=" + codigo);
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }%>

@@ -55,8 +55,8 @@
                             mate4 = null, mate5 = null;
                     try {
                         if (mat1.length() > 0 && mat1 != null) {
-                            materiales += mat1;
                             mate1 = Gestor.getMaterial(Integer.parseInt(mat1));
+                            materiales += mat1;
                             if (mate1.getDisponibilidad() == 1) {
                                 disp++;
                             }
@@ -65,11 +65,12 @@
                             }
                         }
                     } catch (Exception e) {
+                        error = "material_inexistente";
                     }
                     try {
                         if (mat2.length() > 0 && mat2 != null) {
-                            materiales += ";" + mat2;
                             mate2 = Gestor.getMaterial(Integer.parseInt(mat2));
+                            materiales += ";" + mat2;
                             if (mate2.getDisponibilidad() == 1) {
                                 disp++;
                             }
@@ -78,11 +79,12 @@
                             }
                         }
                     } catch (Exception e) {
+                        error = "material_inexistente";
                     }
                     try {
                         if (mat3.length() > 0 && mat3 != null) {
-                            materiales += ";" + mat3;
                             mate3 = Gestor.getMaterial(Integer.parseInt(mat3));
+                            materiales += ";" + mat3;
                             if (mate3.getDisponibilidad() == 1) {
                                 disp++;
                             }
@@ -91,11 +93,12 @@
                             }
                         }
                     } catch (Exception e) {
+                        error = "material_inexistente";
                     }
                     try {
                         if (mat4.length() > 0 && mat4 != null) {
-                            materiales += ";" + mat4;
                             mate4 = Gestor.getMaterial(Integer.parseInt(mat4));
+                            materiales += ";" + mat4;
                             if (mate4.getDisponibilidad() == 1) {
                                 disp++;
                             }
@@ -104,11 +107,12 @@
                             }
                         }
                     } catch (Exception e) {
+                        error = "material_inexistente";
                     }
                     try {
                         if (mat5.length() > 0 && mat5 != null) {
-                            materiales += ";" + mat5;
                             mate5 = Gestor.getMaterial(Integer.parseInt(mat5));
+                            materiales += ";" + mat5;
                             if (mate5.getDisponibilidad() == 1) {
                                 disp++;
                             }
@@ -117,6 +121,7 @@
                             }
                         }
                     } catch (Exception e) {
+                        error = "material_inexistente";
                     }
                     if (disp == 0 && esta == 0) {
                         Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal2, 0);
@@ -207,19 +212,39 @@
                     Material mate1 = null, mate2 = null, mate3 = null,
                             mate4 = null, mate5 = null;
                     if (cadena.length >= 1) {
-                        mate1 = Gestor.getMaterial(Integer.parseInt(cadena[0]));
+                        try {
+                            mate1 = Gestor.getMaterial(Integer.parseInt(cadena[0]));
+                        } catch (Exception e) {
+                            error = "material_inexistente";
+                        }
                     }
                     if (cadena.length >= 2) {
-                        mate2 = Gestor.getMaterial(Integer.parseInt(cadena[1]));
+                        try {
+                            mate2 = Gestor.getMaterial(Integer.parseInt(cadena[1]));
+                        } catch (Exception e) {
+                            error = "material_inexistente";
+                        }
                     }
                     if (cadena.length >= 3) {
-                        mate3 = Gestor.getMaterial(Integer.parseInt(cadena[2]));
+                        try {
+                            mate3 = Gestor.getMaterial(Integer.parseInt(cadena[2]));
+                        } catch (Exception e) {
+                            error = "material_inexistente";
+                        }
                     }
                     if (cadena.length >= 4) {
-                        mate4 = Gestor.getMaterial(Integer.parseInt(cadena[3]));
+                        try {
+                            mate4 = Gestor.getMaterial(Integer.parseInt(cadena[3]));
+                        } catch (Exception e) {
+                            error = "material_inexistente";
+                        }
                     }
                     if (cadena.length >= 5) {
-                        mate5 = Gestor.getMaterial(Integer.parseInt(cadena[4]));
+                        try {
+                            mate5 = Gestor.getMaterial(Integer.parseInt(cadena[4]));
+                        } catch (Exception e) {
+                            error = "material_inexistente";
+                        }
                     }
                     try {
                         if (mate1 != null) {
