@@ -29,6 +29,7 @@ public class Gestor {
     Graficar gra = new Graficar();
     GenerarBackupMySQL gen = new GenerarBackupMySQL();
     RestoreMySQL res = new RestoreMySQL();
+    TextoImagen tei = new TextoImagen();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -51,9 +52,9 @@ public class Gestor {
     }
 
     public void generarQR(String data, String direccion) {
-        qrC.QRmini(data, direccion);
-        qrC.QRMedium(data, direccion);
-        qrC.QRsmall(data, direccion);
+        //qrC.QRmini(data, direccion);
+        qrC.QR(data, direccion);
+        //qrC.QRsmall(data, direccion);
     }
 
     public boolean addUsuario(Usuario usu) {
@@ -193,7 +194,7 @@ public class Gestor {
         return varDAO.getTipo_variable(id);
     }
 
-    public void updateFoto(String data) {
-
+    public void agregarTextoImagen(String dir, String text, int ubi) throws Exception{
+        tei.addTextoImagen(dir, text, ubi);
     }
 }
