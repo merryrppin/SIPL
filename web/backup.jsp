@@ -4,6 +4,8 @@
     Author     : WM
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.io.File"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -25,8 +27,6 @@
         nombre += Y + "-" + M + "-" + D + "_" + h + "-" + m + "-" + s;
         nombre += ".sql";
         String resultado = Gestor.GenerarBackup(nombre);
-%>
-<h1><%out.print(resultado);%></h1>
-<%} else {
+}else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }%>
