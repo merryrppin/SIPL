@@ -199,4 +199,8 @@ public class Gestor {
         return mulDAO.getMultaUsu(cod);
     }
     
+    public ArrayList<Danho> getRangoFecha_danhos(String fecha1, String fecha2){
+        return danDAO.getRangoFecha_danhos(fecha1, fecha2);
+    }
+    
 }

@@ -242,7 +242,7 @@
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'graficar.jsp?accion=1'" style='width:200px;'>Materiales</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaDanhos.jsp'" style='width:200px;'>Daños</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaDanho.jsp'" style='width:200px;'>Daños</button>
                                 </td>
                             </tr>
                         </table>

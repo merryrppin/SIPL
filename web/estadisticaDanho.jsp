@@ -1,6 +1,6 @@
 <%-- 
-    Document   : estadisticaPrestamo
-    Created on : 24-feb-2014, 21:52:21
+    Document   : estadisticaDanho
+    Created on : 07-mar-2014, 15:26:20
     Author     : WM
 --%>
 
@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Estadísticas Préstamo</title>
+        <title>Estadísticas Daño</title>
         <link rel="stylesheet" type="text/css" media="all" href="css/calendar-blue2.css" />
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript" src="js/calendar.js"></script>
@@ -49,14 +49,14 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>Estadísticas Préstamo</h1>
+                <h1>Estadísticas Daño</h1>
             </div>
         </div>
         <br><br><br><br>
         <div class="row">
             <div class="col-xs-12 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-                <form name="Estadistica" class="form-horizontal" action="graficar.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
+                <form name="Estadistica" class="form-horizontal" action="graficarD.jsp?accion=3" method="POST" onsubmit="return validarForm(this);">
                     <table align="center" class="table table-hover">
                         <tr>
                             <td colspan="2">

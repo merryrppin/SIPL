@@ -8,9 +8,10 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String error="";
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("login.jsp?error=No_usuario");
+        error="No_usuario";
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
 %>
 <!DOCTYPE html>
@@ -60,8 +61,20 @@
             <div class="col-xs-12 col-sm-6" align="center">
                 <%
                     String orden = request.getParameter("orden");
+                    if(orden.length()<=0){
+                        error="no_orden";
+                    }else{
+                        String [] g=orden.split(";");
+                        String graf=g[0];
+                        String Prim = ""+graf.charAt(0);
+                        String dir="";
+                        if(Prim.equalsIgnoreCase("P")){
+                            dir="graficar.jsp";
+                        }else if(Prim.equalsIgnoreCase("D")){
+                            dir="graficarD.jsp";
+                        }
                 %>
-                <form class="form-horizontal" action="graficar.jsp?orden=<%out.print(orden);%>" method="POST">
+                <form class="form-horizontal" action="<%out.print(dir);%>?orden=<%out.print(orden);%>" method="POST">
                     <table align="center">
                         <tr>
                             <td>
@@ -91,6 +104,11 @@
         </div>
     </body>
 </html>
-<%} else {
-        response.sendRedirect("principal.jsp?error=sin_permisos");
+<%
+                    }
+    } else {
+        error="sin_permisos";
+    }
+    if(error.length()>0){
+        response.sendRedirect("principal.jsp?error="+error);
     }%>
