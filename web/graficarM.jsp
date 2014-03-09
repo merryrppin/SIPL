@@ -192,15 +192,30 @@
                             <table class="table table-striped">
                                 <%  if (o[0].equals("MultasAnho")) {%>
                                 <tr>
-                                    <td><b>Año</b></td>
-                                    <td><b>Cantidad Multas</b></td>
+                                    <td colspan='2'>  <b>Año</b></td>
+                                    <td colspan='2'><b>Cantidad Multas</b></td>
                                 </tr>
-                                <%  
+                                <%
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
                                     ArrayList<Multa> multas = Gestor.getMultasFecha(f1, f2);
+                                    ArrayList<Usuario> usuarios = Gestor.getUsuarios();
                                     int dif = Integer.parseInt(o[1]) - Integer.parseInt(o[4]);
                                     dif++;
+                                    String codusuarios[] = new String[usuarios.size()];
+                                    int canMult[] = new int[usuarios.size()];
+                                    for (int i = 0; i < usuarios.size(); i++) {
+                                        codusuarios[i] = usuarios.get(i).getCodigo();
+                                        canMult[i] = 0;
+                                    }
+                                    for (int i = 0; i < multas.size(); i++) {
+                                        for (int j = 0; j < usuarios.size(); j++) {
+                                            if (codusuarios[j].equals(multas.get(i).getUsu().getCodigo())) {
+                                                canMult[j]++;
+                                                j = usuarios.size();
+                                            }
+                                        }
+                                    }
                                     int tamY[][] = new int[dif][2];
                                     int u = Integer.parseInt(o[4]);
                                     for (int i = 0; i < dif; i++) {
@@ -223,8 +238,25 @@
                                     for (int i = 0; i < dif; i++) {
                                         if (tamY[i][1] > 0) {
                                             out.print("<tr>");
-                                            out.print("<td>" + tamY[i][0] + "</td>");
-                                            out.print("<td>" + tamY[i][1] + "</td>");
+                                            out.print("<td colspan='2'>" + tamY[i][0] + "</td>");
+                                            out.print("<td colspan='2'>" + tamY[i][1] + "</td>");
+                                            out.print("</tr>");
+                                        }
+                                    }
+
+                                %><tr>
+                                    <td><b>Usuario</b></td>
+                                    <td><b>Nombre</b></td>
+                                    <td><b>Apellidos</b></td>
+                                    <td><b>Cantidad Multas</b></td>
+                                </tr> <%                                    for (int i = 0; i < usuarios.size(); i++) {
+                                        if (canMult[i] > 0) {
+                                            Usuario usuario1 = Gestor.getUsuario(codusuarios[i]);
+                                            out.print("<tr>");
+                                            out.print("<td>" + codusuarios[i] + "</td>");
+                                            out.print("<td>" + usuario1.getNombre() + "</td>");
+                                            out.print("<td>" + usuario1.getApellido() + "</td>");
+                                            out.print("<td>" + canMult[i] + "</td>");
                                             out.print("</tr>");
                                         }
                                     }
@@ -236,8 +268,23 @@
                                 <%
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    ArrayList<Usuario> usuarios = Gestor.getUsuarios();
                                     ArrayList<Multa> multas = Gestor.getMultasFecha(f1, f2);
                                     String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+                                    String codusuarios[] = new String[usuarios.size()];
+                                    int canMult[] = new int[usuarios.size()];
+                                    for (int i = 0; i < usuarios.size(); i++) {
+                                        codusuarios[i] = usuarios.get(i).getCodigo();
+                                        canMult[i] = 0;
+                                    }
+                                    for (int i = 0; i < multas.size(); i++) {
+                                        for (int j = 0; j < usuarios.size(); j++) {
+                                            if (codusuarios[j].equals(multas.get(i).getUsu().getCodigo())) {
+                                                canMult[j]++;
+                                                j = usuarios.size();
+                                            }
+                                        }
+                                    }
                                     int tamY[][] = new int[12][2];
                                     for (int i = 0; i < 12; i++) {
                                         tamY[i][0] = i;
@@ -268,10 +315,25 @@
                                     <td><b>Día del mes</b></td>
                                     <td><b>Cantidad Multas</b></td>
                                 </tr>
-                                <%  
+                                <%
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    ArrayList<Usuario> usuarios = Gestor.getUsuarios();
                                     ArrayList<Multa> multas = Gestor.getMultasFecha(f1, f2);
+                                    String codusuarios[] = new String[usuarios.size()];
+                                    int canMult[] = new int[usuarios.size()];
+                                    for (int i = 0; i < usuarios.size(); i++) {
+                                        codusuarios[i] = usuarios.get(i).getCodigo();
+                                        canMult[i] = 0;
+                                    }
+                                    for (int i = 0; i < multas.size(); i++) {
+                                        for (int j = 0; j < usuarios.size(); j++) {
+                                            if (codusuarios[j].equals(multas.get(i).getUsu().getCodigo())) {
+                                                canMult[j]++;
+                                                j = usuarios.size();
+                                            }
+                                        }
+                                    }
                                     int tamY[][] = new int[32][2];
                                     for (int i = 0; i < 32; i++) {
                                         tamY[i][0] = i;
@@ -297,6 +359,22 @@
                                             out.print("</tr>");
                                         }
                                     }
+                                %><tr>
+                                    <td><b>Usuario</b></td>
+                                    <td><b>Nombre</b></td>
+                                    <td><b>Apellidos</b></td>
+                                    <td><b>Cantidad Multas</b></td>
+                                </tr> <% for (int i = 0; i < usuarios.size(); i++) {
+                                        if (canMult[i] > 0) {
+                                            Usuario usuario1 = Gestor.getUsuario(codusuarios[i]);
+                                            out.print("<tr>");
+                                            out.print("<td>" + codusuarios[i] + "</td>");
+                                            out.print("<td>" + usuario1.getNombre() + "</td>");
+                                            out.print("<td>" + usuario1.getApellido() + "</td>");
+                                            out.print("<td>" + canMult[i] + "</td>");
+                                            out.print("</tr>");
+                                        }
+                                    }
                                 } else if (o[0].equals("MultasHora")) {%>
                                 <tr>
                                     <td><b>Hora del día</b></td>
@@ -305,7 +383,22 @@
                                 <%
                                         String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                         String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                        ArrayList<Usuario> usuarios = Gestor.getUsuarios();
                                         ArrayList<Multa> multas = Gestor.getMultasFecha(f1, f2);
+                                        String codusuarios[] = new String[usuarios.size()];
+                                        int canMult[] = new int[usuarios.size()];
+                                        for (int i = 0; i < usuarios.size(); i++) {
+                                            codusuarios[i] = usuarios.get(i).getCodigo();
+                                            canMult[i] = 0;
+                                        }
+                                        for (int i = 0; i < multas.size(); i++) {
+                                            for (int j = 0; j < usuarios.size(); j++) {
+                                                if (codusuarios[j].equals(multas.get(i).getUsu().getCodigo())) {
+                                                    canMult[j]++;
+                                                    j = usuarios.size();
+                                                }
+                                            }
+                                        }
                                         int tamY[][] = new int[24][2];
                                         for (int i = 0; i < 24; i++) {
                                             tamY[i][0] = i;
@@ -331,6 +424,22 @@
                                                 out.print("</tr>");
                                             }
                                         }
+                                        %><tr>
+                                    <td><b>Usuario</b></td>
+                                    <td><b>Nombre</b></td>
+                                    <td><b>Apellidos</b></td>
+                                    <td><b>Cantidad Multas</b></td>
+                                </tr> <%                                    for (int i = 0; i < usuarios.size(); i++) {
+                                        if (canMult[i] > 0) {
+                                            Usuario usuario1 = Gestor.getUsuario(codusuarios[i]);
+                                            out.print("<tr>");
+                                            out.print("<td>" + codusuarios[i] + "</td>");
+                                            out.print("<td>" + usuario1.getNombre() + "</td>");
+                                            out.print("<td>" + usuario1.getApellido() + "</td>");
+                                            out.print("<td>" + canMult[i] + "</td>");
+                                            out.print("</tr>");
+                                        }
+                                    }
                                     }
                                 %>
                             </table>
