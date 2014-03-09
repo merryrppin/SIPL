@@ -40,21 +40,16 @@
                 } catch (Exception e) {
                     a = 0;
                 }
-                String direccion = this.getServletContext().getRealPath("/Grafica/");
-                String d[] = direccion.split("build");
-                String a1 = d[0];
-                String b1 = d[1];
-                String c1 = a1.substring(a1.length() - 1, a1.length());
-                String A = a1.substring(0, a1.length() - 1);
-                String dir = A + b1 + c1;
+                String direccion = Gestor.getVariable(1).getDatos();
+                direccion += "/Grafica/";
                 if (a == 1) {
                     ArrayList<Tipo_material> data = Gestor.getTiposM();
                     Calendar cal = Calendar.getInstance();
                     String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                             + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                             + cal.get(Calendar.SECOND));
-                    dir += nom + ".jpg";
-                    Gestor.GraficarTipoMat(data, dir);
+                    direccion += nom + ".jpg";
+                    Gestor.GraficarTipoMat(data, direccion);
                     response.sendRedirect("paginaCarga.jsp?orden=TipoMaterial;;;;;;;" + nom + ".jpg");
                 } else if (a == 2) {
                     String titulo = "Préstamos entre el  ";
@@ -75,7 +70,7 @@
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "Y.jpg";
+                        direccion += nom + "Y.jpg";
                         int[][] y = new int[rest][2];
                         int y1 = Integer.parseInt(f[2]);
                         for (int i = 0; i < rest; i++) {
@@ -95,7 +90,7 @@
                                 }
                             }
                         }
-                        Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
+                        Gestor.GraficarPrestamosYear(y, rest, direccion, "Años", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=PrestamoAnho;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "Y.jpg");
                     } else if (rango.equals("Mes")) {
                         int[] values = new int[12];
@@ -118,15 +113,15 @@
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "M.jpg";
-                        Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Mes", titulo);
+                        direccion += nom + "M.jpg";
+                        Gestor.GraficarPrestamos(values, tiempo, 12, direccion, "Mes", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=PrestamosMes;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "M.jpg");
                     } else if (rango.equals("Dia")) {
                         Calendar cal = Calendar.getInstance();
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "D.jpg";
+                        direccion += nom + "D.jpg";
                         int[] values = new int[31];
                         int[] tiempo = new int[31];
                         for (int i = 0; i < 31; i++) {
@@ -145,14 +140,14 @@
                             cant++;
                             values[gj] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
+                        Gestor.GraficarPrestamos(values, tiempo, 31, direccion, "Dia", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=PrestamosDia;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "D.jpg");
                     } else if (rango.equals("Hor")) {
                         Calendar cal = Calendar.getInstance();
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "H.jpg";
+                        direccion += nom + "H.jpg";
                         int[] values = new int[24];
                         int[] tiempo = new int[24];
                         for (int i = 0; i < 24; i++) {
@@ -167,7 +162,7 @@
                             cant++;
                             values[t] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
+                        Gestor.GraficarPrestamos(values, tiempo, 24, direccion, "Horas", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=PrestamosHora;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "H.jpg");
                     }
                 } else {%>

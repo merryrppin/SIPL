@@ -62,7 +62,7 @@
                                 <img src="QR/<%out.print(mat.getCodigo() + "medium.png");%>" alt="...">
                             </td>
                             <td>
-                                <img data-src="holder.js/100%x180" alt="...">
+                                <img src="" alt="...">
                             </td>
                         </tr>
                         <tr>

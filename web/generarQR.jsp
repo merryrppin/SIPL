@@ -12,15 +12,9 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
         String codigo = request.getParameter("codigo");
-        //Material mat = Gestor.getMaterial(Integer.parseInt(codigo));
-        String direccion = this.getServletContext().getRealPath("/QR/");
-        String d[] = direccion.split("build");
-        String a1 = d[0];
-        String b1 = d[1];
-        String c1 = a1.substring(a1.length() - 1, a1.length());
-        String A = a1.substring(0, a1.length() - 1);
-        String dir = A + b1 + c1 + codigo;
-        Gestor.generarQR(codigo, dir);
+        String direccion = Gestor.getVariable(1).getDatos();
+        direccion += "/QR/";
+        Gestor.generarQR(codigo, direccion);
         int num = Integer.parseInt(codigo);
         int ubi = 0;
         if (num < 10) {
@@ -32,7 +26,7 @@
         } else {
             ubi = 32;
         }
-        Gestor.agregarTextoImagen(dir, codigo, ubi);
+        Gestor.agregarTextoImagen(direccion, codigo, ubi);
         response.sendRedirect("verMaterial.jsp?id=" + codigo);
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");

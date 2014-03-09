@@ -40,13 +40,8 @@
                 } catch (Exception e) {
                     a = 0;
                 }
-                String direccion = this.getServletContext().getRealPath("/Grafica/");
-                String d[] = direccion.split("build");
-                String a1 = d[0];
-                String b1 = d[1];
-                String c1 = a1.substring(a1.length() - 1, a1.length());
-                String A = a1.substring(0, a1.length() - 1);
-                String dir = A + b1 + c1;
+                String direccion = Gestor.getVariable(1).getDatos();
+                direccion += "/Grafica/";
                 if (a == 3) {
                     String titulo = "Daños entre el  ";
                     String fecha = request.getParameter("fecha");
@@ -66,7 +61,7 @@
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "DY.jpg";
+                        direccion += nom + "DY.jpg";
                         int[][] y = new int[rest][2];
                         int y1 = Integer.parseInt(f[2]);
                         for (int i = 0; i < rest; i++) {
@@ -86,7 +81,7 @@
                                 }
                             }
                         }
-                        Gestor.GraficarPrestamosYear(y, rest, dir, "Años", titulo);
+                        Gestor.GraficarPrestamosYear(y, rest, direccion, "Años", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoAnho;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DY.jpg");
                     } else if (rango.equals("Mes")) {
                         int[] values = new int[12];
@@ -109,15 +104,15 @@
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "DM.jpg";
-                        Gestor.GraficarPrestamos(values, tiempo, 12, dir, "Mes", titulo);
+                        direccion += nom + "DM.jpg";
+                        Gestor.GraficarPrestamos(values, tiempo, 12, direccion, "Mes", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoMes;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DM.jpg");
                     } else if (rango.equals("Dia")) {
                         Calendar cal = Calendar.getInstance();
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "DD.jpg";
+                        direccion += nom + "DD.jpg";
                         int[] values = new int[31];
                         int[] tiempo = new int[31];
                         for (int i = 0; i < 31; i++) {
@@ -136,14 +131,14 @@
                             cant++;
                             values[gj] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 31, dir, "Dia", titulo);
+                        Gestor.GraficarPrestamos(values, tiempo, 31, direccion, "Dia", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoDia;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DD.jpg");
                     } else if (rango.equals("Hor")) {
                         Calendar cal = Calendar.getInstance();
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
-                        dir += nom + "DH.jpg";
+                        direccion += nom + "DH.jpg";
                         int[] values = new int[24];
                         int[] tiempo = new int[24];
                         for (int i = 0; i < 24; i++) {
@@ -158,7 +153,7 @@
                             cant++;
                             values[t] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 24, dir, "Horas", titulo);
+                        Gestor.GraficarPrestamos(values, tiempo, 24, direccion, "Horas", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoHora;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DH.jpg");
                     }
                 } else {%>
@@ -303,15 +298,15 @@
                                     }
                                     for (int i = 0; i < danhos.size(); i++) {
                                         int P = danhos.get(i).getMat().getCodigo();
-                                            for (int k = 0; k < materiales.size(); k++) {
-                                                int c = 0;
-                                                if (T[k][0] == P) {
-                                                    c = T[k][1];
-                                                    c++;
-                                                    T[k][1] = c;
-                                                    k = materiales.size();
-                                                }
+                                        for (int k = 0; k < materiales.size(); k++) {
+                                            int c = 0;
+                                            if (T[k][0] == P) {
+                                                c = T[k][1];
+                                                c++;
+                                                T[k][1] = c;
+                                                k = materiales.size();
                                             }
+                                        }
                                     }
                                     if (danhos.size() == 0) {
                                         out.print("<tr>");
@@ -390,15 +385,15 @@
                                     }
                                     for (int i = 0; i < danhos.size(); i++) {
                                         int P = danhos.get(i).getMat().getCodigo();
-                                            for (int k = 0; k < materiales.size(); k++) {
-                                                int c = 0;
-                                                if (T[k][0] == P) {
-                                                    c = T[k][1];
-                                                    c++;
-                                                    T[k][1] = c;
-                                                    k = materiales.size();
-                                                }
+                                        for (int k = 0; k < materiales.size(); k++) {
+                                            int c = 0;
+                                            if (T[k][0] == P) {
+                                                c = T[k][1];
+                                                c++;
+                                                T[k][1] = c;
+                                                k = materiales.size();
                                             }
+                                        }
                                     }
                                     if (danhos.size() == 0) {
                                         out.print("<tr>");
@@ -476,15 +471,15 @@
                                     }
                                     for (int i = 0; i < danhos.size(); i++) {
                                         int P = danhos.get(i).getMat().getCodigo();
-                                            for (int k = 0; k < materiales.size(); k++) {
-                                                int c = 0;
-                                                if (T[k][0] == P) {
-                                                    c = T[k][1];
-                                                    c++;
-                                                    T[k][1] = c;
-                                                    k = materiales.size();
-                                                }
+                                        for (int k = 0; k < materiales.size(); k++) {
+                                            int c = 0;
+                                            if (T[k][0] == P) {
+                                                c = T[k][1];
+                                                c++;
+                                                T[k][1] = c;
+                                                k = materiales.size();
                                             }
+                                        }
                                     }
                                     if (danhos.size() == 0) {
                                         out.print("<tr>");
@@ -532,6 +527,7 @@
                                             tamY[j][1] = 0;
                                         }
                                         for (int k = 0; k < danhos.size(); k++) {
+                                            Calendar cy = danhos.get(k).getFecha_d();
                                             int t = danhos.get(k).getFecha_d().get(Calendar.HOUR_OF_DAY);
                                             for (int l = 0; l < 24; l++) {
                                                 if (tamY[l][0] == t) {

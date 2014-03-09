@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.TimeZone;
 import sipl.dominio.Danho;
 
 /**
@@ -40,7 +39,6 @@ public class danhoDAO {
                 int codigo_mat = rs.getInt("codigo_mat");
                 String codigo_usu = rs.getString("codigo_usu");
                 Calendar cal1 = Calendar.getInstance();
-                cal1.setTimeZone(TimeZone.getTimeZone("GMT"));
                 Timestamp t1 = rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
                 String codigo_usu_rd = rs.getString("cod_usu_rd");
@@ -112,7 +110,6 @@ public class danhoDAO {
                 int codigo_mat = rs.getInt("codigo_mat");
                 String codigo_usu = rs.getString("codigo_usu");
                 Calendar cal1 = Calendar.getInstance();
-                cal1.setTimeZone(TimeZone.getTimeZone("GMT"));
                 Timestamp t1 = rs.getTimestamp("fecha_d");
                 cal1.setTimeInMillis(t1.getTime());
                 String codigo_usu_rd = rs.getString("cod_usu_rd");

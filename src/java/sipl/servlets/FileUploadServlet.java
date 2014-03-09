@@ -5,6 +5,10 @@
  */
 package sipl.servlets;
 
+/**
+ *
+ * @author WM
+ */
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,20 +24,22 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
+ * A Java servlet that handles file upload from client.
  *
- * @author WM
+ * @author www.codejava.net
  */
 public class FileUploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     // location to store file uploaded
-    private static final String UPLOAD_DIRECTORY = "imagenes";
+    private static final String UPLOAD_DIRECTORY = "Imagenes";
 
     // upload settings
     private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3;  // 3MB
     private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
+    String nombre="";
 
     /**
      * Upon receiving file upload submission, parses the request to read upload
@@ -67,14 +73,8 @@ public class FileUploadServlet extends HttpServlet {
 
         // constructs the directory path to store upload file
         // this path is relative to application's directory
-        String ubi = getServletContext().getRealPath("");
-        String d[] = ubi.split("build");
-        String a1 = d[0];
-        String b1 = d[1];
-        String c1 = a1.substring(a1.length() - 1, a1.length());
-        String A = a1.substring(0, a1.length() - 1);
-        String dir = A + b1 + c1;
-        String uploadPath = dir + UPLOAD_DIRECTORY;
+        String uploadPath = getServletContext().getRealPath("")
+                + File.separator + UPLOAD_DIRECTORY;
 
         // creates the directory if it does not exist
         File uploadDir = new File(uploadPath);
@@ -93,23 +93,20 @@ public class FileUploadServlet extends HttpServlet {
                     // processes only fields that are not form fields
                     if (!item.isFormField()) {
                         String fileName = new File(item.getName()).getName();
+                        nombre = fileName;
                         String filePath = uploadPath + File.separator + fileName;
                         File storeFile = new File(filePath);
-
-                        // saves the file on disk
                         item.write(storeFile);
-                        request.setAttribute("message",
-                                "Upload has been done successfully!");
+                        request.setAttribute("message", "Upload has been done successfully!");
+                        request.setAttribute("foto", nombre);
                     }
                 }
             }
         } catch (Exception ex) {
-            request.setAttribute("message",
-                    "There was an error: " + ex.getMessage());
+            request.setAttribute("message", "There was an error: " + ex.getMessage());
         }
         // redirects client to message page
-        getServletContext().getRequestDispatcher("/message.jsp").forward(
+        getServletContext().getRequestDispatcher("/guardarMaterial.jsp?accion=3").forward(
                 request, response);
     }
-
 }

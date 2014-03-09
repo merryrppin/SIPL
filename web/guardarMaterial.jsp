@@ -34,18 +34,13 @@
         String disponibilidad = request.getParameter("disponibilidad");
         String hora = request.getParameter("hora");
         String minutos = request.getParameter("minutos");
-        String direccion = this.getServletContext().getRealPath("/QR/");
-        String d[] = direccion.split("build");
-        String a1 = d[0];
-        String b1 = d[1];
-        String c1 = a1.substring(a1.length() - 1, a1.length());
-        String A = a1.substring(0, a1.length() - 1);
-        String dir = A + b1 + c1 + codigo;
+        String direccion = Gestor.getVariable(1).getDatos();
+        direccion += "/QR/";
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {
                 try {
-                    Gestor.generarQR(codigo, dir);
+                    Gestor.generarQR(codigo, direccion);
                     int num = Integer.parseInt(codigo);
                     int ubi = 0;
                     if (num < 10) {
@@ -57,16 +52,9 @@
                     } else {
                         ubi = 32;
                     }
-                    Gestor.agregarTextoImagen(dir, codigo, ubi);
+                    Gestor.agregarTextoImagen(direccion, codigo, ubi);
                 } catch (Exception e) {
                     error = "QR_error";
-                }
-                try {
-                    if (foto == null && foto.length() == 0) {
-                        foto = "ninguna";
-                    }
-                } catch (Exception e) {
-                    foto = "ninguna";
                 }
                 if (descripcion.length() == 0 || descripcion == null) {
                     descripcion = "ninguna";
@@ -101,8 +89,8 @@
                         error = "error_fecha";
                     }
                     Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
-                            marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
-                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), dir);
+                            marca, serial, "ninguna", numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
+                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
                     if (Gestor.addMaterial(mat) == true) {
                         Tipo_material tip = Gestor.getTipoM(Integer.parseInt(tipo));
                         int disp = tip.getDisponibilidad();
@@ -123,7 +111,7 @@
                 }
             } else if (a == 2) {
                 try {
-                    Gestor.generarQR(codigo, dir);
+                    Gestor.generarQR(codigo, direccion);
                     int num = Integer.parseInt(codigo);
                     int ubi = 0;
                     if (num < 10) {
@@ -135,17 +123,12 @@
                     } else {
                         ubi = 32;
                     }
-                    Gestor.agregarTextoImagen(dir, codigo, ubi);
+                    Gestor.agregarTextoImagen(direccion, codigo, ubi);
                 } catch (Exception e) {
                     error = "QR_error";
                 }
-                try {
-                    if (foto == null && foto.length() == 0) {
-                        foto = "ninguna";
-                    }
-                } catch (Exception e) {
-                    foto = "ninguna";
-                }
+                Material mate = Gestor.getMaterial(Integer.parseInt(codigo));
+                String fot = mate.getFoto_mat();
                 if (descripcion.length() == 0 || descripcion == null) {
                     descripcion = "ninguna";
                 }
@@ -179,8 +162,8 @@
                         error = "error_fecha";
                     }
                     Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
-                            marca, serial, foto, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
-                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), dir);
+                            marca, serial, fot, numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
+                            Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
                     if (Gestor.updateMaterial(mat) == true) {
                         response.sendRedirect("listarMateriales.jsp?accion=1");
                     } else {
@@ -189,6 +172,8 @@
                 } catch (Exception e) {
                     error = "fecha_error";
                 }
+            }else if(a==3){
+                
             }
         } catch (Exception e) {
             error = "sin_accion";

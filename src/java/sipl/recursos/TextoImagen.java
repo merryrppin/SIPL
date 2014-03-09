@@ -1,6 +1,5 @@
 package sipl.recursos;
 
-import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -12,7 +11,7 @@ import javax.imageio.ImageIO;
  *
  * @author WM
  */
-public class TextoImagen extends Applet {
+public class TextoImagen {
 
     public void addTextoImagen(String dir, String text, int ubi) throws Exception {
         dir+=".png";
