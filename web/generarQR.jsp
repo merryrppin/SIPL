@@ -13,7 +13,7 @@
     } else if (user.getTipo_usuario() == 2) {
         String codigo = request.getParameter("codigo");
         String direccion = Gestor.getVariable(1).getDatos();
-        direccion += "/QR/";
+        direccion += "QR/";
         Gestor.generarQR(codigo, direccion);
         int num = Integer.parseInt(codigo);
         int ubi = 0;

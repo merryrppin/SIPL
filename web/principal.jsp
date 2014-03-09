@@ -108,9 +108,12 @@
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp?accion=1'" style='width:200px;'>Listar Reporte daños</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="2" align="center">
+                            <tr align="center">
+                                <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'agregarTipoM.jsp'" style='width:200px;'>Agregar Tipo de material</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'uploadImagen.jsp?accion=0'" style='width:200px;'>Cambiar Imagen</button>
                                 </td>
                             </tr>
                         </table>
@@ -295,7 +298,7 @@
                             </tr>
                         </table>
                     </div>
-                                <div class="tab-pane" id="Reserva">
+                    <div class="tab-pane" id="Reserva">
                         <table class="table table-hover">
                             <tr align="center">
                                 <td>

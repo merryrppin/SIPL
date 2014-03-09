@@ -4,7 +4,6 @@
     Author     : WM
 --%>
 
-<%@page import="java.util.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -25,6 +24,12 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script>
+            function runBanner() {
+                document.getElementById('banner').src = 'Imagenes/${foto}';
+            }
+            window.setTimeout("runBanner()", 5000);
+        </script>
         <title>Subir imágen</title>
     </head>
     <body>
@@ -37,7 +42,7 @@
             </div>
         </div>
         <%
-        int a=0;
+            int a = 0;
             try {
                 a = Integer.parseInt(accion);
             } catch (Exception e) {
@@ -48,86 +53,77 @@
                 if (a == 1) {
                     ArrayList<Material> data = Gestor.getMateriales();
         %>
-        <table>
+        <table class="table table-hover" align="center">
             <tr>
                 <td align="center">
-                    <img src="Imagenes/${foto}" alt="..." width="500" height="500">
-                    <input id="foto" name="foto" value="${foto}" hidden>
+                    <img id="banner" src="img/gif_cargando.gif" alt="..." width="500" height="500">
                 </td>
             </tr>
             <tr>
                 <td>
-                    
                     <form action="guardarMaterial.jsp?accion=3" method="POST">
-                    <table>
-                        <tr>
-                            <td><b></b></td>
-                            <td><b>Código</b></td>
-                            <td><b>Tipo</b></td>
-                            <td><b>Descripción</b></td>
-                            <td><b>Marca</b></td>
-                            <td><b>Serial</b></td>
-                            <td><b>Estado actual del elemento</b></td>
-                            <td><b>Nro Inventario</b></td>
-                            <td><b>Disponibilidad</b></td>
-                            <td><b>Ult. Fecha Mantenimiento</b></td>
-                        </tr>
-                        <%
-                            if (data.size() == 0) {
-                                out.print("<tr>");
-                                out.print("<td colspan='10' align='center'>No hay Materiales</td>");
-                                out.print("</tr>");
-                            } else {
-                                for (int i = 0; i < data.size(); i++) {
+                        <input id="foto" name="foto" value="${foto}" hidden>
+                        <table class="table table-condensed" align="center">
+                            <tr>
+                                <td><b></b></td>
+                                <td><b>Código</b></td>
+                                <td><b>Tipo</b></td>
+                                <td><b>Descripción</b></td>
+                                <td><b>Marca</b></td>
+                                <td><b>Serial</b></td>
+                                <td><b>Estado actual del elemento</b></td>
+                                <td><b>Nro Inventario</b></td>
+                                <td><b>Disponibilidad</b></td>
+                                <td colspan="2"><b>Foto</b></td>
+                            </tr>
+                            <%
+                                if (data.size() == 0) {
                                     out.print("<tr>");
-                                    out.print("<td><input type='checkbox' name='id' value='" + data.get(i).getCodigo() + "' /></td>");
-                                    out.print("<td>" + data.get(i).getCodigo() + "</td>");
-                                    out.print("<td>" + Gestor.getTipoM(data.get(i).getTipo_mat().getId()).getNombre() + "</td>");
-                                    out.print("<td>" + data.get(i).getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getMarca() + "</td>");
-                                    out.print("<td>" + data.get(i).getSerial() + "</td>");
-                                    if (data.get(i).getEstado() == 0) {
-                                        out.print("<td>Activo</td>");
-                                    } else if (data.get(i).getEstado() == 1) {
-                                        out.print("<td>Dado de baja</td>");
-                                    } else if (data.get(i).getEstado() == 2) {
-                                        out.print("<td>Dañado</td>");
-                                    } else if (data.get(i).getEstado() == 3) {
-                                        out.print("<td>Reparado</td>");
-                                    } else {
-                                        out.print("<td>Error</td>");
-                                    }
-                                    out.print("<td>" + data.get(i).getNum_inventario() + "</td>");
-                                    if (data.get(i).getDisponibilidad() == 0) {
-                                        out.print("<td>Libre</td>");
-                                    } else if (data.get(i).getDisponibilidad() == 1) {
-                                        out.print("<td>Prestado</td>");
-                                    }
-                                    Calendar cal1 = data.get(i).getUlt_fecha_mante();
-                                    String fecha = cal1.get(Calendar.YEAR) + "-";
-                                    int mes = cal1.get(Calendar.MONTH);
-                                    mes++;
-                                    fecha += mes + "-";
-                                    fecha += cal1.get(Calendar.DAY_OF_MONTH);
-                                    fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-                                    fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
-                                    out.print("<td>" + fecha + "</td>");
+                                    out.print("<td colspan='10' align='center'>No hay Materiales</td>");
                                     out.print("</tr>");
+                                } else {
+                                    for (int i = 0; i < data.size(); i++) {
+                                        out.print("<tr>");
+                                        out.print("<td><input type='checkbox' name='id' value='" + data.get(i).getCodigo() + "' /></td>");
+                                        out.print("<td>" + data.get(i).getCodigo() + "</td>");
+                                        out.print("<td>" + Gestor.getTipoM(data.get(i).getTipo_mat().getId()).getNombre() + "</td>");
+                                        out.print("<td>" + data.get(i).getDescripcion() + "</td>");
+                                        out.print("<td>" + data.get(i).getMarca() + "</td>");
+                                        out.print("<td>" + data.get(i).getSerial() + "</td>");
+                                        if (data.get(i).getEstado() == 0) {
+                                            out.print("<td>Activo</td>");
+                                        } else if (data.get(i).getEstado() == 1) {
+                                            out.print("<td>Dado de baja</td>");
+                                        } else if (data.get(i).getEstado() == 2) {
+                                            out.print("<td>Dañado</td>");
+                                        } else if (data.get(i).getEstado() == 3) {
+                                            out.print("<td>Reparado</td>");
+                                        } else {
+                                            out.print("<td>Error</td>");
+                                        }
+                                        out.print("<td>" + data.get(i).getNum_inventario() + "</td>");
+                                        if (data.get(i).getDisponibilidad() == 0) {
+                                            out.print("<td>Libre</td>");
+                                        } else if (data.get(i).getDisponibilidad() == 1) {
+                                            out.print("<td>Prestado</td>");
+                                        }
+                                        out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
+                                        out.print("<td> <img src='Imagenes/" + data.get(i).getFoto_mat() + "' alt='...' width='50' height='50'></td>");
+                                        out.print("</tr>");
+                                    }
                                 }
-                            }
-                        %>
-                    <tr>
-                            <td colspan="10" align="center">
-                                <button type="submit" class="btn btn-success" style='width:200px;'>Guardar imagen en material</button>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                            </td>
-                        </tr>
-                    </table>
+                            %>
+                            <tr>
+                                <td colspan="10" align="center">
+                                    <button type="submit" class="btn btn-success" style='width:200px;'>Guardar imagen en material</button>
+                                    <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                </td>
+                            </tr>
+                        </table>
                     </form>
                 </td>
             </tr>
         </table>
-
         <%
             }
         } else {
@@ -137,11 +133,13 @@
             </div>
             <div class="col-xs-12 col-sm-6" align="center">
                 <form method="post" action="FileUploadServlet" enctype="multipart/form-data">
-                    <h2>Select file to upload:</h2>
+                    <h2>Selecciona la imagen a subir</h2>
                     <input type="file" name="uploadFile" />
                     <br/><br/>
-                    <input type="submit" value="Upload" />
+                    <input type="submit" value="Upload" class="btn btn-info" style='width:200px;'/>
                 </form>
+                <br>
+                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
             </div>
             <div class="col-xs-12 col-sm-3" align="center">
 

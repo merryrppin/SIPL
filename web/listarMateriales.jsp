@@ -53,11 +53,6 @@
                 <form action="modificarMaterial.jsp" method="POST">
                     <table class="table table-hover" align="center">
                         <tr>
-                            <%
-                                if (a == 2 && user.getTipo_usuario() == 2) {
-                                    
-                                }
-                            %>
                             <td><b></b></td>
                             <td><b>Código</b></td>
                             <td><b>Tipo</b></td>
@@ -67,7 +62,7 @@
                             <td><b>Estado actual del elemento</b></td>
                             <td><b>Nro Inventario</b></td>
                             <td><b>Disponibilidad</b></td>
-                            <td><b>Ult. Fecha Mantenimiento</b></td>
+                            <td colspan="2"><b>Foto</b></td>
                         </tr>
                         <%
                             if (data.size() == 0) {
@@ -101,15 +96,8 @@
                                     } else if (data.get(i).getDisponibilidad() == 1) {
                                         out.print("<td>Prestado</td>");
                                     }
-                                    Calendar cal1 = data.get(i).getUlt_fecha_mante();
-                                    String fecha = cal1.get(Calendar.YEAR) + "-";
-                                    int mes = cal1.get(Calendar.MONTH);
-                                    mes++;
-                                    fecha += mes + "-";
-                                    fecha += cal1.get(Calendar.DAY_OF_MONTH);
-                                    fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-                                    fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
-                                    out.print("<td>" + fecha + "</td>");
+                                    out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
+                                    out.print("<td> <img src='Imagenes/" + data.get(i).getFoto_mat() + "' alt='...' width='50' height='50'></td>");
                                     out.print("</tr>");
                                 }
                             }

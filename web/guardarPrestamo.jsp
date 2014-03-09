@@ -57,7 +57,7 @@
                         if (mat1.length() > 0 && mat1 != null) {
                             mate1 = Gestor.getMaterial(Integer.parseInt(mat1));
                             materiales += mat1;
-                            if (mate1.getDisponibilidad() == 1) {
+                            if (mate1.getDisponibilidad() != 0) {
                                 disp++;
                             }
                             if (mate1.getEstado() == 1 || mate1.getEstado() == 2) {
@@ -71,7 +71,7 @@
                         if (mat2.length() > 0 && mat2 != null) {
                             mate2 = Gestor.getMaterial(Integer.parseInt(mat2));
                             materiales += ";" + mat2;
-                            if (mate2.getDisponibilidad() == 1) {
+                            if (mate2.getDisponibilidad() != 0) {
                                 disp++;
                             }
                             if (mate2.getEstado() == 1 || mate2.getEstado() == 2) {
@@ -85,7 +85,7 @@
                         if (mat3.length() > 0 && mat3 != null) {
                             mate3 = Gestor.getMaterial(Integer.parseInt(mat3));
                             materiales += ";" + mat3;
-                            if (mate3.getDisponibilidad() == 1) {
+                            if (mate3.getDisponibilidad() != 0) {
                                 disp++;
                             }
                             if (mate3.getEstado() == 1 || mate3.getEstado() == 2) {
@@ -99,7 +99,7 @@
                         if (mat4.length() > 0 && mat4 != null) {
                             mate4 = Gestor.getMaterial(Integer.parseInt(mat4));
                             materiales += ";" + mat4;
-                            if (mate4.getDisponibilidad() == 1) {
+                            if (mate4.getDisponibilidad() != 0) {
                                 disp++;
                             }
                             if (mate4.getEstado() == 1 || mate4.getEstado() == 2) {
@@ -113,7 +113,7 @@
                         if (mat5.length() > 0 && mat5 != null) {
                             mate5 = Gestor.getMaterial(Integer.parseInt(mat5));
                             materiales += ";" + mat5;
-                            if (mate5.getDisponibilidad() == 1) {
+                            if (mate5.getDisponibilidad() != 0) {
                                 disp++;
                             }
                             if (mate5.getEstado() == 1 || mate5.getEstado() == 2) {

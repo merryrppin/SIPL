@@ -182,9 +182,16 @@
                         mat.setFoto_mat(foto_mat);
                         Gestor.updateMaterial(mat);
                     }
+                    response.sendRedirect("listarMateriales.jsp?accion=1");
                 } else {
                     out.println("<b>none<b>");
                 }
+            } else if(a == 4){
+                String id_mat=request.getParameter("id");
+                Material mat = Gestor.getMaterial(Integer.parseInt(id_mat));
+                mat.setFoto_mat(foto);
+                Gestor.updateMaterial(mat);
+                response.sendRedirect("listarMateriales.jsp?accion=1");
             }
         } catch (Exception e) {
             error = "sin_accion";

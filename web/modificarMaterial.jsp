@@ -49,11 +49,12 @@
                     <table align="center" class="table table-hover">
                         <tr>
                             <td>
-                                <label class="control-label" for="codigo">Codigo</label>
+                                <img src="Imagenes/<%out.print(mat.getFoto_mat() + "medium.png");%>" alt="...">
                             </td>
-                            <td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
                                 <input hidden type="text" name="codigo" id="codigo" value="<%out.print(mat.getCodigo());%>">
-                                <input disabled="disabled" type="text" value="<%out.print(mat.getCodigo());%>">
                             </td>
                             <td>
                                 <label class="control-label" for="tipo">Tipo de Elemento</label>
@@ -265,6 +266,7 @@
                         <tr>
                              <td colspan="4" align="center">
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'generarQR.jsp?codigo=<%out.print(mat.getCodigo());%>'" style='width:150px;'>Generar Código QR</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'listarImagenes.jsp?codigo=<%out.print(mat.getCodigo());%>'" style='width:150px;'>Cambiar Imagen</button>
                             </td>
                         </tr>
                         <tr>
