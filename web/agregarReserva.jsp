@@ -215,7 +215,7 @@
                         <tr>
                             <td colspan="5" align="center">
                                 <br><br>
-                                <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
+                                <button type="submit" class="btn btn-success" style='width:150px;'>Reservar</button>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                 <br><br>
                             </td>
