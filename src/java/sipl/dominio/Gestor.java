@@ -216,5 +216,10 @@ public class Gestor {
     public ArrayList<Reserva> getReservas() {
         return resDAO.getReservas();
     }
-    
+    public ArrayList<Multa> getMultasFecha(String fecha1, String fecha2) {
+        return mulDAO.getRangoFecha_multa(fecha1, fecha2);
+    }
+    public void GraficarMultas(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
+        gra.Multas(values, fecha, n, direccion, tiempo, titulo);
+    }
 }

@@ -238,7 +238,7 @@
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaPrestamo.jsp'" style='width:200px;'>Préstamos</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMultas.jsp'" style='width:200px;'>Multas</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'estadisticaMulta.jsp'" style='width:200px;'>Multas</button>
                                 </td>
                             </tr>
                             <tr align="center">
