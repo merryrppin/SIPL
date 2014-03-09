@@ -261,7 +261,19 @@
                                     <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Backup</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'backup.jsp'" style='width:200px;'>Backup</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'backup.jsp?accion=1'" style='width:200px;'>Backup</button>
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                                <td>
+                                    <%
+                                        if (user.getTipo_usuario() == 1) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Descargar Backup</button>
+                                    <%} else if (user.getTipo_usuario() == 2) {
+                                    %>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'backup.jsp?accion=2'" style='width:200px;'>Descargar Backup</button>
                                     <%
                                         }
                                     %>
