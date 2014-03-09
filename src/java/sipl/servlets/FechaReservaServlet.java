@@ -8,21 +8,22 @@ package sipl.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sipl.db.Conexion;
-import sipl.db.materialDAO;
-import sipl.db.prestamoDAO;
-import sipl.dominio.Material;
-import sipl.dominio.Prestamo;
+import sipl.db.reservaDAO;
+import sipl.dominio.Reserva;
 
 /**
  *
  * @author WM
  */
-public class MaterialesPrestamoServlet extends HttpServlet {
+@WebServlet(name = "FechaReservaServlet", urlPatterns = {"/FechaReservaServlet"})
+public class FechaReservaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,21 +39,19 @@ public class MaterialesPrestamoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Conexion con = new Conexion();
-        materialDAO matDAO = new materialDAO(con);
-        prestamoDAO preDAO = new prestamoDAO(con);
+        reservaDAO resDAO = new reservaDAO(con);
         String codigo = request.getParameter("Code");
-        Prestamo pre = preDAO.getPrestamoCodUsu(codigo);
-        if(pre!=null){
-            Material mat;
-            String [] materiales = pre.getMat().split(";");
-            for (String materiale : materiales) {
-                mat = matDAO.getMaterial(Integer.parseInt(materiale));
-                out.print("<tr>");
-                out.print("<td>"+mat.getCodigo()+"</td>");
-                out.print("<td>"+mat.getTipo_mat().getNombre()+"</td>");
-                out.print("<td>"+mat.getDescripcion()+"</td>");
-                out.print("</tr>");
-            }
+        Reserva res = resDAO.getReservaCodUsu(codigo);
+        if (res != null) {
+            Calendar cal1 = res.getFecha_reserva();
+            String fecha = cal1.get(Calendar.YEAR) + "-";
+            int mes = cal1.get(Calendar.MONTH);
+            mes++;
+            fecha += mes + "-";
+            fecha += cal1.get(Calendar.DAY_OF_MONTH);
+            fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+            fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+            out.print(fecha);
         }
     }
 

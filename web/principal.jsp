@@ -320,7 +320,7 @@
                                     <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Modificar Reserva</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarReservas.jsp?accion=2'" style='width:200px;'>Modificar Reserva</button>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarReserva.jsp'" style='width:200px;'>Modificar Reserva</button>
                                     <%
                                         }
                                     %>

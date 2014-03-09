@@ -69,6 +69,26 @@ public class reservaDAO {
         return res;
     }
 
+    public Reserva getReservaCodUsu(String codigo) {
+        Reserva res = null;
+        ResultSet rs = con.getQuery("select * from reserva where cod_usuario='" + codigo + "' and estado=0");
+        try {
+            if (rs.next()) {
+                int cod = rs.getInt("codigo");
+                int estado= rs.getInt("estado");
+                Calendar cal = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_reserva");
+                cal.setTimeInMillis(t1.getTime());
+                String mat = rs.getString("cod_material");
+                res = new Reserva (cod, usuDAO.getUsuario(codigo), estado, cal, mat);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            res = null;
+        }
+        return res;
+    }
+    
     public boolean addReserva(Reserva res) {
        boolean result = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

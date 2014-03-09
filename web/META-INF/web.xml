@@ -28,6 +28,10 @@
         <servlet-name>FileUploadServlet</servlet-name>
         <servlet-class>sipl.servlets.FileUploadServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MaterialesReservaServlet</servlet-name>
+        <servlet-class>sipl.servlets.MaterialesReservaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MaterialServlet</servlet-name>
         <url-pattern>/MaterialServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>FileUploadServlet</servlet-name>
         <url-pattern>/FileUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaterialesReservaServlet</servlet-name>
+        <url-pattern>/MaterialesReservaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sipl.db.Conexion;
 import sipl.db.materialDAO;
-import sipl.db.prestamoDAO;
+import sipl.db.reservaDAO;
 import sipl.dominio.Material;
-import sipl.dominio.Prestamo;
+import sipl.dominio.Reserva;
 
 /**
  *
  * @author WM
  */
-public class MaterialesPrestamoServlet extends HttpServlet {
+public class MaterialesReservaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,12 +39,12 @@ public class MaterialesPrestamoServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Conexion con = new Conexion();
         materialDAO matDAO = new materialDAO(con);
-        prestamoDAO preDAO = new prestamoDAO(con);
+        reservaDAO resDAO = new reservaDAO(con);
         String codigo = request.getParameter("Code");
-        Prestamo pre = preDAO.getPrestamoCodUsu(codigo);
-        if(pre!=null){
+        Reserva res = resDAO.getReservaCodUsu(codigo);
+        if(res!=null){
             Material mat;
-            String [] materiales = pre.getMat().split(";");
+            String [] materiales = res.getMat().split(";");
             for (String materiale : materiales) {
                 mat = matDAO.getMaterial(Integer.parseInt(materiale));
                 out.print("<tr>");

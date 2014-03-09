@@ -44,8 +44,8 @@
             function getDatos() {
                 var code = $("#codigo").val();
                 $("#nombre").load("UsuarioServlet", {Code: code});
-                $("#materiales").load("MaterialesPrestamoServlet", {Code: code});
-                $("#fechaPrestamo").load("FechaPrestamoServlet", {Code: code});
+                $("#materiales").load("MaterialesReservaServlet", {Code: code});
+                $("#fechaReserva").load("FechaReservaServlet", {Code: code});
                 return false;
             }
         </script>
@@ -69,31 +69,20 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Reserva" class="form-horizontal" action="guardarReserva.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                <form name="Reserva" class="form-horizontal" action="guardarPrestamo.jsp?accion=4" method="POST" onsubmit="return validarForm(this);">
                     <table class="table table-hover" align="center">
                         <tr>
+                            <td colspan="4">
+                                <label class="control-label">
+                                    Ingresar el código del estudiante para encontrar la reserva activa
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
-                                <label class="control-label" for="codigo">Codigo</label>
+                                <label class="control-label" for="codigo">Id del estudiante: </label>
                             </td>
                             <%
-                                ArrayList<Multa> data = Gestor.getMultas();
-                                for (int i = 0; i < data.size(); i++) {
-                                    Calendar cal1 = data.get(i).getFecha_multa();
-                                    if (data.get(i).getEstado_multa() == 0) {
-                                        Calendar hoy = Calendar.getInstance();
-                                        long tiempo1 = hoy.getTimeInMillis();
-                                        long tiempo2 = cal1.getTimeInMillis();
-                                        if (tiempo1 - tiempo2 >= 259200000) {
-                                            Multa mul = Gestor.getMultaUsu(data.get(i).getUsu().getCodigo());
-                                            mul.setEstado_multa(1);
-                                            Usuario usu = Gestor.getUsuario(mul.getUsu().getCodigo());
-                                            usu.setEstado(0);
-                                            Gestor.updateUsuario(usu);
-                                            Gestor.updateMulta(mul);
-                                        }
-                                    }
-                                }
-
                                 String cod = "";
                                 String accion = request.getParameter("accion");
                                 int a = 0;
@@ -106,66 +95,49 @@
                                 }
                             %>
                             <td>
-                                <label class="control-label" ><%out.print(user.getCodigo());%></label>
+                                <input type="text" id="codigo" name="codigo" onchange="return getDatos();"
+                                       <%if (cod.length() > 0 && cod != null) {
+                                               out.print("value='" + cod + "'");
+                                           }%>
+                                       >
                             </td>
-                            <td><b>Nombre Completo:</b></td>
                             <td>
-                               <label class="control-label" ><%out.print(user.getNombre());%></label>
+                                <label class="control-label" >Nombre</label>
                             </td>
-                            <td>
-                                <label class="control-label" ><%out.print(user.getApellido());%></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5" align="center">
-                                <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return getMulta();" style='width:200px;'/>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="verificar" colspan="5" align="center">
+                            <td id="nombre">
 
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="4">
                                 <table class="table table-striped">
-                                    <tr>
-                                        <th><button onClick="return addInput('dynamicInput');"><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
-                                        <th><label class="control-label">Tipo de Elemento</label></th>
-                                        <th><label class="control-label">Descripción del Elemento</label></th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <table class="table table-striped">
-                                                <tbody  id="dynamicInput">
-                                                    <tr>
-                                                        <td>
-                                                            <input type="text" name="mat1" id="mat1" onchange="return getMaterial1();">
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                        <td colspan="2">
-                                            <table class="table table-striped" id="materialito">
-                                                <tbody>
-                                                    <tr id="r1"></tr>
-                                                    <tr id="r2"></tr>
-                                                    <tr id="r3"></tr>
-                                                    <tr id="r4"></tr>
-                                                    <tr id="r5"></tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>Código elemento</th>
+                                            <th>Tipo elemento</th>
+                                            <th>Descripcion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="materiales">
+
+                                    </tbody>
                                 </table>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="5" align="center">
+                            <td>
+                                <label class="control-label"> Fecha de reserva</label>
+                            </td>
+                            <td id="fechaReserva" colspan="2">
+
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-success" style='width:150px;'>Realizar Préstamo</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center">
                                 <br><br>
-                                <button type="submit" class="btn btn-success" style='width:150px;'>Finalizar Reserva</button>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                 <br><br>
                             </td>
