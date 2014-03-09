@@ -13,7 +13,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || (user.getTipo_usuario() == 0 && user.getEstado()==3)) {
 %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
-           function fijarURL(url, form) {
+            function fijarURL(url, form) {
                 if (form.codigo.value.length === 0) { //¿Tiene 0 caracteres?
                     form.codigo.focus();    // Damos el foco al control
                     alert('No has llenado el campo del código'); //Mostramos el mensaje
@@ -62,14 +62,14 @@
                 <br>
                 <br>
                 <h5><b>Importante:</b> Tiene dos días de plazo para prestar los materiales con el monitor, la reserva <br>de materiales se inactivará automáticamente al 
-                        finalizar dos días después de Guardar la reserva. </h5>
+                    finalizar dos días después de Guardar la reserva. </h5>
             </div>
         </div>
         <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Reserva" class="form-horizontal" action="guardarPrestamo.jsp?accion=4" method="POST" onsubmit="return validarForm(this);">
+                <form name="Reserva" class="form-horizontal" action="guardarPrestamo.jsp?accion=4" method="POST" <%if (user.getTipo_usuario() != 0) {%> onsubmit="return validarForm(this);"<%}%>>
                     <table class="table table-hover" align="center">
                         <tr>
                             <td colspan="4">
@@ -95,9 +95,14 @@
                                 }
                             %>
                             <td>
-                                <input type="text" id="codigo" name="codigo" onchange="return getDatos();"
+                                <input type="text" id="codigo" name="codigo" 
+                                       <%if (user.getTipo_usuario() != 0) {%>
+                                       onchange="return getDatos();"
                                        <%if (cod.length() > 0 && cod != null) {
                                                out.print("value='" + cod + "'");
+                                           }%>
+                                       <%} else {
+                                               out.print("value='" + user.getCodigo() + "'");
                                            }%>
                                        >
                             </td>
@@ -105,7 +110,9 @@
                                 <label class="control-label" >Nombre</label>
                             </td>
                             <td id="nombre">
-
+                                <%if (user.getTipo_usuario()==0) {
+                                               out.print(user.getNombre());
+                                           }%>
                             </td>
                         </tr>
                         <tr>
@@ -119,7 +126,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="materiales">
-
                                     </tbody>
                                 </table>
                             </td>

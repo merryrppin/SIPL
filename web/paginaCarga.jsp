@@ -72,6 +72,8 @@
                             dir = "graficar.jsp";
                         } else if (Prim.equalsIgnoreCase("D")) {
                             dir = "graficarD.jsp";
+                        }else if (Prim.equalsIgnoreCase("T")) {
+                            dir = "graficar.jsp";
                         }
                 %>
                 <form class="form-horizontal" action="<%out.print(dir);%>?orden=<%out.print(orden);%>" method="POST">
@@ -99,7 +101,6 @@
                 </form>
             </div>
             <div class="col-xs-12 col-sm-3" align="center">
-
             </div>
         </div>
     </body>

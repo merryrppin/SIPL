@@ -48,8 +48,11 @@
                 <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=2" method="POST">
                     <table align="center" class="table table-hover">
                         <tr>
-                            <td>
-                                <img src="Imagenes/<%out.print(mat.getFoto_mat() + "medium.png");%>" alt="...">
+                            <td colspan="2" align="center">
+                                <img src="QR/<%out.print(mat.getCodigo() + ".png");%>" alt="...">
+                            </td>
+                            <td colspan="2" align="center">
+                                <img src="Imagenes/<%out.print(mat.getFoto_mat() );%>" alt="..." width="200" height="200">
                             </td>
                         </tr>
                         <tr>

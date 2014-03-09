@@ -56,13 +56,11 @@
                 <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
                     <table align="center" class="table table-hover">
                         <tr>
-                            <%
-                            %>
-                            <td>
-                                <img src="QR/<%out.print(mat.getCodigo() + "medium.png");%>" alt="...">
+                            <td colspan="2" align="center">
+                                <img src="QR/<%out.print(mat.getCodigo() + ".png");%>" alt="...">
                             </td>
-                            <td>
-                                <img src="Imagenes/<%out.print(mat.getFoto_mat() + "medium.png");%>" alt="...">
+                            <td colspan="2" align="center">
+                                <img src="Imagenes/<%out.print(mat.getFoto_mat() );%>" alt="..." width="200" height="200">
                             </td>
                         </tr>
                         <tr>
@@ -145,7 +143,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="3">
                                 <label>Última fecha de Matenimiento</label>
                             </td>
                             <td>
@@ -166,12 +164,12 @@
                             <td>
                                 <label>Descripción</label>
                             </td>
-                            <td colspan="2">
+                            <td colspan="3">
                                 <textarea disabled="disabled" maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(mat.getDescripcion());%></textarea>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="5" align="center">
+                            <td colspan="4" align="center">
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>

@@ -16,7 +16,7 @@
     if (user == null) {
         error = "No_usuario";
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        String id=request.getParameter("codigo");
+        String id = request.getParameter("codigo");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,19 +56,23 @@
                         </tr>
                         <%
                             String sDirectorio = Gestor.getVariable(1).getDatos();
-                            sDirectorio+="//Imagenes";
+                            sDirectorio += "//Imagenes";
                             File f = new File(sDirectorio);
                             if (f.exists()) {
                                 File[] ficheros = f.listFiles();
                                 for (int x = 0; x < ficheros.length; x++) {
-                                    out.print("<tr>");
-                                    out.print("<td><input type='radio' name='foto' value='" + ficheros[x].getName() + "' ");
-                                    out.print("checked='checked'/></td>");
-                                    out.print("<td>" + ficheros[x].getName());
-                                    out.print("</td>");
-                                    out.print("<td><img src='Imagenes/" + ficheros[x].getName() +"' alt='...' width='150' height='150'>")   ;
-                                    out.print("</td>");
-                                    out.print("</tr>");
+                                    if (ficheros[x].getName().equals("noimage.jpg")) {
+
+                                    } else {
+                                        out.print("<tr>");
+                                        out.print("<td><input type='radio' name='foto' value='" + ficheros[x].getName() + "' ");
+                                        out.print("checked='checked'/></td>");
+                                        out.print("<td>" + ficheros[x].getName());
+                                        out.print("</td>");
+                                        out.print("<td><img src='Imagenes/" + ficheros[x].getName() + "' alt='...' width='150' height='150'>");
+                                        out.print("</td>");
+                                        out.print("</tr>");
+                                    }
                                 }
 
                             } else {
@@ -76,7 +80,7 @@
                             }
                         %>
                         <tr>
-                            <td>
+                            <td colspan="3" align="center">
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Guardar</button>
                             </td>
                         </tr>
@@ -93,6 +97,8 @@
 <%    } else {
         error = "sin_permisos";
     }
-    if (error.length() > 0) {
+
+    if (error.length()
+            > 0) {
         response.sendRedirect("principal.jsp?error=" + error);
     }%>
