@@ -13,7 +13,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || (user.getTipo_usuario() == 0 && user.getEstado()==3)) {
+    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || (user.getTipo_usuario() == 0 && user.getEstado() == 3)) {
 %>
 <!DOCTYPE html>
 <html>
@@ -110,11 +110,13 @@
                                 <label class="control-label" >Nombre</label>
                             </td>
                             <td id="nombre">
-                                <%if (user.getTipo_usuario()==0) {
-                                               out.print(user.getNombre());
-                                           }%>
+                                <%if (user.getTipo_usuario() == 0) {
+                                        out.print(user.getNombre());
+                                    }%>
                             </td>
                         </tr>
+
+
                         <tr>
                             <td colspan="4">
                                 <table class="table table-striped">
@@ -126,19 +128,45 @@
                                         </tr>
                                     </thead>
                                     <tbody id="materiales">
+                                        <%if (user.getTipo_usuario() == 0) {
+                                                Prestamo pre = Gestor.getPrestamoCodUsu(user.getCodigo());
+                                                if (pre != null) {
+                                                    Material mat;
+                                                    String[] materiales = pre.getMat().split(";");
+                                                    for (String materiale : materiales) {
+                                                        mat = Gestor.getMaterial(Integer.parseInt(materiale));
+                                                        out.print("<tr>");
+                                                        out.print("<td>" + mat.getCodigo() + "</td>");
+                                                        out.print("<td>" + mat.getTipo_mat().getNombre() + "</td>");
+                                                        out.print("<td>" + mat.getDescripcion() + "</td>");
+                                                        out.print("</tr>");
+                                                    }
+                                                }
+                                            }%>
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
+
                         <tr>
+                            <%
+                                if (user.getTipo_usuario() != 0) {
+                            %>
                             <td>
                                 <label class="control-label"> Fecha de reserva</label>
                             </td>
                             <td id="fechaReserva" colspan="2">
 
                             </td>
+                            <%}%>
                             <td>
+                                <%
+                                if (user.getTipo_usuario() != 0) {
+                            %>
                                 <button type="submit" class="btn btn-success" style='width:150px;'>Realizar Préstamo</button>
+                                <%}else{%>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'darBajaReserva.jsp'" style='width:150px;'>Dar de baja reserva</button>
+                                <%}%>
                             </td>
                         </tr>
                         <tr>

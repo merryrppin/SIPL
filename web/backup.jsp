@@ -11,10 +11,21 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String error="";
+    String accion="";
+    int a=0;
+    try{
+        accion=request.getParameter("accion");
+        a=Integer.parseInt(accion);
+    }catch(Exception e){
+        error="sin_accion";
+    }
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
-        response.sendRedirect("login.jsp?error=No_usuario");
+       error = "No_usuario";
+       
     } else if (user.getTipo_usuario() == 2) {
+        if(a==1){
         Calendar cal = Calendar.getInstance();
         int Y = cal.get(Calendar.YEAR);
         int M = cal.get(Calendar.MONTH);
@@ -27,6 +38,14 @@
         nombre += Y + "-" + M + "-" + D + "_" + h + "-" + m + "-" + s;
         nombre += ".sql";
         String resultado = Gestor.GenerarBackup(nombre);
+        response.sendRedirect("backup.jsp?accion=2");
+        }else if(a==2){
+            
+        }
 }else {
-        response.sendRedirect("principal.jsp?error=sin_permisos");
-    }%>
+        error = "sin_permisos";
+    }
+if(error.length()>0){
+    response.sendRedirect("principal.jsp?error="+error);
+}
+%>
