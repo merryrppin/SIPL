@@ -54,7 +54,7 @@
                     Material mate1 = null, mate2 = null, mate3 = null,
                             mate4 = null, mate5 = null;
                     try {
-                        if (mat1.length() > 0 && mat1 != null) {
+                        if (mat1 != null && mat1.length() > 0) {
                             mate1 = Gestor.getMaterial(Integer.parseInt(mat1));
                             materiales += mat1;
                             if (mate1.getDisponibilidad() != 0) {
@@ -68,7 +68,7 @@
                         error = "material_inexistente";
                     }
                     try {
-                        if (mat2.length() > 0 && mat2 != null) {
+                        if (mat2 != null && mat2.length() > 0) {
                             mate2 = Gestor.getMaterial(Integer.parseInt(mat2));
                             materiales += ";" + mat2;
                             if (mate2.getDisponibilidad() != 0) {
@@ -82,7 +82,7 @@
                         error = "material_inexistente";
                     }
                     try {
-                        if (mat3.length() > 0 && mat3 != null) {
+                        if (mat3 != null && mat3.length() > 0) {
                             mate3 = Gestor.getMaterial(Integer.parseInt(mat3));
                             materiales += ";" + mat3;
                             if (mate3.getDisponibilidad() != 0) {
@@ -96,7 +96,7 @@
                         error = "material_inexistente";
                     }
                     try {
-                        if (mat4.length() > 0 && mat4 != null) {
+                        if (mat4 != null && mat4.length() > 0) {
                             mate4 = Gestor.getMaterial(Integer.parseInt(mat4));
                             materiales += ";" + mat4;
                             if (mate4.getDisponibilidad() != 0) {
@@ -110,7 +110,7 @@
                         error = "material_inexistente";
                     }
                     try {
-                        if (mat5.length() > 0 && mat5 != null) {
+                        if (mat5 != null && mat5.length() > 0) {
                             mate5 = Gestor.getMaterial(Integer.parseInt(mat5));
                             materiales += ";" + mat5;
                             if (mate5.getDisponibilidad() != 0) {
@@ -136,7 +136,7 @@
                         if (flag == true) {
                             Gestor.addPrestamo(pre);
                             try {
-                                if (mat1.length() > 0 && mat1 != null) {
+                                if (mat1 != null && mat1.length() > 0) {
                                     mate1.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate1);
                                     Tipo_material tip = mate1.getTipo_mat();
@@ -149,7 +149,7 @@
                             } catch (Exception e) {
                             }
                             try {
-                                if (mat2.length() > 0 && mat2 != null) {
+                                if (mat2 != null && mat2.length() > 0) {
                                     mate2.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate2);
                                     Tipo_material tip = mate2.getTipo_mat();
@@ -161,7 +161,7 @@
                             } catch (Exception e) {
                             }
                             try {
-                                if (mat3.length() > 0 && mat3 != null) {
+                                if (mat3 != null && mat3.length() > 0) {
                                     mate3.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate3);
                                     Tipo_material tip = mate3.getTipo_mat();
@@ -173,7 +173,7 @@
                             } catch (Exception e) {
                             }
                             try {
-                                if (mat4.length() > 0 && mat4 != null) {
+                                if (mat4 != null && mat4.length() > 0) {
                                     mate4.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate4);
                                     Tipo_material tip = mate4.getTipo_mat();
@@ -185,7 +185,7 @@
                             } catch (Exception e) {
                             }
                             try {
-                                if (mat5.length() > 0 && mat5 != null) {
+                                if (mat5 != null && mat5.length() > 0) {
                                     mate5.setDisponibilidad(1);
                                     Gestor.updateMaterial(mate5);
                                     Tipo_material tip = mate5.getTipo_mat();

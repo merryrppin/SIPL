@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import sipl.dominio.Reserva;
-import sipl.dominio.Usuario;
 
 /**
  *
@@ -74,8 +73,8 @@ public class reservaDAO {
        boolean result = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal2 = sdf.format(res.getFecha_reserva().getTime());
-        String sql = "insert into reserva (cod_usuario,estado,fecha_reserva,cod_material) values ('"+res.getUsu().getCodigo()+"','" +res.getEstado()+ "','"
-                + cal2 + "'," + res.getMat() + ")";
+        String sql = "insert into reserva (cod_usuario,estado,fecha_reserva,cod_material) values ('"+res.getUsu().getCodigo()+"'," +res.getEstado()+ ",'"
+                + cal2 + "','" + res.getMat() + "')";
         int registros = con.setQuery(sql);
         if (registros == 1) {
             result = true;
@@ -88,8 +87,8 @@ public class reservaDAO {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String cal2 = sdf.format(res.getFecha_reserva().getTime());
         String sql = "update reserva set cod_usuario='" +res.getUsu().getCodigo()+ "',"
-                + " estado='"+res.getEstado()+"', fecha_reserva='" + cal2
-                + "', cod_material="+ res.getMat()+" where codigo=" + res.getCodigo();
+                + " estado="+res.getEstado()+", fecha_reserva='" + cal2
+                + "', cod_material='"+ res.getMat()+"' where codigo=" + res.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
