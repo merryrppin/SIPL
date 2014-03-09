@@ -73,8 +73,10 @@ public class FileUploadServlet extends HttpServlet {
 
         // constructs the directory path to store upload file
         // this path is relative to application's directory
-        String uploadPath = getServletContext().getRealPath("")
-                + File.separator + UPLOAD_DIRECTORY;
+        String dir="C:\\sipl\\SIPL\\web\\";
+//        String uploadPath = getServletContext().getRealPath("")
+//                + File.separator + UPLOAD_DIRECTORY;
+        String uploadPath = dir + UPLOAD_DIRECTORY;
 
         // creates the directory if it does not exist
         File uploadDir = new File(uploadPath);
@@ -106,7 +108,7 @@ public class FileUploadServlet extends HttpServlet {
             request.setAttribute("message", "There was an error: " + ex.getMessage());
         }
         // redirects client to message page
-        getServletContext().getRequestDispatcher("/guardarMaterial.jsp?accion=3").forward(
+        getServletContext().getRequestDispatcher("/uploadImagen.jsp?accion=1").forward(
                 request, response);
     }
 }

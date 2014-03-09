@@ -30,15 +30,6 @@
         <script type="text/javascript" src="js/calendar-setup.js"></script>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script type="text/javascript">
-            function validarForm(Material) {
-                if (Material.fecha.value.length === 0) { //¿Tiene 0 caracteres?
-                    Material.fecha.focus();    // Damos el foco al control
-                    alert('No has llenado el campo de la fecha'); //Mostramos el mensaje
-                    return false; //devolvemos el foco
-                }
-            }
-        </script>
     </head>
     <body>
         <br>
@@ -54,7 +45,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
+                <form name="Material" class="form-horizontal" action="guardarMaterial.jsp?accion=2" method="POST">
                     <table align="center" class="table table-hover">
                         <tr>
                             <td>
@@ -259,10 +250,6 @@
                             <td colspan="2">
                                 <textarea maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(mat.getDescripcion());%></textarea>
                             </td>
-                            <td>
-                                <label class="control-label" for="foto">Foto Material</label>
-                                <input type="file" id="foto" name="foto"><%out.print(mat.getFoto_mat());%>
-                            </td>
                         </tr>  
                         <tr>
                             <td colspan="4" align="center"> 
@@ -281,7 +268,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="5" align="center">
+                            <td colspan="4" align="center">
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>

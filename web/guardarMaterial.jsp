@@ -172,8 +172,19 @@
                 } catch (Exception e) {
                     error = "fecha_error";
                 }
-            }else if(a==3){
-                
+            } else if (a == 3) {
+                String foto_mat=foto;
+                String[] materiales;
+                materiales = request.getParameterValues("id");
+                if (materiales != null) {
+                    for (int i = 0; i < materiales.length; i++) {
+                        Material mat = Gestor.getMaterial(Integer.parseInt(materiales[i]));
+                        mat.setFoto_mat(foto_mat);
+                        Gestor.updateMaterial(mat);
+                    }
+                } else {
+                    out.println("<b>none<b>");
+                }
             }
         } catch (Exception e) {
             error = "sin_accion";
