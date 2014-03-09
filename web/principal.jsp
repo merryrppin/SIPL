@@ -63,7 +63,7 @@
                     <li><a href="#Acercade" data-toggle="tab">Acerca de  <span class="glyphicon glyphicon-circle-arrow-right"></span></a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="Material">
+                    <div class="tab-pane" id="Material">
                         <table align="center" class="table table-hover">
                             <tr align="center">
                                 <td>
@@ -144,7 +144,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="tab-pane" id="Prestamo">
+                    <div class="tab-pane active" id="Prestamo">
                         <table class="table table-hover" align="center">
                             <tr align ="center">
                                 <td>
