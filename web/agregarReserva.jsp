@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar Préstamo</title>
+        <title>Agregar Reserva</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -67,11 +67,6 @@
                 $("#verificar").load("MultaUsuarioServlet", {Code: code});
                 return false;
             }
-            function getReserva() {
-                var code = $("#codigo").val();
-                $("#verificar").load("ReservaUsuarioServlet", {Code: code});
-                return false;
-            }
             function getUsuario() {
                 var code = $("#codigo").val();
                 $("#nombre").load("UsuarioServlet", {Code: code});
@@ -111,14 +106,20 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>Agregar Préstamo</h1>
+                <h1>Agregar Reserva</h1>
+                <br>
+                <br>
+                <br>
+                
+                <h5><b>Importante:</b> Tiene dos días de plazo para prestar los materiales con el monitor, la reserva <br>de materiales se inactivará automáticamente al 
+                        finalizar dos días después de Guardar la reserva. </h5>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Material" class="form-horizontal" action="guardarPrestamo.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                <form name="Reserva" class="form-horizontal" action="guardarReserva.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table class="table table-hover" align="center">
                         <tr>
                             <td>
@@ -155,32 +156,29 @@
                                 }
                             %>
                             <td>
-                                <input type="text" id="codigo" name="codigo" onchange="return getUsuario();"
-                                       <%if (cod.length() > 0 && cod != null) {
-                                               out.print("value='" + cod + "'");
-                                           }%>
-                                       >
+                                <label class="control-label" ><%out.print(user.getCodigo());%></label>
+                            </td>
+                            <td><b>Nombre Completo:</b></td>
+                            <td>
+                               <label class="control-label" ><%out.print(user.getNombre());%></label>
                             </td>
                             <td>
-                                <label class="control-label" >Nombre</label>
-                            </td>
-                            <td id="nombre">
-
+                                <label class="control-label" ><%out.print(user.getApellido());%></label>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
+                            <td colspan="5" align="center">
                                 <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return getMulta();" style='width:200px;'/>
-                                <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return getReserva();" style='width:200px;'/>
+                                
                             </td>
                         </tr>
                         <tr>
-                            <td id="verificar" colspan="4" align="center">
+                            <td id="verificar" colspan="5" align="center">
 
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">
+                            <td colspan="5">
                                 <table class="table table-striped">
                                     <tr>
                                         <th><button onClick="return addInput('dynamicInput');"><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
@@ -215,7 +213,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
+                            <td colspan="5" align="center">
                                 <br><br>
                                 <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>

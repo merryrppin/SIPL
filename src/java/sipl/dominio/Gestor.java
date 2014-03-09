@@ -24,6 +24,7 @@ public class Gestor {
     private final prestamoDAO preDAO;
     private final multaDAO mulDAO;
     private final variableSisDAO varDAO;
+    private final reservaDAO resDAO;
     Encri enc = new Encri();
     QRCode qrC = new QRCode();
     Graficar gra = new Graficar();
@@ -41,6 +42,7 @@ public class Gestor {
         preDAO = new prestamoDAO(con);
         mulDAO = new multaDAO(con);
         varDAO = new variableSisDAO(con);
+        resDAO = new reservaDAO(con);
     }
 
     public Usuario validarLogin(String login, String clave) {
@@ -201,6 +203,18 @@ public class Gestor {
     
     public ArrayList<Danho> getRangoFecha_danhos(String fecha1, String fecha2){
         return danDAO.getRangoFecha_danhos(fecha1, fecha2);
+    }
+    public Reserva getReserva(int codigo) {
+        return resDAO.getReserva(codigo);
+    }
+    public boolean addReserva(Reserva res) {
+        return resDAO.addReserva(res);
+    }
+    public boolean updateReserva(Reserva res) {
+        return resDAO.updateReserva(res);
+    }
+    public ArrayList<Reserva> getReservas() {
+        return resDAO.getReservas();
     }
     
 }
