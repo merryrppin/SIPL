@@ -50,13 +50,13 @@
                         if (Gestor.addUsuario(usu) == true) {
                             response.sendRedirect("listarUsuarios.jsp?accion=1");
                         } else {
-                            error = "usuario_no_agregado";
+                            error = "no_agrego";
                         }
                     } else {
-                        error = "telefono_invalido";
+                        error = "telefono_incorrecto";
                     }
                 } else {
-                    error = "datos_incompletos";
+                    error = "faltan_Datos";
                 }
             } else if (a == 2) {
                 if (nombre != null && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
@@ -86,13 +86,13 @@
                         if (Gestor.updateUsuario(u) == true) {
                             response.sendRedirect("listarUsuarios.jsp?accion=2");
                         } else {
-                            error = "usuario_no_modificado";
+                            error = "no_agrego";
                         }
                     } else {
-                        error = "telefono_invalido";
+                        error = "telefono_incorrecto";
                     }
                 } else {
-                    error = "datos_incompletos";
+                    error = "faltan_Datos";
                 }
             } else if ((a == 3 || a == 4 || a == 5) && user.getTipo_usuario() == 2) {
                 String ID = request.getParameter("id");
@@ -116,7 +116,7 @@
                 response.sendRedirect("modificarUsuario.jsp?id=" + ID);
             }
         } catch (Exception e) {
-            error = "sin_accion";
+            error = "error_accion";
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
