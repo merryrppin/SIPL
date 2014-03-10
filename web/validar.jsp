@@ -14,6 +14,7 @@
         String encr = passwd;
         encr = Gestor.encriptar(encr);
         Usuario usu = Gestor.validarLogin(login, encr);
+        if(usu.getEstado()!=1){
         if (usu != null) {
             HttpSession hsession = request.getSession(true);
             hsession.setMaxInactiveInterval(30 * 60);
@@ -21,6 +22,9 @@
             response.sendRedirect("principal.jsp");
         } else {
             response.sendRedirect("login.jsp?error=loginIncorrecto");
+        }
+    }else{
+        response.sendRedirect("login.jsp?error=usuario_inactivo");    
         }
     } else {
         response.sendRedirect("login.jsp?error=faltanDatos");
