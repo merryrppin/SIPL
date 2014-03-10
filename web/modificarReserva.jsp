@@ -161,10 +161,10 @@
                             <%}%>
                             <td>
                                 <%
-                                if (user.getTipo_usuario() != 0) {
-                            %>
+                                    if (user.getTipo_usuario() != 0) {
+                                %>
                                 <button type="submit" class="btn btn-success" style='width:150px;'>Realizar Préstamo</button>
-                                <%}else{%>
+                                <%} else {%>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'darBajaReserva.jsp'" style='width:150px;'>Dar de baja reserva</button>
                                 <%}%>
                             </td>

@@ -19,9 +19,9 @@
             <br><br><br><br><br>
             <div class="col-xs-6 col-sm-6">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
-               <h2 align="center"><b>Bienvenid@ al SILAB - Sistema de Información de Laboratorios</b></h2>
+                    html,body{ background: #e0e0e0; }   
+                </style>
+                <h2 align="center"><b>Bienvenid@ al SILAB - Sistema de Información de Laboratorios</b></h2>
                 <br><br><br>
                 <form class="form-horizontal" action="validar.jsp" method="POST">
                     <table align="center">
@@ -69,7 +69,7 @@
                         </td>
                     </tr>
                 </table>
-                
+
             </div>
         </div>
     </body>

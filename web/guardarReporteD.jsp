@@ -57,18 +57,18 @@
                     }
                     if (codigo_material != null && codigo_material.length() > 0) {
                         Material mat = Gestor.getMaterial(Integer.parseInt(codigo_material));
-                        int e=0;
-                        if(Integer.parseInt(estado)==0){
-                            e=2;
-                        }else if(Integer.parseInt(estado)==1){
-                            e=3;
-                        }else{
-                            e=1;
+                        int e = 0;
+                        if (Integer.parseInt(estado) == 0) {
+                            e = 2;
+                        } else if (Integer.parseInt(estado) == 1) {
+                            e = 3;
+                        } else {
+                            e = 1;
                         }
                         mat.setEstado(e);
                         Gestor.updateMaterial(mat);
-                        Danho dan = new Danho(Integer.parseInt(codigo), descripcion, 
-                                Gestor.getMaterial(Integer.parseInt(codigo_material)), 
+                        Danho dan = new Danho(Integer.parseInt(codigo), descripcion,
+                                Gestor.getMaterial(Integer.parseInt(codigo_material)),
                                 Gestor.getUsuario(codigo_usuario), cal, user, Integer.parseInt(estado));
                         if (Gestor.addDanho(dan) == true) {
                             response.sendRedirect("listarReporteD.jsp?accion=1");
@@ -80,31 +80,31 @@
                 } catch (Exception e) {
                     error = "fecha_error";
                 }
-             } else if (a == 2) {
+            } else if (a == 2) {
                 if (descripcion.length() == 0 || descripcion == null) {
                     descripcion = "ninguna";
                 }
-                    int cod= Integer.parseInt(codigo);
-                    Danho dan= Gestor.getDanho(cod);
-                    dan.setDescripcion(descripcion);
-                    dan.setEstado(Integer.parseInt(estado));
-                    Material mat = dan.getMat();
-                    int est=(Integer.parseInt(estado));
-                    int estadoMat=0;
-                    if(est==0){
-                        estadoMat=2;
-                    }else if(est==1){
-                        estadoMat=0;
-                    }else if(est==2){
-                        estadoMat=1;
-                    }
-                    mat.setEstado(estadoMat);
-                    Gestor.updateMaterial(mat);
-                    if (Gestor.updateDanho(dan) == true) {
-                        response.sendRedirect("listarReporteD.jsp?accion=1");
-                    } else {
-                        error = "no_agrego";
-                    }
+                int cod = Integer.parseInt(codigo);
+                Danho dan = Gestor.getDanho(cod);
+                dan.setDescripcion(descripcion);
+                dan.setEstado(Integer.parseInt(estado));
+                Material mat = dan.getMat();
+                int est = (Integer.parseInt(estado));
+                int estadoMat = 0;
+                if (est == 0) {
+                    estadoMat = 2;
+                } else if (est == 1) {
+                    estadoMat = 0;
+                } else if (est == 2) {
+                    estadoMat = 1;
+                }
+                mat.setEstado(estadoMat);
+                Gestor.updateMaterial(mat);
+                if (Gestor.updateDanho(dan) == true) {
+                    response.sendRedirect("listarReporteD.jsp?accion=1");
+                } else {
+                    error = "no_agrego";
+                }
             }
         } catch (Exception e) {
             error = "sin_accion";

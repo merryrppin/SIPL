@@ -24,10 +24,10 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
             function fijarURL(url, form) {
-                if (form.codigo.value.length === 0) { //¿Tiene 0 caracteres?
-                    form.codigo.focus();    // Damos el foco al control
-                    alert('No has llenado el campo del código'); //Mostramos el mensaje
-                    return false; //devolvemos el foco
+                if (form.codigo.value.length === 0) {
+                    form.codigo.focus();
+                    alert('No has llenado el campo del código');
+                    return false;
                 } else {
                     form.action = url;
                     form.submit();

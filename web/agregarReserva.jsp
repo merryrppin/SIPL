@@ -61,7 +61,6 @@
                     return false;
                 }
             }
-
             function getMulta() {
                 var code = $("#codigo").val();
                 $("#verificar").load("MultaUsuarioServlet", {Code: code});
@@ -157,6 +156,7 @@
                             %>
                             <td>
                                 <label class="control-label" ><%out.print(user.getCodigo());%></label>
+                                <input hidden id="codigo" name="codigo" value="<%out.print(user.getCodigo());%>">
                             </td>
                             <td><b>Nombre Completo:</b></td>
                             <td>

@@ -93,7 +93,7 @@
                                         out.print("<td>Libre</td>");
                                     } else if (data.get(i).getDisponibilidad() == 1) {
                                         out.print("<td>Prestado</td>");
-                                    }else if (data.get(i).getDisponibilidad() == 2) {
+                                    } else if (data.get(i).getDisponibilidad() == 2) {
                                         out.print("<td>En Reserva</td>");
                                     }
                                     out.print("<td>" + data.get(i).getFoto_mat() + "</td>");

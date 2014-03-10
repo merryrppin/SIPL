@@ -108,7 +108,7 @@
                                 <br>
                                 <br>
                                 <%
-                                if (a == 2) {%>
+                                    if (a == 2) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                                 <%}
                                 %>

@@ -52,7 +52,7 @@
                                 <img src="QR/<%out.print(mat.getCodigo() + ".png");%>" alt="...">
                             </td>
                             <td colspan="2" align="center">
-                                <img src="Imagenes/<%out.print(mat.getFoto_mat() );%>" alt="..." width="200" height="200">
+                                <img src="Imagenes/<%out.print(mat.getFoto_mat());%>" alt="..." width="200" height="200">
                             </td>
                         </tr>
                         <tr>
@@ -257,12 +257,12 @@
                                         <br>
                                         <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                     </div>
-                                           
+
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                             <td colspan="4" align="center">
+                            <td colspan="4" align="center">
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'generarQR.jsp?codigo=<%out.print(mat.getCodigo());%>'" style='width:150px;'>Generar Código QR</button>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'listarImagenes.jsp?codigo=<%out.print(mat.getCodigo());%>'" style='width:150px;'>Cambiar Imagen</button>
                             </td>

@@ -173,7 +173,7 @@
                     error = "fecha_error";
                 }
             } else if (a == 3) {
-                String foto_mat=foto;
+                String foto_mat = foto;
                 String[] materiales;
                 materiales = request.getParameterValues("id");
                 if (materiales != null) {
@@ -186,8 +186,8 @@
                 } else {
                     out.println("<b>none<b>");
                 }
-            } else if(a == 4){
-                String id_mat=request.getParameter("id");
+            } else if (a == 4) {
+                String id_mat = request.getParameter("id");
                 Material mat = Gestor.getMaterial(Integer.parseInt(id_mat));
                 mat.setFoto_mat(foto);
                 Gestor.updateMaterial(mat);

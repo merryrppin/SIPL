@@ -106,14 +106,14 @@
                                 <select id="estado" name="estado">
                                     <option value="0"
                                             <%if (est == 0) {
-                                                out.print(" selected ");
-                                            }%>>
+                                                    out.print(" selected ");
+                                                }%>>
                                         Activo
                                     </option>
                                     <option value="1"
                                             <%if (est == 1) {
-                                                out.print(" selected ");
-                                            }%>
+                                                    out.print(" selected ");
+                                                }%>
                                             >
                                         Inactivo
                                     </option>
