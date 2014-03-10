@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.recursos;
 
 import java.io.File;
@@ -38,7 +37,7 @@ public class Graficar {
     }
 
     public boolean TipoMaterial(ArrayList<Tipo_material> TM, String direccion) throws IOException {
-        boolean flag=false;
+        boolean flag = false;
         DefaultPieDataset data = new DefaultPieDataset();
         for (int i = 0; i < TM.size(); i++) {
             data.setValue("Cat." + TM.get(i).getId(), TM.get(i).getCantidad());
@@ -46,11 +45,28 @@ public class Graficar {
         JFreeChart chart = ChartFactory.createPieChart("Cantidad de materiales por categoría", data, true, true, true);
         try {
             ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
-            flag=true;
+            flag = true;
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo");
         }
         return flag;
+    }
+
+    public void Danhos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
+        try {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for (int j = 0; j < n; j++) {
+                dataset.addValue(values[j], "Cantidad de Daños", "" + fecha[j]);
+            }
+            JFreeChart chart = ChartFactory.createLineChart(titulo, tiempo, "Cantidad", dataset, PlotOrientation.VERTICAL, true, true, true);
+            try {
+                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 700, 500);
+            } catch (IOException e) {
+                System.out.println("Error al abrir el archivo");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void Prestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
@@ -69,7 +85,7 @@ public class Graficar {
             System.out.println(e);
         }
     }
-    
+
     public void Multas(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
         try {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -103,7 +119,24 @@ public class Graficar {
             System.out.println(e);
         }
     }
-    
+
+    public void DanhosY(int[][] values, int n, String direccion, String tiempo, String titulo) {
+        try {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for (int j = 0; j < n; j++) {
+                dataset.addValue(values[j][1], "Cantidad de Daños", "" + values[j][0]);
+            }
+            JFreeChart chart = ChartFactory.createLineChart(titulo, tiempo, "Cantidad", dataset, PlotOrientation.VERTICAL, true, true, true);
+            try {
+                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+            } catch (IOException e) {
+                System.out.println("Error al abrir el archivo");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void MultasY(int[][] values, int n, String direccion, String tiempo, String titulo) {
         try {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -120,7 +153,6 @@ public class Graficar {
             System.out.println(e);
         }
     }
-    
 
     public void PrestamosY_Barra(int[][] values, int n, String direccion, String tiempo, String titulo) {
         //Crear el dataset...
@@ -139,4 +171,3 @@ public class Graficar {
     }
 
 }
-

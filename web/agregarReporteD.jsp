@@ -33,8 +33,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Agregar Reporte Daño</h1>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="col-xs-12 col-sm-10">
                 <form class="form-horizontal" action="guardarReporteD.jsp?accion=1" method="POST">
                     <table align="center"   class="table table-hover">
-                           <tr>
+                        <tr>
                             <td>
                                 <label class="control-label" for="codigo">Codigo Reporte</label>
                             </td>
@@ -70,7 +70,7 @@
                                 <input maxlength="10" type="text" id="codigo_material" name="codigo_material">
                             </td>
                         </tr> 
-                        
+
                         <tr>
                             <td>
                                 <label class="control-label" for="codigo_usuario">Codigo Usuario</label>
@@ -79,8 +79,8 @@
                                 <input maxlength="20" type="text" id="codigo_usuario" name="codigo_usuario">
                             </td>
 
-                            </tr>
-                            <tr>
+                        </tr>
+                        <tr>
                             <td>
                                 <label class="control-label" for="cal-field-1">Fecha Daño</label>
                             </td>
@@ -127,7 +127,7 @@
                         </tr>
                         <tr>
                             <td>
-                        <label class="control-label" for="estado">Estado</label>
+                                <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
                                 <select id="estado" name="estado">
@@ -142,13 +142,13 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
-                                     <br>
-                                     <br>
+                                        <br>
+                                        <br>
                                         <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                     </div>
                                 </div>
                             </td>
-                           
+
                         </tr>
                     </table>
                 </form>

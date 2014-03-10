@@ -162,11 +162,15 @@ public class Gestor {
     public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
     }
+    
+    public void GraficarDanhoYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
+        gra.DanhosY(values, n, direccion, tiempo, titulo);
+    }
 
-     public void GraficarMultasYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
+    public void GraficarMultasYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
         gra.MultasY(values, n, direccion, tiempo, titulo);
     }
-     
+
     public Prestamo getPrestamoCodUsu(String codigo) {
         return preDAO.getPrestamoCodUsu(codigo);
     }
@@ -199,39 +203,51 @@ public class Gestor {
         return varDAO.getTipo_variable(id);
     }
 
-    public void agregarTextoImagen(String dir, String text, int ubi) throws Exception{
+    public void agregarTextoImagen(String dir, String text, int ubi) throws Exception {
         tei.addTextoImagen(dir, text, ubi);
     }
-    
-    public Multa getMultaUsu(String cod){
+
+    public Multa getMultaUsu(String cod) {
         return mulDAO.getMultaUsu(cod);
     }
-    
-    public ArrayList<Danho> getRangoFecha_danhos(String fecha1, String fecha2){
+
+    public ArrayList<Danho> getRangoFecha_danhos(String fecha1, String fecha2) {
         return danDAO.getRangoFecha_danhos(fecha1, fecha2);
     }
+
     public Reserva getReserva(int codigo) {
         return resDAO.getReserva(codigo);
     }
+
     public boolean addReserva(Reserva res) {
         return resDAO.addReserva(res);
     }
+
     public boolean updateReserva(Reserva res) {
         return resDAO.updateReserva(res);
     }
+
     public ArrayList<Reserva> getReservas() {
         return resDAO.getReservas();
     }
+
     public ArrayList<Multa> getMultasFecha(String fecha1, String fecha2) {
         return mulDAO.getRangoFecha_multa(fecha1, fecha2);
     }
+
     public void GraficarMultas(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
         gra.Multas(values, fecha, n, direccion, tiempo, titulo);
     }
-    public Reserva getReservaCodUsu(String codigo){
+
+    public void GraficarDanhos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
+        gra.Multas(values, fecha, n, direccion, tiempo, titulo);
+    }
+    
+    public Reserva getReservaCodUsu(String codigo) {
         return resDAO.getReservaCodUsu(codigo);
     }
-    public Error_D getError(String codigo){
+
+    public Error_D getError(String codigo) {
         return errDAO.getError(codigo);
     }
 }

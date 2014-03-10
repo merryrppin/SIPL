@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 /**
@@ -11,6 +10,7 @@ package sipl.dominio;
  * @author WM
  */
 public class Error_D {
+
     String codigo;
     String mensaje;
 
@@ -34,5 +34,5 @@ public class Error_D {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
+
 }

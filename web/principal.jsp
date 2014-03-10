@@ -13,7 +13,6 @@
     try {
         error = request.getParameter("error");
     } catch (Exception e) {
-
     }
     if (error != null && error.length() > 0) {
         er = Gestor.getError(error);

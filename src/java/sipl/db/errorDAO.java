@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.db;
 
 import java.sql.ResultSet;
@@ -15,6 +14,7 @@ import sipl.dominio.Error_D;
  * @author WM
  */
 public class errorDAO {
+
     private final Conexion con;
 
     public errorDAO(Conexion con) {
@@ -23,7 +23,7 @@ public class errorDAO {
 
     public Error_D getError(String codigo) {
         Error_D error = null;
-        ResultSet rs = con.getQuery("select * from error where codigo='" + codigo+"'");
+        ResultSet rs = con.getQuery("select * from error where codigo='" + codigo + "'");
         try {
             if (rs.next()) {
                 String mensaje = rs.getString("mensaje");

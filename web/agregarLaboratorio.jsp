@@ -36,8 +36,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
                 <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+                    html,body{ background: #e0e0e0; }   
+                </style>
                 <h1>Agregar Laboratorio</h1>
             </div>
         </div>
@@ -95,11 +95,11 @@
                                 </div>
                             </td>
                         </tr>
-                         <tr>
-                        <td colspan="5" align="center">
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="5" align="center">
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
+                        </tr>
                     </table>
                 </form>
             </div>
