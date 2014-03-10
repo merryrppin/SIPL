@@ -104,7 +104,22 @@ public class Graficar {
         }
     }
     
-    
+    public void MultasY(int[][] values, int n, String direccion, String tiempo, String titulo) {
+        try {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for (int j = 0; j < n; j++) {
+                dataset.addValue(values[j][1], "Cantidad de Multas", "" + values[j][0]);
+            }
+            JFreeChart chart = ChartFactory.createLineChart(titulo, tiempo, "Cantidad", dataset, PlotOrientation.VERTICAL, true, true, true);
+            try {
+                ChartUtilities.saveChartAsJPEG(new File(direccion), chart, 500, 500);
+            } catch (IOException e) {
+                System.out.println("Error al abrir el archivo");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
     
 
     public void PrestamosY_Barra(int[][] values, int n, String direccion, String tiempo, String titulo) {

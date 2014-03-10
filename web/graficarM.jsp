@@ -81,7 +81,7 @@
                                 }
                             }
                         }
-                        Gestor.GraficarPrestamosYear(y, rest, direccion, "Años", titulo);
+                        Gestor.GraficarMultasYear(y, rest, direccion, "Años", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=MultasAnho;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "YM.jpg");
                     } else if (rango.equals("Mes")) {
                         int[] values = new int[12];
@@ -131,7 +131,7 @@
                             cant++;
                             values[gj] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 31, direccion, "Dia", titulo);
+                        Gestor.GraficarMultas(values, tiempo, 31, direccion, "Dia", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=MultasDia;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DM.jpg");
                     } else if (rango.equals("Hor")) {
                         Calendar cal = Calendar.getInstance();
@@ -307,6 +307,22 @@
                                             out.print("<tr>");
                                             out.print("<td>" + meses[i] + "</td>");
                                             out.print("<td>" + tamY[i][1] + "</td>");
+                                            out.print("</tr>");
+                                        }
+                                    }
+                                    %><tr>
+                                    <td><b>Usuario</b></td>
+                                    <td><b>Nombre</b></td>
+                                    <td><b>Apellidos</b></td>
+                                    <td><b>Cantidad Multas</b></td>
+                                </tr> <%                                    for (int i = 0; i < usuarios.size(); i++) {
+                                        if (canMult[i] > 0) {
+                                            Usuario usuario1 = Gestor.getUsuario(codusuarios[i]);
+                                            out.print("<tr>");
+                                            out.print("<td>" + codusuarios[i] + "</td>");
+                                            out.print("<td>" + usuario1.getNombre() + "</td>");
+                                            out.print("<td>" + usuario1.getApellido() + "</td>");
+                                            out.print("<td>" + canMult[i] + "</td>");
                                             out.print("</tr>");
                                         }
                                     }

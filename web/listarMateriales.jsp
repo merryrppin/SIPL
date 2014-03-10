@@ -95,6 +95,8 @@
                                         out.print("<td>Libre</td>");
                                     } else if (data.get(i).getDisponibilidad() == 1) {
                                         out.print("<td>Prestado</td>");
+                                    }else if (data.get(i).getDisponibilidad() == 2) {
+                                        out.print("<td>En Reserva</td>");
                                     }
                                     out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
                                     out.print("<td> <img src='Imagenes/" + data.get(i).getFoto_mat() + "' alt='...' width='50' height='50'></td>");
@@ -103,7 +105,7 @@
                             }
                         %>
                         <tr>
-                            <td colspan="10" align="center">
+                            <td colspan="11" align="center">
                                 <%
                                     if (a == 2 && data.size() > 0) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>

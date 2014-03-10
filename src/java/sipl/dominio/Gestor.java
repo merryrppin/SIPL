@@ -161,6 +161,10 @@ public class Gestor {
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
     }
 
+     public void GraficarMultasYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
+        gra.MultasY(values, n, direccion, tiempo, titulo);
+    }
+     
     public Prestamo getPrestamoCodUsu(String codigo) {
         return preDAO.getPrestamoCodUsu(codigo);
     }

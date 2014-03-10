@@ -4,6 +4,7 @@
     Author     : WM
 --%>
 
+<%@page import="java.io.File"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
@@ -60,7 +61,7 @@
                                 <img src="QR/<%out.print(mat.getCodigo() + ".png");%>" alt="...">
                             </td>
                             <td colspan="2" align="center">
-                                <img src="Imagenes/<%out.print(mat.getFoto_mat() );%>" alt="..." width="200" height="200">
+                                <img src="Imagenes/<%out.print(mat.getFoto_mat());%>" alt="..." width="200" height="200">
                             </td>
                         </tr>
                         <tr>
@@ -166,6 +167,12 @@
                             </td>
                             <td colspan="3">
                                 <textarea disabled="disabled" maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(mat.getDescripcion());%></textarea>
+                            </td>
+                        </tr>
+                        
+                          <tr>
+                            <td colspan="4" align="center">
+                                <button  type="button" class="btn btn-default"><span class='glyphicon glyphicon-qrcode'></span> Tutorial descargar y redimensionar QR</button>
                             </td>
                         </tr>
                         <tr>
