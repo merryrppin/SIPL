@@ -10,6 +10,14 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String error = "";
+    Error_D er = null;
+    try {
+        error = request.getParameter("error");
+    } catch (Exception e) {
+    }
+    er = Gestor.getError(error);
+
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
@@ -30,11 +38,37 @@
         <script type="text/javascript" src="js/calendar-setup.js"></script>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script>
+            <%if (error != null && error.length() > 0) {%>
+            $(document).ready(function() {
+                $("#myModal").modal('show');
+            });
+            <%}
+            %>
+        </script>
     </head>
     <body>
         <style>
-          html,body{ background: #e0e0e0; }   
-               </style>
+            html,body{ background: #e0e0e0; }   
+        </style>
+        <%if (error != null && error.length() > 0) {%>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-warning"><%out.print(er.getMensaje());%></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}%>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
@@ -86,40 +120,40 @@
                             <td>
                                 <label class="control-label" for="cal-field-1">Fecha Daño</label>
                             </td>
-                         <td>
+                            <td>
                                 <%
-                                String fecha;
-                                Calendar cal1=dan.getFecha_d();
-                                fecha=cal1.get(Calendar.DAY_OF_MONTH)+"/";
-                                int mes=cal1.get(Calendar.MONTH);
-                                mes++;
-                                String m="";
-                                if(mes<10){
-                                    m+="0";
-                                }
-                                m+=mes;
-                                fecha+=m+"/";
-                                fecha+=cal1.get(Calendar.YEAR)+"";
+                                    String fecha;
+                                    Calendar cal1 = dan.getFecha_d();
+                                    fecha = cal1.get(Calendar.DAY_OF_MONTH) + "/";
+                                    int mes = cal1.get(Calendar.MONTH);
+                                    mes++;
+                                    String m = "";
+                                    if (mes < 10) {
+                                        m += "0";
+                                    }
+                                    m += mes;
+                                    fecha += m + "/";
+                                    fecha += cal1.get(Calendar.YEAR) + "";
                                 %>
                                 <input disabled type="text" id="cal-field-1" name="fecha" placeholder="dd/mm/AAAA" value="<%out.print(fecha);%>"/>
-                                
+
 
                             </td>
                             <td>
                                 <label class="control-label" for="hora">Hora</label>
                                 <select disabled="disabled" id="hora" name="hora">
                                     <%
-                                int hora=cal1.get(Calendar.HOUR_OF_DAY);
+                                        int hora = cal1.get(Calendar.HOUR_OF_DAY);
                                         for (int i = 0; i < 24; i++) {
                                             if (i < 10) {
                                                 out.print("<option ");
-                                                if(i==hora){
+                                                if (i == hora) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>0" + i + "</option>");
                                             } else {
-                                                out.print("<option "); 
-                                                if(i==hora){
+                                                out.print("<option ");
+                                                if (i == hora) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>" + i + "</option>");
@@ -134,13 +168,13 @@
                                         for (int i = 0; i < 60; i++) {
                                             if (i < 10) {
                                                 out.print("<option ");
-                                                if(i==minutos){
+                                                if (i == minutos) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>0" + i + "</option>");
                                             } else {
                                                 out.print("<option ");
-                                                if(i==minutos){
+                                                if (i == minutos) {
                                                     out.print("selected ");
                                                 }
                                                 out.print("value='" + i + "'>" + i + "</option>");
@@ -153,7 +187,7 @@
 
                         </tr>
                         <tr>
-                               <td>
+                            <td>
                                 <label class="control-label" for="estado">Estado</label>
                             </td>
                             <td>
@@ -174,7 +208,7 @@
                                             out.print("selected ");
                                         }
                                         out.print("value='2'>Dado de baja</option>");
-    
+
                                     %>
                                 </select>
                             </td>
@@ -187,13 +221,13 @@
                                         <br>
                                         <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                     </div>
-                                    
+
                                 </div>
                             </td>
                             <td colspan="2" align="center">
                                 <br>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                        </td>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
                         </tr>
                     </table>
                 </form>

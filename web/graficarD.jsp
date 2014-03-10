@@ -9,6 +9,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
+<%
+    String error = "";
+    Error_D er = null;
+    try {
+        error = request.getParameter("error");
+    } catch (Exception e) {
+    }
+    er = Gestor.getError(error);
+    %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,11 +32,34 @@
                 form.action = url;
                 form.submit();
             }
+            <%if (error != null && error.length() > 0) {%>
+            $(document).ready(function() {
+                $("#myModal").modal('show');
+            });
+            <%}
+            %>
         </script>
     </head>
     <body>
+        <%if (error != null && error.length() > 0) {%>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-warning"><%out.print(er.getMensaje());%></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}%>
         <%
-            String error = "";
             Usuario user = (Usuario) session.getAttribute("user");
             String accion = request.getParameter("accion");
             String orden = request.getParameter("orden");
@@ -81,7 +113,7 @@
                                 }
                             }
                         }
-                        Gestor.GraficarPrestamosYear(y, rest, direccion, "Años", titulo);
+                        Gestor.GraficarDanhoYear(y, rest, direccion, "Años", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoAnho;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DY.jpg");
                     } else if (rango.equals("Mes")) {
                         int[] values = new int[12];
@@ -105,7 +137,7 @@
                                 + cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + "" + cal.get(Calendar.MINUTE)
                                 + cal.get(Calendar.SECOND));
                         direccion += nom + "DM.jpg";
-                        Gestor.GraficarPrestamos(values, tiempo, 12, direccion, "Mes", titulo);
+                        Gestor.GraficarDanhos(values, tiempo, 12, direccion, "Mes", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoMes;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DM.jpg");
                     } else if (rango.equals("Dia")) {
                         Calendar cal = Calendar.getInstance();
@@ -131,7 +163,7 @@
                             cant++;
                             values[gj] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 31, direccion, "Dia", titulo);
+                        Gestor.GraficarDanhos(values, tiempo, 31, direccion, "Dia", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoDia;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DD.jpg");
                     } else if (rango.equals("Hor")) {
                         Calendar cal = Calendar.getInstance();
@@ -153,7 +185,7 @@
                             cant++;
                             values[t] = cant;
                         }
-                        Gestor.GraficarPrestamos(values, tiempo, 24, direccion, "Horas", titulo);
+                        Gestor.GraficarDanhos(values, tiempo, 24, direccion, "Horas", titulo);
                         response.sendRedirect("paginaCarga.jsp?orden=DanhoHora;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "DH.jpg");
                     }
                 } else {%>

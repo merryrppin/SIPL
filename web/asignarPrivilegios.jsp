@@ -9,6 +9,13 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String error = "";
+    Error_D er = null;
+    try {
+        error = request.getParameter("error");
+    } catch (Exception e) {
+    }
+    er = Gestor.getError(error);
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
@@ -28,6 +35,12 @@
                 form.action = url;
                 form.submit();
             }
+            <%if (error != null && error.length() > 0) {%>
+            $(document).ready(function() {
+                $("#myModal").modal('show');
+            });
+            <%}
+            %>
         </script>
     </head>
     <body>

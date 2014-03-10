@@ -11,6 +11,15 @@
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <!DOCTYPE html>
 <html>
+    <%
+    String error = "";
+    Error_D er = null;
+    try {
+        error = request.getParameter("error");
+    } catch (Exception e) {
+    }
+    er = Gestor.getError(error);
+    %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reportes</title>
@@ -23,11 +32,34 @@
                 form.action = url;
                 form.submit();
             }
+            <%if (error != null && error.length() > 0) {%>
+            $(document).ready(function() {
+                $("#myModal").modal('show');
+            });
+            <%}
+            %>
         </script>
     </head>
     <body>
+        <%if (error != null && error.length() > 0) {%>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-warning"><%out.print(er.getMensaje());%></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}%>
         <%
-            String error = "";
             Usuario user = (Usuario) session.getAttribute("user");
             String accion = request.getParameter("accion");
             String orden = request.getParameter("orden");

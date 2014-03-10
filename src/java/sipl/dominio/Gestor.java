@@ -162,7 +162,7 @@ public class Gestor {
     public void GraficarPrestamosYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
         gra.PrestamosY(values, n, direccion, tiempo, titulo);
     }
-    
+
     public void GraficarDanhoYear(int[][] values, int n, String direccion, String tiempo, String titulo) {
         gra.DanhosY(values, n, direccion, tiempo, titulo);
     }
@@ -242,7 +242,7 @@ public class Gestor {
     public void GraficarDanhos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
         gra.Multas(values, fecha, n, direccion, tiempo, titulo);
     }
-    
+
     public Reserva getReservaCodUsu(String codigo) {
         return resDAO.getReservaCodUsu(codigo);
     }
