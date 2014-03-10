@@ -262,8 +262,8 @@
                                     }
                                 } else if (o[0].equals("MultasMes")) {%>
                                 <tr>
-                                    <td><b>Mes</b></td>
-                                    <td><b>Cantidad Multas</b></td>
+                                    <td colspan='2'><b>Mes</b></td>
+                                    <td colspan='2'><b>Cantidad Multas</b></td>
                                 </tr>
                                 <%
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
@@ -305,8 +305,8 @@
                                     for (int i = 0; i < 12; i++) {
                                         if (tamY[i][1] > 0) {
                                             out.print("<tr>");
-                                            out.print("<td>" + meses[i] + "</td>");
-                                            out.print("<td>" + tamY[i][1] + "</td>");
+                                            out.print("<td colspan='2'>" + meses[i] + "</td>");
+                                            out.print("<td colspan='2'>" + tamY[i][1] + "</td>");
                                             out.print("</tr>");
                                         }
                                     }
@@ -328,8 +328,8 @@
                                     }
                                 } else if (o[0].equals("MultasDia")) {%>
                                 <tr>
-                                    <td><b>Día del mes</b></td>
-                                    <td><b>Cantidad Multas</b></td>
+                                    <td colspan='2'><b>Día del mes</b></td>
+                                    <td colspan='2'><b>Cantidad Multas</b></td>
                                 </tr>
                                 <%
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
@@ -370,8 +370,8 @@
                                     for (int i = 0; i < 32; i++) {
                                         if (tamY[i][1] > 0) {
                                             out.print("<tr>");
-                                            out.print("<td>" + i + "</td>");
-                                            out.print("<td>" + tamY[i][1] + "</td>");
+                                            out.print("<td colspan='2'>" + i + "</td>");
+                                            out.print("<td colspan='2'>" + tamY[i][1] + "</td>");
                                             out.print("</tr>");
                                         }
                                     }
@@ -393,8 +393,8 @@
                                     }
                                 } else if (o[0].equals("MultasHora")) {%>
                                 <tr>
-                                    <td><b>Hora del día</b></td>
-                                    <td><b>Cantidad Préstamos</b></td>
+                                    <td colspan='2'><b>Hora del día</b></td>
+                                    <td colspan='2'><b>Cantidad Préstamos</b></td>
                                 </tr>
                                 <%
                                         String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
@@ -435,8 +435,8 @@
                                         for (int i = 0; i < 24; i++) {
                                             if (tamY[i][1] > 0) {
                                                 out.print("<tr>");
-                                                out.print("<td>" + i + "</td>");
-                                                out.print("<td>" + tamY[i][1] + "</td>");
+                                                out.print("<td colspan='2'>" + i + "</td>");
+                                                out.print("<td colspan='2'>" + tamY[i][1] + "</td>");
                                                 out.print("</tr>");
                                             }
                                         }
