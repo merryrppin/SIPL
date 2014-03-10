@@ -16,6 +16,7 @@ import sipl.recursos.*;
  */
 public class Gestor {
 
+    private final errorDAO errDAO;
     private final usuarioDAO usuDAO;
     private final materialDAO matDAO;
     private final tipo_materialDAO tipDAO;
@@ -43,6 +44,7 @@ public class Gestor {
         mulDAO = new multaDAO(con);
         varDAO = new variableSisDAO(con);
         resDAO = new reservaDAO(con);
+        errDAO = new errorDAO(con);
     }
 
     public Usuario validarLogin(String login, String clave) {
@@ -228,5 +230,8 @@ public class Gestor {
     }
     public Reserva getReservaCodUsu(String codigo){
         return resDAO.getReservaCodUsu(codigo);
+    }
+    public Error_D getError(String codigo){
+        return errDAO.getError(codigo);
     }
 }

@@ -169,8 +169,8 @@
                                 <textarea disabled="disabled" maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(mat.getDescripcion());%></textarea>
                             </td>
                         </tr>
-                        
-                          <tr>
+
+                        <tr>
                             <td colspan="4" align="center">
                                 <button  type="button" class="btn btn-default"><span class='glyphicon glyphicon-qrcode'></span> Tutorial descargar y redimensionar QR</button>
                             </td>

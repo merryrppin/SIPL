@@ -14,19 +14,19 @@
         String encr = passwd;
         encr = Gestor.encriptar(encr);
         Usuario usu = Gestor.validarLogin(login, encr);
-        if(usu.getEstado()!=1){
-        if (usu != null) {
-            HttpSession hsession = request.getSession(true);
-            hsession.setMaxInactiveInterval(30 * 60);
-            hsession.setAttribute("user", usu);
-            response.sendRedirect("principal.jsp");
+        if (usu.getEstado() != 1) {
+            if (usu != null) {
+                HttpSession hsession = request.getSession(true);
+                hsession.setMaxInactiveInterval(30 * 60);
+                hsession.setAttribute("user", usu);
+                response.sendRedirect("principal.jsp");
+            } else {
+                response.sendRedirect("login.jsp?error=login_Incorrecto");
+            }
         } else {
-            response.sendRedirect("login.jsp?error=loginIncorrecto");
-        }
-    }else{
-        response.sendRedirect("login.jsp?error=usuario_inactivo");    
+            response.sendRedirect("login.jsp?error=usuario_inactivo");
         }
     } else {
-        response.sendRedirect("login.jsp?error=faltanDatos");
+        response.sendRedirect("login.jsp?error=faltan_Datos");
     }
 %>

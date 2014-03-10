@@ -121,11 +121,6 @@
                                             out.print("selected ");
                                         }
                                         out.print("value='2'>Dañado</option>");
-                                        out.print("<option ");
-                                        if (est == 3) {
-                                            out.print("selected ");
-                                        }
-                                        out.print("value='3'>Reparado</option>");
                                     %>
                                 </select>
                             </td>

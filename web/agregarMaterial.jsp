@@ -92,7 +92,6 @@
                                     <option value="0">Activo</option>
                                     <option value="1">Dado de baja</option>
                                     <option value="2">Dañado</option>
-                                    <option value="3">Reparado</option>
                                 </select>
                             </td>
                         </tr>

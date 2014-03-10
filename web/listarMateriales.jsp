@@ -85,8 +85,6 @@
                                         out.print("<td>Dado de baja</td>");
                                     } else if (data.get(i).getEstado() == 2) {
                                         out.print("<td>Dañado</td>");
-                                    } else if (data.get(i).getEstado() == 3) {
-                                        out.print("<td>Reparado</td>");
                                     } else {
                                         out.print("<td>Error</td>");
                                     }

@@ -96,7 +96,7 @@
                         int disp = tip.getDisponibilidad();
                         int can = tip.getCantidad();
                         can++;
-                        if (Integer.parseInt(estado) == 0 || Integer.parseInt(estado) == 3) {
+                        if (Integer.parseInt(estado) == 0) {
                             disp++;
                         }
                         tip.setDisponibilidad(disp);

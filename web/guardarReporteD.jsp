@@ -88,6 +88,18 @@
                     Danho dan= Gestor.getDanho(cod);
                     dan.setDescripcion(descripcion);
                     dan.setEstado(Integer.parseInt(estado));
+                    Material mat = dan.getMat();
+                    int est=(Integer.parseInt(estado));
+                    int estadoMat=0;
+                    if(est==0){
+                        estadoMat=2;
+                    }else if(est==1){
+                        estadoMat=0;
+                    }else if(est==2){
+                        estadoMat=1;
+                    }
+                    mat.setEstado(estadoMat);
+                    Gestor.updateMaterial(mat);
                     if (Gestor.updateDanho(dan) == true) {
                         response.sendRedirect("listarReporteD.jsp?accion=1");
                     } else {

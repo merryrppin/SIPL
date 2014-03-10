@@ -72,10 +72,10 @@
                             dir = "graficar.jsp";
                         } else if (Prim.equalsIgnoreCase("D")) {
                             dir = "graficarD.jsp";
-                        }else if (Prim.equalsIgnoreCase("T")) {
+                        } else if (Prim.equalsIgnoreCase("T")) {
                             dir = "graficar.jsp";
-                        } else if (Prim.equalsIgnoreCase("M")){
-                            dir= "graficarM.jsp";
+                        } else if (Prim.equalsIgnoreCase("M")) {
+                            dir = "graficarM.jsp";
                         }
                 %>
                 <form class="form-horizontal" action="<%out.print(dir);%>?orden=<%out.print(orden);%>" method="POST">
