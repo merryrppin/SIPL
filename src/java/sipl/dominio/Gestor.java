@@ -226,4 +226,7 @@ public class Gestor {
     public void GraficarMultas(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
         gra.Multas(values, fecha, n, direccion, tiempo, titulo);
     }
+    public Reserva getReservaCodUsu(String codigo){
+        return resDAO.getReservaCodUsu(codigo);
+    }
 }

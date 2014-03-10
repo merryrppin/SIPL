@@ -61,7 +61,11 @@
                     return false;
                 }
             }
-
+            function getPrestamo() {
+                var code = $("#codigo").val();
+                $("#verificar").load("PrestamoUsuarioServlet", {Code: code});
+                return false;
+            }
             function getMulta() {
                 var code = $("#codigo").val();
                 $("#verificar").load("MultaUsuarioServlet", {Code: code});
@@ -69,7 +73,8 @@
             }
             function getReserva() {
                 var code = $("#codigo").val();
-                $("#verificar").load("ReservaUsuarioServlet", {Code: code});
+                $("#verificar").load("VerificarReservaUsuarioServlet", {Code: code});
+                $("#materRes").load("ReservaUsuarioServlet", {Code: code});
                 return false;
             }
             function getUsuario() {
@@ -142,7 +147,6 @@
                                         }
                                     }
                                 }
-
                                 String cod = "";
                                 String accion = request.getParameter("accion");
                                 int a = 0;
@@ -172,6 +176,7 @@
                             <td colspan="4" align="center">
                                 <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return getMulta();" style='width:200px;'/>
                                 <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return getReserva();" style='width:200px;'/>
+                                <input class="btn btn-info" type="button" value="Verificar Préstamo" onclick="return getPrestamo();" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>
@@ -180,8 +185,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">
-                                <table class="table table-striped">
+                            <td colspan="4" id="materRes">
+                                <table class="table table-striped" id="tablaMats">
                                     <tr>
                                         <th><button onClick="return addInput('dynamicInput');"><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
                                         <th><label class="control-label">Tipo de Elemento</label></th>

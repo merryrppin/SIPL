@@ -35,7 +35,19 @@
                 if (usuario.getEstado() == 2) {
                     error = "usuario_prestamo";
                 } else if (usuario.getEstado() == 3) {
-                    error = "usuario_reserva";
+                    usuario.setEstado(2);
+                    Reserva res = Gestor.getReservaCodUsu(codigo);
+                    Calendar cal = Calendar.getInstance();
+                    Prestamo pres = new Prestamo(0, res.getMat(), res.getUsu(), cal, cal, 0);
+                    String [] mates = res.getMat().split(";");
+                    for(int i=0; i<mates.length; i++){
+                        Material mat = Gestor.getMaterial(Integer.parseInt(mates[i]));
+                        mat.setDisponibilidad(1);
+                        Gestor.updateMaterial(mat);
+                    }
+                    Gestor.addPrestamo(pres);  
+                    res.setEstado(1);
+                    Gestor.updateReserva(res);
                 } else if (usuario.getEstado() == 4) {
                     error = "usuario_multa";
                 } else if (usuario.getEstado() == 1) {

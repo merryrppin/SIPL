@@ -32,6 +32,14 @@
         <servlet-name>MaterialesReservaServlet</servlet-name>
         <servlet-class>sipl.servlets.MaterialesReservaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerificarReservaUsuarioServlet</servlet-name>
+        <servlet-class>sipl.servlets.VerificarReservaUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PrestamoUsuarioServlet</servlet-name>
+        <servlet-class>sipl.servlets.PrestamoUsuarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MaterialServlet</servlet-name>
         <url-pattern>/MaterialServlet</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>MaterialesReservaServlet</servlet-name>
         <url-pattern>/MaterialesReservaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerificarReservaUsuarioServlet</servlet-name>
+        <url-pattern>/VerificarReservaUsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrestamoUsuarioServlet</servlet-name>
+        <url-pattern>/PrestamoUsuarioServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
