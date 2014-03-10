@@ -49,7 +49,7 @@
                     String f[] = fecha.split("/");
                     String fe = f[2] + "/" + f[1] + "/" + f[0] + " 00:00:00";
                     String f2[] = fecha2.split("/");
-                    String fe2 = f2[2] + "/" + f2[1] + "/" + f2[0] + " 00:00:00";
+                    String fe2 = f2[2] + "/" + f2[1] + "/" + f2[0] + " 23:59:59";
                     titulo += fecha + " al " + fecha2;
                     ArrayList<Danho> data = Gestor.getRangoFecha_danhos(fe, fe2);
                     String rango = request.getParameter("rango");

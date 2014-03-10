@@ -49,7 +49,7 @@
                     String f[] = fecha.split("/");
                     String fe = f[2] + "/" + f[1] + "/" + f[0] + " 00:00:00";
                     String f2[] = fecha2.split("/");
-                    String fe2 = f2[2] + "/" + f2[1] + "/" + f2[0] + " 00:00:00";
+                    String fe2 = f2[2] + "/" + f2[1] + "/" + f2[0] + " 23:59:59";
                     titulo += fecha + " al " + fecha2;
                     ArrayList<Multa> datam = Gestor.getMultasFecha(fe, fe2);
                     String rango = request.getParameter("rango");
@@ -310,7 +310,7 @@
                                             out.print("</tr>");
                                         }
                                     }
-                                    %><tr>
+                                %><tr>
                                     <td><b>Usuario</b></td>
                                     <td><b>Nombre</b></td>
                                     <td><b>Apellidos</b></td>
@@ -397,65 +397,65 @@
                                     <td colspan='2'><b>Cantidad Préstamos</b></td>
                                 </tr>
                                 <%
-                                        String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
-                                        String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
-                                        ArrayList<Usuario> usuarios = Gestor.getUsuarios();
-                                        ArrayList<Multa> multas = Gestor.getMultasFecha(f1, f2);
-                                        String codusuarios[] = new String[usuarios.size()];
-                                        int canMult[] = new int[usuarios.size()];
-                                        for (int i = 0; i < usuarios.size(); i++) {
-                                            codusuarios[i] = usuarios.get(i).getCodigo();
-                                            canMult[i] = 0;
-                                        }
-                                        for (int i = 0; i < multas.size(); i++) {
-                                            for (int j = 0; j < usuarios.size(); j++) {
-                                                if (codusuarios[j].equals(multas.get(i).getUsu().getCodigo())) {
-                                                    canMult[j]++;
-                                                    j = usuarios.size();
-                                                }
+                                    String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
+                                    String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    ArrayList<Usuario> usuarios = Gestor.getUsuarios();
+                                    ArrayList<Multa> multas = Gestor.getMultasFecha(f1, f2);
+                                    String codusuarios[] = new String[usuarios.size()];
+                                    int canMult[] = new int[usuarios.size()];
+                                    for (int i = 0; i < usuarios.size(); i++) {
+                                        codusuarios[i] = usuarios.get(i).getCodigo();
+                                        canMult[i] = 0;
+                                    }
+                                    for (int i = 0; i < multas.size(); i++) {
+                                        for (int j = 0; j < usuarios.size(); j++) {
+                                            if (codusuarios[j].equals(multas.get(i).getUsu().getCodigo())) {
+                                                canMult[j]++;
+                                                j = usuarios.size();
                                             }
                                         }
-                                        int tamY[][] = new int[24][2];
-                                        for (int i = 0; i < 24; i++) {
-                                            tamY[i][0] = i;
-                                        }
-                                        for (int j = 0; j < 24; j++) {
-                                            tamY[j][1] = 0;
-                                        }
-                                        for (int k = 0; k < multas.size(); k++) {
-                                            int t = multas.get(k).getFecha_multa().get(Calendar.HOUR_OF_DAY);
-                                            for (int l = 0; l < 24; l++) {
-                                                if (tamY[l][0] == t) {
-                                                    int cant = tamY[l][1];
-                                                    cant++;
-                                                    tamY[l][1] = cant;
-                                                }
+                                    }
+                                    int tamY[][] = new int[24][2];
+                                    for (int i = 0; i < 24; i++) {
+                                        tamY[i][0] = i;
+                                    }
+                                    for (int j = 0; j < 24; j++) {
+                                        tamY[j][1] = 0;
+                                    }
+                                    for (int k = 0; k < multas.size(); k++) {
+                                        int t = multas.get(k).getFecha_multa().get(Calendar.HOUR_OF_DAY);
+                                        for (int l = 0; l < 24; l++) {
+                                            if (tamY[l][0] == t) {
+                                                int cant = tamY[l][1];
+                                                cant++;
+                                                tamY[l][1] = cant;
                                             }
                                         }
-                                        for (int i = 0; i < 24; i++) {
-                                            if (tamY[i][1] > 0) {
-                                                out.print("<tr>");
-                                                out.print("<td colspan='2'>" + i + "</td>");
-                                                out.print("<td colspan='2'>" + tamY[i][1] + "</td>");
-                                                out.print("</tr>");
-                                            }
+                                    }
+                                    for (int i = 0; i < 24; i++) {
+                                        if (tamY[i][1] > 0) {
+                                            out.print("<tr>");
+                                            out.print("<td colspan='2'>" + i + "</td>");
+                                            out.print("<td colspan='2'>" + tamY[i][1] + "</td>");
+                                            out.print("</tr>");
                                         }
-                                        %><tr>
+                                    }
+                                %><tr>
                                     <td><b>Usuario</b></td>
                                     <td><b>Nombre</b></td>
                                     <td><b>Apellidos</b></td>
                                     <td><b>Cantidad Multas</b></td>
                                 </tr> <%                                    for (int i = 0; i < usuarios.size(); i++) {
-                                        if (canMult[i] > 0) {
-                                            Usuario usuario1 = Gestor.getUsuario(codusuarios[i]);
-                                            out.print("<tr>");
-                                            out.print("<td>" + codusuarios[i] + "</td>");
-                                            out.print("<td>" + usuario1.getNombre() + "</td>");
-                                            out.print("<td>" + usuario1.getApellido() + "</td>");
-                                            out.print("<td>" + canMult[i] + "</td>");
-                                            out.print("</tr>");
+                                            if (canMult[i] > 0) {
+                                                Usuario usuario1 = Gestor.getUsuario(codusuarios[i]);
+                                                out.print("<tr>");
+                                                out.print("<td>" + codusuarios[i] + "</td>");
+                                                out.print("<td>" + usuario1.getNombre() + "</td>");
+                                                out.print("<td>" + usuario1.getApellido() + "</td>");
+                                                out.print("<td>" + canMult[i] + "</td>");
+                                                out.print("</tr>");
+                                            }
                                         }
-                                    }
                                     }
                                 %>
                             </table>

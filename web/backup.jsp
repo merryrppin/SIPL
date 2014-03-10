@@ -88,7 +88,6 @@
                                         out.print("</td>");
                                         out.print("</tr>");
                                     }
-
                                 } else {
                                     error = "no_directorio";
                                 }

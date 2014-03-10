@@ -8,6 +8,7 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String error="";
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
@@ -35,7 +36,7 @@
                     Usuario.clave2.focus();
                     alert('No has llenado el campo de la contraseña');
                     return false;
-                } else if (Usuario.clave2.value !==  Usuario.clave1.value) {
+                } else if (Usuario.clave2.value !== Usuario.clave1.value) {
                     alert('Las contraseñas no coinciden');
                     return false;
                 }
@@ -148,11 +149,15 @@
     </body>
 </html>
 <%} else {
-                response.sendRedirect("principal.jsp?error=no_existe");
+                error="no_existe";
             }
         } else {
-            response.sendRedirect("principal.jsp?error=sin_ID");
+            error="sin_ID";
         }
     } else {
-        response.sendRedirect("principal.jsp?error=sin_permisos");
-    }%>
+        error="sin_permisos";
+    }
+if (error.length() > 0) {
+        response.sendRedirect("principal.jsp?" + error);
+    }
+%>

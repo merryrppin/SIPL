@@ -12,8 +12,6 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2) {
-        int id = Gestor.getMateriales().size();
-        id++;
 %>
 <!DOCTYPE html>
 <html>

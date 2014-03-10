@@ -34,7 +34,7 @@
                         error = "no_agrego";
                     }
                 } else {
-                    error = "datos_incompletos";
+                    error = "faltan_Datos";
                 }
             }
         } catch (Exception e) {

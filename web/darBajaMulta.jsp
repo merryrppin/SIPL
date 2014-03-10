@@ -22,7 +22,7 @@
         Gestor.updateMulta(mul);
         response.sendRedirect("darBajaM.jsp?accion=2");
     } else {
-        response.sendRedirect("principal.jsp?error=sin_permisos");
+        error = "sin_permisos";
     }
     if (error.length() > 0) {
         response.sendRedirect("principal.jsp?" + error);
