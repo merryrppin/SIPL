@@ -402,20 +402,22 @@
                                     for (int i = 0; i < 32; i++) {
                                         if (tamY[i][1] > 0) {
                                             out.print("<tr>");
-                                                                      %><tr>
+                                %><tr>
                                     <td><b>Usuario</b></td>
                                     <td><b>Nombre</b></td>
                                     <td><b>Apellidos</b></td>
                                     <td><b>Cantidad Multas</b></td>
-                                </tr> <% for (int i = 0; i < usuarios.size(); i++) {
-                                        if (canMult[i] > 0) {
-                                            Usuario usuario1 = Gestor.getUsuario(codusuarios[i]);
-                                            out.print("<tr>");
-                                            out.print("<td>" + codusuarios[i] + "</td>");
-                                            out.print("<td>" + usuario1.getNombre() + "</td>");
-                                            out.print("<td>" + usuario1.getApellido() + "</td>");
-                                            out.print("<td>" + canMult[i] + "</td>");
-                                            out.print("</tr>");
+                                </tr> <% for (int x = 0; x < usuarios.size(); x++) {
+                                                if (canMult[x] > 0) {
+                                                    Usuario usuario1 = Gestor.getUsuario(codusuarios[x]);
+                                                    out.print("<tr>");
+                                                    out.print("<td>" + codusuarios[x] + "</td>");
+                                                    out.print("<td>" + usuario1.getNombre() + "</td>");
+                                                    out.print("<td>" + usuario1.getApellido() + "</td>");
+                                                    out.print("<td>" + canMult[x] + "</td>");
+                                                    out.print("</tr>");
+                                                }
+                                            }
                                         }
                                     }
                                 } else if (o[0].equals("MultasHora")) {%>
@@ -503,7 +505,7 @@
     } else {
         error = "sin_permisos";
     }
-    if (error.length() > 0) {
+    if (error != null && error.length() > 0) {
         response.sendRedirect("principal.jsp?error=" + error);
     }
 %>

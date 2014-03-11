@@ -46,7 +46,7 @@
                         <p class="text-warning"><%out.print(er.getMensaje());%></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'login.jsp'" data-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,6 @@
                         </td>
                     </tr>
                 </table>
-
             </div>
         </div>
     </body>

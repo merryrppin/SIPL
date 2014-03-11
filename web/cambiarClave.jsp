@@ -9,12 +9,6 @@
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
     String error = "";
-    Error_D er = null;
-    try {
-        error = request.getParameter("error");
-    } catch (Exception e) {
-    }
-    er = Gestor.getError(error);
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
@@ -47,34 +41,9 @@
                     return false;
                 }
             }
-            <%if (error != null && error.length() > 0) {%>
-            $(document).ready(function() {
-                $("#myModal").modal('show');
-            });
-            <%}
-            %>
-
         </script>
     </head>
     <body>
-        <%if (error != null && error.length() > 0) {%>
-        <div id="myModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Error</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p class="text-warning"><%out.print(er.getMensaje());%></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <%}%>
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
@@ -113,7 +82,7 @@
                                 <%out.print(usu.getApellido());%>
                             </td>
                             <%
-                                if (usu.getTipo_usuario() == 0 || usu.getTipo_usuario() == 1) {
+                                if (usu.getTipo_usuario() == 1 || usu.getTipo_usuario() == 2) {
                                     int est = usu.getEstado();
                             %>
                             <td>
@@ -188,7 +157,7 @@
     } else {
         error = "sin_permisos";
     }
-    if (error.length() > 0) {
-        response.sendRedirect("principal.jsp?" + error);
+    if (error != null && error.length() > 0) {
+        response.sendRedirect("principal.jsp?error=" + error);
     }
 %>

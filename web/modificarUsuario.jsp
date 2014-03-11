@@ -189,11 +189,14 @@
     </body>
 </html>
 <%} else {
-                response.sendRedirect("principal.jsp?error=no_existe");
+                error = "no_existe";
             }
         } else {
-            response.sendRedirect("principal.jsp?error=sin_ID");
+            error = "sin_ID";
         }
     } else {
-        response.sendRedirect("principal.jsp?error=sin_permisos");
+        error = "sin_permisos";
+    }
+    if (error != null && error.length() > 0) {
+        response.sendRedirect("principal.jsp?error=" + error);
     }%>

@@ -597,7 +597,7 @@
     } else {
         error = "sin_permisos";
     }
-    if (error.length() > 0) {
+    if (error != null && error.length() > 0) {
         response.sendRedirect("principal.jsp?error=" + error);
     }
 %>
