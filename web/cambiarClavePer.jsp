@@ -143,7 +143,7 @@
                         <tr>
                             <td colspan="4" align="center"> 
                                 <button type="submit" class="btn btn-success" style='width:150px;' onclick="return check();">Guardar</button>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'modificarUsuario.jsp?id=<%out.print(usu.getCodigo());%>'" style='width:150px;'>Atrás</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'configuracion.jsp'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>

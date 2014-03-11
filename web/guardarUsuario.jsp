@@ -14,7 +14,7 @@
     String error = "";
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || user.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || user.getTipo_usuario() == 0) {
         try {
             String codigo = request.getParameter("codigo");
             String tipo = request.getParameter("tipo");
@@ -106,7 +106,7 @@
                 }
                 Gestor.updateUsuario(usu);
                 response.sendRedirect("asignarPrivilegios.jsp");
-            } else if (a == 6) {
+            } else if (a == 6 && (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2)) {
                 String ID = request.getParameter("codigo");
                 Usuario usu = Gestor.getUsuario(ID);
                 String clave = request.getParameter("clave1");
@@ -114,7 +114,7 @@
                 usu.setClave(c);
                 Gestor.updateUsuario(usu);
                 response.sendRedirect("modificarUsuario.jsp?id=" + ID);
-            }else if (a == 7 && (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2)) {
+            } else if (a == 7) {
                 String ID = request.getParameter("codigo");
                 Usuario usu = Gestor.getUsuario(ID);
                 String clave = request.getParameter("clave1");

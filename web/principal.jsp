@@ -393,7 +393,9 @@
     </body>
 </html>
 <%
-    } else {
+    }else if(user.getTipo_usuario()==0){
+        response.sendRedirect("principalUsuario.jsp?error=sin_permisos");
+    }else {
         response.sendRedirect("login.jsp?error=sin_permisos");
     }
 %>

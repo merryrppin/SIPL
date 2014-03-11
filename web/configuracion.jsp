@@ -4,6 +4,7 @@
     Author     : WM
 --%>
 
+<%@page import="java.io.File"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
@@ -50,7 +51,7 @@
                         <p class="text-warning"><%out.print(er.getMensaje());%></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'configuracion.jsp'" data-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -67,31 +68,64 @@
         </div>
         <br><br><br><br>
         <div class="row">
-            <div class="col-xs-6 col-sm-1"></div>
-            <div class="col-xs-12 col-sm-10">
-                <table align="center">
+            <div class="col-xs-6 col-sm-3"></div>
+            <div class="col-xs-12 col-sm-6">
+                <table align="center" class="table table-hover">
                     <tr>
-                        <td>
+                        <td align="center">
                             <button type="button" class="btn btn-info" onclick="location.href = 'cambiarClavePer.jsp'">Cambiar Contraseña</button>
                         </td>
+                        <td></td>
                     </tr>
-                    <%if(user.getTipo_usuario()==1 || user.getTipo_usuario()==2){%>
+                    <%if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {%>
                     <tr>
-                        <td>
+                        <td align="center">
                             <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=1'">Eliminar Gráficas Temporales</button>
+                            <%
+                                String sDirectorio = Gestor.getVariable(1).getDatos();
+                                sDirectorio += "//Grafica";
+                                File f = new File(sDirectorio);
+                                File[] ficheros = f.listFiles();
+                            %>
                         </td>
-                    </tr>
-                    <%}%>
-                    <%if(user.getTipo_usuario()==2){%>
-                    <tr>
                         <td>
-                            <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=2'">Eliminar Backups Temporales</button>
+                            <span class="label label-default"><%out.print(ficheros.length+" Archivos");%></span>
                         </td>
                     </tr>
                     <%}%>
+                    <%if (user.getTipo_usuario() == 2) {%>
+                    <tr>
+                        <td align="center">
+                            <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=2'">Eliminar Backups Temporales</button>
+                            <%
+                                String sDirectorio = Gestor.getVariable(1).getDatos();
+                                sDirectorio += "//Backup";
+                                File f = new File(sDirectorio);
+                                File[] ficheros = f.listFiles();
+                            %>
+                        </td>
+                        <td>
+                            <span class="label label-default"><%out.print(ficheros.length+" Backup");%></span>
+                        </td>
+                    </tr>
+                    <%}%>
+                    <tr>
+                        <%
+                        String direccion="principal.jsp";
+                        if(user.getTipo_usuario()==0){
+                            direccion="principalUsuario.jsp";
+                        }
+                        %>
+                        <td align="center">
+                            <button class="btn btn-danger" type="button" onclick="location.href = '<%out.print(direccion);%>'" style='width:150px;'>Atrás</button>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
                 </table>
             </div>
-            <div class="col-xs-6 col-sm-1"></div>
+            <div class="col-xs-6 col-sm-3"></div>
         </div>
     </body>
 </html>

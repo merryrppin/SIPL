@@ -34,10 +34,12 @@
             } else {
                 error = "no_directorio";
             }
+            response.sendRedirect("configuracion.jsp");
         } else if (a == 2) {
             String sDirectorio = Gestor.getVariable(1).getDatos();
             sDirectorio += "//Backup";
             File f = new File(sDirectorio);
+            int c = 0;
             if (f.exists()) {
                 File[] ficheros = f.listFiles();
                 if (ficheros.length > 10) {
@@ -47,10 +49,14 @@
                         ficheros[x].delete();
                     }
                 } else {
-                    error = "backup_insuficiente";
+                    c++;
+                    response.sendRedirect("configuracion.jsp?error=backup_insuficiente");
                 }
             } else {
                 error = "no_directorio";
+            }
+            if (c == 0) {
+                response.sendRedirect("configuracion.jsp");
             }
         }
     } else {

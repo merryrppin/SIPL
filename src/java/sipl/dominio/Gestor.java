@@ -240,7 +240,7 @@ public class Gestor {
     }
 
     public void GraficarDanhos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
-        gra.Multas(values, fecha, n, direccion, tiempo, titulo);
+        gra.Danhos(values, fecha, n, direccion, tiempo, titulo);
     }
 
     public Reserva getReservaCodUsu(String codigo) {
