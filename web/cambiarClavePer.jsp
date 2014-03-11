@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cambiarClave
-    Created on : 04-mar-2014, 23:17:29
+    Document   : cambiarClavePer
+    Created on : 11-mar-2014, 15:32:36
     Author     : WM
 --%>
 
@@ -12,11 +12,9 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
-        String ID = request.getParameter("id");
-        if (ID.length() > 0 && ID != null) {
-            Usuario usu = Gestor.getUsuario(ID);
-            if (usu != null) {
+    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || user.getTipo_usuario() == 0) {
+        Usuario usu = Gestor.getUsuario(user.getCodigo());
+        if (usu != null) {
 %>
 <!DOCTYPE html>
 <html>
@@ -57,7 +55,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=6" method="POST" onsubmit="return validarForm(this);">
+                <form name="Usuario" class="form-horizontal" action="guardarUsuario.jsp?accion=7" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
@@ -99,6 +97,8 @@
                                     }%>
                             </td>
                             <%
+                                } else {
+                                    out.print("<input hidden type='text' id='estado' name='estado' value='" + usu.getCorreo() + "'>");
                                 }
                             %>
                         </tr>
@@ -154,10 +154,7 @@
     </body>
 </html>
 <%} else {
-                error = "no_existe";
-            }
-        } else {
-            error = "sin_ID";
+            error = "no_existe";
         }
     } else {
         error = "sin_permisos";

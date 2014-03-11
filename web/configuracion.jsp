@@ -72,7 +72,7 @@
                 <table align="center">
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-info" onclick="location.href = 'cambiarClave.jsp?id=<%out.print(user.getCodigo());%>'">Cambiar Contraseña</button>
+                            <button type="button" class="btn btn-info" onclick="location.href = 'cambiarClavePer.jsp'">Cambiar Contraseña</button>
                         </td>
                     </tr>
                     <%if(user.getTipo_usuario()==1 || user.getTipo_usuario()==2){%>

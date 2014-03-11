@@ -14,7 +14,7 @@
     String error = "";
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || user.getTipo_usuario() == 2) {
         try {
             String codigo = request.getParameter("codigo");
             String tipo = request.getParameter("tipo");
@@ -25,7 +25,7 @@
             String correo = request.getParameter("correo");
             String observaciones = request.getParameter("observaciones");
             a = Integer.parseInt(accion);
-            if (a == 1) {
+            if (a == 1 && (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2)) {
                 if (codigo != null && codigo.length() > 0 && nombre != null
                         && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
@@ -114,6 +114,14 @@
                 usu.setClave(c);
                 Gestor.updateUsuario(usu);
                 response.sendRedirect("modificarUsuario.jsp?id=" + ID);
+            }else if (a == 7 && (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2)) {
+                String ID = request.getParameter("codigo");
+                Usuario usu = Gestor.getUsuario(ID);
+                String clave = request.getParameter("clave1");
+                String c = Gestor.encriptar(clave);
+                usu.setClave(c);
+                Gestor.updateUsuario(usu);
+                response.sendRedirect("configuracion.jsp");
             }
         } catch (Exception e) {
             error = "error_accion";

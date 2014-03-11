@@ -64,7 +64,7 @@
         <%}%>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="right">
-                <h6><b><button onclick="location.href = 'configuracion.jsp'"><span class="glyphicon glyphicon-cog"></span></button><%out.print(user.getNombre() + " " + user.getApellido());%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
+                <h6><b><button onclick="location.href = 'configuracion.jsp'"><span class="glyphicon glyphicon-cog"></span></button><%out.print("  "+user.getNombre() + " " + user.getApellido()+"  ");%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
             </div>
         </div>
         <br>

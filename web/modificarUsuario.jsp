@@ -127,7 +127,7 @@
                                 <input maxlength="30" type="text" id="apellidos" name="apellidos" value="<%out.print(usu.getApellido());%>">
                             </td>
                             <%
-                                if (usu.getTipo_usuario() == 0 || usu.getTipo_usuario() == 1) {
+                                if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
                                     int est = usu.getEstado();
                             %>
                             <td>
@@ -151,6 +151,8 @@
                                 </select>
                             </td>
                             <%
+                                }else{
+                                    out.print("<input hidden type='text' id='estado' name='estado' value='"+usu.getCorreo()+"'>");
                                 }
                             %>
                         </tr>
