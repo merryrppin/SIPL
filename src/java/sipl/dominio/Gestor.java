@@ -5,6 +5,7 @@
  */
 package sipl.dominio;
 
+import com.itextpdf.text.BadElementException;
 import java.io.IOException;
 import java.util.ArrayList;
 import sipl.db.*;
@@ -33,6 +34,7 @@ public class Gestor {
     RestoreMySQL res = new RestoreMySQL();
     TextoImagen tei = new TextoImagen();
     ActivarMultas actM = new ActivarMultas();
+    GenerarPDFListar pdfL = new GenerarPDFListar();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -254,5 +256,9 @@ public class Gestor {
     
     public void activarMultas(){
         actM.Multas();
+    }
+    
+    public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir) throws BadElementException, IOException{
+        pdfL.generarPDF(titulo, imagen, usu, dir);
     }
 }

@@ -136,6 +136,14 @@
                         %>
                         <tr>
                             <td colspan="11" align="center">
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=1', this.form)" style='width:200px;'/>
+                                <%String genPDF = "material;Lista de Materiales";
+                                    out.print("<td><input hidden type='text' name='pdf' value='" + genPDF + "' ");
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" align="center">
                                 <%
                                     if (a == 2 && data.size() > 0) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
