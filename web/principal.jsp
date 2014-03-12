@@ -349,20 +349,6 @@
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Modificar Reserva</button>
-                                    <%} else if (user.getTipo_usuario() == 2) {
-                                    %>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarReserva.jsp'" style='width:200px;'>Modificar Reserva</button>
-                                    <%
-                                        }
-                                    %>
-                                </td>
-                            </tr>
-                            <tr align="center">
-                                <td colspan="2">
-                                    <%
-                                        if (user.getTipo_usuario() == 1) {
-                                    %>
                                     <button class="btn btn-primary" type="button" disabled="disabled"  style='width:200px;'>Listar Reservas</button>
                                     <%} else if (user.getTipo_usuario() == 2) {
                                     %>

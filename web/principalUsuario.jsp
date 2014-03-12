@@ -135,16 +135,13 @@
                     <div class="tab-pane" id="Reserva">
                         <table class="table table-hover">
                             <tr align="center">
-                                <td colspan="2">
+                                <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'verReserva.jsp'" style='width:200px;'>Ver Reserva Activa</button>
                                 </td>
                             </tr>
                             <tr align="center">                                
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'agregarReserva.jsp'" style='width:200px;'>Agregar Reserva</button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'modificarReserva.jsp'" style='width:200px;'>Dar de Baja Reserva</button>
                                 </td>
                             </tr>
                         </table>
