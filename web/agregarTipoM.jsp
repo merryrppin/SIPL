@@ -36,24 +36,20 @@
                 form.action = url;
                 form.submit();
             }
-            function validarForm(Usuario) {
-                if (Usuario.codigo.value.length === 0 || /^\s+$/.test(Usuario.codigo.value)) {
-                    Usuario.codigo.focus();
+            function validarForm(Tipom) {
+                if (Tipom.codigo.value.length === 0 || /^\s+$/.test(Tipom.codigo.value)) {
+                    Tipom.codigo.focus();
                     alert('No has llenado el campo del codigo');
                     return false;
-                } else if (Usuario.nombre.value.length === 0 || /^\s+$/.test(Usuario.nombre.value)) {
-                    Usuario.nombre.focus();
+                } else if (Tipom.nombre.value.length === 0 || /^\s+$/.test(Tipom.nombre.value)) {
+                    Tipom.nombre.focus();
                     alert('No has llenado el campo del nombre');
                     return false;
-                } else if (Usuario.apellido.value.length === 0 || /^\s+$/.test(Usuario.apellido.value)) {
-                    Usuario.apellido.focus();
-                    alert('No has llenado el campo del apellido');
+                } else if (Tipom.descripcion.value.length === 0 || /^\s+$/.test(Tipom.descripcion..value)) {
+                    Tipom.descripcion.focus();
+                    alert('No has llenado el campo de descripción');
                     return false;
-                } else if (/^\s+$/.test(Usuario.telefono.value)) {
-                    Usuario.telefono.focus();
-                    alert('El valor del telefono no es válido');
-                    return false;
-                }
+                } 
             }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
@@ -95,7 +91,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-                <form name="Material" class="form-horizontal" action="guardarTipoM.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                <form name="Tipom" class="form-horizontal" action="guardarTipoM.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>

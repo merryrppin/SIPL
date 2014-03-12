@@ -33,6 +33,17 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script>
+            function validarForm(Laboratorio) {
+                if (Laboratorio.nombre.value.length === 0 || /^\s+$/.test(Laboratorio.nombre.value)) {
+                    Laboratorio.nombre.focus();
+                    alert('No has llenado el campo del nombre');
+                    return false;
+                } else if (Laboratorio.ubicacion.value.length === 0 || /^\s+$/.test(Laboratorio.ubicacion.value)) {
+                    Laboratorio.telefono.focus();
+                    alert('No has llenado el campo de ubicación');
+                    return false;
+                }
+            }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
@@ -75,7 +86,7 @@
             <div class="col-xs-12 col-sm-6">
 
 
-                <form class="form-horizontal" action="guardarLaboratorio.jsp?accion=2" method="POST">
+                <form name="Laboratorio" class="form-horizontal" action="guardarLaboratorio.jsp?accion=2" method="POST" onsubmit="return validarForm(this);" >
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
