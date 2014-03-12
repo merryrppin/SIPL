@@ -107,18 +107,6 @@
                             <td>
                                 <label class="control-label" for="codigo">Id del estudiante: </label>
                             </td>
-                            <%
-                                String cod = "";
-                                String accion = request.getParameter("accion");
-                                int a = 0;
-                                try {
-                                    a = Integer.parseInt(accion);
-                                } catch (Exception e) {
-                                }
-                                if (a == 1) {
-                                    cod = request.getParameter("codigo");
-                                }
-                            %>
                             <td>
                                 <input type="text" disabled="disabled" value="<%out.print(user.getCodigo());%>">
                                 <input hidden type="text" id="codigo" name="codigo" value="<%out.print(user.getCodigo());%>">

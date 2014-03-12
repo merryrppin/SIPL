@@ -16,14 +16,17 @@
         error = request.getParameter("error");
     } catch (Exception e) {
     }
-
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usuario = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 0) {
-        if (user.getEstado() == 4) {
+        if( usuario.getEstado()==2){
+            error = "usuario_prestamo";
+        }
+        if (usuario.getEstado() == 4) {
             error = "usuario_multa";
-        } else if (user.getEstado() == 3) {
+        } else if (usuario.getEstado() == 3) {
             error = "usuario_reserva";
         }
         er = Gestor.getError(error);
@@ -163,15 +166,11 @@
                             </td>
                             <%
                                 Gestor.activarMultas();
-                                String cod = "";
                                 String accion = request.getParameter("accion");
                                 int a = 0;
                                 try {
                                     a = Integer.parseInt(accion);
                                 } catch (Exception e) {
-                                }
-                                if (a == 1) {
-                                    cod = request.getParameter("codigo");
                                 }
                             %>
                             <td>

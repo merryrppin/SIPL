@@ -21,6 +21,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 0) {
+        Usuario usuario = Gestor.getUsuario(user.getCodigo());
 %>
 <!DOCTYPE html>
 <html>
@@ -75,10 +76,10 @@
                     <table class="table table-hover" align="center">
                         <tr>
                             <td>
-                                <label class="control-label" for="codigo">Id del estudiante: </label>
+                                <label class="control-label">Id del estudiante: </label>
                             </td>
                             <%
-                                if (user.getEstado() == 2) {
+                                if (usuario.getEstado() == 2) {
                                     Prestamo pre = Gestor.getPrestamoCodUsu(user.getCodigo());
                             %>
                             <td>
@@ -159,7 +160,7 @@
                         <tr>
                             <td colspan="4" align="center">
                                 <br><br>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principalUsuario.jsp'" style='width:150px;'>Atrás</button>
                                 <br><br>
                             </td>
                         </tr>
