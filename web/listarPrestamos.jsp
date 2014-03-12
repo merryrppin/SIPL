@@ -10,6 +10,7 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    Gestor.activarMultas();
     String error = "";
     Error_D er = null;
     try {

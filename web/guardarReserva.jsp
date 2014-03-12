@@ -198,7 +198,7 @@
                             }
                             usuario.setEstado(3);
                             Gestor.updateUsuario(usuario);
-                            response.sendRedirect("listarReservas.jsp?accion=1");
+                            response.sendRedirect("principalUsuario.jsp");
                         } else {
                             error = "no_agrego";
                         }

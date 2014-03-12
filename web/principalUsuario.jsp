@@ -135,8 +135,8 @@
                     <div class="tab-pane" id="Reserva">
                         <table class="table table-hover">
                             <tr align="center">
-                                <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'verPrestamo.jsp'" style='width:200px;'>Ver Préstamo Activo</button>
+                                <td colspan="2">
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'verReserva.jsp'" style='width:200px;'>Ver Reserva Activa</button>
                                 </td>
                             </tr>
                             <tr align="center">                                

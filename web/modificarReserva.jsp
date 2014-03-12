@@ -49,13 +49,6 @@
                     return false;
                 }
             }
-            function getDatos() {
-                var code = $("#codigo").val();
-                $("#nombre").load("UsuarioServlet", {Code: code});
-                $("#materiales").load("MaterialesReservaServlet", {Code: code});
-                $("#fechaReserva").load("FechaReservaServlet", {Code: code});
-                return false;
-            }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
@@ -127,16 +120,8 @@
                                 }
                             %>
                             <td>
-                                <input type="text" id="codigo" name="codigo" 
-                                       <%if (user.getTipo_usuario() != 0) {%>
-                                       onchange="return getDatos();"
-                                       <%if (cod.length() > 0 && cod != null) {
-                                               out.print("value='" + cod + "'");
-                                           }%>
-                                       <%} else {
-                                               out.print("value='" + user.getCodigo() + "'");
-                                           }%>
-                                       >
+                                <input type="text" disabled="disabled" value="<%out.print(user.getCodigo());%>">
+                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(user.getCodigo());%>">
                             </td>
                             <td>
                                 <label class="control-label" >Nombre</label>
@@ -147,8 +132,6 @@
                                     }%>
                             </td>
                         </tr>
-
-
                         <tr>
                             <td colspan="4">
                                 <table class="table table-striped">
@@ -160,45 +143,43 @@
                                         </tr>
                                     </thead>
                                     <tbody id="materiales">
-                                        <%if (user.getTipo_usuario() == 0) {
-                                                Prestamo pre = Gestor.getPrestamoCodUsu(user.getCodigo());
-                                                if (pre != null) {
-                                                    Material mat;
-                                                    String[] materiales = pre.getMat().split(";");
-                                                    for (String materiale : materiales) {
-                                                        mat = Gestor.getMaterial(Integer.parseInt(materiale));
-                                                        out.print("<tr>");
-                                                        out.print("<td>" + mat.getCodigo() + "</td>");
-                                                        out.print("<td>" + mat.getTipo_mat().getNombre() + "</td>");
-                                                        out.print("<td>" + mat.getDescripcion() + "</td>");
-                                                        out.print("</tr>");
-                                                    }
+                                        <%
+                                            Reserva res = Gestor.getReservaCodUsu(user.getCodigo());
+                                            if (res != null) {
+                                                Material mat;
+                                                String[] materiales = res.getMat().split(";");
+                                                for (String materiale : materiales) {
+                                                    mat = Gestor.getMaterial(Integer.parseInt(materiale));
+                                                    out.print("<tr>");
+                                                    out.print("<td>" + mat.getCodigo() + "</td>");
+                                                    out.print("<td>" + mat.getTipo_mat().getNombre() + "</td>");
+                                                    out.print("<td>" + mat.getDescripcion() + "</td>");
+                                                    out.print("</tr>");
                                                 }
                                             }%>
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
-
                         <tr>
-                            <%
-                                if (user.getTipo_usuario() != 0) {
-                            %>
                             <td>
                                 <label class="control-label"> Fecha de reserva</label>
                             </td>
-                            <td id="fechaReserva" colspan="2">
-
-                            </td>
-                            <%}%>
-                            <td>
+                            <td colspan="2">
                                 <%
-                                    if (user.getTipo_usuario() != 0) {
+                                Calendar cal1 = res.getFecha_reserva();
+                                    String fecha = cal1.get(Calendar.YEAR) + "-";
+                                    int mes = cal1.get(Calendar.MONTH);
+                                    mes++;
+                                    fecha += mes + "-";
+                                    fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                                    fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                                    fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
                                 %>
-                                <button type="submit" class="btn btn-success" style='width:150px;'>Realizar Préstamo</button>
-                                <%} else {%>
+                                <input disabled="disabled" value="<%out.print(fecha);%>">
+                            </td>
+                            <td>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'darBajaReserva.jsp'" style='width:150px;'>Dar de baja reserva</button>
-                                <%}%>
                             </td>
                         </tr>
                         <tr>

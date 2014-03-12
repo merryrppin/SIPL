@@ -162,24 +162,7 @@
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
                             <%
-                                ArrayList<Multa> data = Gestor.getMultas();
-                                for (int i = 0; i < data.size(); i++) {
-                                    Calendar cal1 = data.get(i).getFecha_multa();
-                                    if (data.get(i).getEstado_multa() == 0) {
-                                        Calendar hoy = Calendar.getInstance();
-                                        long tiempo1 = hoy.getTimeInMillis();
-                                        long tiempo2 = cal1.getTimeInMillis();
-                                        if (tiempo1 - tiempo2 >= 259200000) {
-                                            Multa mul = Gestor.getMultaUsu(data.get(i).getUsu().getCodigo());
-                                            mul.setEstado_multa(1);
-                                            Usuario usu = Gestor.getUsuario(mul.getUsu().getCodigo());
-                                            usu.setEstado(0);
-                                            Gestor.updateUsuario(usu);
-                                            Gestor.updateMulta(mul);
-                                        }
-                                    }
-                                }
-
+                                Gestor.activarMultas();
                                 String cod = "";
                                 String accion = request.getParameter("accion");
                                 int a = 0;

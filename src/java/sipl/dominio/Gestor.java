@@ -32,6 +32,7 @@ public class Gestor {
     GenerarBackupMySQL gen = new GenerarBackupMySQL();
     RestoreMySQL res = new RestoreMySQL();
     TextoImagen tei = new TextoImagen();
+    ActivarMultas actM = new ActivarMultas();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -249,5 +250,9 @@ public class Gestor {
 
     public Error_D getError(String codigo) {
         return errDAO.getError(codigo);
+    }
+    
+    public void activarMultas(){
+        actM.Multas();
     }
 }
