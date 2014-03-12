@@ -20,7 +20,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1 || user.getTipo_usuario() == 0) {
         String ID = request.getParameter("id");
         try {
             Material mat = Gestor.getMaterial(Integer.parseInt(ID));
@@ -200,16 +200,23 @@
                                 <textarea disabled="disabled" maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(mat.getDescripcion());%></textarea>
                             </td>
                         </tr>
-
+                        <% if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {%>
                         <tr>
                             <td colspan="4" align="center">
                                 <button  type="button" class="btn btn-default"><span class='glyphicon glyphicon-qrcode'></span> Tutorial descargar y redimensionar QR</button>
                             </td>
                         </tr>
+                        <%}%>
                         <tr>
-                            <td colspan="4" align="center">
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                            </td>
+                            <%
+                        String direccion="principal.jsp";
+                        if(user.getTipo_usuario()==0){
+                            direccion="principalUsuario.jsp";
+                        }
+                        %>
+                        <td align="center" colspan="4">
+                            <button class="btn btn-danger" type="button" onclick="location.href = '<%out.print(direccion);%>'" style='width:150px;'>Atrás</button>
+                        </td>
                         </tr>
                     </table>
                 </form>

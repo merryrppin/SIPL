@@ -20,7 +20,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
+    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1 || user.getTipo_usuario() == 0) {
         ArrayList<Material> data = Gestor.getMateriales();
         String accion = request.getParameter("accion");
         int a = 0;
@@ -128,7 +128,7 @@
                                     } else if (data.get(i).getDisponibilidad() == 2) {
                                         out.print("<td>En Reserva</td>");
                                     }
-                                    out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
+                                    //out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
                                     out.print("<td> <img src='Imagenes/" + data.get(i).getFoto_mat() + "' alt='...' width='50' height='50'></td>");
                                     out.print("</tr>");
                                 }
@@ -146,7 +146,13 @@
                                 <input class="btn btn-info" type="button" value="Ver Material" onclick="fijarURL('verMaterial.jsp', this.form)" style='width:200px;'/>
                                 <%}
                                 %>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                <%
+                                    String direccion = "principal.jsp";
+                                    if (user.getTipo_usuario() == 0) {
+                                        direccion = "principalUsuario.jsp";
+                                    }
+                                %>
+                                <button class="btn btn-danger" type="button" onclick="location.href = '<%out.print(direccion);%>'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>
