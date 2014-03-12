@@ -32,6 +32,21 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
+             function validarForm(Laboratorio) {
+                if (Laboratorio.nombre.value.length === 0 || /^\s+$/.test(Laboratorio.nombre.value)) {
+                    Laboratorio.nombre.focus();
+                    alert('No has llenado el campo del nombre');
+                    return false;
+                } else if (Laboratorio.descripcion.value.length === 0 || /^\s+$/.test(Laboratorio.descripcion.value)) {
+                    Usuario.apellido.focus();
+                    alert('No has llenado el campo de descripción');
+                    return false;
+                } else if (Laboratorio.ubicacion.value.length === 0 || /^\s+$/.test(Laboratorio.ubicacion.value)) {
+                    Usuario.telefono.focus();
+                    alert('No has llenado el campo de ubicación');
+                    return false;
+                }
+            }
             function fijarURL(url, form) {
                 form.action = url;
                 form.submit();
@@ -78,7 +93,7 @@
             <div class="col-xs-12 col-sm-6">
 
 
-                <form class="form-horizontal" action="guardarLaboratorio.jsp?accion=1" method="POST">
+                <form name="Laboratorio" class="form-horizontal" action="guardarLaboratorio.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>
