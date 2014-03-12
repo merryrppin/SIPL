@@ -34,6 +34,12 @@
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
+            function validarForm(Reporte) {
+                if (Reporte.codigo_material.value.length === 0 || /^\s+$/.test(Reporte.codigo_material.value)) {
+                    Reporte.codigo_material.focus();
+                    alert('No has llenado el campo del codigo del material');
+                    return false;
+                } 
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
@@ -75,7 +81,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form class="form-horizontal" action="guardarReporteD.jsp?accion=1" method="POST">
+                <form name="Reporte" class="form-horizontal" action="guardarReporteD.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table align="center"   class="table table-hover">
                         <tr>
                             <td>

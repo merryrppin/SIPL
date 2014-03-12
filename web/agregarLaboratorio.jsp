@@ -37,12 +37,8 @@
                     Laboratorio.nombre.focus();
                     alert('No has llenado el campo del nombre');
                     return false;
-                } else if (Laboratorio.descripcion.value.length === 0 || /^\s+$/.test(Laboratorio.descripcion.value)) {
-                    Usuario.apellido.focus();
-                    alert('No has llenado el campo de descripción');
-                    return false;
                 } else if (Laboratorio.ubicacion.value.length === 0 || /^\s+$/.test(Laboratorio.ubicacion.value)) {
-                    Usuario.telefono.focus();
+                    Laboratorio.telefono.focus();
                     alert('No has llenado el campo de ubicación');
                     return false;
                 }
