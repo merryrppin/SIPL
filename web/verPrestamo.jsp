@@ -1,6 +1,6 @@
 <%-- 
-    Document   : verReserva
-    Created on : 11-mar-2014, 22:25:08
+    Document   : verPrestamo
+    Created on : 12-mar-2014, 0:09:17
     Author     : WM
 --%>
 
@@ -21,34 +21,16 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 0) {
-        if (user.getEstado() == 3) {
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ver Reserva</title>
+        <title>Ver Préstamo</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
-            function fijarURL(url, form) {
-                if (form.codigo.value.length === 0) { //¿Tiene 0 caracteres?
-                    form.codigo.focus();    // Damos el foco al control
-                    alert('No has llenado el campo del código'); //Mostramos el mensaje
-                    return false; //devolvemos el foco
-                } else {
-                    form.action = url;
-                    form.submit();
-                }
-            }
-            function validarForm(Prestamo) {
-                if (Prestamo.codigo.value.length === 0 || /^\s+$/.test(Material.codigo.value)) {
-                    Prestamo.codigo.focus();
-                    alert('No has llenado el campo del codigo');
-                    return false;
-                }
-            }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
@@ -70,7 +52,7 @@
                         <p class="text-warning"><%out.print(er.getMensaje());%></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" onclick="location.href = 'principalUsuario.jsp'" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -82,54 +64,31 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>Ver Reserva</h1>
-                <br>
-                <br>
-                <br>
-                <h5><b>Importante:</b> Tiene dos días de plazo para prestar los materiales con el monitor, la reserva <br>de materiales se inactivará automáticamente al 
-                    finalizar dos días después de Guardar la reserva. </h5>
+                <h1>Ver Préstamo</h1>
             </div>
         </div>
-        <br><br>
+        <br><br><br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
-                <form name="Reserva" class="form-horizontal" action="guardarReserva.jsp?accion=2" method="POST" <%if (user.getTipo_usuario() != 0) {%> onsubmit="return validarForm(this);"<%}%>>
+                <form name="Material" class="form-horizontal" action="guardarPrestamo.jsp?accion=2" method="POST" onsubmit="return validarForm(this);">
                     <table class="table table-hover" align="center">
-                        <tr>
-                            <td colspan="4">
-                                <label class="control-label">
-                                    Ingresar el código del estudiante para encontrar la reserva activa
-                                </label>
-                            </td>
-                        </tr>
                         <tr>
                             <td>
                                 <label class="control-label" for="codigo">Id del estudiante: </label>
                             </td>
                             <%
-                                String cod = "";
-                                String accion = request.getParameter("accion");
-                                int a = 0;
-                                try {
-                                    a = Integer.parseInt(accion);
-                                } catch (Exception e) {
-                                }
-                                if (a == 1) {
-                                    cod = request.getParameter("codigo");
-                                }
+                                if (user.getEstado() == 2) {
+                                    Prestamo pre = Gestor.getPrestamoCodUsu(user.getCodigo());
                             %>
                             <td>
                                 <input type="text" disabled="disabled" value="<%out.print(user.getCodigo());%>">
-                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(user.getCodigo());%>">
                             </td>
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
                             <td id="nombre">
-                                <%if (user.getTipo_usuario() == 0) {
-                                        out.print(user.getNombre());
-                                    }%>
+                                <input type="text" disabled="disabled" value="<%out.print(user.getNombre());%>">
                             </td>
                         </tr>
                         <tr>
@@ -144,10 +103,9 @@
                                     </thead>
                                     <tbody id="materiales">
                                         <%
-                                            Reserva res = Gestor.getReservaCodUsu(user.getCodigo());
-                                            if (res != null) {
+                                            if (pre != null) {
                                                 Material mat;
-                                                String[] materiales = res.getMat().split(";");
+                                                String[] materiales = pre.getMat().split(";");
                                                 for (String materiale : materiales) {
                                                     mat = Gestor.getMaterial(Integer.parseInt(materiale));
                                                     out.print("<tr>");
@@ -163,11 +121,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="control-label"> Fecha de reserva</label>
+                                <label class="control-label"> Fecha de préstamo</label>
                             </td>
-                            <td colspan="2">
+                            <td>
                                 <%
-                                    Calendar cal1 = res.getFecha_reserva();
+                                    Calendar cal1 = pre.getFecha_prestamo();
                                     String fecha = cal1.get(Calendar.YEAR) + "-";
                                     int mes = cal1.get(Calendar.MONTH);
                                     mes++;
@@ -179,13 +137,29 @@
                                 <input disabled="disabled" value="<%out.print(fecha);%>">
                             </td>
                             <td>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'guardarReserva.jsp?accion=2'" style='width:150px;'>Dar de baja reserva</button>
+                                <label class="control-label"> Fecha de Devolución</label>
+                            </td>
+                            <td>
+                                <%
+                                    long tiempo = cal1.getTimeInMillis();
+                                    tiempo += 259200000;
+                                    Calendar cal2 = Calendar.getInstance();
+                                    cal2.setTimeInMillis(tiempo);
+                                    String fecha2 = cal2.get(Calendar.YEAR) + "-";
+                                    int mes2 = cal2.get(Calendar.MONTH);
+                                    mes2++;
+                                    fecha2 += mes2 + "-";
+                                    fecha2 += cal2.get(Calendar.DAY_OF_MONTH);
+                                    fecha2 += " " + cal2.get(Calendar.HOUR_OF_DAY);
+                                    fecha2 += ":" + cal2.get(Calendar.MINUTE) + ":00";
+                                %>
+                                <input disabled="disabled" value="<%out.print(fecha2);%>">
                             </td>
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
                                 <br><br>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principalUsuario.jsp'" style='width:150px;'>Atrás</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                 <br><br>
                             </td>
                         </tr>
@@ -197,10 +171,10 @@
     </body>
 </html>
 <%} else {
-            response.sendRedirect("principalUsuario.jsp?error=sin_reserva");
+            error = "prestamo_null";
         }
     } else {
-        response.sendRedirect("principal.jsp?error=sin_permisos");
+        error = "sin_permisos";
     }
     if (error != null && error.length() > 0) {
         response.sendRedirect("principalUsuario.jsp?error=" + error);

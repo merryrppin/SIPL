@@ -108,6 +108,14 @@
                             <span class="label label-default"><%out.print(ficheros.length+" Backup");%></span>
                         </td>
                     </tr>
+                    <tr>
+                        <td align="center">
+                            <button type="button" class="btn btn-info" onclick="location.href = 'variablesSistema.jsp'">Variables del Sistema</button>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
                     <%}%>
                     <tr>
                         <%

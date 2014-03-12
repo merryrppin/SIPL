@@ -32,7 +32,7 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
-             function validarForm(Laboratorio) {
+            function validarForm(Laboratorio) {
                 if (Laboratorio.nombre.value.length === 0 || /^\s+$/.test(Laboratorio.nombre.value)) {
                     Laboratorio.nombre.focus();
                     alert('No has llenado el campo del nombre');
@@ -151,4 +151,7 @@
 </html>
 <%} else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
+    }
+    if (error != null && error.length() > 0) {
+        response.sendRedirect("principal.jsp?error=" + error);
     }%>

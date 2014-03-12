@@ -174,4 +174,7 @@
         </div>
     </body>
 </html>
-<%}%>
+<%}
+if (error != null && error.length() > 0) {
+        response.sendRedirect("principal.jsp?error=" + error);
+    }%>
