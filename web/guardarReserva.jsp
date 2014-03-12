@@ -17,7 +17,7 @@
     int a = 0;
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
+    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1 || user.getTipo_usuario() == 0) {
         String codigo = request.getParameter("codigo");
         String mat1 = request.getParameter("mat1");
         String mat2 = request.getParameter("mat2");
@@ -29,7 +29,7 @@
         } catch (Exception e) {
             error = "sin_accion";
         }
-        if (a == 1) {
+        if (a == 1 && user.getTipo_usuario()==0) {
             Usuario usuario = Gestor.getUsuario(user.getCodigo());
             if (usuario != null) {
                 if (usuario.getEstado() == 2) {

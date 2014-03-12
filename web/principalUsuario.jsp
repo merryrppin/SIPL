@@ -64,7 +64,7 @@
         <%}%>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="right">
-                <h6><b><button onclick="location.href = 'configuracion.jsp'"><span class="glyphicon glyphicon-cog"></span></button><%out.print("  "+user.getNombre() + " " + user.getApellido()+"  ");%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
+                <h6><b><button onclick="location.href = 'configuracion.jsp'"><span class="glyphicon glyphicon-cog"></span></button><%out.print("  " + user.getNombre() + " " + user.getApellido() + "  ");%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
             </div>
         </div>
         <br>
@@ -127,13 +127,19 @@
                                             fue elaborado como proyecto de grado por los estudiantes <b>Sandra Milena Vera Gómez</b> y <b>Wilmar González Franco</b> de la 
                                             Facultad de Ingeniería de Sistemas de la UNAB, bajo la supervisión y tutoría de los docentes <b>Juan Carlos García Ojeda</b> , <b>Freddy Mendez Ortiz</b> y
                                             <b>Daniel Arenas Seleey</b>.
-                                        </em></p></td>
+                                        </em></p>
+                                </td>
                             </tr>
                         </table>
                     </div>
                     <div class="tab-pane" id="Reserva">
                         <table class="table table-hover">
                             <tr align="center">
+                                <td>
+                                    <button class="btn btn-primary" type="button" onclick="location.href = 'verPrestamo.jsp'" style='width:200px;'>Ver Préstamo Activo</button>
+                                </td>
+                            </tr>
+                            <tr align="center">                                
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'agregarReserva.jsp'" style='width:200px;'>Agregar Reserva</button>
                                 </td>
@@ -150,7 +156,7 @@
     </body>
 </html>
 <%
-    }else {
+    } else {
         response.sendRedirect("login.jsp?error=sin_permisos");
     }
 %>

@@ -208,14 +208,8 @@
                         </tr>
                         <%}%>
                         <tr>
-                            <%
-                        String direccion="principal.jsp";
-                        if(user.getTipo_usuario()==0){
-                            direccion="principalUsuario.jsp";
-                        }
-                        %>
                         <td align="center" colspan="4">
-                            <button class="btn btn-danger" type="button" onclick="location.href = '<%out.print(direccion);%>'" style='width:150px;'>Atrás</button>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'listarMateriales.jsp'" style='width:150px;'>Atrás</button>
                         </td>
                         </tr>
                     </table>

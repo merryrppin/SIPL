@@ -16,11 +16,17 @@
         error = request.getParameter("error");
     } catch (Exception e) {
     }
-    er = Gestor.getError(error);
+
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 0) {
+        if (user.getEstado() == 4) {
+            error = "usuario_multa";
+        } else if (user.getEstado() == 3) {
+            error = "usuario_reserva";
+        }
+        er = Gestor.getError(error);
 %>
 <!DOCTYPE html>
 <html>
@@ -124,7 +130,7 @@
                         <p class="text-warning"><%out.print(er.getMensaje());%></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'principalUsuario.jsp'" data-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -140,9 +146,9 @@
                 <br>
                 <br>
                 <br>
-                
+
                 <h5><b>Importante:</b> Tiene dos días de plazo para prestar los materiales con el monitor, la reserva <br>de materiales se inactivará automáticamente al 
-                        finalizar dos días después de Guardar la reserva. </h5>
+                    finalizar dos días después de Guardar la reserva. </h5>
             </div>
         </div>
         <br><br>
@@ -191,7 +197,7 @@
                             </td>
                             <td><b>Nombre Completo:</b></td>
                             <td>
-                               <label class="control-label" ><%out.print(user.getNombre());%></label>
+                                <label class="control-label" ><%out.print(user.getNombre());%></label>
                             </td>
                             <td>
                                 <label class="control-label" ><%out.print(user.getApellido());%></label>
@@ -200,7 +206,7 @@
                         <tr>
                             <td colspan="5" align="center">
                                 <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return getMulta();" style='width:200px;'/>
-                                
+
                             </td>
                         </tr>
                         <tr>
@@ -247,7 +253,7 @@
                             <td colspan="5" align="center">
                                 <br><br>
                                 <button type="submit" class="btn btn-success" style='width:150px;'>Reservar</button>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principalUsuario.jsp'" style='width:150px;'>Atrás</button>
                                 <br><br>
                             </td>
                         </tr>
@@ -258,4 +264,9 @@
         </div>
     </body>
 </html>
-<%}%>
+<%} else {
+        response.sendRedirect("principal.jsp?error=sin_permisos");
+    }
+    if (error != null && error.length() > 0) {
+        response.sendRedirect("principalUsuario.jsp?error=" + error);
+    }%>

@@ -20,7 +20,8 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || (user.getTipo_usuario() == 0 && user.getEstado() == 3)) {
+    } else if (user.getTipo_usuario() == 0) {
+        if (user.getEstado() == 3) {
 %>
 <!DOCTYPE html>
 <html>
@@ -76,7 +77,7 @@
                         <p class="text-warning"><%out.print(er.getMensaje());%></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'principalUsuario.jsp'" data-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -214,4 +215,12 @@
         </div>
     </body>
 </html>
-<%}%>
+<%} else {
+            response.sendRedirect("principalUsuario.jsp?error=sin_reserva");
+        }
+    } else {
+        response.sendRedirect("principal.jsp?error=sin_permisos");
+    }
+    if (error != null && error.length() > 0) {
+        response.sendRedirect("principalUsuario.jsp?error=" + error);
+    }%>
