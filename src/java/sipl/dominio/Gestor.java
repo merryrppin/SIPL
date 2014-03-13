@@ -35,6 +35,7 @@ public class Gestor {
     TextoImagen tei = new TextoImagen();
     ActivarMultas actM = new ActivarMultas();
     GenerarPDFListar pdfL = new GenerarPDFListar();
+    GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -253,12 +254,16 @@ public class Gestor {
     public Error_D getError(String codigo) {
         return errDAO.getError(codigo);
     }
-    
-    public void activarMultas(){
+
+    public void activarMultas() {
         actM.Multas();
     }
-    
-    public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir) throws BadElementException, IOException{
+
+    public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir) throws BadElementException, IOException {
         pdfL.generarPDF(titulo, imagen, usu, dir);
+    }
+
+    public void GenerarPDFGrafica(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango) throws BadElementException, IOException {
+        pdfG.generarPDF(titulo, imagen, usu, dir, Fecha1, Fecha2, Rango);
     }
 }
