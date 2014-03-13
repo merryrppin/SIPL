@@ -44,7 +44,31 @@
             fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
             fecha += "-" + cal1.get(Calendar.MINUTE) + "-00";
             FILE += titulo + " " + fecha + ".pdf";
-            response.sendRedirect("listarMateriales.jsp?"+FILE);
+            response.sendRedirect("listarMateriales.jsp?" + FILE);
+        } else if (a == 2) {
+
+        } else if (a == 3) {
+
+        } else if (a == 4) {
+
+        } else if (a == 5) {
+
+        } else if (a == 6) {
+
+        } else if (a == 7) {
+
+        } else if (a == 8) {
+            String titulo = "Prestamos por Año";
+            VariableSis vs = Gestor.getVariable(1);
+            String fecha1 = request.getParameter("fecha1");
+            String fecha2 = request.getParameter("fecha2");
+            String rango = request.getParameter("rango");
+            String imagen = request.getParameter("imagen");
+            String img = vs.getDatos() + "img//" + imagen;
+            Gestor.GenerarPDFGrafica(titulo, img, usuario, vs.getDatos(), fecha1, fecha2, rango);
+            response.sendRedirect("listarMateriales.jsp");
+        } else if (a == 9) {
+
         }
     } else {
         error = "sin_permisos";
