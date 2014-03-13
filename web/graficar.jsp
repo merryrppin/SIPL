@@ -652,6 +652,7 @@
                                     out.print("<input hidden type='text' name='fecha1' value='" + f1 + "' />");
                                     out.print("<input hidden type='text' name='fecha2' value='" + f2 + "' />");
                                     out.print("<input hidden type='text' name='imagen' value='" + o[7] + "' />");
+                                    out.print("<input hidden type='text' name='rango' value='Anho' />");
                                 %>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=8', this.form)" style='width:150px;'/>

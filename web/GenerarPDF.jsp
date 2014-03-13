@@ -46,7 +46,21 @@
             FILE += titulo + " " + fecha + ".pdf";
             response.sendRedirect("listarMateriales.jsp?" + FILE);
         } else if (a == 2) {
-
+            String titulo = "Listar usuarios";
+            VariableSis vs = Gestor.getVariable(1);
+            String img = vs.getDatos() + "img//logo_unab.jpg";
+            Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
+            String FILE = "";
+            Calendar cal1 = Calendar.getInstance();
+            String fecha = cal1.get(Calendar.YEAR) + "-";
+            int mes = cal1.get(Calendar.MONTH);
+            mes++;
+            fecha += mes + "-";
+            fecha += cal1.get(Calendar.DAY_OF_MONTH);
+            fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+            fecha += "-" + cal1.get(Calendar.MINUTE) + "-00";
+            FILE += titulo + " " + fecha + ".pdf";
+            response.sendRedirect("listarUsuarios.jsp?" + FILE);
         } else if (a == 3) {
 
         } else if (a == 4) {
