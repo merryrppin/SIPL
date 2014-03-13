@@ -29,8 +29,19 @@ import java.util.Calendar;
 import java.util.Date;
 import sipl.db.Conexion;
 import sipl.db.materialDAO;
+import sipl.db.usuarioDAO;
+import sipl.db.laboratorioDAO;
+import sipl.db.reservaDAO;
+import sipl.db.multaDAO;
+import sipl.db.prestamoDAO;
+import sipl.db.danhoDAO;
+import sipl.dominio.Danho;
+import sipl.dominio.Prestamo;
+import sipl.dominio.Laboratorio;
 import sipl.dominio.Material;
 import sipl.dominio.Usuario;
+import sipl.dominio.Reserva;
+import sipl.dominio.Multa;
 
 /**
  *
@@ -40,6 +51,12 @@ public class GenerarPDFListar {
 
     private static final Conexion con = new Conexion();
     private static final materialDAO matDAO = new materialDAO(con);
+    private static final usuarioDAO usuDAO = new usuarioDAO(con);
+    private static final laboratorioDAO labDAO = new laboratorioDAO(con);
+    private static final reservaDAO resDAO = new reservaDAO(con);
+    private static final multaDAO mulDAO = new multaDAO(con);
+    private static final prestamoDAO preDAO = new prestamoDAO(con);
+    private static final danhoDAO danDAO = new danhoDAO(con);
     private static String FILE = "";
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
@@ -49,11 +66,11 @@ public class GenerarPDFListar {
             Font.BOLD);
     private static String Titulo = "";
     private static Usuario user;
-    private static String direc="";
+    private static String direc = "";
 
     public void generarPDF(String titulo, String imagen, Usuario usu, String dir) throws BadElementException, IOException {
         user = usu;
-        direc+=dir;
+        direc += dir;
         Titulo = titulo;
         Calendar cal1 = Calendar.getInstance();
         String fecha = cal1.get(Calendar.YEAR) + "-";
@@ -106,8 +123,8 @@ public class GenerarPDFListar {
                 smallBold));
 
         addEmptyLine(preface, 6);
-        Image img = Image.getInstance(direc+ "img//logo_unab.jpg");
-        
+        Image img = Image.getInstance(direc + "img//logo_unab.jpg");
+
         img.scaleAbsolute(70, 100);
         img.setAlignment(Image.ALIGN_CENTER);
         Chunk c = new Chunk(img, 0, 0);
@@ -197,7 +214,307 @@ public class GenerarPDFListar {
                 }
             }
             subCatPart.add(table);
-        }
+        } else if (Titulo.equals("Listar usuarios")) {
+            ArrayList<Usuario> usuarios = usuDAO.getUsuarios();
+            PdfPTable table = new PdfPTable(8);
+            PdfPCell c1 = new PdfPCell(new Phrase("Código"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Nombre"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Apellido"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Teléfono"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Correo"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Estado"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Tipo Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Observaciones"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
+            for (int i = 0; i < usuarios.size(); i++) {
+                Usuario usu = usuarios.get(i);
+                table.addCell("" + usu.getCodigo());
+                table.addCell(usu.getNombre());
+                table.addCell(usu.getApellido());
+                table.addCell("" + usu.getTelefono());
+                table.addCell("" + usu.getCorreo());
+                if (usu.getEstado() == 0) {
+                    table.addCell("Activo");
+                } else if (usu.getEstado() == 1) {
+                    table.addCell("Inactivo");
+                } else if (usu.getEstado() == 2) {
+                    table.addCell("Con préstamo");
+                } else {
+                    if (usu.getEstado() == 3) {
+                        table.addCell("Con reserva ");
+                    } else {
+                        if (usu.getEstado() == 4) {
+                            table.addCell("Con multa");
+                        } else {
+                            table.addCell("Error");
+                        }
+                        if (usu.getTipo_usuario() == 0) {
+                            table.addCell("Estudiante");
+                        } else if (usu.getTipo_usuario() == 1) {
+                            table.addCell("Administrador local");
+                        } else if (usu.getTipo_usuario() == 2) {
+                            table.addCell("Administrador Global");
+                        } else {
+                            table.addCell("Error");
+                        }
+                        table.addCell("" + usu.getObservaciones());
+                    }
+                    subCatPart.add(table);
+                }
+            }
+
+        } else if (Titulo.equals("Listar laboratorios")) {
+            ArrayList<Laboratorio> laboratorios = labDAO.getLaboratorios();
+            PdfPTable table = new PdfPTable(4);
+            PdfPCell c1 = new PdfPCell(new Phrase("Código"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Nombre"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Descripción"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Ubicación"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
+            for (int i = 0; i < laboratorios.size(); i++) {
+                Laboratorio lab = laboratorios.get(i);
+                table.addCell("" + lab.getCodigo());
+                table.addCell(lab.getNombre());
+                table.addCell(lab.getDescripcion());
+                table.addCell(lab.getUbicacion());
+            }
+            subCatPart.add(table);
+        } else if (Titulo.equals("Listar reservas")) {
+            ArrayList<Reserva> reservas = resDAO.getReservas();
+            PdfPTable table = new PdfPTable(6);
+            PdfPCell c1 = new PdfPCell(new Phrase("Código Reserva"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Nombre Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Apellido Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Código Materiales"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Fecha Reserva"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Estado Reserva"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
+            for (int i = 0; i < reservas.size(); i++) {
+                Reserva res = reservas.get(i);
+                table.addCell("" + res.getCodigo());
+                table.addCell(res.getUsu().getNombre());
+                table.addCell(res.getUsu().getApellido());
+                table.addCell(res.getMat());
+                Calendar cal1 = res.getFecha_reserva();
+                String fecha = cal1.get(Calendar.YEAR) + "-";
+                int mes = cal1.get(Calendar.MONTH);
+                mes++;
+                fecha += mes + "-";
+                fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+                table.addCell(fecha);
+                if (res.getEstado() == 0) {
+                    table.addCell("Activo");
+                } else if (res.getEstado() == 1) {
+                    table.addCell("Inactivo");
+                } else {
+                    table.addCell("Error");
+                }
+            }
+            subCatPart.add(table);
+        } else if (Titulo.equals("Listar multas")) {
+            ArrayList<Multa> multas = mulDAO.getMultas();
+            PdfPTable table = new PdfPTable(6);
+            PdfPCell c1 = new PdfPCell(new Phrase("Código Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Nombre Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Apellido Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Fecha Multa"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Estado Multa"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Tiempo Multa"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
+            for (int i = 0; i < multas.size(); i++) {
+                Multa mul = multas.get(i);
+                table.addCell("" + mul.getUsu().getCodigo());
+                table.addCell(mul.getUsu().getNombre());
+                table.addCell(mul.getUsu().getApellido());
+                Calendar cal1 = mul.getFecha_multa();
+                String fecha = cal1.get(Calendar.YEAR) + "-";
+                int mes = cal1.get(Calendar.MONTH);
+                mes++;
+                fecha += mes + "-";
+                fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+                table.addCell(fecha);
+                if (mul.getEstado_multa() == 0) {
+                    table.addCell("Activo");
+                } else if (mul.getEstado_multa() == 1) {
+                    table.addCell("Inactivo");
+                } else {
+                    table.addCell("Error");
+                }
+                table.addCell("" + mul.getTiempo_multa());
+            }
+            subCatPart.add(table);
+        } else if (Titulo.equals("Listar préstamos")) {
+            ArrayList<Prestamo> prestamos = preDAO.getprestamos();
+            PdfPTable table = new PdfPTable(7);
+            PdfPCell c1 = new PdfPCell(new Phrase("Código Préstamo"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Código Material"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Nombre Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Apellido Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Fecha Préstamo"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Fecha Devolución"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Estado"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
+            for (int i = 0; i < prestamos.size(); i++) {
+                Prestamo pre = prestamos.get(i);
+                table.addCell("" + pre.getCodigo());
+                table.addCell(pre.getMat());
+                table.addCell(pre.getUsu().getNombre());
+                table.addCell(pre.getUsu().getApellido());
+                Calendar cal1 = pre.getFecha_prestamo();
+                String fecha = cal1.get(Calendar.YEAR) + "-";
+                int mes = cal1.get(Calendar.MONTH);
+                mes++;
+                fecha += mes + "-";
+                fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+                table.addCell(fecha);
+                Calendar cal2 = pre.getFecha_devolucion();
+                String fecha1 = cal2.get(Calendar.YEAR) + "-";
+                int mes1 = cal2.get(Calendar.MONTH);
+                mes1++;
+                fecha1 += mes1 + "-";
+                fecha1 += cal2.get(Calendar.DAY_OF_MONTH);
+                fecha1 += " " + cal2.get(Calendar.HOUR_OF_DAY);
+                fecha1 += ":" + cal2.get(Calendar.MINUTE) + ":00";
+                table.addCell(fecha1);
+                if (pre.getEstado() == 0) {
+                    table.addCell("Activo");
+                } else if (pre.getEstado() == 1) {
+                    table.addCell("Inactivo");
+                } else {
+                    table.addCell("Error");
+                }
+            }
+            subCatPart.add(table);
+        } else if (Titulo.equals("Listar Daño")) {
+            ArrayList<Danho> danhos = danDAO.getDanhos();
+            PdfPTable table = new PdfPTable(9);
+            PdfPCell c1 = new PdfPCell(new Phrase("Descripción Daño"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Código Material"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Descripción Material"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Codigo Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Nombre Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Apellidos Usuario"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Fecha Daño"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Daño Reportado por"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("Estado"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
+            for (int i = 0; i < danhos.size(); i++) {
+                Danho dan = danhos.get(i);
+                table.addCell("" + dan.getDescripcion());
+                table.addCell("" + dan.getMat());
+                table.addCell(dan.getMat().getDescripcion());
+                table.addCell(dan.getUsu().getCodigo());
+                table.addCell(dan.getUsu().getNombre());
+                table.addCell(dan.getUsu().getApellido());
+                Calendar cal1 = dan.getFecha_d();
+                String fecha = cal1.get(Calendar.YEAR) + "-";
+                int mes = cal1.get(Calendar.MONTH);
+                mes++;
+                fecha += mes + "-";
+                fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+                table.addCell(fecha);
+                table.addCell("" + dan.getUsu_rd());
+                if (dan.getEstado() == 0) {
+                    table.addCell("Dañado");
+                } else if (dan.getEstado() == 1) {
+                    table.addCell("Reparado");
+                }else if (dan.getEstado() == 2) {
+                    table.addCell("Dado de baja");
+                } else {
+                    table.addCell("Error");
+                }
+                }
+                subCatPart.add(table);
+
+            }
 
     }
 
