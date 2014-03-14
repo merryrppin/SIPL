@@ -29,57 +29,44 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+        VariableSis vs = Gestor.getVariable(1);
+        String img = vs.getDatos() + "img//logo_unab.jpg";
         if (a == 1) {
             String titulo = "Listar materiales";
-            VariableSis vs = Gestor.getVariable(1);
-            String img = vs.getDatos() + "img//logo_unab.jpg";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
-            String FILE = "";
-            Calendar cal1 = Calendar.getInstance();
-            String fecha = cal1.get(Calendar.YEAR) + "-";
-            int mes = cal1.get(Calendar.MONTH);
-            mes++;
-            fecha += mes + "-";
-            fecha += cal1.get(Calendar.DAY_OF_MONTH);
-            fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-            fecha += "-" + cal1.get(Calendar.MINUTE) + "-00";
-            FILE += titulo + " " + fecha + ".pdf";
-            response.sendRedirect("listarMateriales.jsp?" + FILE);
+            response.sendRedirect("listarMateriales.jsp?");
         } else if (a == 2) {
             String titulo = "Listar usuarios";
-            VariableSis vs = Gestor.getVariable(1);
-            String img = vs.getDatos() + "img//logo_unab.jpg";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
-            String FILE = "";
-            Calendar cal1 = Calendar.getInstance();
-            String fecha = cal1.get(Calendar.YEAR) + "-";
-            int mes = cal1.get(Calendar.MONTH);
-            mes++;
-            fecha += mes + "-";
-            fecha += cal1.get(Calendar.DAY_OF_MONTH);
-            fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-            fecha += "-" + cal1.get(Calendar.MINUTE) + "-00";
-            FILE += titulo + " " + fecha + ".pdf";
-            response.sendRedirect("listarUsuarios.jsp?" + FILE);
+            response.sendRedirect("listarUsuarios.jsp?");
         } else if (a == 3) {
-
+            String titulo = "Listar laboratorios";
+            Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
+            response.sendRedirect("listarLaboratorios.jsp?");
         } else if (a == 4) {
-
+            String titulo = "Listar reservas";
+            Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
+            response.sendRedirect("listarReservas.jsp?");
         } else if (a == 5) {
-
+            String titulo = "Listar multas";
+            Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
+            response.sendRedirect("listarMultas.jsp?");
         } else if (a == 6) {
-
+            String titulo = "Listar prestamos";
+            Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
+            response.sendRedirect("listarPrestamos.jsp?");
         } else if (a == 7) {
-
+            String titulo = "Listar Daño";
+            Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
+            response.sendRedirect("listarReporteD.jsp?");
         } else if (a == 8) {
             String titulo = "Prestamos por Año";
-            VariableSis vs = Gestor.getVariable(1);
             String fecha1 = request.getParameter("fecha1");
             String fecha2 = request.getParameter("fecha2");
             String rango = request.getParameter("rango");
             String imagen = request.getParameter("imagen");
-            String img = vs.getDatos() + "img//" + imagen;
-            Gestor.GenerarPDFGrafica(titulo, img, usuario, vs.getDatos(), fecha1, fecha2, rango);
+            String imge = vs.getDatos() + "img//" + imagen;
+            Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango);
             response.sendRedirect("listarMateriales.jsp");
         } else if (a == 9) {
 

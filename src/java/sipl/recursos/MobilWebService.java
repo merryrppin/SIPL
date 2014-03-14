@@ -24,4 +24,18 @@ public class MobilWebService {
     public String hello(@WebParam(name = "name") String txt) {
         return "Hello " + txt + " !";
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "login")
+    public String login(@WebParam(name = "user") String user, @WebParam(name = "passwd") String passwd) {
+        String rs = "";
+        if (user.equals("w1") && passwd.equals("w1")) {
+            rs="OK";
+        } else {
+            rs="Fallo";
+        }
+        return rs;
+    }
 }

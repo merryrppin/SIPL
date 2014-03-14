@@ -143,9 +143,6 @@
                         <tr>
                             <td colspan="8" align="center">
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=2', this.form)" style='width:200px;'/>
-                                <%String genPDF = "usuario;Lista de Usuarios";
-                                    out.print("<input hidden type='text' name='pdf' value='" + genPDF + "' />");
-                                %>
                             </td>
                         </tr>
                         <tr>

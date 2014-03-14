@@ -132,8 +132,6 @@ public class GenerarPDFListar {
         img.scaleAbsolute(70, 100);
         img.setAlignment(Image.ALIGN_CENTER);
         Chunk c = new Chunk(img, 0, 0);
-        preface.add(new Paragraph("Este documento es creado a petición del autor",
-                smallBold));
         preface.add(c);
         //document.add(c);
         document.add(preface);
@@ -383,7 +381,7 @@ public class GenerarPDFListar {
                 subCatPart.add(table);
                 break;
             }
-            case "Listar préstamos": {
+            case "Listar prestamos": {
                 ArrayList<Prestamo> prestamos = preDAO.getprestamos();
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell c1 = new PdfPCell(new Phrase("Código Préstamo"));
@@ -477,7 +475,7 @@ public class GenerarPDFListar {
                 for (int i = 0; i < danhos.size(); i++) {
                     Danho dan = danhos.get(i);
                     table.addCell("" + dan.getDescripcion());
-                    table.addCell("" + dan.getMat());
+                    table.addCell("" + dan.getMat().getCodigo());
                     table.addCell(dan.getMat().getDescripcion());
                     table.addCell(dan.getUsu().getCodigo());
                     table.addCell(dan.getUsu().getNombre());
@@ -491,7 +489,7 @@ public class GenerarPDFListar {
                     fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
                     fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
                     table.addCell(fecha);
-                    table.addCell("" + dan.getUsu_rd());
+                    table.addCell("" + dan.getUsu_rd().getNombre());
                     if (dan.getEstado() == 0) {
                         table.addCell("Dañado");
                     } else if (dan.getEstado() == 1) {

@@ -44,6 +44,10 @@
             });
             <%}
             %>
+            function fijarURL(url, form) {
+                form.action = url;
+                form.submit();
+            }
         </script>
     </head>
     <body>
@@ -143,6 +147,11 @@
                                 }
                             }
                         %>
+                        <tr>
+                            <td colspan="7" align="center">
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=6', this.form)" style='width:200px;'/>
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="7" align="center">
                                 <%

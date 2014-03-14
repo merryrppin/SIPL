@@ -42,6 +42,10 @@
             });
             <%}
             %>
+            function fijarURL(url, form) {
+                form.action = url;
+                form.submit();
+            }
         </script>
     </head>
     <body>
@@ -111,8 +115,13 @@
                         %>
                         <tr>
                             <td colspan="5" align="center">
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=3', this.form)" style='width:200px;'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" align="center">
                                 <%
-                                if (a == 2) {%>
+                                    if (a == 2) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                                 <%}
                                 %>
