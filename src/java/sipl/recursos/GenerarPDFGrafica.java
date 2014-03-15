@@ -62,6 +62,7 @@ public class GenerarPDFGrafica {
     private static String imgG = "";
 
     public void generarPDF(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango) throws BadElementException, IOException {
+        FILE = "";
         Titulo = "";
         direc = "";
         fecha1 = "";
@@ -419,6 +420,7 @@ public class GenerarPDFGrafica {
                         table.addCell("" + tamY[i][1]);
                     }
                 }
+                subCatPart.add(table);
             } else if (rango.equals("Hora")) {
                 int T[][] = new int[materiales.size()][2];
                 for (int i = 0; i < materiales.size(); i++) {
@@ -503,6 +505,7 @@ public class GenerarPDFGrafica {
                         table.addCell("" + tamY[i][1]);
                     }
                 }
+                subCatPart.add(table);
             }
         }
     }

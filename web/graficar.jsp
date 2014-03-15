@@ -124,7 +124,7 @@
                                 }
                             }
                             Gestor.GraficarPrestamosYear(y, rest, direccion, "Años", titulo);
-                            response.sendRedirect("paginaCarga.jsp?orden=PrestamoAnho;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "Y.jpg");
+                            response.sendRedirect("paginaCarga.jsp?orden=PrestamosAnho;" + f2[2] + ";" + f2[1] + ";" + f2[0] + ";" + f[2] + ";" + f[1] + ";" + f[0] + ";" + nom + "Y.jpg");
                         } else if (rango.equals("Mes")) {
                             int[] values = new int[12];
                             int[] tiempo = new int[12];
@@ -210,7 +210,7 @@
                         String[] o = orden.split(";");
                         if (o[0].equals("TipoMaterial")) {
                             titulo = "Reporte de Cantidad de Materiales por Categoría";
-                        } else if (o[0].equals("PrestamoAnho")) {
+                        } else if (o[0].equals("PrestamosAnho")) {
                             titulo = "Reporte de Préstamos por año";
                         } else if (o[0].equals("PrestamosMes")) {
                             titulo = "Reporte de Préstamos por mes";
@@ -264,7 +264,7 @@
                                             out.print("<tr><td><td><td><b>Total Materiales</b><td><b>" + cont + "</b></td></td></td></td><td></td></tr>");
                                         }
 
-                                    } else if (o[0].equals("PrestamoAnho")) {%>
+                                    } else if (o[0].equals("PrestamosAnho")) {%>
                                     <tr>
                                         <td><b>Categoria Material</b></td>
                                         <td><b>Cantidad Material</b></td>
@@ -648,13 +648,12 @@
                                     String genPDF = "prestamo;Gráfica de Préstamos";
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
-                                    String env = ""+o[0];
-                                    env.replace("Prestamo", "");
+                                    String [] env = o[0].split("Prestamos");
                                     out.print("<input hidden type='text' name='pdf' value='" + genPDF + "' />");
                                     out.print("<input hidden type='text' name='fecha1' value='" + f1 + "' />");
                                     out.print("<input hidden type='text' name='fecha2' value='" + f2 + "' />");
                                     out.print("<input hidden type='text' name='imagen' value='" + o[7] + "' />");
-                                    out.print("<input hidden type='text' name='rango' value='"+env+"' />");
+                                    out.print("<input hidden type='text' name='rango' value='"+env[1]+"' />");
                                     out.print("<input hidden type='text' name='orden' value='"+orden+"' />");
                                 %>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>

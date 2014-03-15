@@ -60,15 +60,15 @@
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos());
             response.sendRedirect("listarReporteD.jsp?");
         } else if (a == 8) {
-            String orden=request.getParameter("orden");
+            String orden = request.getParameter("orden");
             String rango = request.getParameter("rango");
-            String titulo = "Prestamos por "+rango;
+            String titulo = "Prestamos por " + rango;
             String fecha1 = request.getParameter("fecha1");
             String fecha2 = request.getParameter("fecha2");
             String imagen = request.getParameter("imagen");
             String imge = vs.getDatos() + "Grafica//" + imagen;
             Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango);
-            response.sendRedirect("graficar.jsp?orden="+orden);
+            response.sendRedirect("graficar.jsp?orden=" + orden);
         } else if (a == 9) {
 
         }

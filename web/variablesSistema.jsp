@@ -79,27 +79,27 @@
                             String password = Gestor.getVariable(4).getDatos();
                         %>
                         <tr>
-                            <td>
+                            <td align="center">
                                 <label class="control-label" for="ubicacion">Ubicación del sistema</label>
-                                <input type="text" id="ubicacion" placeholder='"C:\sipl\SIPL\web\"' name="ubicacion" value='<%out.print(ubicacion);%>'>
+                                <input type="text" style='width:350px;' id="ubicacion" placeholder='"C:\sipl\SIPL\web\"' name="ubicacion" value='<%out.print(ubicacion);%>'>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td align="center">
                                 <label class="control-label" for="Mysql">Ubicación de Mysql en el disco duro</label>
-                                <input type="text" id="Mysql" placeholder='"C:\Program Files (x86)\MySQL\MySQL Server 5.5\bin\mysqldump"' name="Mysql" value='<%out.print(mysql);%>'>
+                                <input type="text" style='width:350px;' id="Mysql" placeholder='"C:\Program Files (x86)\MySQL\MySQL Server 5.5\bin\mysqldump"' name="Mysql" value='<%out.print(mysql);%>'>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td align="center">
                                 <label class="control-label" for="usuario">Usuario Mysql</label>
-                                <input type="text" id="usuario" placeholder='"root"' name="usuario" value='<%out.print(usuario);%>'>
+                                <input type="text" style='width:350px;' id="usuario" placeholder='"root"' name="usuario" value='<%out.print(usuario);%>'>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td align="center">
                                 <label class="control-label" for="password">Clave Mysql</label>
-                                <input type="password" id="password" placeholder='"C:\sipl\SIPL\web\"' name="password" value='<%out.print(password);%>'>
+                                <input type="password" style='width:350px;' id="password" name="password" value='<%out.print(password);%>'>
                             </td>
                         </tr>
                     </table>
