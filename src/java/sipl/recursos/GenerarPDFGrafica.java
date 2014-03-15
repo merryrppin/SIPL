@@ -59,8 +59,16 @@ public class GenerarPDFGrafica {
     private static String fecha1 = "";
     private static String fecha2 = "";
     private static String rango = "";
+    private static String imgG = "";
 
     public void generarPDF(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango) throws BadElementException, IOException {
+        Titulo = "";
+        direc = "";
+        fecha1 = "";
+        fecha2 = "";
+        rango = "";
+        imgG = "";
+        imgG = imagen;
         fecha1 = Fecha1;
         fecha2 = Fecha2;
         rango = Rango;
@@ -113,28 +121,32 @@ public class GenerarPDFGrafica {
 
         addEmptyLine(preface, 6);
         Image img = Image.getInstance(direc + "img//logo_unab.jpg");
-
         img.scaleAbsolute(70, 100);
         img.setAlignment(Image.ALIGN_CENTER);
         Chunk c = new Chunk(img, 0, 0);
-        preface.add(new Paragraph("Este documento es creado a petición del autor",
-                smallBold));
         preface.add(c);
         document.add(preface);
+        document.newPage();
+        Paragraph preface1 = new Paragraph();
+        preface1.add(new Paragraph("Gráfica",
+                smallBold));
+        addEmptyLine(preface1, 20);
+        img = Image.getInstance(imgG);
+        img.scaleAbsolute(400, 300);
+        img.setAlignment(Image.ALIGN_CENTER);
+        c = new Chunk(img, 0, 0);
+        preface1.add(c);
+        document.add(preface1);
         document.newPage();
     }
 
     private static void addContent(Document document) throws DocumentException {
         Anchor anchor = new Anchor(Titulo, catFont);
         anchor.setName(Titulo);
-
         Chapter catPart = new Chapter(new Paragraph(anchor), 1);
-
         Paragraph subPara = new Paragraph("", subFont);
         Section subCatPart = catPart.addSection(subPara);
-
         createTable(subCatPart);
-
         document.add(catPart);
 
     }
@@ -142,15 +154,10 @@ public class GenerarPDFGrafica {
     private static void createTable(Section subCatPart)
             throws BadElementException {
         String p = Titulo.charAt(0) + "";
-        String f[] = fecha1.split("/");
-        String fe = f[2] + "/" + f[1] + "/" + f[0] + " 00:00:00";
-        String f2[] = fecha2.split("/");
-        String fe2 = f2[2] + "/" + f2[1] + "/" + f2[0] + " 23:59:59";
         if (p.equals("P")) {
-            ArrayList<Prestamo> prestamos = preDAO.getRangoFecha_prestamo(fe, fe2);
+            ArrayList<Prestamo> prestamos = preDAO.getRangoFecha_prestamo(fecha1, fecha2);
             ArrayList<Material> materiales = matDAO.getMateriales();
             if (rango.equals("Anho")) {
-
                 int T[][] = new int[materiales.size()][2];
                 for (int i = 0; i < materiales.size(); i++) {
                     T[i][0] = materiales.get(i).getCodigo();
@@ -187,30 +194,317 @@ public class GenerarPDFGrafica {
                         TM[i][0] = tm.get(i).getId();
                         TM[i][1] = 0;
                     }
-                    for (int[] T1 : T) {
+                    for (int i = 0; i < T.length; i++) {
                         int c;
-                        Material mat = matDAO.getMaterial(T1[0]);
+                        Material mat = matDAO.getMaterial(T[i][0]);
                         for (int j = 0; j < TM.length; j++) {
                             if (TM[j][0] == mat.getTipo_mat().getId()) {
                                 c = TM[j][1];
-                                c += T1[1];
+                                c += T[i][1];
                                 TM[j][1] = c;
                                 j = tm.size();
                             }
                         }
                     }
-                    for (int[] TM1 : TM) {
-                        if (TM1[1] > 0) {
-                            Tipo_material tip = tipDAO.getTipo_material(TM1[0]);
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
                             table.addCell("" + tip.getNombre());
-                            table.addCell("" + TM1[1]);
+                            table.addCell("" + TM[i][1]);
                         }
                     }
                 }
+                table.addCell("");
+                table.addCell("");
+                table.addCell("Año");
+                table.addCell("Cantidad Préstamos");
+                String[] f1 = fecha1.split("/");
+                int a = Integer.parseInt(f1[0]);
+                String[] f2 = fecha2.split("/");
+                int b = Integer.parseInt(f2[0]);
+                int dif = b - a;
+                dif++;
+                int tamY[][] = new int[dif][2];
+                for (int i = 0; i < dif; i++) {
+                    tamY[i][0] = a;
+                    a++;
+                }
+                for (int j = 0; j < dif; j++) {
+                    tamY[j][1] = 0;
+                }
+                for (int k = 0; k < prestamos.size(); k++) {
+                    int t = prestamos.get(k).getFecha_prestamo().get(Calendar.YEAR);
+                    for (int l = 0; l < dif; l++) {
+                        if (tamY[l][0] == t) {
+                            int cant = tamY[l][1];
+                            cant++;
+                            tamY[l][1] = cant;
+                        }
+                    }
+                }
+                for (int i = 0; i < dif; i++) {
+                    if (tamY[i][1] > 0) {
+                        table.addCell("" + tamY[i][0]);
+                        table.addCell("" + tamY[i][1]);
+                    }
+                }
                 subCatPart.add(table);
+            } else if (rango.equals("Mes")) {
+                int T[][] = new int[materiales.size()][2];
+                for (int i = 0; i < materiales.size(); i++) {
+                    T[i][0] = materiales.get(i).getCodigo();
+                    T[i][1] = 0;
+                }
+                for (int i = 0; i < prestamos.size(); i++) {
+                    String[] P = prestamos.get(i).getMat().split(";");
+                    for (String P1 : P) {
+                        for (int k = 0; k < materiales.size(); k++) {
+                            int c;
+                            if (T[k][0] == Integer.parseInt(P1)) {
+                                c = T[k][1];
+                                c++;
+                                T[k][1] = c;
+                                k = materiales.size();
+                            }
+                        }
+                    }
+                }
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Categoría Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (prestamos.isEmpty()) {
+                    table.addCell("No hay préstamos en ese rango de fecha");
+                } else {
+                    ArrayList<Tipo_material> tm = tipDAO.getTipo_material();
+                    int TM[][] = new int[tm.size()][2];
+                    for (int i = 0; i < tm.size(); i++) {
+                        TM[i][0] = tm.get(i).getId();
+                        TM[i][1] = 0;
+                    }
+                    for (int i = 0; i < T.length; i++) {
+                        int c;
+                        Material mat = matDAO.getMaterial(T[i][0]);
+                        for (int j = 0; j < TM.length; j++) {
+                            if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                c = TM[j][1];
+                                c += T[i][1];
+                                TM[j][1] = c;
+                                j = tm.size();
+                            }
+                        }
+                    }
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
+                            table.addCell("" + tip.getNombre());
+                            table.addCell("" + TM[i][1]);
+                        }
+                    }
+                }
+                table.addCell("");
+                table.addCell("");
+                table.addCell("Mes");
+                table.addCell("Cantidad Préstamos");
+                String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+                int tamY[][] = new int[12][2];
+                for (int i = 0; i < 12; i++) {
+                    tamY[i][0] = i;
+                }
+                for (int j = 0; j < 12; j++) {
+                    tamY[j][1] = 0;
+                }
+                for (int k = 0; k < prestamos.size(); k++) {
+                    int t = prestamos.get(k).getFecha_prestamo().get(Calendar.MONTH);
+                    for (int l = 0; l < 12; l++) {
+                        if (tamY[l][0] == t) {
+                            int cant = tamY[l][1];
+                            cant++;
+                            tamY[l][1] = cant;
+                        }
+                    }
+                }
+                for (int i = 0; i < 12; i++) {
+                    if (tamY[i][1] > 0) {
+                        table.addCell("" + meses[i]);
+                        table.addCell("" + tamY[i][1]);
+                    }
+                }
+                subCatPart.add(table);
+            } else if (rango.equals("Dia")) {
+                int T[][] = new int[materiales.size()][2];
+                for (int i = 0; i < materiales.size(); i++) {
+                    T[i][0] = materiales.get(i).getCodigo();
+                    T[i][1] = 0;
+                }
+                for (int i = 0; i < prestamos.size(); i++) {
+                    String[] P = prestamos.get(i).getMat().split(";");
+                    for (String P1 : P) {
+                        for (int k = 0; k < materiales.size(); k++) {
+                            int c;
+                            if (T[k][0] == Integer.parseInt(P1)) {
+                                c = T[k][1];
+                                c++;
+                                T[k][1] = c;
+                                k = materiales.size();
+                            }
+                        }
+                    }
+                }
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Categoría Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (prestamos.isEmpty()) {
+                    table.addCell("No hay préstamos en ese rango de fecha");
+                } else {
+                    ArrayList<Tipo_material> tm = tipDAO.getTipo_material();
+                    int TM[][] = new int[tm.size()][2];
+                    for (int i = 0; i < tm.size(); i++) {
+                        TM[i][0] = tm.get(i).getId();
+                        TM[i][1] = 0;
+                    }
+                    for (int i = 0; i < T.length; i++) {
+                        int c;
+                        Material mat = matDAO.getMaterial(T[i][0]);
+                        for (int j = 0; j < TM.length; j++) {
+                            if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                c = TM[j][1];
+                                c += T[i][1];
+                                TM[j][1] = c;
+                                j = tm.size();
+                            }
+                        }
+                    }
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
+                            table.addCell("" + tip.getNombre());
+                            table.addCell("" + TM[i][1]);
+                        }
+                    }
+                }
+                table.addCell("");
+                table.addCell("");
+                table.addCell("Dia");
+                table.addCell("Cantidad Préstamos");
+                int tamY[][] = new int[32][2];
+                for (int i = 0; i < 32; i++) {
+                    tamY[i][0] = i;
+                }
+                for (int j = 0; j < 32; j++) {
+                    tamY[j][1] = 0;
+                }
+                for (int k = 0; k < prestamos.size(); k++) {
+                    int t = prestamos.get(k).getFecha_prestamo().get(Calendar.DAY_OF_MONTH);
+                    for (int l = 0; l < 32; l++) {
+                        if (tamY[l][0] == t) {
+                            int cant = tamY[l][1];
+                            cant++;
+                            tamY[l][1] = cant;
+                        }
+                    }
+                }
+                for (int i = 0; i < 32; i++) {
+                    if (tamY[i][1] > 0) {
+                        table.addCell("" + i);
+                        table.addCell("" + tamY[i][1]);
+                    }
+                }
+            } else if (rango.equals("Hora")) {
+                int T[][] = new int[materiales.size()][2];
+                for (int i = 0; i < materiales.size(); i++) {
+                    T[i][0] = materiales.get(i).getCodigo();
+                    T[i][1] = 0;
+                }
+                for (int i = 0; i < prestamos.size(); i++) {
+                    String[] P = prestamos.get(i).getMat().split(";");
+                    for (String P1 : P) {
+                        for (int k = 0; k < materiales.size(); k++) {
+                            int c;
+                            if (T[k][0] == Integer.parseInt(P1)) {
+                                c = T[k][1];
+                                c++;
+                                T[k][1] = c;
+                                k = materiales.size();
+                            }
+                        }
+                    }
+                }
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Categoría Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (prestamos.isEmpty()) {
+                    table.addCell("No hay préstamos en ese rango de fecha");
+                } else {
+                    ArrayList<Tipo_material> tm = tipDAO.getTipo_material();
+                    int TM[][] = new int[tm.size()][2];
+                    for (int i = 0; i < tm.size(); i++) {
+                        TM[i][0] = tm.get(i).getId();
+                        TM[i][1] = 0;
+                    }
+                    for (int i = 0; i < T.length; i++) {
+                        int c;
+                        Material mat = matDAO.getMaterial(T[i][0]);
+                        for (int j = 0; j < TM.length; j++) {
+                            if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                c = TM[j][1];
+                                c += T[i][1];
+                                TM[j][1] = c;
+                                j = tm.size();
+                            }
+                        }
+                    }
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
+                            table.addCell("" + tip.getNombre());
+                            table.addCell("" + TM[i][1]);
+                        }
+                    }
+                }
+                table.addCell("");
+                table.addCell("");
+                table.addCell("Hora");
+                table.addCell("Cantidad Préstamos");
+                int tamY[][] = new int[24][2];
+                for (int i = 0; i < 24; i++) {
+                    tamY[i][0] = i;
+                }
+                for (int j = 0; j < 24; j++) {
+                    tamY[j][1] = 0;
+                }
+                for (int k = 0; k < prestamos.size(); k++) {
+                    int t = prestamos.get(k).getFecha_prestamo().get(Calendar.HOUR_OF_DAY);
+                    for (int l = 0; l < 24; l++) {
+                        if (tamY[l][0] == t) {
+                            int cant = tamY[l][1];
+                            cant++;
+                            tamY[l][1] = cant;
+                        }
+                    }
+                }
+                for (int i = 0; i < 24; i++) {
+                    if (tamY[i][1] > 0) {
+                        table.addCell("" + i);
+                        table.addCell("" + tamY[i][1]);
+                    }
+                }
             }
         }
-
     }
 
     private static void addEmptyLine(Paragraph paragraph, int number) {

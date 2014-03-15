@@ -648,11 +648,14 @@
                                     String genPDF = "prestamo;Gráfica de Préstamos";
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    String env = ""+o[0];
+                                    env.replace("Prestamo", "");
                                     out.print("<input hidden type='text' name='pdf' value='" + genPDF + "' />");
                                     out.print("<input hidden type='text' name='fecha1' value='" + f1 + "' />");
                                     out.print("<input hidden type='text' name='fecha2' value='" + f2 + "' />");
                                     out.print("<input hidden type='text' name='imagen' value='" + o[7] + "' />");
-                                    out.print("<input hidden type='text' name='rango' value='Anho' />");
+                                    out.print("<input hidden type='text' name='rango' value='"+env+"' />");
+                                    out.print("<input hidden type='text' name='orden' value='"+orden+"' />");
                                 %>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=8', this.form)" style='width:150px;'/>
