@@ -118,7 +118,7 @@
                         </tr>
                         <tr>
                             <td align="center">
-                                <button id="btnNext" type="submit" class="btn btn-info" style='width:200px;'>Ver Resultado</button>
+                                <input id="btnNext" class="btn btn-info" type="button" value="Abrir PDF" onclick="window.open('<%out.print(orden);%>');" style='width:150px;'/>
                             </td>
                         </tr>
                     </table>

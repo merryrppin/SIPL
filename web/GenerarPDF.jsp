@@ -45,37 +45,37 @@
             String titulo = "Listar materiales";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 2) {
             String titulo = "Listar usuarios";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 3) {
             String titulo = "Listar laboratorios";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 4) {
             String titulo = "Listar reservas";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 5) {
             String titulo = "Listar multas";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 6) {
             String titulo = "Listar prestamos";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 7) {
             String titulo = "Listar Daño";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 8) {
             String rango = request.getParameter("rango");
             String titulo = "Prestamos por " + rango;
@@ -85,7 +85,7 @@
             String imge = vs.getDatos() + "Grafica//" + imagen;
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango, Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 9) {
             String rango = request.getParameter("rango");
             String titulo = "Multas por " + rango;
@@ -95,7 +95,7 @@
             String imge = vs.getDatos() + "Grafica//" + imagen;
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango, Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 10) {
             String rango = request.getParameter("rango");
             String titulo = "Daños por " + rango;
@@ -105,7 +105,7 @@
             String imge = vs.getDatos() + "Grafica//" + imagen;
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango, Filex);
-            response.sendRedirect("PDF/" + Filex);
+            response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 11) {
             String titulo = "Materiales_por_Categoria";
             String imagen = request.getParameter("imagen");

@@ -673,7 +673,7 @@
                                     }
                                 %>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="window.open('GenerarPDF.jsp?accion=<%out.print(acc);%>', this.form);" style='width:150px;'/>
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=<%out.print(acc);%>', this.form);" style='width:150px;'/>
                             </td>
                         </tr>
                     </table>
