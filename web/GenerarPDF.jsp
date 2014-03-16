@@ -70,7 +70,27 @@
             Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango);
             response.sendRedirect("graficar.jsp?orden=" + orden);
         } else if (a == 9) {
-
+            String orden = request.getParameter("orden");
+            String rango = request.getParameter("rango");
+            String titulo = "Multas por " + rango;
+            String fecha1 = request.getParameter("fecha1");
+            String fecha2 = request.getParameter("fecha2");
+            String imagen = request.getParameter("imagen");
+            String imge = vs.getDatos() + "Grafica//" + imagen;
+            Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango);
+            response.sendRedirect("graficarM.jsp?orden=" + orden);
+        }else if(a == 10){
+            String orden = request.getParameter("orden");
+            String rango = request.getParameter("rango");
+            String titulo = "Daños por " + rango;
+            String fecha1 = request.getParameter("fecha1");
+            String fecha2 = request.getParameter("fecha2");
+            String imagen = request.getParameter("imagen");
+            String imge = vs.getDatos() + "Grafica//" + imagen;
+            Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango);
+            response.sendRedirect("graficarD.jsp?orden=" + orden);
+        }else{
+            error="error_accion";
         }
     } else {
         error = "sin_permisos";

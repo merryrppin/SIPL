@@ -28,10 +28,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import sipl.db.Conexion;
+import sipl.db.danhoDAO;
 import sipl.db.materialDAO;
+import sipl.db.multaDAO;
 import sipl.db.prestamoDAO;
 import sipl.db.tipo_materialDAO;
+import sipl.db.usuarioDAO;
 import sipl.dominio.Material;
+import sipl.dominio.Multa;
 import sipl.dominio.Prestamo;
 import sipl.dominio.Tipo_material;
 import sipl.dominio.Usuario;
@@ -46,6 +50,9 @@ public class GenerarPDFGrafica {
     private static final materialDAO matDAO = new materialDAO(con);
     private static final prestamoDAO preDAO = new prestamoDAO(con);
     private static final tipo_materialDAO tipDAO = new tipo_materialDAO(con);
+    private static final multaDAO mulDAO = new multaDAO(con);
+    private static final danhoDAO danDAO = new danhoDAO(con);
+    private static final usuarioDAO usuDAO = new usuarioDAO(con);
     private static String FILE = "";
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
@@ -148,6 +155,12 @@ public class GenerarPDFGrafica {
         Paragraph subPara = new Paragraph("", subFont);
         Section subCatPart = catPart.addSection(subPara);
         createTable(subCatPart);
+        String p = Titulo.charAt(0) + "";
+        if (p.equals("M")) {
+            subPara = new Paragraph("", subFont);
+            subCatPart = catPart.addSection(subPara);
+            createTable2(subCatPart);
+        }
         document.add(catPart);
 
     }
@@ -507,6 +520,215 @@ public class GenerarPDFGrafica {
                 }
                 subCatPart.add(table);
             }
+        } else if (p.equals("M")) {
+            ArrayList<Multa> multas = mulDAO.getRangoFecha_multa(fecha1, fecha2);
+            if (rango.equals("Anho")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Año"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Multas"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (multas.isEmpty()) {
+                    table.addCell("No hay multas en ese rango de fecha");
+                } else {
+                    String[] f1 = fecha1.split("/");
+                    int a = Integer.parseInt(f1[0]);
+                    String[] f2 = fecha2.split("/");
+                    int b = Integer.parseInt(f2[0]);
+                    int dif = b - a;
+                    dif++;
+
+                    int tamY[][] = new int[dif][2];
+                    int u = a;
+                    for (int i = 0; i < dif; i++) {
+                        tamY[i][0] = u;
+                        u++;
+                    }
+                    for (int j = 0; j < dif; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < multas.size(); k++) {
+                        int t = multas.get(k).getFecha_multa().get(Calendar.YEAR);
+                        for (int l = 0; l < dif; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < dif; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + tamY[i][0]);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                }
+                subCatPart.add(table);
+            } else if (rango.equals("Mes")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Mes"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Multas"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (multas.isEmpty()) {
+                    table.addCell("No hay multas en ese rango de fecha");
+                } else {
+                    String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+                    int tamY[][] = new int[12][2];
+                    for (int i = 0; i < 12; i++) {
+                        tamY[i][0] = i;
+                    }
+                    for (int j = 0; j < 12; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < multas.size(); k++) {
+                        int t = multas.get(k).getFecha_multa().get(Calendar.MONTH);
+                        for (int l = 0; l < 12; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 12; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + meses[i]);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                }
+                subCatPart.add(table);
+            } else if (rango.equals("Dia")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Día del mes"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Multas"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (multas.isEmpty()) {
+                    table.addCell("No hay multas en ese rango de fecha");
+                } else {
+                    int tamY[][] = new int[32][2];
+                    for (int i = 0; i < 32; i++) {
+                        tamY[i][0] = i;
+                    }
+                    for (int j = 0; j < 32; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < multas.size(); k++) {
+                        int t = multas.get(k).getFecha_multa().get(Calendar.DAY_OF_MONTH);
+                        for (int l = 0; l < 32; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 12; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + i);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                }
+                subCatPart.add(table);
+            } else if (rango.equals("Hora")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Hora del día"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Multas"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (multas.isEmpty()) {
+                    table.addCell("No hay multas en ese rango de fecha");
+                } else {
+                    int tamY[][] = new int[24][2];
+                    for (int i = 0; i < 24; i++) {
+                        tamY[i][0] = i;
+                    }
+                    for (int j = 0; j < 24; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < multas.size(); k++) {
+                        int t = multas.get(k).getFecha_multa().get(Calendar.HOUR_OF_DAY);
+                        for (int l = 0; l < 24; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 12; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + i);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                }
+                subCatPart.add(table);
+            }
+        }
+    }
+
+    private static void createTable2(Section subCatPart)
+            throws BadElementException {
+        ArrayList<Multa> multas = mulDAO.getRangoFecha_multa(fecha1, fecha2);
+        ArrayList<Usuario> usuarios = usuDAO.getUsuarios();
+        String codusuarios[] = new String[usuarios.size()];
+        int canMult[] = new int[usuarios.size()];
+        for (int i = 0; i < usuarios.size(); i++) {
+            codusuarios[i] = usuarios.get(i).getCodigo();
+            canMult[i] = 0;
+        }
+        for (int i = 0; i < multas.size(); i++) {
+            for (int j = 0; j < usuarios.size(); j++) {
+                if (codusuarios[j].equals(multas.get(i).getUsu().getCodigo())) {
+                    canMult[j]++;
+                    j = usuarios.size();
+                }
+            }
+        }
+        PdfPTable table = new PdfPTable(4);
+        PdfPCell c1 = new PdfPCell(new Phrase("Usuario"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("Nombre"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("Apellidos"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("Cantidad Multas"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        table.setHeaderRows(1);
+        if (multas.isEmpty()) {
+            table.addCell("No hay multas en ese rango de fecha");
+        } else {
+            for (int i = 0; i < usuarios.size(); i++) {
+                if (canMult[i] > 0) {
+                    Usuario usuario1 = usuDAO.getUsuario(codusuarios[i]);
+                    table.addCell("" + codusuarios[i]);
+                    table.addCell("" + usuario1.getNombre());
+                    table.addCell("" + usuario1.getApellido());
+                    table.addCell("" + canMult[i]);
+                }
+            }
+            subCatPart.add(table);
         }
     }
 

@@ -41,6 +41,7 @@
         </script>
     </head>
     <body>
+        <form action="principal.jsp" method="POST">
         <%if (error != null && error.length() > 0) {%>
         <div id="myModal" class="modal fade">
             <div class="modal-dialog">
@@ -585,13 +586,27 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            <%
+                                    String genPDF = "danho;Gráfica de Daños";
+                                    String f3 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
+                                    String f4 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
+                                    String[] env = o[0].split("Danhos");
+                                    out.print("<input hidden type='text' name='pdf' value='" + genPDF + "' />");
+                                    out.print("<input hidden type='text' name='fecha1' value='" + f3 + "' />");
+                                    out.print("<input hidden type='text' name='fecha2' value='" + f4 + "' />");
+                                    out.print("<input hidden type='text' name='imagen' value='" + o[7] + "' />");
+                                    out.print("<input hidden type='text' name='rango' value='" + env[1] + "' />");
+                                    out.print("<input hidden type='text' name='orden' value='" + orden + "' />");
+                                %>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=10', this.form)" style='width:150px;'/>
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="col-xs-12 col-sm-1"></div>
         </div>
+    </form>
     </body>
 </html>
 <%}

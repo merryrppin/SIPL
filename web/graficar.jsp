@@ -41,7 +41,7 @@
         </script>
     </head>
     <body>
-        <form action="guardarUsuario.jsp" method="POST">
+        <form action="principal.jsp" method="POST">
             <%if (error != null && error.length() > 0) {%>
             <div id="myModal" class="modal fade">
                 <div class="modal-dialog">
