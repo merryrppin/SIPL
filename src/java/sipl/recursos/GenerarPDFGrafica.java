@@ -34,6 +34,7 @@ import sipl.db.multaDAO;
 import sipl.db.prestamoDAO;
 import sipl.db.tipo_materialDAO;
 import sipl.db.usuarioDAO;
+import sipl.dominio.Danho;
 import sipl.dominio.Material;
 import sipl.dominio.Multa;
 import sipl.dominio.Prestamo;
@@ -635,7 +636,7 @@ public class GenerarPDFGrafica {
                             }
                         }
                     }
-                    for (int i = 0; i < 12; i++) {
+                    for (int i = 0; i < 32; i++) {
                         if (tamY[i][1] > 0) {
                             table.addCell("" + i);
                             table.addCell("" + tamY[i][1]);
@@ -672,12 +673,494 @@ public class GenerarPDFGrafica {
                             }
                         }
                     }
-                    for (int i = 0; i < 12; i++) {
+                    for (int i = 0; i < 24; i++) {
                         if (tamY[i][1] > 0) {
                             table.addCell("" + i);
                             table.addCell("" + tamY[i][1]);
                         }
                     }
+                }
+                subCatPart.add(table);
+            }
+        } else if (p.equals("D")) {
+            ArrayList<Danho> danhos = danDAO.getRangoFecha_danhos(fecha1, fecha2);
+            ArrayList<Material> materiales = matDAO.getMateriales();
+            if (rango.equals("Anho")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Categoría Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (danhos.isEmpty()) {
+                    table.addCell("No hay daños en ese rango de fecha");
+                } else {
+                    int T[][] = new int[materiales.size()][2];
+                    for (int i = 0; i < materiales.size(); i++) {
+                        T[i][0] = materiales.get(i).getCodigo();
+                        T[i][1] = 0;
+                    }
+                    for (int i = 0; i < danhos.size(); i++) {
+                        int P = danhos.get(i).getMat().getCodigo();
+                        for (int k = 0; k < materiales.size(); k++) {
+                            int c = 0;
+                            if (T[k][0] == P) {
+                                c = T[k][1];
+                                c++;
+                                T[k][1] = c;
+                                k = materiales.size();
+                            }
+                        }
+                    }
+                    ArrayList<Tipo_material> tm = tipDAO.getTipo_material();
+                    int TM[][] = new int[tm.size()][2];
+                    for (int i = 0; i < tm.size(); i++) {
+                        TM[i][0] = tm.get(i).getId();
+                        TM[i][1] = 0;
+                    }
+                    for (int i = 0; i < T.length; i++) {
+                        int c = 0;
+                        Material mat = matDAO.getMaterial(T[i][0]);
+                        for (int j = 0; j < TM.length; j++) {
+                            if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                c = TM[j][1];
+                                c += T[i][1];
+                                TM[j][1] = c;
+                                j = tm.size();
+                            }
+                        }
+                    }
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
+                            table.addCell("" + tip.getNombre());
+                            table.addCell("" + TM[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Año"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad Daños"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    String[] f1 = fecha1.split("/");
+                    int a = Integer.parseInt(f1[0]);
+                    String[] f2 = fecha2.split("/");
+                    int b = Integer.parseInt(f2[0]);
+                    int dif = b - a;
+                    dif++;
+                    int tamY[][] = new int[dif][2];
+                    int u = a;
+                    for (int i = 0; i < dif; i++) {
+                        tamY[i][0] = u;
+                        u++;
+                    }
+                    for (int j = 0; j < dif; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        int t = danhos.get(k).getFecha_d().get(Calendar.YEAR);
+                        for (int l = 0; l < dif; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < dif; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + tamY[i][0]);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Estado"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    int tipoD[] = new int[3];
+                    for (int i = 0; i < 3; i++) {
+                        tipoD[i] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        int cont;
+                        if (danhos.get(k).getEstado() == 0) {
+                            cont = tipoD[0];
+                            cont++;
+                            tipoD[0] = cont;
+                        } else if (danhos.get(k).getEstado() == 1) {
+                            cont = tipoD[1];
+                            cont++;
+                            tipoD[1] = cont;
+                        } else if (danhos.get(k).getEstado() == 2) {
+                            cont = tipoD[2];
+                            cont++;
+                            tipoD[2] = cont;
+                        }
+                    }
+                    table.addCell("Dañado");
+                    table.addCell("" + tipoD[0]);
+                    table.addCell("Reparado");
+                    table.addCell("" + tipoD[1]);
+                    table.addCell("Dado de Baja");
+                    table.addCell("" + tipoD[2]);
+                }
+                subCatPart.add(table);
+            } else if (rango.equals("Mes")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Categoría Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (danhos.isEmpty()) {
+                    table.addCell("No hay daños en ese rango de fecha");
+                } else {
+                    int T[][] = new int[materiales.size()][2];
+                    for (int i = 0; i < materiales.size(); i++) {
+                        T[i][0] = materiales.get(i).getCodigo();
+                        T[i][1] = 0;
+                    }
+                    for (int i = 0; i < danhos.size(); i++) {
+                        int P = danhos.get(i).getMat().getCodigo();
+                        for (int k = 0; k < materiales.size(); k++) {
+                            int c = 0;
+                            if (T[k][0] == P) {
+                                c = T[k][1];
+                                c++;
+                                T[k][1] = c;
+                                k = materiales.size();
+                            }
+                        }
+                    }
+                    ArrayList<Tipo_material> tm = tipDAO.getTipo_material();
+                    int TM[][] = new int[tm.size()][2];
+                    for (int i = 0; i < tm.size(); i++) {
+                        TM[i][0] = tm.get(i).getId();
+                        TM[i][1] = 0;
+                    }
+                    for (int i = 0; i < T.length; i++) {
+                        int c = 0;
+                        Material mat = matDAO.getMaterial(T[i][0]);
+                        for (int j = 0; j < TM.length; j++) {
+                            if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                c = TM[j][1];
+                                c += T[i][1];
+                                TM[j][1] = c;
+                                j = tm.size();
+                            }
+                        }
+                    }
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
+                            table.addCell("" + tip.getNombre());
+                            table.addCell("" + TM[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Mes"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad Daños"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+                    int tamY[][] = new int[12][2];
+                    for (int i = 0; i < 12; i++) {
+                        tamY[i][0] = i;
+                    }
+                    for (int j = 0; j < 12; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        int t = danhos.get(k).getFecha_d().get(Calendar.MONTH);
+                        for (int l = 0; l < 12; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 12; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + meses[i]);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Estado"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    int tipoD[] = new int[3];
+                    for (int i = 0; i < 3; i++) {
+                        tipoD[i] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        int cont;
+                        if (danhos.get(k).getEstado() == 0) {
+                            cont = tipoD[0];
+                            cont++;
+                            tipoD[0] = cont;
+                        } else if (danhos.get(k).getEstado() == 1) {
+                            cont = tipoD[1];
+                            cont++;
+                            tipoD[1] = cont;
+                        } else if (danhos.get(k).getEstado() == 2) {
+                            cont = tipoD[2];
+                            cont++;
+                            tipoD[2] = cont;
+                        }
+                    }
+                    table.addCell("Dañado");
+                    table.addCell("" + tipoD[0]);
+                    table.addCell("Reparado");
+                    table.addCell("" + tipoD[1]);
+                    table.addCell("Dado de Baja");
+                    table.addCell("" + tipoD[2]);
+                }
+                subCatPart.add(table);
+            } else if (rango.equals("Dia")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Categoría Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (danhos.isEmpty()) {
+                    table.addCell("No hay daños en ese rango de fecha");
+                } else {
+                    int T[][] = new int[materiales.size()][2];
+                    for (int i = 0; i < materiales.size(); i++) {
+                        T[i][0] = materiales.get(i).getCodigo();
+                        T[i][1] = 0;
+                    }
+                    for (int i = 0; i < danhos.size(); i++) {
+                        int P = danhos.get(i).getMat().getCodigo();
+                        for (int k = 0; k < materiales.size(); k++) {
+                            int c = 0;
+                            if (T[k][0] == P) {
+                                c = T[k][1];
+                                c++;
+                                T[k][1] = c;
+                                k = materiales.size();
+                            }
+                        }
+                    }
+                    ArrayList<Tipo_material> tm = tipDAO.getTipo_material();
+                    int TM[][] = new int[tm.size()][2];
+                    for (int i = 0; i < tm.size(); i++) {
+                        TM[i][0] = tm.get(i).getId();
+                        TM[i][1] = 0;
+                    }
+                    for (int i = 0; i < T.length; i++) {
+                        int c = 0;
+                        Material mat = matDAO.getMaterial(T[i][0]);
+                        for (int j = 0; j < TM.length; j++) {
+                            if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                c = TM[j][1];
+                                c += T[i][1];
+                                TM[j][1] = c;
+                                j = tm.size();
+                            }
+                        }
+                    }
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
+                            table.addCell("" + tip.getNombre());
+                            table.addCell("" + TM[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Día del mes"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad Daños"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    int tamY[][] = new int[32][2];
+                    for (int i = 0; i < 32; i++) {
+                        tamY[i][0] = i;
+                    }
+                    for (int j = 0; j < 32; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        int t = danhos.get(k).getFecha_d().get(Calendar.DAY_OF_MONTH);
+                        for (int l = 0; l < 32; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 32; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + i);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Estado"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    int tipoD[] = new int[3];
+                    for (int i = 0; i < 3; i++) {
+                        tipoD[i] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        int cont;
+                        if (danhos.get(k).getEstado() == 0) {
+                            cont = tipoD[0];
+                            cont++;
+                            tipoD[0] = cont;
+                        } else if (danhos.get(k).getEstado() == 1) {
+                            cont = tipoD[1];
+                            cont++;
+                            tipoD[1] = cont;
+                        } else if (danhos.get(k).getEstado() == 2) {
+                            cont = tipoD[2];
+                            cont++;
+                            tipoD[2] = cont;
+                        }
+                    }
+                    table.addCell("Dañado");
+                    table.addCell("" + tipoD[0]);
+                    table.addCell("Reparado");
+                    table.addCell("" + tipoD[1]);
+                    table.addCell("Dado de Baja");
+                    table.addCell("" + tipoD[2]);
+                }
+                subCatPart.add(table);
+            } else if (rango.equals("Hora")) {
+                PdfPTable table = new PdfPTable(2);
+                PdfPCell c1 = new PdfPCell(new Phrase("Categoría Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                c1 = new PdfPCell(new Phrase("Cantidad Material"));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(c1);
+                table.setHeaderRows(1);
+                if (danhos.isEmpty()) {
+                    table.addCell("No hay daños en ese rango de fecha");
+                } else {
+                    int T[][] = new int[materiales.size()][2];
+                    for (int i = 0; i < materiales.size(); i++) {
+                        T[i][0] = materiales.get(i).getCodigo();
+                        T[i][1] = 0;
+                    }
+                    for (int i = 0; i < danhos.size(); i++) {
+                        int P = danhos.get(i).getMat().getCodigo();
+                        for (int k = 0; k < materiales.size(); k++) {
+                            int c = 0;
+                            if (T[k][0] == P) {
+                                c = T[k][1];
+                                c++;
+                                T[k][1] = c;
+                                k = materiales.size();
+                            }
+                        }
+                    }
+                    ArrayList<Tipo_material> tm = tipDAO.getTipo_material();
+                    int TM[][] = new int[tm.size()][2];
+                    for (int i = 0; i < tm.size(); i++) {
+                        TM[i][0] = tm.get(i).getId();
+                        TM[i][1] = 0;
+                    }
+                    for (int i = 0; i < T.length; i++) {
+                        int c = 0;
+                        Material mat = matDAO.getMaterial(T[i][0]);
+                        for (int j = 0; j < TM.length; j++) {
+                            if (TM[j][0] == mat.getTipo_mat().getId()) {
+                                c = TM[j][1];
+                                c += T[i][1];
+                                TM[j][1] = c;
+                                j = tm.size();
+                            }
+                        }
+                    }
+                    for (int i = 0; i < TM.length; i++) {
+                        if (TM[i][1] > 0) {
+                            Tipo_material tip = tipDAO.getTipo_material(TM[i][0]);
+                            table.addCell("" + tip.getNombre());
+                            table.addCell("" + TM[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Hora del día"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad Daños"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    int tamY[][] = new int[24][2];
+                    for (int i = 0; i < 24; i++) {
+                        tamY[i][0] = i;
+                    }
+                    for (int j = 0; j < 24; j++) {
+                        tamY[j][1] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        Calendar cy = danhos.get(k).getFecha_d();
+                        int t = danhos.get(k).getFecha_d().get(Calendar.HOUR_OF_DAY);
+                        for (int l = 0; l < 24; l++) {
+                            if (tamY[l][0] == t) {
+                                int cant = tamY[l][1];
+                                cant++;
+                                tamY[l][1] = cant;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 24; i++) {
+                        if (tamY[i][1] > 0) {
+                            table.addCell("" + i);
+                            table.addCell("" + tamY[i][1]);
+                        }
+                    }
+                    c1 = new PdfPCell(new Phrase("Estado"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    c1 = new PdfPCell(new Phrase("Cantidad"));
+                    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(c1);
+                    int tipoD[] = new int[3];
+                    for (int i = 0; i < 3; i++) {
+                        tipoD[i] = 0;
+                    }
+                    for (int k = 0; k < danhos.size(); k++) {
+                        int cont;
+                        if (danhos.get(k).getEstado() == 0) {
+                            cont = tipoD[0];
+                            cont++;
+                            tipoD[0] = cont;
+                        } else if (danhos.get(k).getEstado() == 1) {
+                            cont = tipoD[1];
+                            cont++;
+                            tipoD[1] = cont;
+                        } else if (danhos.get(k).getEstado() == 2) {
+                            cont = tipoD[2];
+                            cont++;
+                            tipoD[2] = cont;
+                        }
+                    }
+                    table.addCell("Dañado");
+                    table.addCell("" + tipoD[0]);
+                    table.addCell("Reparado");
+                    table.addCell("" + tipoD[1]);
+                    table.addCell("Dado de Baja");
+                    table.addCell("" + tipoD[2]);
                 }
                 subCatPart.add(table);
             }

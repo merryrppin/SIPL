@@ -61,6 +61,7 @@
             </div>
             <%}%>
             <%
+                String tGraf = "";
                 Usuario user = (Usuario) session.getAttribute("user");
                 Usuario usu = Gestor.getUsuario(user.getCodigo());
                 String accion = request.getParameter("accion");
@@ -77,6 +78,7 @@
                     String direccion = Gestor.getVariable(1).getDatos();
                     direccion += "/Grafica/";
                     if (a == 1) {
+                        tGraf = "Tipo";
                         ArrayList<Tipo_material> data = Gestor.getTiposM();
                         Calendar cal = Calendar.getInstance();
                         String nom = (cal.get(Calendar.YEAR) + "" + cal.get(Calendar.MONTH) + ""
@@ -647,18 +649,27 @@
                             <td colspan="2" align="center">
                                 <%
                                     String genPDF = "prestamo;Gráfica de Préstamos";
+                                    String[] env = o[0].split("Prestamos");
+                                    String ox = env[1];
+                                    if (tGraf != null && tGraf.length() > 0) {
+                                        genPDF = "tipoMaterial;Gráfica de Tipos de Material";
+                                        ox = "";
+                                    }
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
-                                    String[] env = o[0].split("Prestamos");
                                     out.print("<input hidden type='text' name='pdf' value='" + genPDF + "' />");
                                     out.print("<input hidden type='text' name='fecha1' value='" + f1 + "' />");
                                     out.print("<input hidden type='text' name='fecha2' value='" + f2 + "' />");
                                     out.print("<input hidden type='text' name='imagen' value='" + o[7] + "' />");
-                                    out.print("<input hidden type='text' name='rango' value='" + env[1] + "' />");
+                                    out.print("<input hidden type='text' name='rango' value='" + ox + "' />");
                                     out.print("<input hidden type='text' name='orden' value='" + orden + "' />");
+                                    int acc=8;
+                                    if(o[0].equals("TipoMaterial")){
+                                        acc=11;
+                                    }
                                 %>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=8', this.form)" style='width:150px;'/>
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=<%out.print(acc);%>', this.form)" style='width:150px;'/>
                             </td>
                         </tr>
                     </table>

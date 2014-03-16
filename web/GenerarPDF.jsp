@@ -89,6 +89,13 @@
             String imge = vs.getDatos() + "Grafica//" + imagen;
             Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos(), fecha1, fecha2, rango);
             response.sendRedirect("graficarD.jsp?orden=" + orden);
+        }else if(a == 11){
+            String orden = request.getParameter("orden");
+            String titulo = "Materiales por Categoría";
+            String imagen = request.getParameter("imagen");
+            String imge = vs.getDatos() + "Grafica//" + imagen;
+            Gestor.GenerarPDFGrafica(titulo, imge, usuario, vs.getDatos());
+            response.sendRedirect("graficar.jsp?orden=" + orden);
         }else{
             error="error_accion";
         }

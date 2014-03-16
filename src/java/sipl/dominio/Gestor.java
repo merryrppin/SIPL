@@ -266,4 +266,7 @@ public class Gestor {
     public void GenerarPDFGrafica(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango) throws BadElementException, IOException {
         pdfG.generarPDF(titulo, imagen, usu, dir, Fecha1, Fecha2, Rango);
     }
+    public void GenerarPDFGrafica(String titulo, String imge, Usuario usuario, String dir){
+        
+    }
 }

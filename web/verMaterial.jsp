@@ -200,13 +200,6 @@
                                 <textarea disabled="disabled" maxlength="150" id="descripcion" name="descripcion" style='width:500px;'><%out.print(mat.getDescripcion());%></textarea>
                             </td>
                         </tr>
-                        <% if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {%>
-                        <tr>
-                            <td colspan="4" align="center">
-                                <button  type="button" class="btn btn-default"><span class='glyphicon glyphicon-qrcode'></span> Tutorial descargar y redimensionar QR</button>
-                            </td>
-                        </tr>
-                        <%}%>
                         <tr>
                         <td align="center" colspan="4">
                             <button class="btn btn-danger" type="button" onclick="location.href = 'listarMateriales.jsp'" style='width:150px;'>Atrás</button>
