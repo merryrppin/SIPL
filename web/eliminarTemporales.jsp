@@ -59,6 +59,19 @@
             if (c == 0) {
                 response.sendRedirect("configuracion.jsp");
             }
+        }else if(a == 3){
+            String sDirectorio = Gestor.getVariable(1).getDatos();
+            sDirectorio += "//PDF";
+            File f = new File(sDirectorio);
+            if (f.exists()) {
+                File[] ficheros = f.listFiles();
+                for (int x = 0; x < ficheros.length; x++) {
+                    ficheros[x].delete();
+                }
+            } else {
+                error = "no_directorio";
+            }
+            response.sendRedirect("configuracion.jsp");
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");

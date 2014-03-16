@@ -238,7 +238,9 @@
                             <td>
                                 <table class="table table-striped">
                                     <%
-                                        if (o[0].equals("TipoMaterial")) {%>
+                                        if (o[0].equals("TipoMaterial")) {
+                                            tGraf = "Tipo";
+                                    %>
                                     <tr>
                                         <td><b>Cat.</b></td>
                                         <td><b>Nombre</b></td>
@@ -650,10 +652,12 @@
                                 <%
                                     String genPDF = "prestamo;Gráfica de Préstamos";
                                     String[] env = o[0].split("Prestamos");
-                                    String ox = env[1];
+                                    String ox = "";
                                     if (tGraf != null && tGraf.length() > 0) {
                                         genPDF = "tipoMaterial;Gráfica de Tipos de Material";
                                         ox = "";
+                                    } else {
+                                        ox = env[1];
                                     }
                                     String f1 = o[4] + "/" + o[5] + "/" + o[6] + " 00:00:00";
                                     String f2 = o[1] + "/" + o[2] + "/" + o[3] + " 23:59:59";
@@ -663,13 +667,13 @@
                                     out.print("<input hidden type='text' name='imagen' value='" + o[7] + "' />");
                                     out.print("<input hidden type='text' name='rango' value='" + ox + "' />");
                                     out.print("<input hidden type='text' name='orden' value='" + orden + "' />");
-                                    int acc=8;
-                                    if(o[0].equals("TipoMaterial")){
-                                        acc=11;
+                                    int acc = 8;
+                                    if (o[0].equals("TipoMaterial")) {
+                                        acc = 11;
                                     }
                                 %>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
-                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=<%out.print(acc);%>', this.form)" style='width:150px;'/>
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="window.open('GenerarPDF.jsp?accion=<%out.print(acc);%>', this.form);" style='width:150px;'/>
                             </td>
                         </tr>
                     </table>

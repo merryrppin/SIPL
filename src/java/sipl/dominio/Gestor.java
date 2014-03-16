@@ -36,6 +36,7 @@ public class Gestor {
     ActivarMultas actM = new ActivarMultas();
     GenerarPDFListar pdfL = new GenerarPDFListar();
     GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
+    GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -259,14 +260,14 @@ public class Gestor {
         actM.Multas();
     }
 
-    public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir) throws BadElementException, IOException {
-        pdfL.generarPDF(titulo, imagen, usu, dir);
+    public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir, String Filex) throws BadElementException, IOException {
+        pdfL.generarPDF(titulo, imagen, usu, dir, Filex);
     }
 
-    public void GenerarPDFGrafica(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango) throws BadElementException, IOException {
-        pdfG.generarPDF(titulo, imagen, usu, dir, Fecha1, Fecha2, Rango);
+    public void GenerarPDFGrafica(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango, String Filex) throws BadElementException, IOException {
+        pdfG.generarPDF(titulo, imagen, usu, dir, Fecha1, Fecha2, Rango, Filex);
     }
-    public void GenerarPDFGrafica(String titulo, String imge, Usuario usuario, String dir){
-        
+    public void GenerarPDFGrafica(String titulo, String imge, Usuario usuario, String dir, String Filex) throws BadElementException, IOException{
+        pdfT.generarPDF(titulo, imge, usuario, dir, Filex);
     }
 }

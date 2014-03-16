@@ -28,16 +28,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import sipl.db.Conexion;
-import sipl.db.danhoDAO;
 import sipl.db.materialDAO;
-import sipl.db.multaDAO;
-import sipl.db.prestamoDAO;
 import sipl.db.tipo_materialDAO;
-import sipl.db.usuarioDAO;
-import sipl.dominio.Danho;
-import sipl.dominio.Material;
-import sipl.dominio.Multa;
-import sipl.dominio.Prestamo;
 import sipl.dominio.Tipo_material;
 import sipl.dominio.Usuario;
 
@@ -48,7 +40,6 @@ import sipl.dominio.Usuario;
 public class GenerarPDFtipomaterial {
 
     private static final Conexion con = new Conexion();
-    private static final materialDAO matDAO = new materialDAO(con);
     private static final tipo_materialDAO tipDAO = new tipo_materialDAO(con);
     private static String FILE = "";
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
@@ -62,7 +53,7 @@ public class GenerarPDFtipomaterial {
     private static String direc = "";
     private static String imgG = "";
 
-    public void generarPDF(String titulo, String imge, Usuario usuario, String dir) throws BadElementException, IOException {
+    public void generarPDF(String titulo, String imge, Usuario usuario, String dir, String Filex) throws BadElementException, IOException {
         FILE = "";
         Titulo = "";
         direc = "";
@@ -71,16 +62,7 @@ public class GenerarPDFtipomaterial {
         user = usuario;
         direc += dir;
         Titulo = titulo;
-        Calendar cal1 = Calendar.getInstance();
-        String fecha = cal1.get(Calendar.YEAR) + "-";
-        int mes = cal1.get(Calendar.MONTH);
-        mes++;
-        fecha += mes + "-";
-        fecha += cal1.get(Calendar.DAY_OF_MONTH);
-        fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-        fecha += "-" + cal1.get(Calendar.MINUTE);
-        fecha += "-" + cal1.get(Calendar.SECOND);
-        FILE += titulo + " " + fecha + ".pdf";
+        FILE = Filex;
         try {
             Document document = new Document();
             FileOutputStream file = new FileOutputStream(dir + "PDF//" + FILE);
@@ -148,7 +130,6 @@ public class GenerarPDFtipomaterial {
 
     private static void createTable(Section subCatPart)
             throws BadElementException {
-        String p = Titulo.charAt(0) + "";
         ArrayList<Tipo_material> Tipos = tipDAO.getTipo_material();
         PdfPTable table = new PdfPTable(5);
         PdfPCell c1 = new PdfPCell(new Phrase("Cat."));
@@ -170,19 +151,22 @@ public class GenerarPDFtipomaterial {
         if (Tipos.isEmpty()) {
             table.addCell("No hay Tipos de Material");
         } else {
-
             int cont = 0;
             for (int i = 0; i < Tipos.size(); i++) {
                 table.addCell("" + Tipos.get(i).getId());
                 table.addCell("" + Tipos.get(i).getNombre());
                 table.addCell("" + Tipos.get(i).getDescripcion());
-                table.addCell("" + Tipos.get(i).getCantidad() + "</td>");
+                table.addCell("" + Tipos.get(i).getCantidad());
                 table.addCell("" + Tipos.get(i).getDisponibilidad());
                 cont += Tipos.get(i).getCantidad();
             }
-            //out.print("<tr><td><td><td><b>Total Materiales</b><td><b>" + cont + "</b></td></td></td></td><td></td></tr>");
+            table.addCell("");
+            table.addCell("");
+            table.addCell("Total Materiales");
+            table.addCell("" + cont);
+            table.addCell("");
         }
-        
+        subCatPart.add(table);
     }
 
     private static void addEmptyLine(Paragraph paragraph, int number) {

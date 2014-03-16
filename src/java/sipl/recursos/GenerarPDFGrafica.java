@@ -69,7 +69,7 @@ public class GenerarPDFGrafica {
     private static String rango = "";
     private static String imgG = "";
 
-    public void generarPDF(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango) throws BadElementException, IOException {
+    public void generarPDF(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango, String Filex) throws BadElementException, IOException {
         FILE = "";
         Titulo = "";
         direc = "";
@@ -84,16 +84,7 @@ public class GenerarPDFGrafica {
         user = usu;
         direc += dir;
         Titulo = titulo;
-        Calendar cal1 = Calendar.getInstance();
-        String fecha = cal1.get(Calendar.YEAR) + "-";
-        int mes = cal1.get(Calendar.MONTH);
-        mes++;
-        fecha += mes + "-";
-        fecha += cal1.get(Calendar.DAY_OF_MONTH);
-        fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-        fecha += "-" + cal1.get(Calendar.MINUTE);
-        fecha += "-" + cal1.get(Calendar.SECOND);
-        FILE += titulo + " " + fecha + ".pdf";
+        FILE = Filex;
         try {
             Document document = new Document();
             FileOutputStream file = new FileOutputStream(dir + "PDF//" + FILE);

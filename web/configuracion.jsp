@@ -92,6 +92,20 @@
                             <span class="label label-default"><%out.print(ficheros.length+" Archivos");%></span>
                         </td>
                     </tr>
+                    <tr>
+                        <td align="center">
+                            <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=3'">Eliminar PDF Temporales</button>
+                            <%
+                                sDirectorio = Gestor.getVariable(1).getDatos();
+                                sDirectorio += "//PDF";
+                                File f1 = new File(sDirectorio);
+                                File[] ficheros1 = f1.listFiles();
+                            %>
+                        </td>
+                        <td>
+                            <span class="label label-default"><%out.print(ficheros1.length+" PDF");%></span>
+                        </td>
+                    </tr>
                     <%}%>
                     <%if (user.getTipo_usuario() == 2) {%>
                     <tr>
