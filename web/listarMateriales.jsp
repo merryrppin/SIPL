@@ -134,12 +134,14 @@
                                     out.print("</tr>");
                                 }
                             }
+                            if(usu.getTipo_usuario() == 1 || usu.getTipo_usuario() == 2){
                         %>
                         <tr>
                             <td colspan="11" align="center">
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=1', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
+                        <%}%>
                         <tr>
                             <td colspan="11" align="center">
                                 <%
@@ -151,8 +153,6 @@
                                     if (data.size() > 0) {%>
                                 <input class="btn btn-info" type="button" value="Ver Material" onclick="fijarURL('verMaterial.jsp', this.form)" style='width:200px;'/>
                                 <%}
-                                %>
-                                <%
                                     String direccion = "principal.jsp";
                                     if (usu.getTipo_usuario() == 0) {
                                         direccion = "principalUsuario.jsp";

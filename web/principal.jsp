@@ -99,16 +99,7 @@
                         <table align="center" class="table table-hover">
                             <tr align="center">
                                 <td>
-                                    <%
-                                        if (user.getTipo_usuario() == 1) {
-                                    %>
-                                    <button class="btn btn-primary" disabled="disabled" type="button" style='width:200px;'>Agregar Material</button>
-                                    <%} else if (user.getTipo_usuario() == 2) {
-                                    %>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'agregarMaterial.jsp'" style='width:200px;'>Agregar Material</button>
-                                    <%
-                                        }
-                                    %>
 
                                 </td>
                                 <td>
@@ -117,16 +108,7 @@
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <%
-                                        if (user.getTipo_usuario() == 1) {
-                                    %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled" style='width:200px;'>Modificar Material</button>
-                                    <%} else if (user.getTipo_usuario() == 2) {
-                                    %>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarMateriales.jsp?accion=2'" style='width:200px;'>Modificar Material</button>
-                                    <%
-                                        }
-                                    %>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarReporteD.jsp?accion=2'" style='width:200px;'>Modificar Reporte daño</button>
@@ -312,7 +294,7 @@
                                 </td>
                             </tr>
                             <tr align="center">
-                                <td>
+                                <td colspan="2">
                                     <%
                                         if (user.getTipo_usuario() == 1) {
                                     %>
@@ -346,17 +328,7 @@
                         <table class="table table-hover">
                             <tr align="center">
                                 <td>
-                                    <%
-                                        if (user.getTipo_usuario() == 1) {
-                                    %>
-                                    <button class="btn btn-primary" type="button" disabled="disabled"  style='width:200px;'>Listar Reservas</button>
-                                    <%} else if (user.getTipo_usuario() == 2) {
-                                    %>
                                     <button class="btn btn-primary" type="button" onclick="location.href = 'listarReservas.jsp'" style='width:200px;'>Listar Reservas</button>
-                                    <%
-                                        }
-                                    %>
-                                </td>
                             </tr>
                         </table>
                     </div>
