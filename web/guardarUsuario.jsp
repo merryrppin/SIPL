@@ -9,12 +9,13 @@
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usu1 = Gestor.getUsuario(user.getCodigo());
     String accion = request.getParameter("accion");
     int a = 0;
     String error = "";
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2 || user.getTipo_usuario() == 0) {
+    } else if (usu1.getTipo_usuario() == 1 || usu1.getTipo_usuario() == 2 || usu1.getTipo_usuario() == 0) {
         try {
             String codigo = request.getParameter("codigo");
             String tipo = request.getParameter("tipo");
@@ -25,7 +26,7 @@
             String correo = request.getParameter("correo");
             String observaciones = request.getParameter("observaciones");
             a = Integer.parseInt(accion);
-            if (a == 1 && (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2)) {
+            if (a == 1 && (usu1.getTipo_usuario() == 1 || usu1.getTipo_usuario() == 2)) {
                 if (codigo != null && codigo.length() > 0 && nombre != null
                         && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
@@ -58,7 +59,7 @@
                 } else {
                     error = "faltan_Datos";
                 }
-            } else if (a == 2) {
+            } else if (a == 2 && (usu1.getTipo_usuario() == 1 || usu1.getTipo_usuario() == 2)) {
                 if (nombre != null && nombre.length() > 0 && apellidos != null && apellidos.length() > 0) {
                     long tel = 0;
                     int est;
@@ -94,7 +95,7 @@
                 } else {
                     error = "faltan_Datos";
                 }
-            } else if ((a == 3 || a == 4 || a == 5) && user.getTipo_usuario() == 2) {
+            } else if ((a == 3 || a == 4 || a == 5) && usu1.getTipo_usuario() == 2) {
                 String ID = request.getParameter("id");
                 Usuario usu = Gestor.getUsuario(ID);
                 if (a == 3) {
@@ -106,7 +107,7 @@
                 }
                 Gestor.updateUsuario(usu);
                 response.sendRedirect("asignarPrivilegios.jsp");
-            } else if (a == 6 && (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2)) {
+            } else if (a == 6 && (usu1.getTipo_usuario() == 1 || usu1.getTipo_usuario() == 2)) {
                 String ID = request.getParameter("codigo");
                 Usuario usu = Gestor.getUsuario(ID);
                 String clave = request.getParameter("clave1");

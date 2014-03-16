@@ -13,11 +13,12 @@
 <%
     String error = "";
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usu = Gestor.getUsuario(user.getCodigo());
     String accion = request.getParameter("accion");
     int a = 0;
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
+    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario() == 1) {
         String codigo = request.getParameter("codigo");
         String mat1 = request.getParameter("mat1");
         String mat2 = request.getParameter("mat2");

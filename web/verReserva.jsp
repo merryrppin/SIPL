@@ -21,7 +21,8 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 0) {
-        if (user.getEstado() == 3) {
+        Usuario usuario = Gestor.getUsuario(user.getCodigo());
+        if (usuario.getEstado() == 3) {
 %>
 <!DOCTYPE html>
 <html>
@@ -108,15 +109,15 @@
                                 <label class="control-label" for="codigo">Id del estudiante: </label>
                             </td>
                             <td>
-                                <input type="text" disabled="disabled" value="<%out.print(user.getCodigo());%>">
-                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(user.getCodigo());%>">
+                                <input type="text" disabled="disabled" value="<%out.print(usuario.getCodigo());%>">
+                                <input hidden type="text" id="codigo" name="codigo" value="<%out.print(usuario.getCodigo());%>">
                             </td>
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
                             <td id="nombre">
-                                <%if (user.getTipo_usuario() == 0) {
-                                        out.print(user.getNombre());
+                                <%if (usuario.getTipo_usuario() == 0) {
+                                        out.print(usuario.getNombre());
                                     }%>
                             </td>
                         </tr>
@@ -132,7 +133,7 @@
                                     </thead>
                                     <tbody id="materiales">
                                         <%
-                                            Reserva res = Gestor.getReservaCodUsu(user.getCodigo());
+                                            Reserva res = Gestor.getReservaCodUsu(usuario.getCodigo());
                                             if (res != null) {
                                                 Material mat;
                                                 String[] materiales = res.getMat().split(";");

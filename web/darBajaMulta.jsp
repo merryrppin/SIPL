@@ -10,9 +10,10 @@
 <%
     String error = "";
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usu1 = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2) {
+    } else if (usu1.getTipo_usuario() == 2) {
         String ID = request.getParameter("id");
         Multa mul = Gestor.getMulta(Integer.parseInt(ID));
         mul.setEstado_multa(1);

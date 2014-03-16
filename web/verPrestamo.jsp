@@ -80,16 +80,16 @@
                             </td>
                             <%
                                 if (usuario.getEstado() == 2) {
-                                    Prestamo pre = Gestor.getPrestamoCodUsu(user.getCodigo());
+                                    Prestamo pre = Gestor.getPrestamoCodUsu(usuario.getCodigo());
                             %>
                             <td>
-                                <input type="text" disabled="disabled" value="<%out.print(user.getCodigo());%>">
+                                <input type="text" disabled="disabled" value="<%out.print(usuario.getCodigo());%>">
                             </td>
                             <td>
                                 <label class="control-label" >Nombre</label>
                             </td>
                             <td id="nombre">
-                                <input type="text" disabled="disabled" value="<%out.print(user.getNombre());%>">
+                                <input type="text" disabled="disabled" value="<%out.print(usuario.getNombre());%>">
                             </td>
                         </tr>
                         <tr>

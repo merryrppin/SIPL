@@ -19,9 +19,10 @@
     er = Gestor.getError(error);
 
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2) {
+    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario() == 1) {
         String ID = request.getParameter("id");
         int cod = Integer.parseInt(ID);
         Danho dan = Gestor.getDanho(cod);

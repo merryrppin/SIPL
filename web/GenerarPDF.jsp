@@ -28,7 +28,7 @@
     }
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+    } else if (usuario.getTipo_usuario() == 1 || usuario.getTipo_usuario() == 2) {
         VariableSis vs = Gestor.getVariable(1);
         String img = vs.getDatos() + "img//logo_unab.jpg";
         if (a == 1) {

@@ -16,9 +16,10 @@
     }
     er = Gestor.getError(error);
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+    } else if (usu.getTipo_usuario() == 1 || usu.getTipo_usuario() == 2) {
 %>
 <!DOCTYPE html>
 <html>
@@ -112,7 +113,7 @@
                             </td>
                             <td>
                                 <%
-                                    if (user.getTipo_usuario() == 1) {
+                                    if (usu.getTipo_usuario() == 1) {
                                 %>
                                 <select name="tipo" disabled="disabled">
                                     <option value="0">
@@ -120,7 +121,7 @@
                                     </option>
                                 </select>
                                 <%
-                                } else if (user.getTipo_usuario() == 2) {
+                                } else if (usu.getTipo_usuario() == 2) {
                                 %>
                                 <select name="tipo" id="tipo">
                                     <option value="0">

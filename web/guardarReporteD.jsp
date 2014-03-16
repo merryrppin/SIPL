@@ -15,11 +15,12 @@
 <%
     String error = "";
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usu = Gestor.getUsuario(user.getCodigo());
     String accion = request.getParameter("accion");
     int a = 0;
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2) {
+    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario() == 1) {
         String codigo = request.getParameter("codigo");
         String descripcion = request.getParameter("descripcion");
         String codigo_material = request.getParameter("codigo_material");
@@ -28,7 +29,6 @@
         String hora = request.getParameter("hora");
         String minutos = request.getParameter("minutos");
         String estado = request.getParameter("estado");
-
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {

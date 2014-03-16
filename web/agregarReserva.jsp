@@ -20,7 +20,7 @@
     Usuario usuario = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 0) {
+    } else if (usuario.getTipo_usuario() == 0) {
         if( usuario.getEstado()==2){
             error = "usuario_prestamo";
         }

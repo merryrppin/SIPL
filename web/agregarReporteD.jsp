@@ -16,10 +16,11 @@
     }
     er = Gestor.getError(error);
     Usuario user = (Usuario) session.getAttribute("user");
+    Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
-        int id=Gestor.getDanhos().size();
+    } else if (usu.getTipo_usuario() == 1 || usu.getTipo_usuario() == 2) {
+        int id = Gestor.getDanhos().size();
 %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +40,8 @@
                     Reporte.codigo_material.focus();
                     alert('No has llenado el campo del codigo del material');
                     return false;
-                } 
+                }
+            }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
@@ -139,27 +141,27 @@
                                 <label class="control-label" for="hora">Hora</label>
                                 <select id="hora" name="hora">
                                     <%
-                                    for(int i=0;i<24;i++){
-                                        if(i<10){
-                                            out.print("<option value='"+i+"'>0"+i+"</option>");
-                                        }else{
-                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        for (int i = 0; i < 24; i++) {
+                                            if (i < 10) {
+                                                out.print("<option value='" + i + "'>0" + i + "</option>");
+                                            } else {
+                                                out.print("<option value='" + i + "'>" + i + "</option>");
+                                            }
+
                                         }
-                                        
-                                    }
                                     %>
                                 </select>
                                 <label class="control-label" for="minutos">Minutos</label>
                                 <select id="minutos" name="minutos">
                                     <%
-                                    for(int i=0;i<60;i++){
-                                        if(i<10){
-                                            out.print("<option value='"+i+"'>0"+i+"</option>");
-                                        }else{
-                                            out.print("<option value='"+i+"'>"+i+"</option>");
+                                        for (int i = 0; i < 60; i++) {
+                                            if (i < 10) {
+                                                out.print("<option value='" + i + "'>0" + i + "</option>");
+                                            } else {
+                                                out.print("<option value='" + i + "'>" + i + "</option>");
+                                            }
+
                                         }
-                                        
-                                    }
                                     %>
                                 </select>
                             </td> 

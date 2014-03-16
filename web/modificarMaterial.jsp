@@ -20,7 +20,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
         String ID = request.getParameter("id");
         try {
             Material mat = Gestor.getMaterial(Integer.parseInt(ID));
