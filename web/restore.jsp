@@ -83,12 +83,18 @@
         <div class="row">
             <div class="col-xs-6 col-sm-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <form method="post" action="FileBackupServlet" enctype="multipart/form-data">
-                    <h2>Selecciona el backup a subir</h2>
-                    <input type="file" name="uploadFile" />
-                    <br/><br/>
-                    <input type="submit" value="Upload" class="btn btn-info" style='width:200px;'/>
-                </form>
+                <table class="table table-hover" align="center">
+                    <tr>
+                        <td align="center">
+                            <form method="post" action="FileBackupServlet" enctype="multipart/form-data">
+                                <h2>Selecciona el backup a subir</h2>
+                                <input type="file" name="uploadFile" />
+                                <br/><br/>
+                                <input type="submit" value="Upload" class="btn btn-info" style='width:200px;'/>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
                 <br>
                 <form name="Restore" class="form-horizontal" action="aplicarRestore.jsp?accion=1" method="POST" onsubmit="return validar(this);">
                     <table class="table table-hover" align="center">
