@@ -37,6 +37,7 @@ public class Gestor {
     GenerarPDFListar pdfL = new GenerarPDFListar();
     GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
     GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
+    AplicarRestore aplR = new AplicarRestore();
 
     public Gestor() {
         Conexion con = new Conexion();
@@ -269,5 +270,8 @@ public class Gestor {
     }
     public void GenerarPDFGrafica(String titulo, String imge, Usuario usuario, String dir, String Filex) throws BadElementException, IOException{
         pdfT.generarPDF(titulo, imge, usuario, dir, Filex);
+    }
+    public String AplicarRestore(String nombre){
+        return aplR.AplicarRestoreMySQL(nombre);
     }
 }

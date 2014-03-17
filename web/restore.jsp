@@ -4,6 +4,7 @@
     Author     : WM
 --%>
 
+<%@page import="java.io.File"%>
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
@@ -82,16 +83,41 @@
         <div class="row">
             <div class="col-xs-6 col-sm-2"></div>
             <div class="col-xs-12 col-sm-8">
-                <form name="Restore" class="form-horizontal" action="aplicarRestore.jsp" method="POST" onsubmit="return validar(this);">
-                    <table class="table-hover" align="center">
+                <form method="post" action="FileBackupServlet" enctype="multipart/form-data">
+                    <h2>Selecciona el backup a subir</h2>
+                    <input type="file" name="uploadFile" />
+                    <br/><br/>
+                    <input type="submit" value="Upload" class="btn btn-info" style='width:200px;'/>
+                </form>
+                <br>
+                <form name="Restore" class="form-horizontal" action="aplicarRestore.jsp?accion=1" method="POST" onsubmit="return validar(this);">
+                    <table class="table table-hover" align="center">
                         <tr>
+                            <td></td>
                             <td>
-                                <label class="control-label" for="restore">Restore</label>
-                                <input type="file" id="restore" name="restore">
+                                <b>Fecha</b>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
+                        <%
+                            String sDirectorio = Gestor.getVariable(1).getDatos();
+                            sDirectorio += "//Backup";
+                            File f = new File(sDirectorio);
+                            if (f.exists()) {
+                                File[] ficheros = f.listFiles();
+                                for (int x = 0; x < ficheros.length; x++) {
+                                    out.print("<tr>");
+                                    out.print("<td><input type='radio' name='id' value='" + ficheros[x].getName() + "' ");
+                                    out.print("checked='checked'/></td>");
+                                    out.print("<td>" + ficheros[x].getName());
+                                    out.print("</td>");
+                                    out.print("</tr>");
+                                }
+                            } else {
+                                error = "no_directorio";
+                            }
+                        %>
+                        <tr align="center">
+                            <td colspan="2">
                                 <br>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Restore</button>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
@@ -99,7 +125,6 @@
                         </tr>
                     </table>
                 </form>
-                <br>
                 <div class="alert alert-warning">  <strong>Warning!</strong> Recuerde que esta acción no puede deshacerse y se perderá la información que esté guardada en la Base de Datos y que no halla sido salvada en un Backup </div>
             </div>
             <div class="col-xs-6 col-sm-2"></div>

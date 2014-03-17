@@ -21,7 +21,7 @@
     int a = 0;
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario()) {
+    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario() == 1) {
         String codigo = request.getParameter("codigo");
         String tipo = request.getParameter("tipo");
         String marca = request.getParameter("marca");

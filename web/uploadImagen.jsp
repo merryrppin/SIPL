@@ -80,7 +80,6 @@
                 error = "error_accion";
             }
             if (a != 0) {
-
                 if (a == 1) {
                     ArrayList<Material> data = Gestor.getMateriales();
         %>

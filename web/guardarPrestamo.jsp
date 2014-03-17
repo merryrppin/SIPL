@@ -227,7 +227,6 @@
                 error = "usuario_inexistente";
             }
         } else if (a == 2) {
-            Usuario usu = Gestor.getUsuario(codigo);
             if (usu.getEstado() == 2) {
                 Prestamo pre = null;
                 pre = Gestor.getPrestamoCodUsu(codigo);

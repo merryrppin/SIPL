@@ -8,21 +8,74 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String error = "";
+    String accion = request.getParameter("accion");
+    int a = 0;
+    try {
+        a = Integer.parseInt(accion);
+    } catch (Exception e) {
+        error = "sin_accion";
+    }
+    String mov="restore.jsp";
+    String x = "";
     Usuario user = (Usuario) session.getAttribute("user");
     Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (usu.getTipo_usuario() == 2) {
-    String dire = request.getParameter("restore");
-    String direccion = this.getServletContext().getRealPath("/Backup/");
-    String d[] = direccion.split("build");
-    String a1 = d[0];
-    String b1 = d[1];
-    String c1 = a1.substring(a1.length() - 1, a1.length());
-    String A = a1.substring(0, a1.length() - 1);
-    String dir = A + b1 + c1;
-    dir+=dire;
-    }else {
+        if (a == 1) {
+            String resto = request.getParameter("id");
+            String dir = Gestor.getVariable(1).getDatos();
+            dir += "Backup\\";
+            dir += resto;
+            x = Gestor.AplicarRestore(dir);
+            if(x.equals("Restore aplicado satisfacoriamente")){
+                mov="logout.jsp";
+            }
+        }else if(a == 2){
+            
+        }
+        if (x != null && x.length() > 0) {
+%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title></title>
+        <script src="jquery/jquery-1.10.2.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#myModal").modal('show');
+            });
+        </script>
+    </head>
+    <body>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Restore</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><%out.print(x);%></p>
+                        <p class="text-warning"><small>Presione Aceptar para continuar</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" onclick="location.href = '<%out.print(mov);%>'" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>  
+<%}
+    } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");
+    }
+    if (error != null && error.length() > 0) {
+        response.sendRedirect("principal.jsp?" + error);
     }
 %>
