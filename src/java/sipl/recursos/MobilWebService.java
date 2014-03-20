@@ -11,12 +11,14 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import sipl.db.Conexion;
 import sipl.db.materialDAO;
+import sipl.db.multaDAO;
 import sipl.db.prestamoDAO;
 import sipl.db.tipo_materialDAO;
 import sipl.db.usuarioDAO;
 import sipl.db.variableSisDAO;
 import sipl.dominio.Gestor;
 import sipl.dominio.Material;
+import sipl.dominio.Multa;
 import sipl.dominio.Prestamo;
 import sipl.dominio.Tipo_material;
 import sipl.dominio.Usuario;
@@ -35,6 +37,7 @@ public class MobilWebService {
     materialDAO matDAO = new materialDAO(con);
     tipo_materialDAO tipDAO = new tipo_materialDAO(con);
     variableSisDAO varDAO = new variableSisDAO(con);
+    multaDAO mulDAO = new multaDAO(con);
 
     /**
      * Web service operation
@@ -79,11 +82,13 @@ public class MobilWebService {
                     try {
                         for (String mate : mates) {
                             Material mat = matDAO.getMaterial(Integer.parseInt(mate));
-                            if (mat.getDisponibilidad() != 0) {
-                                disp++;
-                            }
-                            if (mat.getEstado() == 1 || mat.getEstado() == 2) {
-                                esta++;
+                            if (mat != null) {
+                                if (mat.getDisponibilidad() != 0) {
+                                    disp++;
+                                }
+                                if (mat.getEstado() == 1 || mat.getEstado() == 2) {
+                                    esta++;
+                                }
                             }
                         }
                         if (disp == 0 && esta == 0) {
@@ -142,4 +147,82 @@ public class MobilWebService {
         }
         return rs;
     }
+
+    /**
+     * Web service operation
+     *
+     * @param cod_usuario
+     * @param apiK
+     * @param apiS
+     * @return
+     */
+    @WebMethod(operationName = "finalizarPrestamo")
+    public String finalzarPrestamo(@WebParam(name = "cod_usuario") String cod_usuario,
+            @WebParam(name = "apiK") String apiK, @WebParam(name = "apiS") String apiS) {
+        String rs = "";
+        String aK = varDAO.getTipo_variable(5).getDatos();
+        if (aK.equals(apiK)) {
+            Usuario usu = usuDAO.getUsuario(cod_usuario);
+            String aS = "";
+            int tam = Integer.parseInt("" + apiS.charAt(0));
+            String cod = apiS.substring(1, tam + 1);
+            Usuario adm = usuDAO.getUsuario(cod);
+            String c = adm.getCodigo();
+            aS += c.length() + "" + c + "" + adm.getClave();
+            if (apiS.equals(aS) && (adm.getTipo_usuario() == 1 || adm.getTipo_usuario() == 2)) {
+                if (usu.getEstado() == 2) {
+                    Prestamo pre;
+                    pre = preDAO.getPrestamoCodUsu(usu.getCodigo());
+                    if (pre != null) {
+                        String[] cadena = pre.getMat().split(";");
+                        for (String cadena1 : cadena) {
+                            try {
+                                Material mat = matDAO.getMaterial(Integer.parseInt(cadena1));
+                                if (mat != null) {
+                                    mat.setDisponibilidad(0);
+                                    matDAO.updateMaterial(mat);
+                                    Tipo_material tip = mat.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d++;
+                                    tip.setDisponibilidad(d);
+                                    tipDAO.updateTipo_material(tip);
+                                }
+                            } catch (NumberFormatException e) {
+                                rs = "error_material";
+                            }
+                        }
+                        usu.setEstado(0);
+                        Calendar cal = Calendar.getInstance();
+                        Calendar cal2 = pre.getFecha_prestamo();
+                        long time1 = cal.getTimeInMillis();
+                        long time2 = cal2.getTimeInMillis();
+                        long dias3 = 259200000;
+                        time1 -= dias3;
+                        int m = 0;
+                        if (time1 > time2) {
+                            usu.setEstado(4);
+                            Multa mul = new Multa(0, usu, cal, 0, 3);
+                            mulDAO.addMulta(mul);
+                            m++;
+                        }
+                        pre.setEstado(1);
+                        pre.setFecha_devolucion(cal);
+                        usuDAO.updateUsuario(usu);
+                        preDAO.updatePrestamo(pre);
+                        if (m > 0) {
+                            rs = "multa_generada";
+                        } else {
+                            rs = "prestamo_finalizado";
+                        }
+                    }
+                }
+            } else {
+                rs = "ApiS_error";
+            }
+        } else {
+            rs = "ApiK_error";
+        }
+        return rs;
+    }
+
 }

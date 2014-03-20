@@ -227,7 +227,7 @@
                 if (pre != null) {
                     String[] cadena = pre.getMat().split(";");
                     Material mate1 = null, mate2 = null, mate3 = null,
-                            mate4 = null, mate5 = null;
+                            mate4 = null, mate5 = null; 
                     if (cadena.length >= 1) {
                         try {
                             mate1 = Gestor.getMaterial(Integer.parseInt(cadena[0]));
