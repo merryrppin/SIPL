@@ -10,6 +10,8 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    Gestor.desactivarMultas();
+    Gestor.desactivarReservas();
     String error = "";
     Error_D er = null;
     try {
@@ -18,10 +20,10 @@
     }
     er = Gestor.getError(error);
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usu = Gestor.getUsuario(user.getCodigo());
+    Usuario usu1 = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario() == 1) {
+    } else if (usu1.getTipo_usuario() == 2 || usu1.getTipo_usuario() == 1) {
         ArrayList<Multa> data = Gestor.getMultas();
         String accion = request.getParameter("accion");
         int a = 0;
@@ -105,19 +107,6 @@
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
                                     Calendar cal1 = data.get(i).getFecha_multa();
-                                    if (data.get(i).getEstado_multa() == 0) {
-                                        Calendar hoy = Calendar.getInstance();
-                                        long tiempo1 = hoy.getTimeInMillis();
-                                        long tiempo2 = cal1.getTimeInMillis();
-                                        if (tiempo1 - tiempo2 >= 259200000) {
-                                            Multa mul = Gestor.getMultaUsu(data.get(i).getUsu().getCodigo());
-                                            mul.setEstado_multa(1);
-                                            Usuario usu = Gestor.getUsuario(mul.getUsu().getCodigo());
-                                            usu.setEstado(0);
-                                            Gestor.updateUsuario(usu);
-                                            Gestor.updateMulta(mul);
-                                        }
-                                    }
                                     out.print("<tr>");
                                     if (a == 2) {
                                         out.print("<td><input type='radio' name='id' value='" + data.get(i).getCodigo() + "' ");

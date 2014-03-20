@@ -33,7 +33,8 @@ public class Gestor {
     GenerarBackupMySQL gen = new GenerarBackupMySQL();
     RestoreMySQL res = new RestoreMySQL();
     TextoImagen tei = new TextoImagen();
-    ActivarMultas actM = new ActivarMultas();
+    DesactivarMultas actM = new DesactivarMultas();
+    DesactivarReserva actR = new DesactivarReserva();
     GenerarPDFListar pdfL = new GenerarPDFListar();
     GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
     GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
@@ -257,8 +258,8 @@ public class Gestor {
         return errDAO.getError(codigo);
     }
 
-    public void activarMultas() {
-        actM.Multas();
+    public void desactivarMultas() {
+        actM.desactivarMult();
     }
 
     public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir, String Filex) throws BadElementException, IOException {
@@ -273,5 +274,9 @@ public class Gestor {
     }
     public String AplicarRestore(String nombre){
         return aplR.AplicarRestoreMySQL(nombre);
+    }
+    
+    public void desactivarReservas(){
+        actR.desactivarRes();
     }
 }

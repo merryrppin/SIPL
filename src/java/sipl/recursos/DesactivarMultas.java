@@ -17,13 +17,13 @@ import sipl.dominio.Usuario;
  *
  * @author WM
  */
-public class ActivarMultas {
+public class DesactivarMultas {
 
-    public void Multas() {
+    public void desactivarMult() {
         Conexion con = new Conexion();
         multaDAO mulDAO = new multaDAO(con);
         usuarioDAO usuDAO = new usuarioDAO(con);
-        ArrayList<Multa> data = mulDAO.getMultas();
+        ArrayList<Multa> data = mulDAO.getMultasAct();
         for (int i = 0; i < data.size(); i++) {
             Calendar cal1 = data.get(i).getFecha_multa();
             if (data.get(i).getEstado_multa() == 0) {

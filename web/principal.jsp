@@ -8,6 +8,8 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    Gestor.desactivarMultas();
+    Gestor.desactivarReservas();
     Error_D er = null;
     String error = "";
     try {
@@ -64,7 +66,7 @@
         <%}%>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="right">
-                <h6><b><button onclick="location.href = 'configuracion.jsp'"><span class="glyphicon glyphicon-cog"></span></button><%out.print("  "+user.getNombre() + " " + user.getApellido()+"  ");%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
+                <h6><b><button onclick="location.href = 'configuracion.jsp'"><span class="glyphicon glyphicon-cog"></span></button><%out.print("  " + user.getNombre() + " " + user.getApellido() + "  ");%></b><a href="logout.jsp" style='width:200px;'>Cerrar sesión</a></h6>
             </div>
         </div>
         <br>
@@ -328,7 +330,10 @@
                         <table class="table table-hover">
                             <tr align="center">
                                 <td>
-                                    <button class="btn btn-primary" type="button" onclick="location.href = 'listarReservas.jsp'" style='width:200px;'>Listar Reservas</button>
+                                    <button class="btn btn-primary" type="button" 
+                                            onclick="location.href = 'listarReservas.jsp'" 
+                                            style='width:200px;'>Listar Reservas</button>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -339,9 +344,9 @@
     </body>
 </html>
 <%
-    }else if(user.getTipo_usuario()==0){
+    } else if (user.getTipo_usuario() == 0) {
         response.sendRedirect("principalUsuario.jsp?error=sin_permisos");
-    }else {
+    } else {
         response.sendRedirect("login.jsp?error=sin_permisos");
     }
 %>

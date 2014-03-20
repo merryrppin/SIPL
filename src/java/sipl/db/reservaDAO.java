@@ -48,7 +48,28 @@ public class reservaDAO {
         return data;
     }
     
-
+    public ArrayList<Reserva> getReservasAct() {
+        ArrayList<Reserva> data = new ArrayList<>();
+        ResultSet rs = con.getQuery("select * from reserva where estado=0");
+        try {
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String usu = rs.getString("cod_usuario");
+                int estado= rs.getInt("estado");
+                Calendar cal = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("fecha_reserva");
+                cal.setTimeInMillis(t1.getTime());
+                String mat = rs.getString("cod_material");
+                Reserva res = new Reserva(codigo, usuDAO.getUsuario(usu), estado, cal, mat);
+                data.add(res);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            data = null;
+        }
+        return data;
+    }
+    
     public Reserva getReserva(int codigo) {
         Reserva res = null;
         ResultSet rs = con.getQuery("select * from reserva where codigo=" + codigo);

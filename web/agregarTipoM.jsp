@@ -46,7 +46,7 @@
                     Tipom.nombre.focus();
                     alert('No has llenado el campo del nombre');
                     return false;
-                } else if (Tipom.descripcion.value.length === 0 || /^\s+$/.test(Tipom.descripcion..value)) {
+                } else if (Tipom.descripcion.value.length === 0 || /^\s+$/.test(Tipom.descripcion.value)) {
                     Tipom.descripcion.focus();
                     alert('No has llenado el campo de descripción');
                     return false;

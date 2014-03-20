@@ -82,28 +82,41 @@
                         <td align="center">
                             <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=1'">Eliminar Gráficas Temporales</button>
                             <%
+                                File[] ficheros;
+                                int ver = 0;
                                 String sDirectorio = Gestor.getVariable(1).getDatos();
                                 sDirectorio += "//Grafica";
                                 File f = new File(sDirectorio);
-                                File[] ficheros = f.listFiles();
+                                if (!f.exists()) {
+                                    ver = 1;
+                                }
+                                ficheros = f.listFiles();
                             %>
                         </td>
                         <td>
-                            <span class="label label-default"><%out.print(ficheros.length+" Archivos");%></span>
+                            <span class="label label-default"><%if (ver == 0) {
+                                    out.print(ficheros.length + " Archivos");
+                                }%></span>
                         </td>
                     </tr>
                     <tr>
                         <td align="center">
                             <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=3'">Eliminar PDF Temporales</button>
                             <%
+                                int ver1 = 0;
                                 sDirectorio = Gestor.getVariable(1).getDatos();
                                 sDirectorio += "//PDF";
                                 File f1 = new File(sDirectorio);
                                 File[] ficheros1 = f1.listFiles();
+                                if (!f.exists()) {
+                                    ver1 = 1;
+                                }
+                                ficheros = f.listFiles();
                             %>
                         </td>
                         <td>
-                            <span class="label label-default"><%out.print(ficheros1.length+" PDF");%></span>
+                            <span class="label label-default"><%if (ver1 == 0) {
+                                    out.print(ficheros1.length + " PDF");%></span>
                         </td>
                     </tr>
                     <%}%>
@@ -112,14 +125,15 @@
                         <td align="center">
                             <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=2'">Eliminar Backups Temporales</button>
                             <%
-                                String sDirectorio = Gestor.getVariable(1).getDatos();
+                                sDirectorio = Gestor.getVariable(1).getDatos();
                                 sDirectorio += "//Backup";
-                                File f = new File(sDirectorio);
-                                File[] ficheros = f.listFiles();
+                                File f2 = new File(sDirectorio);
+                                File[] ficheros2 = f2.listFiles();
                             %>
                         </td>
                         <td>
-                            <span class="label label-default"><%out.print(ficheros.length+" Backup");%></span>
+                            <span class="label label-default"><%if (ver1 == 0) {
+                                    out.print(ficheros2.length + " Backup");%></span>
                         </td>
                     </tr>
                     <tr>
@@ -127,22 +141,20 @@
                             <button type="button" class="btn btn-info" onclick="location.href = 'variablesSistema.jsp'">Variables del Sistema</button>
                         </td>
                         <td>
-                            
                         </td>
                     </tr>
                     <%}%>
                     <tr>
                         <%
-                        String direccion="principal.jsp";
-                        if(user.getTipo_usuario()==0){
-                            direccion="principalUsuario.jsp";
-                        }
+                            String direccion = "principal.jsp";
+                            if (user.getTipo_usuario() == 0) {
+                                direccion = "principalUsuario.jsp";
+                            }
                         %>
                         <td align="center">
                             <button class="btn btn-danger" type="button" onclick="location.href = '<%out.print(direccion);%>'" style='width:150px;'>Atrás</button>
                         </td>
                         <td>
-                            
                         </td>
                     </tr>
                 </table>

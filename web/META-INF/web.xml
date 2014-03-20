@@ -44,6 +44,10 @@
         <servlet-class>sipl.servlets.PrestamoUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GetUbicacionServlet</servlet-name>
+        <servlet-class>sipl.servlets.GetUbicacionServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>MobilWebService</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>PrestamoUsuarioServlet</servlet-name>
         <url-pattern>/PrestamoUsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUbicacionServlet</servlet-name>
+        <url-pattern>/GetUbicacionServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MobilWebService</servlet-name>

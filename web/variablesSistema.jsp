@@ -30,12 +30,20 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
+            function fijarURL(url, form) {
+                form.action = url;
+                form.submit();
+            }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
             });
             <%}
             %>
+            function getUbicacion() {
+                $("#ubicacion").load("GetUbicacionServlet");
+                return false;
+            }
         </script>
     </head>
     <body>
@@ -78,10 +86,11 @@
                             String usuario = Gestor.getVariable(3).getDatos();
                             String password = Gestor.getVariable(4).getDatos();
                         %>
-                        <tr>
+                        <tr id="ubicacion">
                             <td align="center">
                                 <label class="control-label" for="ubicacion">Ubicación del sistema</label>
-                                <input type="text" style='width:350px;' id="ubicacion" placeholder='"C:\sipl\SIPL\web\"' name="ubicacion" value='<%out.print(ubicacion);%>'>
+                                <input type="text" style='width:350px;' id="ubicaciona" placeholder='"C:\sipl\SIPL\web\"' name="ubicaciona" value='<%out.print(ubicacion);%>'>
+                                <button onClick="return getUbicacion();"><span class="glyphicon glyphicon-home"></span></button>
                             </td>
                         </tr>
                         <tr>

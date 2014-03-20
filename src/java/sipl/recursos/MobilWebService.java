@@ -3,12 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.recursos;
 
+import java.util.Calendar;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import sipl.db.Conexion;
+import sipl.db.materialDAO;
+import sipl.db.prestamoDAO;
+import sipl.db.tipo_materialDAO;
+import sipl.db.usuarioDAO;
+import sipl.db.variableSisDAO;
+import sipl.dominio.Gestor;
+import sipl.dominio.Material;
+import sipl.dominio.Prestamo;
+import sipl.dominio.Tipo_material;
+import sipl.dominio.Usuario;
 
 /**
  *
@@ -17,24 +28,117 @@ import javax.jws.WebParam;
 @WebService(serviceName = "MobilWebService")
 public class MobilWebService {
 
+    Gestor gestor = new Gestor();
+    Conexion con = new Conexion();
+    usuarioDAO usuDAO = new usuarioDAO(con);
+    prestamoDAO preDAO = new prestamoDAO(con);
+    materialDAO matDAO = new materialDAO(con);
+    tipo_materialDAO tipDAO = new tipo_materialDAO(con);
+    variableSisDAO varDAO = new variableSisDAO(con);
+
     /**
-     * This is a sample web service operation
+     * Web service operation
+     *
+     * @param cod_materiales
+     * @param cod_usuario
+     * @param apiK
+     * @param apiS
+     * @return
      */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    @WebMethod(operationName = "addPrestamo")
+    public String addPrestamo(@WebParam(name = "cod_materiales") String cod_materiales,
+            @WebParam(name = "cod_usuario") String cod_usuario, @WebParam(name = "apiK") String apiK,
+            @WebParam(name = "apiS") String apiS) {
+        String rs = "";
+        String aK = varDAO.getTipo_variable(5).getDatos();
+        if (aK.equals(apiK)) {
+            Usuario usu = usuDAO.getUsuario(cod_usuario);
+            String aS = "";
+            String cod = usu.getCodigo();
+            aS += cod.length() + "" + cod + "" + usu.getClave();
+            if (apiS.equals(aS)) {
+                Calendar cal = Calendar.getInstance();
+                if (usu.getEstado() == 2) {
+                    rs = "usuario_prestamo";
+                } else if (usu.getEstado() == 3) {
+                    rs = "usuario_reserva";
+                } else if (usu.getEstado() == 4) {
+                    rs = "usuario_multa";
+                } else if (usu.getEstado() == 1) {
+                    rs = "usuario_inactivo";
+                } else if (usu.getEstado() == 0) {
+                    long i = cal.getTimeInMillis();
+                    Calendar cal2 = Calendar.getInstance();
+                    cal2.setTimeInMillis(i);
+                    int dia = cal.get(Calendar.DAY_OF_MONTH);
+                    dia += 3;
+                    cal2.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), dia);
+                    int disp = 0;
+                    int esta = 0;
+                    String mates[] = cod_materiales.split(";");
+                    try {
+                        for (String mate : mates) {
+                            Material mat = matDAO.getMaterial(Integer.parseInt(mate));
+                            if (mat.getDisponibilidad() != 0) {
+                                disp++;
+                            }
+                            if (mat.getEstado() == 1 || mat.getEstado() == 2) {
+                                esta++;
+                            }
+                        }
+                        if (disp == 0 && esta == 0) {
+                            Prestamo pre = new Prestamo(0, cod_materiales, usu, cal, cal2, 0);
+                            for (String mate : mates) {
+                                Material mat = matDAO.getMaterial(Integer.parseInt(mate));
+                                mat.setDisponibilidad(1);
+                                matDAO.updateMaterial(mat);
+                                Tipo_material tip = mat.getTipo_mat();
+                                int d = tip.getDisponibilidad();
+                                d--;
+                                tip.setDisponibilidad(d);
+                                tipDAO.updateTipo_material(tip);
+                            }
+                            usu.setEstado(2);
+                            usuDAO.updateUsuario(usu);
+                            preDAO.addPrestamo(pre);
+                            rs = "Prestamo_Agregado";
+                        }
+                    } catch (NumberFormatException e) {
+                        rs = "error";
+                    }
+                }
+            } else {
+                rs = "ApiS_error";
+            }
+        } else {
+            rs = "ApiK_error";
+        }
+        return rs;
     }
 
     /**
      * Web service operation
+     *
+     * @param user
+     * @param password
+     * @param apiK
+     * @return
      */
     @WebMethod(operationName = "login")
-    public String login(@WebParam(name = "user") String user, @WebParam(name = "passwd") String passwd) {
-        String rs = "";
-        if (user.equals("w1") && passwd.equals("w1")) {
-            rs="OK";
+    public String login(@WebParam(name = "user") String user, @WebParam(name = "password") String password,
+            @WebParam(name = "apiK") String apiK) {
+        String rs;
+        String aK = varDAO.getTipo_variable(5).getDatos();
+        if (aK.equals(apiK)) {
+            Usuario usu = usuDAO.getLogin(user, gestor.encriptar(password));
+            if (usu != null) {
+                rs = usu.getCodigo() + ";" + usu.getNombre() + ";" + usu.getApellido() + ";" + usu.getTipo_usuario() + ";"
+                        + usu.getEstado() + ";" + usu.getClave();
+            } else {
+                rs = "Error";
+            }
         } else {
-            rs="Fallo";
+            rs = "ApiK_error";
         }
         return rs;
     }

@@ -57,12 +57,6 @@
                     error = "usuario_inactivo";
                 } else if (usuario.getEstado() == 0) {
                     Calendar cal = Calendar.getInstance();
-                    long i = cal.getTimeInMillis();
-                    Calendar cal2 = Calendar.getInstance();
-                    cal2.setTimeInMillis(i);
-                    int dia = cal.get(Calendar.DAY_OF_MONTH);
-                    dia += 3;
-                    cal2.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), dia);
                     String materiales = "";
                     int disp = 0;
                     int esta = 0;
@@ -139,7 +133,7 @@
                         error = "material_inexistente";
                     }
                     if (disp == 0 && esta == 0) {
-                        Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal2, 0);
+                        Prestamo pre = new Prestamo(0, materiales, Gestor.getUsuario(codigo), cal, cal, 0);
                         boolean flag = false;
                         if (mate1 != null || mate2 != null || mate3 != null || mate4 != null
                                 || mate5 != null) {
@@ -149,7 +143,6 @@
                             flag = false;
                         }
                         if (flag == true) {
-                            Gestor.addPrestamo(pre);
                             try {
                                 if (mat1 != null && mat1.length() > 0) {
                                     mate1.setDisponibilidad(1);
@@ -213,6 +206,7 @@
                             }
                             usuario.setEstado(2);
                             Gestor.updateUsuario(usuario);
+                            Gestor.addPrestamo(pre);
                             response.sendRedirect("listarPrestamos.jsp?accion=1");
                         } else {
                             error = "no_agrego";

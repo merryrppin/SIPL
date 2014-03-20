@@ -142,7 +142,7 @@
                             }
                         %>
                         <tr>
-                            <td colspan="8" align="center">
+                            <td colspan="9" align="center">
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=2', this.form)" style='width:200px;'/>
                             </td>
                         </tr>

@@ -17,7 +17,6 @@
     } catch (Exception e) {
     }
     er = Gestor.getError(error);
-
     Usuario user = (Usuario) session.getAttribute("user");
     Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
@@ -45,7 +44,8 @@
                     Reporte.codigo_material.focus();
                     alert('No has llenado el campo del codigo del material');
                     return false;
-                } 
+                }
+            }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
@@ -215,7 +215,6 @@
                                             out.print("selected ");
                                         }
                                         out.print("value='2'>Dado de baja</option>");
-
                                     %>
                                 </select>
                             </td>
