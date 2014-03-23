@@ -111,6 +111,16 @@
                                 <input type="password" style='width:350px;' id="password" name="password" value='<%out.print(password);%>'>
                             </td>
                         </tr>
+                        <tr>
+                            <td align="center">
+                            <button class="btn btn-info" type="button" onclick="location.href = 'guardarVariables.jsp'" style='width:150px;'>Guardar</button>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'configuracion.jsp'" style='width:150px;'>Atrás</button>
+                        </td>
+                        </tr>
                     </table>
                 </form>
             </div>

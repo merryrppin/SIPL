@@ -11,6 +11,8 @@
 <%
     String error = "";
     Error_D er = null;
+    int ver = 0;
+    String sDirectorio = Gestor.getVariable(1).getDatos();
     try {
         error = request.getParameter("error");
     } catch (Exception e) {
@@ -83,8 +85,6 @@
                             <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=1'">Eliminar Gráficas Temporales</button>
                             <%
                                 File[] ficheros;
-                                int ver = 0;
-                                String sDirectorio = Gestor.getVariable(1).getDatos();
                                 sDirectorio += "//Grafica";
                                 File f = new File(sDirectorio);
                                 if (!f.exists()) {
@@ -116,7 +116,8 @@
                         </td>
                         <td>
                             <span class="label label-default"><%if (ver1 == 0) {
-                                    out.print(ficheros1.length + " PDF");%></span>
+                                    out.print(ficheros1.length + " PDF");
+                                }%></span>
                         </td>
                     </tr>
                     <%}%>
@@ -125,15 +126,19 @@
                         <td align="center">
                             <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=2'">Eliminar Backups Temporales</button>
                             <%
+                                int ver2=0;
                                 sDirectorio = Gestor.getVariable(1).getDatos();
                                 sDirectorio += "//Backup";
                                 File f2 = new File(sDirectorio);
                                 File[] ficheros2 = f2.listFiles();
+                                if (!f2.exists()) {
+                                    ver2 = 1;
+                                }
                             %>
                         </td>
                         <td>
-                            <span class="label label-default"><%if (ver1 == 0) {
-                                    out.print(ficheros2.length + " Backup");%></span>
+                            <span class="label label-default"><%if (ver2 == 0) {
+                                    out.print(ficheros2.length + " Backup");}%></span>
                         </td>
                     </tr>
                     <tr>
@@ -143,7 +148,8 @@
                         <td>
                         </td>
                     </tr>
-                    <%}%>
+                    <%
+                        }%>
                     <tr>
                         <%
                             String direccion = "principal.jsp";

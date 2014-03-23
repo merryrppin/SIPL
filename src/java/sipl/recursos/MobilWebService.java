@@ -55,10 +55,17 @@ public class MobilWebService {
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
         if (aK.equals(apiK)) {
-            Usuario usu = usuDAO.getUsuario(cod_usuario);
             String aS = "";
-            String cod = usu.getCodigo();
-            aS += cod.length() + "" + cod + "" + usu.getClave();
+            if (apiS.length() > 0) {
+                int tam = apiS.charAt(0);
+                String codigoAdm = apiS.substring(1, tam);
+                Usuario adm = usuDAO.getUsuario(codigoAdm);
+                String cod = adm.getCodigo();
+                aS += cod.length() + "" + cod + "" + adm.getClave();
+            } else {
+                rs = "error_apiS";
+            }
+            Usuario usu = usuDAO.getUsuario(cod_usuario);
             if (apiS.equals(aS)) {
                 Calendar cal = Calendar.getInstance();
                 if (usu.getEstado() == 2) {
@@ -140,7 +147,7 @@ public class MobilWebService {
                 rs = usu.getCodigo() + ";" + usu.getNombre() + ";" + usu.getApellido() + ";" + usu.getTipo_usuario() + ";"
                         + usu.getEstado() + ";" + usu.getClave();
             } else {
-                rs = "Error";
+                rs = "Error_usu";
             }
         } else {
             rs = "ApiK_error";
@@ -224,5 +231,4 @@ public class MobilWebService {
         }
         return rs;
     }
-
 }
