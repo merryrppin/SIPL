@@ -21,15 +21,6 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (usu.getTipo_usuario() == 1 || usu.getTipo_usuario() == 2) {
         
-        //Prueba
-        String ubic = this.getServletContext().getRealPath("/QR/");
-        String d[] = ubic.split("build");
-        String a1 = d[0];
-        String b1 = d[1];
-        String c1 = a1.substring(a1.length() - 1, a1.length());
-        String A = a1.substring(0, a1.length() - 1);
-        String dir = A + b1 + c1;
-        
         
         
 %>
@@ -104,8 +95,6 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>ubic=<%out.print(ubic);%></h1>
-                <h1>dir=<%out.print(dir);%></h1>
                 <h1>Agregar Usuario</h1>
             </div>
         </div>

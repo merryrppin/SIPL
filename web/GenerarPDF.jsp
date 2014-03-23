@@ -72,7 +72,7 @@
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 7) {
-            String titulo = "Listar Daño";
+            String titulo = "Listar Danho";
             Filex += titulo + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
@@ -98,7 +98,7 @@
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 10) {
             String rango = request.getParameter("rango");
-            String titulo = "Daños por " + rango;
+            String titulo = "Danos por " + rango;
             String fecha1 = request.getParameter("fecha1");
             String fecha2 = request.getParameter("fecha2");
             String imagen = request.getParameter("imagen");

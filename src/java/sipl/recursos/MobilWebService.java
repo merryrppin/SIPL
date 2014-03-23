@@ -54,18 +54,23 @@ public class MobilWebService {
             @WebParam(name = "apiS") String apiS) {
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
-        
+
         if (aK.equals(apiK)) {
             String aS = "";
-            if (apiS.length() > 0) {
-                String t =apiS.substring(0);
-                System.out.print(t);
-                int tam = 3;
-                String codigoAdm = apiS.substring(1, tam);
-                Usuario adm = usuDAO.getUsuario(codigoAdm);
-                String cod = adm.getCodigo();
-                aS += cod.length() + "" + cod + "" + adm.getClave();
-            } else {
+            try {
+                if (apiS.length() > 0) {
+                    String t = apiS.substring(0, 1);
+                    System.out.print(t);
+                    int tam = Integer.parseInt(t);
+                    tam++;
+                    String codigoAdm = apiS.substring(1, tam);
+                    Usuario adm = usuDAO.getUsuario(codigoAdm);
+                    String cod = adm.getCodigo();
+                    aS += cod.length() + "" + cod + "" + adm.getClave();
+                } else {
+                    rs = "error_apiS";
+                }
+            } catch (NumberFormatException e) {
                 rs = "error_apiS";
             }
             Usuario usu = usuDAO.getUsuario(cod_usuario);
@@ -228,6 +233,37 @@ public class MobilWebService {
                 }
             } else {
                 rs = "ApiS_error";
+            }
+        } else {
+            rs = "ApiK_error";
+        }
+        return rs;
+    }
+
+    /**
+     * Web service operation
+     *
+     * @param cod_material
+     * @param apiK
+     * @return
+     */
+    @WebMethod(operationName = "getDisponibilidadMat")
+    public String getDisponibilidadMat(@WebParam(name = "cod_material") String cod_material, @WebParam(name = "apiK") String apiK) {
+        String rs = "";
+        String aK = varDAO.getTipo_variable(5).getDatos();
+        if (aK.equals(apiK)) {
+            try {
+                String[] materiales = cod_material.split(";");
+                for (int i = 0; i < materiales.length; i++) {
+                    if (i != 0) {
+                        rs += "-";
+                    }
+                    String[] pos = materiales[i].split("-");
+                    Material mat = matDAO.getMaterial(Integer.parseInt(materiales[i]));
+                    rs += pos + ";" + mat.getTipo_mat().getNombre() + ";" + mat.getDisponibilidad();
+                }
+            } catch (NumberFormatException e) {
+                rs = "materiales_error";
             }
         } else {
             rs = "ApiK_error";

@@ -432,7 +432,7 @@ public class GenerarPDFListar {
                 subCatPart.add(table);
                 break;
             }
-            case "Listar Daño": {
+            case "Listar Danho": {
                 ArrayList<Danho> danhos = danDAO.getDanhos();
                 PdfPTable table = new PdfPTable(9);
                 PdfPCell c1 = new PdfPCell(new Phrase("Descripción Daño"));
