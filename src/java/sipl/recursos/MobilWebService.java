@@ -58,7 +58,9 @@ public class MobilWebService {
         if (aK.equals(apiK)) {
             String aS = "";
             if (apiS.length() > 0) {
-                int tam = Integer.parseInt(apiS.substring(0));
+                String t =apiS.substring(0);
+                System.out.print(t);
+                int tam = 3;
                 String codigoAdm = apiS.substring(1, tam);
                 Usuario adm = usuDAO.getUsuario(codigoAdm);
                 String cod = adm.getCodigo();
