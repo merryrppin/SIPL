@@ -111,6 +111,7 @@ public class MobilWebServicePort {
      */
     private sipl.recursos_client.MobilWebService getPort() {
         try {
+            
             // Call Web Service Operation
             sipl.recursos_client.MobilWebService_Service service = new sipl.recursos_client.MobilWebService_Service();
             sipl.recursos_client.MobilWebService p = service.getMobilWebServicePort();
