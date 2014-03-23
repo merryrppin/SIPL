@@ -54,6 +54,7 @@ public class MobilWebService {
             @WebParam(name = "apiS") String apiS) {
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
+        
         if (aK.equals(apiK)) {
             String aS = "";
             if (apiS.length() > 0) {
