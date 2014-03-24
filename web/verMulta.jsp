@@ -147,7 +147,7 @@
                 response.sendRedirect("principalUsuario.jsp?error=error");
             }
         } else {
-            response.sendRedirect("principalUsuario.jsp?error=sin_reserva");
+            response.sendRedirect("principalUsuario.jsp?error=sin_multa");
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");

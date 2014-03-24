@@ -101,9 +101,9 @@ public class prestamoDAO {
 
     public boolean addPrestamo(Prestamo pre) {
         boolean result = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal2 = sdf.format(pre.getFecha_prestamo().getTime());
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal3 = sdf1.format(pre.getFecha_devolucion().getTime());
         String sql = "insert into prestamo (cod_material, cod_usuario, fecha_prestamo, fecha_devolucion, estado) values ('"
                 + pre.getMat() + "','" + pre.getUsu().getCodigo() + "','" + cal2 + "','" + cal3 + "'," + pre.getEstado() + ")";
@@ -116,9 +116,9 @@ public class prestamoDAO {
 
     public boolean updatePrestamo(Prestamo pre) {
         boolean result = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal2 = sdf.format(pre.getFecha_prestamo().getTime());
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal3 = sdf1.format(pre.getFecha_devolucion().getTime());
         String sql = "update prestamo set cod_material='" + pre.getMat() + "',cod_usuario='" + pre.getUsu().getCodigo() + "',"
                 + " fecha_prestamo='" + cal2 + "', fecha_devolucion='" + cal3 + "',estado=" + pre.getEstado() + " where codigo=" + pre.getCodigo();

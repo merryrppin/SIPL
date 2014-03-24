@@ -112,7 +112,7 @@ public class reservaDAO {
     
     public boolean addReserva(Reserva res) {
        boolean result = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal2 = sdf.format(res.getFecha_reserva().getTime());
         String sql = "insert into reserva (cod_usuario,estado,fecha_reserva,cod_material) values ('"+res.getUsu().getCodigo()+"'," +res.getEstado()+ ",'"
                 + cal2 + "','" + res.getMat() + "')";
@@ -125,7 +125,7 @@ public class reservaDAO {
 
     public boolean updateReserva(Reserva res) {
          boolean result = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal2 = sdf.format(res.getFecha_reserva().getTime());
         String sql = "update reserva set cod_usuario='" +res.getUsu().getCodigo()+ "',"
                 + " estado="+res.getEstado()+", fecha_reserva='" + cal2

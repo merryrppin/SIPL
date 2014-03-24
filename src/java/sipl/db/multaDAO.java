@@ -114,7 +114,7 @@ public class multaDAO {
 
     public boolean addMulta(Multa mul) {
         boolean result = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal1 = sdf.format(mul.getFecha_multa().getTime());
         String sql = "insert into multa (cod_usuario, fecha_multa, estado_multa, tiempo_multa) values ('"
                 + mul.getUsu().getCodigo() + "','" + cal1 + "'," + mul.getEstado_multa() + ","
@@ -128,7 +128,7 @@ public class multaDAO {
 
     public boolean updateMulta(Multa mul) {
         boolean result = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String cal1 = sdf.format(mul.getFecha_multa().getTime());
         String sql = "update multa set cod_usuario='" + mul.getUsu().getCodigo() + "',"
                 + " fecha_multa='" + cal1 + "', estado_multa=" + mul.getEstado_multa()
