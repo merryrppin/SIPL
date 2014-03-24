@@ -240,34 +240,4 @@ public class MobilWebService {
         return rs;
     }
 
-    /**
-     * Web service operation
-     *
-     * @param cod_material
-     * @param apiK
-     * @return
-     */
-    @WebMethod(operationName = "getDisponibilidadMat")
-    public String getDisponibilidadMat(@WebParam(name = "cod_material") String cod_material, @WebParam(name = "apiK") String apiK) {
-        String rs = "";
-        String aK = varDAO.getTipo_variable(5).getDatos();
-        if (aK.equals(apiK)) {
-            try {
-                String[] materiales = cod_material.split(";");
-                for (int i = 0; i < materiales.length; i++) {
-                    if (i != 0) {
-                        rs += "-";
-                    }
-                    String[] pos = materiales[i].split("-");
-                    Material mat = matDAO.getMaterial(Integer.parseInt(materiales[i]));
-                    rs += pos + ";" + mat.getTipo_mat().getNombre() + ";" + mat.getDisponibilidad();
-                }
-            } catch (NumberFormatException e) {
-                rs = "materiales_error";
-            }
-        } else {
-            rs = "ApiK_error";
-        }
-        return rs;
-    }
 }

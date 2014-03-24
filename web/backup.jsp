@@ -40,7 +40,7 @@
             int h = cal.get(Calendar.HOUR_OF_DAY);
             int m = cal.get(Calendar.MINUTE);
             int s = cal.get(Calendar.SECOND);
-            String nombre = "\\backup";
+            String nombre = "Backup\\";
             nombre += Y + "-" + M + "-" + D + "_" + h + "-" + m + "-" + s;
             nombre += ".sql";
             Gestor.GenerarBackup(nombre);

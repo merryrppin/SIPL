@@ -25,7 +25,6 @@ public class GenerarBackupMySQL {
         VariableSis vs4 = gestor.getVariable(4);
         String direccion=vs2.getDatos();
         String mysql =vs.getDatos() +"mysqldump";
-        direccion+="Backup\\";
         direccion+=nombre;
         try {
             int processComplete;
@@ -38,6 +37,7 @@ public class GenerarBackupMySQL {
                 resultado = "Backup creado satisfactoriamente...";
             }
         } catch (HeadlessException | IOException | InterruptedException e) {
+            System.out.print(e);
         }
         return resultado;
     }
