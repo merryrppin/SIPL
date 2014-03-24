@@ -28,7 +28,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar Laboratorio</title>
+        <title>Modificar Laboratorio</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -77,7 +77,7 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <h1>Agregar Laboratorio</h1>
+                <h1>Modificar Laboratorio</h1>
             </div>
         </div>
         <br><br><br><br>

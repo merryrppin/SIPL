@@ -17,7 +17,6 @@
     } catch (Exception e) {
     }
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usuario = Gestor.getUsuario(user.getCodigo());
     String accion = "";
     int a = 0;
     try {
@@ -28,7 +27,8 @@
     }
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usuario.getTipo_usuario() == 1 || usuario.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2) {
+        Usuario usuario = Gestor.getUsuario(user.getCodigo());
         Calendar cal1 = Calendar.getInstance();
         String fecha = cal1.get(Calendar.YEAR) + "-";
         int mes = cal1.get(Calendar.MONTH);

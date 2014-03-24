@@ -13,12 +13,11 @@
 <%
     String error = "";
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usu = Gestor.getUsuario(user.getCodigo());
     String accion = request.getParameter("accion");
     int a = 0;
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario() == 1) {
+    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
         String codigo = request.getParameter("codigo");
         String mat1 = request.getParameter("mat1");
         String mat2 = request.getParameter("mat2");
@@ -30,8 +29,8 @@
         } catch (Exception e) {
             error = "sin_accion";
         }
+        Usuario usuario = Gestor.getUsuario(codigo);
         if (a == 1) {
-            Usuario usuario = Gestor.getUsuario(codigo);
             if (usuario != null) {
                 if (usuario.getEstado() == 2) {
                     error = "usuario_prestamo";
@@ -221,13 +220,13 @@
                 error = "usuario_inexistente";
             }
         } else if (a == 2) {
-            if (usu.getEstado() == 2) {
+            if (usuario.getEstado() == 2) {
                 Prestamo pre = null;
                 pre = Gestor.getPrestamoCodUsu(codigo);
                 if (pre != null) {
                     String[] cadena = pre.getMat().split(";");
                     Material mate1 = null, mate2 = null, mate3 = null,
-                            mate4 = null, mate5 = null; 
+                            mate4 = null, mate5 = null;
                     if (cadena.length >= 1) {
                         try {
                             mate1 = Gestor.getMaterial(Integer.parseInt(cadena[0]));
@@ -323,7 +322,7 @@
                         }
                     } catch (Exception e) {
                     }
-                    usu.setEstado(0);
+                    usuario.setEstado(0);
                     Calendar cal = Calendar.getInstance();
                     Calendar cal2 = pre.getFecha_prestamo();
                     long time1 = cal.getTimeInMillis();
@@ -332,14 +331,14 @@
                     time1 -= dias3;
                     int m = 0;
                     if (time1 > time2) {
-                        usu.setEstado(4);
-                        Multa mul = new Multa(0, usu, cal, 0, 3);
+                        usuario.setEstado(4);
+                        Multa mul = new Multa(0, usuario, cal, 0, 3);
                         Gestor.addMulta(mul);
                         m++;
                     }
                     pre.setEstado(1);
                     pre.setFecha_devolucion(cal);
-                    Gestor.updateUsuario(usu);
+                    Gestor.updateUsuario(usuario);
                     Gestor.updatePrestamo(pre);
                     if (m > 0) {%>
 <!DOCTYPE html>

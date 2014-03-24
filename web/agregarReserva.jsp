@@ -19,16 +19,17 @@
     } catch (Exception e) {
     }
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usuario = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usuario.getTipo_usuario() == 0) {
-        if( usuario.getEstado()==2){
+    } else if (user.getTipo_usuario() == 0) {
+        Usuario usu = Gestor.getUsuario(user.getCodigo());
+        if( usu.getEstado()==2){
             error = "usuario_prestamo";
         }
-        if (usuario.getEstado() == 4) {
+        if (usu.getEstado() == 4) {
             error = "usuario_multa";
-        } else if (usuario.getEstado() == 3) {
+        } 
+        if (usu.getEstado() == 3) {
             error = "usuario_reserva";
         }
         er = Gestor.getError(error);

@@ -27,10 +27,9 @@
         error = "sin_accion";
     }
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         error = "No_usuario";
-    } else if (usu.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 2) {
         if (a == 1) {
             Calendar cal = Calendar.getInstance();
             int Y = cal.get(Calendar.YEAR);

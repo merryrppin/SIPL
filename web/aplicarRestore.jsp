@@ -19,10 +19,9 @@
     String mov="restore.jsp";
     String x = "";
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usu.getTipo_usuario() == 2) {
+    } else if (user.getTipo_usuario() == 2) {
         if (a == 1) {
             String resto = request.getParameter("id");
             String dir = Gestor.getVariable(1).getDatos();

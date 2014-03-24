@@ -16,10 +16,9 @@
     }
     er = Gestor.getError(error);
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usu = Gestor.getUsuario(user.getCodigo());
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usu.getTipo_usuario() == 2 || usu.getTipo_usuario() == 1) {
+    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
 %>
 <!DOCTYPE html>
 <html>

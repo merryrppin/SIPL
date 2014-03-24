@@ -13,12 +13,11 @@
 <%
     String error = "";
     Usuario user = (Usuario) session.getAttribute("user");
-    Usuario usu = Gestor.getUsuario(user.getCodigo());
     String accion = request.getParameter("accion");
     int a = 0;
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (usu.getTipo_usuario() == 0) {
+    } else if (user.getTipo_usuario() == 0) {
         String mat1 = request.getParameter("mat1");
         String mat2 = request.getParameter("mat2");
         String mat3 = request.getParameter("mat3");
@@ -42,12 +41,6 @@
                     error = "usuario_inactivo";
                 } else if (usuario.getEstado() == 0) {
                     Calendar cal = Calendar.getInstance();
-                    long i = cal.getTimeInMillis();
-                    Calendar cal2 = Calendar.getInstance();
-                    cal2.setTimeInMillis(i);
-                    int dia = cal.get(Calendar.DAY_OF_MONTH);
-                    dia += 3;
-                    cal2.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), dia);
                     String materiales = "";
                     int disp = 0;
                     int esta = 0;
@@ -124,7 +117,7 @@
                         error = "material_inexistente";
                     }
                     if (disp == 0 && esta == 0) {
-                        Reserva res = new Reserva(0, usu, 0, cal, materiales);
+                        Reserva res = new Reserva(0, usuario, 0, cal, materiales);
                         boolean flag = false;
                         if (mate1 != null || mate2 != null || mate3 != null || mate4 != null
                                 || mate5 != null) {
