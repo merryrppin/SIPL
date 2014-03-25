@@ -2,4 +2,4 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8084/SIPL/MobilWebService?wsdl" uri="wsdl/localhost_8084/SIPL/MobilWebService.wsdl"/>
     <system systemId="http://localhost:8084/SIPL/MobilWebService?xsd=1" uri="wsdl/localhost_8084/SIPL/MobilWebService.xsd_1.xsd"/>
-</catalog>
+</catalog> 
