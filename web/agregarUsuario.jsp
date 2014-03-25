@@ -115,7 +115,7 @@
                             </td>
                             <td>
                                 <%
-                                    if (usu.getTipo_usuario() == 1) {
+                                    if (user.getTipo_usuario() == 1) {
                                 %>
                                 <select name="tipo" disabled="disabled">
                                     <option value="0">
@@ -123,7 +123,7 @@
                                     </option>
                                 </select>
                                 <%
-                                } else if (usu.getTipo_usuario() == 2) {
+                                } else if (user.getTipo_usuario() == 2) {
                                 %>
                                 <select name="tipo" id="tipo">
                                     <option value="0">

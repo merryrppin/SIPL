@@ -133,7 +133,7 @@
                                     out.print("</tr>");
                                 }
                             }
-                            if(usu.getTipo_usuario() == 1 || usu.getTipo_usuario() == 2){
+                            if(user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2){
                         %>
                         <tr>
                             <td colspan="11" align="center">
@@ -153,7 +153,7 @@
                                 <input class="btn btn-info" type="button" value="Ver Material" onclick="fijarURL('verMaterial.jsp', this.form)" style='width:200px;'/>
                                 <%}
                                     String direccion = "principal.jsp";
-                                    if (usu.getTipo_usuario() == 0) {
+                                    if (user.getTipo_usuario() == 0) {
                                         direccion = "principalUsuario.jsp";
                                     }
                                 %>
