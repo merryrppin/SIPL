@@ -34,7 +34,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
             var counter = 1;
-            var limit = 5;
+            var limit = 15;
             function addInput(divName) {
                 if (counter === limit) {
                     alert("Haz alcanzado el límite máximo de " + counter + " materiales");
@@ -114,6 +114,56 @@
             function getMaterial5() {
                 var code = $("#mat5").val();
                 $("#r5").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial6() {
+                var code = $("#mat6").val();
+                $("#r6").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial7() {
+                var code = $("#mat7").val();
+                $("#r7").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial8() {
+                var code = $("#mat8").val();
+                $("#r8").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial9() {
+                var code = $("#mat9").val();
+                $("#r9").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial10() {
+                var code = $("#mat10").val();
+                $("#r10").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial11() {
+                var code = $("#mat11").val();
+                $("#r11").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial12() {
+                var code = $("#mat12").val();
+                $("#r12").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial13() {
+                var code = $("#mat13").val();
+                $("#r13").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial14() {
+                var code = $("#mat14").val();
+                $("#r14").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial15() {
+                var code = $("#mat15").val();
+                $("#r15").load("MaterialServlet", {id_material: code});
                 return false;
             }
             <%if (error != null && error.length() > 0) {%>
@@ -201,6 +251,20 @@
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="4" align="center">
+                                <label class="control-label">Cantidad de días</label>
+                                <label class="control-label">
+                                    <select name="dia">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="4" id="materRes">
                                 <table class="table table-striped" id="tablaMats">
                                     <tr>
@@ -228,6 +292,16 @@
                                                     <tr id="r3"></tr>
                                                     <tr id="r4"></tr>
                                                     <tr id="r5"></tr>
+                                                    <tr id="r6"></tr>
+                                                    <tr id="r7"></tr>
+                                                    <tr id="r8"></tr>
+                                                    <tr id="r9"></tr>
+                                                    <tr id="r10"></tr>
+                                                    <tr id="r11"></tr>
+                                                    <tr id="r12"></tr>
+                                                    <tr id="r13"></tr>
+                                                    <tr id="r14"></tr>
+                                                    <tr id="r15"></tr>
                                                 </tbody>
                                             </table>
                                         </td>

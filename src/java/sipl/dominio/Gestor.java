@@ -35,9 +35,9 @@ public class Gestor {
     TextoImagen tei = new TextoImagen();
     DesactivarMultas actM = new DesactivarMultas();
     DesactivarReserva actR = new DesactivarReserva();
-    GenerarPDFListar pdfL = new GenerarPDFListar();
-    GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
-    GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
+//    GenerarPDFListar pdfL = new GenerarPDFListar();
+//    GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
+//    GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
     AplicarRestore aplR = new AplicarRestore();
 
     public Gestor() {
@@ -261,15 +261,18 @@ public class Gestor {
     public void desactivarMultas() {
         actM.desactivarMult();
     }
-
+    
     public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir, String Filex) throws BadElementException, IOException {
+        GenerarPDFListar pdfL = new GenerarPDFListar();
         pdfL.generarPDF(titulo, imagen, usu, dir, Filex);
     }
 
     public void GenerarPDFGrafica(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango, String Filex) throws BadElementException, IOException {
+        GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
         pdfG.generarPDF(titulo, imagen, usu, dir, Fecha1, Fecha2, Rango, Filex);
     }
     public void GenerarPDFGrafica(String titulo, String imge, Usuario usuario, String dir, String Filex) throws BadElementException, IOException{
+        GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
         pdfT.generarPDF(titulo, imge, usuario, dir, Filex);
     }
     public String AplicarRestore(String nombre){

@@ -35,11 +35,12 @@
         String hora = request.getParameter("hora");
         String minutos = request.getParameter("minutos");
         String direccion = Gestor.getVariable(1).getDatos();
-        direccion += "/QR/";
+        direccion += "QR/";
         try {
             a = Integer.parseInt(accion);
             if (a == 1) {
                 try {
+                    direccion += codigo;
                     Gestor.generarQR(codigo, direccion);
                     int num = Integer.parseInt(codigo);
                     int ubi = 0;
@@ -77,19 +78,25 @@
                     if (m < 10) {
                         minutos = "0" + m;
                     }
-                    String[] f = fecha.split("/");
-                    String fe = f[2] + "-" + f[1] + "-" + f[0];
-                    fe += " " + hora + ":" + minutos + ":00";
-                    Calendar cal = Calendar.getInstance();
+                    Calendar cal;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    try {
-                        Date myDate = sdf.parse(fe);
-                        cal.setTime(myDate);
-                    } catch (Exception e) {
-                        error = "error_fecha";
+                    String fe = null;
+                    if (fecha != null && fecha.length() > 0) {
+                        String[] f = fecha.split("/");
+                        fe = f[2] + "-" + f[1] + "-" + f[0];
+                        fe += " " + hora + ":" + minutos + ":00";
+                        cal = Calendar.getInstance();
+                        try {
+                            Date myDate = sdf.parse(fe);
+                            cal.setTime(myDate);
+                        } catch (Exception e) {
+                            error = "error_fecha";
+                        }
+                    } else {
+                        cal = Calendar.getInstance();
                     }
                     Material mat = new Material(Integer.parseInt(codigo), descripcion, Gestor.getTipoM(Integer.parseInt(tipo)),
-                            marca, serial, "ninguna", numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
+                            marca, serial, "noimage.jpg", numero, Integer.parseInt(estado), cal, Integer.parseInt(disponibilidad),
                             Gestor.getLaboratorio(Integer.parseInt(laboratorio)), direccion);
                     if (Gestor.addMaterial(mat) == true) {
                         Tipo_material tip = Gestor.getTipoM(Integer.parseInt(tipo));
