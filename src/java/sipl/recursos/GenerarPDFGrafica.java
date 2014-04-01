@@ -154,7 +154,6 @@ public class GenerarPDFGrafica {
             createTable2(subCatPart);
         }
         document.add(catPart);
-
     }
 
     private static void createTable(Section subCatPart)

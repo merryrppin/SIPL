@@ -252,7 +252,7 @@
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
-                                <label class="control-label">Cantidad de días</label>
+                                <label class="control-label">Cantidad de días:</label>
                                 <label class="control-label">
                                     <select name="dia">
                                         <option value="1">1</option>

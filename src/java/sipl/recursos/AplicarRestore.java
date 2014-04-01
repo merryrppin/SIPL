@@ -32,7 +32,7 @@ public class AplicarRestore {
             int processComplete = runtimeProcess.waitFor();
  
             if (processComplete == 0) {
-                resultado="Restore aplicado satisfacoriamente";
+                resultado="Restore aplicado satisfactoriamente";
             } else {
                 resultado="Ha ocurrido un error";
             }

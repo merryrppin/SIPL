@@ -261,7 +261,7 @@ public class Gestor {
     public void desactivarMultas() {
         actM.desactivarMult();
     }
-    
+
     public void GenerarPDFListar(String titulo, String imagen, Usuario usu, String dir, String Filex) throws BadElementException, IOException {
         GenerarPDFListar pdfL = new GenerarPDFListar();
         pdfL.generarPDF(titulo, imagen, usu, dir, Filex);
@@ -271,15 +271,17 @@ public class Gestor {
         GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
         pdfG.generarPDF(titulo, imagen, usu, dir, Fecha1, Fecha2, Rango, Filex);
     }
-    public void GenerarPDFGrafica(String titulo, String imge, Usuario usuario, String dir, String Filex) throws BadElementException, IOException{
+
+    public void GenerarPDFGrafica(String titulo, String imge, Usuario usuario, String dir, String Filex) throws BadElementException, IOException {
         GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
         pdfT.generarPDF(titulo, imge, usuario, dir, Filex);
     }
-    public String AplicarRestore(String nombre){
+
+    public String AplicarRestore(String nombre) {
         return aplR.AplicarRestoreMySQL(nombre);
     }
-    
-    public void desactivarReservas(){
+
+    public void desactivarReservas() {
         actR.desactivarRes();
     }
 }
