@@ -47,27 +47,27 @@ import sipl.dominio.Usuario;
  */
 public class GenerarPDFGrafica {
 
-    private static final Conexion con = new Conexion();
-    private static final materialDAO matDAO = new materialDAO(con);
-    private static final prestamoDAO preDAO = new prestamoDAO(con);
-    private static final tipo_materialDAO tipDAO = new tipo_materialDAO(con);
-    private static final multaDAO mulDAO = new multaDAO(con);
-    private static final danhoDAO danDAO = new danhoDAO(con);
-    private static final usuarioDAO usuDAO = new usuarioDAO(con);
-    private static String FILE = "";
-    private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+    private final Conexion con = new Conexion();
+    private final materialDAO matDAO = new materialDAO(con);
+    private final prestamoDAO preDAO = new prestamoDAO(con);
+    private final tipo_materialDAO tipDAO = new tipo_materialDAO(con);
+    private final multaDAO mulDAO = new multaDAO(con);
+    private final danhoDAO danDAO = new danhoDAO(con);
+    private final usuarioDAO usuDAO = new usuarioDAO(con);
+    private String FILE = "";
+    private final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
-    private static final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
+    private final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
             Font.BOLD);
-    private static final Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+    private final Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.BOLD);
-    private static String Titulo = "";
-    private static Usuario user;
-    private static String direc = "";
-    private static String fecha1 = "";
-    private static String fecha2 = "";
-    private static String rango = "";
-    private static String imgG = "";
+    private String Titulo = "";
+    private Usuario user;
+    private String direc = "";
+    private String fecha1 = "";
+    private String fecha2 = "";
+    private String rango = "";
+    private String imgG = "";
 
     public void generarPDF(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango, String Filex) throws BadElementException, IOException {
         FILE = "";
@@ -99,7 +99,7 @@ public class GenerarPDFGrafica {
         }
     }
 
-    private static void addMetaData(Document document) {
+    private void addMetaData(Document document) {
         document.addTitle(Titulo);
         document.addSubject("Gráfica");
         document.addKeywords("Java, Gráfica, PDF, iText");
@@ -107,7 +107,7 @@ public class GenerarPDFGrafica {
         document.addCreator("SIPL");
     }
 
-    private static void addTitlePage(Document document)
+    private void addTitlePage(Document document)
             throws DocumentException, MalformedURLException, BadElementException, IOException {
         Paragraph preface = new Paragraph();
         addEmptyLine(preface, 1);
@@ -140,7 +140,7 @@ public class GenerarPDFGrafica {
         document.newPage();
     }
 
-    private static void addContent(Document document) throws DocumentException {
+    private void addContent(Document document) throws DocumentException {
         Anchor anchor = new Anchor(Titulo, catFont);
         anchor.setName(Titulo);
         Chapter catPart = new Chapter(new Paragraph(anchor), 1);
@@ -156,7 +156,7 @@ public class GenerarPDFGrafica {
         document.add(catPart);
     }
 
-    private static void createTable(Section subCatPart)
+    private void createTable(Section subCatPart)
             throws BadElementException {
         String p = Titulo.charAt(0) + "";
         if (p.equals("P")) {
@@ -1157,7 +1157,7 @@ public class GenerarPDFGrafica {
         }
     }
 
-    private static void createTable2(Section subCatPart)
+    private void createTable2(Section subCatPart)
             throws BadElementException {
         ArrayList<Multa> multas = mulDAO.getRangoFecha_multa(fecha1, fecha2);
         ArrayList<Usuario> usuarios = usuDAO.getUsuarios();

@@ -49,24 +49,24 @@ import sipl.dominio.Multa;
  */
 public class GenerarPDFListar {
 
-    private static final Conexion con = new Conexion();
-    private static final materialDAO matDAO = new materialDAO(con);
-    private static final usuarioDAO usuDAO = new usuarioDAO(con);
-    private static final laboratorioDAO labDAO = new laboratorioDAO(con);
-    private static final reservaDAO resDAO = new reservaDAO(con);
-    private static final multaDAO mulDAO = new multaDAO(con);
-    private static final prestamoDAO preDAO = new prestamoDAO(con);
-    private static final danhoDAO danDAO = new danhoDAO(con);
-    private static String FILE = "";
-    private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+    private final Conexion con = new Conexion();
+    private final materialDAO matDAO = new materialDAO(con);
+    private final usuarioDAO usuDAO = new usuarioDAO(con);
+    private final laboratorioDAO labDAO = new laboratorioDAO(con);
+    private final reservaDAO resDAO = new reservaDAO(con);
+    private final multaDAO mulDAO = new multaDAO(con);
+    private final prestamoDAO preDAO = new prestamoDAO(con);
+    private final danhoDAO danDAO = new danhoDAO(con);
+    private String FILE = "";
+    private final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
-    private static final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
+    private final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
             Font.BOLD);
-    private static final Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+    private final Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.BOLD);
-    private static String Titulo = "";
-    private static Usuario user;
-    private static String direc = "";
+    private String Titulo = "";
+    private Usuario user;
+    private String direc = "";
 
     public void generarPDF(String titulo, String imagen, Usuario usu, String dir, String Filex) throws BadElementException, IOException {
         FILE = "";
@@ -90,7 +90,7 @@ public class GenerarPDFListar {
         }
     }
     
-    private static void addMetaData(Document document) {
+    private void addMetaData(Document document) {
         document.addTitle(Titulo);
         document.addSubject("Lista específica");
         document.addKeywords("Java, PDF, iText");
@@ -98,7 +98,7 @@ public class GenerarPDFListar {
         document.addCreator("SIPL");
     }
 
-    private static void addTitlePage(Document document)
+    private void addTitlePage(Document document)
             throws DocumentException, MalformedURLException, BadElementException, IOException {
         Paragraph preface = new Paragraph();
         addEmptyLine(preface, 1);
@@ -119,7 +119,7 @@ public class GenerarPDFListar {
         document.newPage();
     }
 
-    private static void addContent(Document document) throws DocumentException {
+    private void addContent(Document document) throws DocumentException {
         Anchor anchor = new Anchor(Titulo, catFont);
         anchor.setName(Titulo);
         Chapter catPart = new Chapter(new Paragraph(anchor), 1);
@@ -129,7 +129,7 @@ public class GenerarPDFListar {
         document.add(catPart);
     }
 
-    private static void createTable(Section subCatPart) {
+    private void createTable(Section subCatPart) {
         switch (Titulo) {
             case "Listar materiales": {
                 ArrayList<Material> materiales = matDAO.getMateriales();
