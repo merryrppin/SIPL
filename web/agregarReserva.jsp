@@ -10,8 +10,16 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
-    Gestor.desactivarMultas();
-    Gestor.desactivarReservas();
+    String vs = "";
+    try {
+        vs = Gestor.getVariable(1).getDatos();
+    } catch (Exception e) {
+
+    }
+    if (vs != null && vs.length() > 0) {
+        Gestor.desactivarMultas();
+        Gestor.desactivarReservas();
+    }
     String error = "";
     Error_D er = null;
     try {
