@@ -69,51 +69,51 @@
                     Calendar cal = Calendar.getInstance();
                     Calendar cal2 = Calendar.getInstance();
                     Usuario usu = Gestor.getUsuario(codigo);
-                    String cod_materiales ="";
-                    if(m1!=null && m1.length()>0){
-                        cod_materiales+=m1+";";
+                    String cod_materiales = "";
+                    if (m1 != null && m1.length() > 0) {
+                        cod_materiales += m1 + ";";
                     }
-                    if(m2!=null && m2.length()>0){
-                        cod_materiales+=m2+";";
+                    if (m2 != null && m2.length() > 0) {
+                        cod_materiales += m2 + ";";
                     }
-                    if(m3!=null && m3.length()>0){
-                        cod_materiales+=m3+";";
+                    if (m3 != null && m3.length() > 0) {
+                        cod_materiales += m3 + ";";
                     }
-                    if(m4!=null && m4.length()>0){
-                        cod_materiales+=m4+";";
+                    if (m4 != null && m4.length() > 0) {
+                        cod_materiales += m4 + ";";
                     }
-                    if(m5!=null && m5.length()>0){
-                        cod_materiales+=m5+";";
+                    if (m5 != null && m5.length() > 0) {
+                        cod_materiales += m5 + ";";
                     }
-                    if(m6!=null && m6.length()>0){
-                        cod_materiales+=m6+";";
+                    if (m6 != null && m6.length() > 0) {
+                        cod_materiales += m6 + ";";
                     }
-                    if(m7!=null && m7.length()>0){
-                        cod_materiales+=m7+";";
+                    if (m7 != null && m7.length() > 0) {
+                        cod_materiales += m7 + ";";
                     }
-                    if(m8!=null && m8.length()>0){
-                        cod_materiales+=m8+";";
+                    if (m8 != null && m8.length() > 0) {
+                        cod_materiales += m8 + ";";
                     }
-                    if(m9!=null && m9.length()>0){
-                        cod_materiales+=m9+";";
+                    if (m9 != null && m9.length() > 0) {
+                        cod_materiales += m9 + ";";
                     }
-                    if(m10!=null && m10.length()>0){
-                        cod_materiales+=m10+";";
+                    if (m10 != null && m10.length() > 0) {
+                        cod_materiales += m10 + ";";
                     }
-                    if(m11!=null && m11.length()>0){
-                        cod_materiales+=m11+";";
+                    if (m11 != null && m11.length() > 0) {
+                        cod_materiales += m11 + ";";
                     }
-                    if(m12!=null && m12.length()>0){
-                        cod_materiales+=m12+";";
+                    if (m12 != null && m12.length() > 0) {
+                        cod_materiales += m12 + ";";
                     }
-                    if(m13!=null && m13.length()>0){
-                        cod_materiales+=m13+";";
+                    if (m13 != null && m13.length() > 0) {
+                        cod_materiales += m13 + ";";
                     }
-                    if(m14!=null && m14.length()>0){
-                        cod_materiales+=m14+";";
+                    if (m14 != null && m14.length() > 0) {
+                        cod_materiales += m14 + ";";
                     }
-                    if(m15!=null && m15.length()>0){
-                        cod_materiales+=m15+";";
+                    if (m15 != null && m15.length() > 0) {
+                        cod_materiales += m15 + ";";
                     }
                     int disp = 0;
                     int esta = 0;
@@ -168,25 +168,24 @@
                 Prestamo pre = null;
                 pre = Gestor.getPrestamoCodUsu(codigo);
                 if (pre != null) {
-                        String[] cadena = pre.getMat().split(";");
-                        for (String cadena1 : cadena) {
-                            try {
-                                Material mat = Gestor.getMaterial(Integer.parseInt(cadena1));
-                                if (mat != null) {
-                                    mat.setDisponibilidad(0);
-                                    Gestor.updateMaterial(mat);
-                                    Tipo_material tip = mat.getTipo_mat();
-                                    int d = tip.getDisponibilidad();
-                                    d++;
-                                    tip.setDisponibilidad(d);
-                                    Gestor.updateTipoMat(tip);
-                                }
-                            } catch (NumberFormatException e) {
-                                error = "material_inexistente";
+                    String[] cadena = pre.getMat().split(";");
+                    for (String cadena1 : cadena) {
+                        try {
+                            Material mat = Gestor.getMaterial(Integer.parseInt(cadena1));
+                            if (mat != null) {
+                                mat.setDisponibilidad(0);
+                                Gestor.updateMaterial(mat);
+                                Tipo_material tip = mat.getTipo_mat();
+                                int d = tip.getDisponibilidad();
+                                d++;
+                                tip.setDisponibilidad(d);
+                                Gestor.updateTipoMat(tip);
                             }
+                        } catch (NumberFormatException e) {
+                            error = "material_inexistente";
                         }
-                        usuario.setEstado(0);
-                        
+                    }
+                    usuario.setEstado(0);
                     Calendar cal = Calendar.getInstance();
                     Calendar cal2 = pre.getFecha_devolucion();
                     long time1 = cal.getTimeInMillis();
