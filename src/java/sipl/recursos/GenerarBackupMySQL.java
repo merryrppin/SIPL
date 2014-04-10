@@ -24,7 +24,7 @@ public class GenerarBackupMySQL {
         VariableSis vs3 = gestor.getVariable(3);
         VariableSis vs4 = gestor.getVariable(4);
         String direccion=vs2.getDatos();
-        String mysql =vs.getDatos() +"mysqldump";
+        String mysql =vs.getDatos() +"\\mysqldump";
         direccion+=nombre;
         try {
             int processComplete;
