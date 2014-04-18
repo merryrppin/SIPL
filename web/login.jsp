@@ -24,7 +24,9 @@
         error = request.getParameter("error");
     } catch (Exception e) {
     }
-    er = Gestor.getError(error);
+    if(error!=null && error.length()>0){
+        er = Gestor.getError(error);
+    }
 %>
 <!DOCTYPE html>
 <html>
