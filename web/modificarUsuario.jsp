@@ -148,6 +148,27 @@
                                             >
                                         Inactivo
                                     </option>
+                                    <option value="2"
+                                            <%if (est == 2) {
+                                                    out.print(" selected ");
+                                                }%>
+                                            >
+                                        Con prestamo
+                                    </option>
+                                    <option value="3"
+                                            <%if (est == 3) {
+                                                    out.print(" selected ");
+                                                }%>
+                                            >
+                                        Con reserva
+                                    </option>
+                                    <option value="4"
+                                            <%if (est == 4) {
+                                                    out.print(" selected ");
+                                                }%>
+                                            >
+                                        Con multa
+                                    </option>
                                 </select>
                             </td>
                             <%

@@ -163,11 +163,13 @@
                             <td>
                                 <%
                                     String disp = "";
-                                    if (mat.getEstado() == 0) {
+                                    if (mat.getDisponibilidad()== 0) {
                                         disp = "Libre";
-                                    } else if (mat.getEstado() == 0) {
+                                    } else if (mat.getDisponibilidad() == 1) {
                                         disp = "Prestado";
-                                    } else {
+                                    } else if (mat.getDisponibilidad() == 2) {
+                                        disp = "En Reserva";
+                                    }else {
                                         estado = "Error";
                                     }
                                 %>

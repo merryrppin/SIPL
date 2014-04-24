@@ -188,12 +188,17 @@
                                         if (disp == 0) {
                                             out.print("selected ");
                                         }
-                                        out.print("value='0'>Activo</option>");
+                                        out.print("value='0'>Libre</option>");
                                         out.print("<option ");
                                         if (disp == 1) {
                                             out.print("selected ");
                                         }
-                                        out.print("value='1'>Dado de baja</option>");
+                                        out.print("value='1'>Prestado</option>");
+                                        out.print("<option ");
+                                        if (disp == 2) {
+                                            out.print("selected ");
+                                        }
+                                        out.print("value='2'>En Reserva</option>");
                                     %>
                                 </select>
                             </td>

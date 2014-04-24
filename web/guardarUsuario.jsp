@@ -71,11 +71,7 @@
                         }
                     }
                     Usuario u = Gestor.getUsuario(codigo);
-                    if (u.getTipo_usuario() != 2) {
-                        est = Integer.parseInt(estado);
-                    } else {
-                        est = 0;
-                    }
+                    est = Integer.parseInt(estado);
                     if (tel > -1) {
                         u.setTelefono(tel);
                         u.setEstado(est);

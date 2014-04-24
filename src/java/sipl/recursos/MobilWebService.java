@@ -46,15 +46,15 @@ public class MobilWebService {
      * @param cod_usuario
      * @param apiK
      * @param apiS
-     * @param dias
      * @return
      */
     @WebMethod(operationName = "addPrestamo")
     public String addPrestamo(@WebParam(name = "cod_materiales") String cod_materiales,
             @WebParam(name = "cod_usuario") String cod_usuario, @WebParam(name = "apiK") String apiK,
-            @WebParam(name = "apiS") String apiS, @WebParam(name = "dias") String dias) {
+            @WebParam(name = "apiS") String apiS) {
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
+
         if (aK.equals(apiK)) {
             String aS = "";
             try {
@@ -87,10 +87,10 @@ public class MobilWebService {
                 } else if (usu.getEstado() == 0) {
                     long i = cal.getTimeInMillis();
                     Calendar cal2 = Calendar.getInstance();
-                    long timeFP = 86400000;
-                    timeFP *= Integer.parseInt(dias);
-                    i += timeFP;
                     cal2.setTimeInMillis(i);
+                    int dia = cal.get(Calendar.DAY_OF_MONTH);
+                    dia += 3;
+                    cal2.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), dia);
                     int disp = 0;
                     int esta = 0;
                     String mates[] = cod_materiales.split(";");
@@ -142,7 +142,7 @@ public class MobilWebService {
      * @param user
      * @param password
      * @param apiK
-     * @return 
+     * @return
      */
     @WebMethod(operationName = "login")
     public String login(@WebParam(name = "user") String user, @WebParam(name = "password") String password,
@@ -203,6 +203,7 @@ public class MobilWebService {
                                     tipDAO.updateTipo_material(tip);
                                 }
                             } catch (NumberFormatException e) {
+                                rs = "error_material";
                             }
                         }
                         usu.setEstado(0);
@@ -239,41 +240,60 @@ public class MobilWebService {
         return rs;
     }
 
-    /**
-     * Web service operation
-     *
-     * @param material
-     * @param apiK
-     * @return 
-     */
-    @WebMethod(operationName = "validar")
-    public String validar(@WebParam(name = "material") String material, @WebParam(name = "apiK") String apiK) {
-        String rs;
-        String aK = varDAO.getTipo_variable(5).getDatos();
-        if (aK.equals(apiK)) {
-            try {
-                Material mat = matDAO.getMaterial(Integer.parseInt(material));
-                if (mat != null) {
-                    String disponib;
-                    if (mat.getDisponibilidad() == 0) {
-                        disponib = "Libre";
-                    } else if (mat.getDisponibilidad() == 1) {
-                        disponib = "Prestado";
-                    } else if (mat.getDisponibilidad() == 1) {
-                        disponib = "Reservado";
-                    } else {
-                        disponib = "ERROR";
-                    }
-                    rs = mat.getTipo_mat().getNombre() + ";" + disponib;
-                } else {
-                    rs = "Material_inexistente";
-                }
-            } catch (NumberFormatException e) {
-                rs = "error_material";
-            }
-        } else {
-            rs = "ApiK_error";
-        }
-        return rs;
-    }
+//    /**
+//     * Web service operation
+//     * @param apiK
+//     * @param idMaterial
+//     * @return 
+//     */
+//    @WebMethod(operationName = "validarMaterial")
+//    public String validarMaterial(@WebParam(name = "apiK") String apiK, @WebParam(name = "idMaterial") String idMaterial) {
+//        String rs="";
+//        String aK = varDAO.getTipo_variable(5).getDatos();
+//        if (aK.equals(apiK)) {
+//            try{
+//                int codM = Integer.parseInt(idMaterial);
+//                Material mat = matDAO.getMaterial(codM);
+//                if(mat!=null){
+//                    if(mat.getEstado()==0){
+//                        if(mat.getDisponibilidad()==0){
+//                            rs="0;"+mat.getTipo_mat().getNombre()+";"+mat.getDisponibilidad();
+//                        }else if(mat.getDisponibilidad()==1){
+//                            rs="1;Prestado";
+//                        }else if(mat.getDisponibilidad()==2){
+//                            rs="1;Reservado";
+//                        }
+//                    }else if(mat.getEstado()==1){
+//                        rs="1;Dado de Baja";
+//                    }else if(mat.getEstado()==2){
+//                        rs="1;Dañado";
+//                    }
+//                }
+//            }catch(NumberFormatException e){
+//                rs="1;Error_CodigoMaterial";
+//            }
+//        } else {
+//            rs = "1;ApiK_error";
+//        }
+//        return rs;
+//    }
+//    /**
+//     * Web service operation
+//     *
+//     * @param apiK
+//     * @return
+//     */
+//    @WebMethod(operationName = "listarMateriales")
+//    public ArrayList listarMateriales(@WebParam(name = "apiK") String apiK) {
+//        ArrayList data = new ArrayList();
+//        String aK = varDAO.getTipo_variable(5).getDatos();
+//        if (aK.equals(apiK)) {
+//            ArrayList<Material> materiales = matDAO.getMateriales();
+//            for (Material mat : materiales) {
+//                data.add(mat.getCodigo() + ";" + mat.getDescripcion() + ";" + mat.getDisponibilidad() + ";" + mat.getEstado());
+//            }
+//        }
+//        return data;
+//    }
+
 }

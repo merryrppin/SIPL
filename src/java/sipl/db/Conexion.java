@@ -20,10 +20,10 @@ public class Conexion {
     private Connection con;
     private final String driver = "com.mysql.jdbc.Driver";
     private final String dbName = "siprelab";
-    private final String url = "jdbc:mysql://172.16.20.79:3306/";
-    private final String user = "electronica";
-    private final String passwd = "q-j8$mr5.L";
-    //private final String passwd = "12345";
+    private final String url = "jdbc:mysql://localhost:3306/";
+    private final String user = "root";
+    //private final String passwd = "q-j8$mr5.L";
+    private final String passwd = "12345";
 
     public Conexion() {
         try {
