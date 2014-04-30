@@ -233,6 +233,8 @@ public class MobilWebService {
                         } else {
                             rs = "prestamo_finalizado";
                         }
+                    }else{
+                        rs="Sin Prestamo";
                     }
                 }
             } else {
@@ -301,6 +303,34 @@ public class MobilWebService {
             }
         }
         return data;
+    }
+
+    /**
+     * Web service operation
+     * @param cod_usuario
+     * @param apiK
+     * @return 
+     */
+    @WebMethod(operationName = "getPrestamo")
+    public String getPrestamo(@WebParam(name = "cod_usuario") String cod_usuario, @WebParam(name = "apiK") String apiK) {
+        String rs = "";
+        String aK = varDAO.getTipo_variable(5).getDatos();
+        if (aK.equals(apiK)) {
+            Prestamo pre = preDAO.getPrestamoCodUsu(cod_usuario);
+            if(pre!=null){
+                String materiales [] = pre.getMat().split(";");
+                for(String mat:materiales){
+                    Material material = matDAO.getMaterial(Integer.parseInt(mat));
+                    rs+=mat+":"+material.getTipo_mat().getNombre()+"/";
+                }
+                rs+=";"+pre.getFecha_prestamo();
+            }else{
+                rs="sin Prestamo";
+            }
+        }else{
+            rs="apiK Error";
+        }
+        return rs;
     }
 
 }

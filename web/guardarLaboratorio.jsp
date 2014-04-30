@@ -17,13 +17,21 @@
     } else if (user.getTipo_usuario() == 2) {
         try {
             a = Integer.parseInt(accion);
+            String codigo = request.getParameter("codigo");
+            String nombre = request.getParameter("nombre");
+            String descripcion = request.getParameter("descripcion");
+            String ubicacion = request.getParameter("ubicacion");
             if (a == 1) {
-                
+                if (nombre != null && nombre.length() > 0) {
+                    int c = Integer.parseInt(codigo);
+                    Laboratorio lab = new Laboratorio(c, nombre, descripcion, ubicacion);
+                    if(Gestor.addLaboratorio(lab)==true){
+                        response.sendRedirect("listarLaboratorios.jsp");
+                    }else{
+                        error="no_agrego";
+                    }
+                }
             } else if (a == 2) {
-                String codigo = request.getParameter("codigo");
-                String nombre = request.getParameter("nombre");
-                String descripcion = request.getParameter("descripcion");
-                String ubicacion = request.getParameter("ubicacion");
                 if (codigo != null && codigo.length() > 0 && nombre != null
                         && nombre.length() > 0 && descripcion != null && descripcion.length() > 0) {
                     int c = Integer.parseInt(codigo);

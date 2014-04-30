@@ -284,4 +284,8 @@ public class Gestor {
     public void desactivarReservas() {
         actR.desactivarRes();
     }
+    
+    public boolean addLaboratorio(Laboratorio lab){
+        return labDAO.addLaboratorio(lab);
+    }
 }
