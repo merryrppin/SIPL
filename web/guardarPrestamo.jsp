@@ -161,47 +161,48 @@
                     error = "error";
                 }
             } else {
-                error = "usuario_inexistente";
+                error = "no_existe";
             }
         } else if (a == 2) {
-            if (usuario.getEstado() == 2) {
-                Prestamo pre = null;
-                pre = Gestor.getPrestamoCodUsu(codigo);
-                if (pre != null) {
-                    String[] cadena = pre.getMat().split(";");
-                    for (String cadena1 : cadena) {
-                        try {
-                            Material mat = Gestor.getMaterial(Integer.parseInt(cadena1));
-                            if (mat != null) {
-                                mat.setDisponibilidad(0);
-                                Gestor.updateMaterial(mat);
-                                Tipo_material tip = mat.getTipo_mat();
-                                int d = tip.getDisponibilidad();
-                                d++;
-                                tip.setDisponibilidad(d);
-                                Gestor.updateTipoMat(tip);
+            if (usuario != null) {
+                if (usuario.getEstado() == 2) {
+                    Prestamo pre = null;
+                    pre = Gestor.getPrestamoCodUsu(codigo);
+                    if (pre != null) {
+                        String[] cadena = pre.getMat().split(";");
+                        for (String cadena1 : cadena) {
+                            try {
+                                Material mat = Gestor.getMaterial(Integer.parseInt(cadena1));
+                                if (mat != null) {
+                                    mat.setDisponibilidad(0);
+                                    Gestor.updateMaterial(mat);
+                                    Tipo_material tip = mat.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d++;
+                                    tip.setDisponibilidad(d);
+                                    Gestor.updateTipoMat(tip);
+                                }
+                            } catch (NumberFormatException e) {
+                                error = "material_inexistente";
                             }
-                        } catch (NumberFormatException e) {
-                            error = "material_inexistente";
                         }
-                    }
-                    usuario.setEstado(0);
-                    Calendar cal = Calendar.getInstance();
-                    Calendar cal2 = pre.getFecha_devolucion();
-                    long time1 = cal.getTimeInMillis();
-                    long time2 = cal2.getTimeInMillis();
-                    int m = 0;
-                    if (time1 > time2) {
-                        usuario.setEstado(4);
-                        Multa mul = new Multa(0, usuario, cal, 0, 3);
-                        Gestor.addMulta(mul);
-                        m++;
-                    }
-                    pre.setEstado(1);
-                    pre.setFecha_devolucion(cal);
-                    Gestor.updateUsuario(usuario);
-                    Gestor.updatePrestamo(pre);
-                    if (m > 0) {%>
+                        usuario.setEstado(0);
+                        Calendar cal = Calendar.getInstance();
+                        Calendar cal2 = pre.getFecha_devolucion();
+                        long time1 = cal.getTimeInMillis();
+                        long time2 = cal2.getTimeInMillis();
+                        int m = 0;
+                        if (time1 > time2) {
+                            usuario.setEstado(4);
+                            Multa mul = new Multa(0, usuario, cal, 0, 3);
+                            Gestor.addMulta(mul);
+                            m++;
+                        }
+                        pre.setEstado(1);
+                        pre.setFecha_devolucion(cal);
+                        Gestor.updateUsuario(usuario);
+                        Gestor.updatePrestamo(pre);
+                        if (m > 0) {%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -237,13 +238,104 @@
     </body>
 </html>  
 <%} else {
-                        response.sendRedirect("listarPrestamos.jsp");
+                            response.sendRedirect("listarPrestamos.jsp");
+                        }
+                    } else {
+                        error = "prestamo_null";
                     }
                 } else {
-                    error = "prestamo_null";
+                    error = "NO_prestamo";
                 }
             } else {
-                error = "NO_prestamo";
+                error = "no_existe";
+            }
+        } else if (a == 3) {
+            if (usuario != null) {
+                Prestamo pre = Gestor.getPrestamoCodUsu(usuario.getCodigo());
+                if (pre != null) {
+                    Calendar cal = pre.getFecha_devolucion();
+                    Long fechaDev = cal.getTimeInMillis();
+                    Calendar calAct = Calendar.getInstance();
+                    Long fechaAct = calAct.getTimeInMillis();
+                    if (fechaAct <= fechaDev) {
+                        String[] materiales = pre.getMat().split(";");
+                        int CantidadM = materiales.length;
+                        String nMateriales = "";
+                        int contador = 0;
+                        if (m2 != null && m2.length() > 0) {
+                            nMateriales += m2 + ";";
+                            contador++;
+                        }
+                        if (m3 != null && m3.length() > 0) {
+                            nMateriales += m3 + ";";
+                            contador++;
+                        }
+                        if (m4 != null && m4.length() > 0) {
+                            nMateriales += m4 + ";";
+                            contador++;
+                        }
+                        if (m5 != null && m5.length() > 0) {
+                            nMateriales += m5 + ";";
+                            contador++;
+                        }
+                        if (m6 != null && m6.length() > 0) {
+                            nMateriales += m6 + ";";
+                            contador++;
+                        }
+                        if (m7 != null && m7.length() > 0) {
+                            nMateriales += m7 + ";";
+                            contador++;
+                        }
+                        if (m8 != null && m8.length() > 0) {
+                            nMateriales += m8 + ";";
+                            contador++;
+                        }
+                        if (m9 != null && m9.length() > 0) {
+                            nMateriales += m9 + ";";
+                            contador++;
+                        }
+                        if (m10 != null && m10.length() > 0) {
+                            nMateriales += m10 + ";";
+                            contador++;
+                        }
+                        if (m11 != null && m11.length() > 0) {
+                            nMateriales += m11 + ";";
+                            contador++;
+                        }
+                        if (m12 != null && m12.length() > 0) {
+                            nMateriales += m12 + ";";
+                            contador++;
+                        }
+                        if (m13 != null && m13.length() > 0) {
+                            nMateriales += m13 + ";";
+                            contador++;
+                        }
+                        if (m14 != null && m14.length() > 0) {
+                            nMateriales += m14 + ";";
+                            contador++;
+                        }
+                        if (m15 != null && m15.length() > 0) {
+                            nMateriales += m15 + ";";
+                            contador++;
+                        }
+                        int total = contador + CantidadM;
+                        if (total <= 15) {
+                            String p = pre.getMat();
+                            p += nMateriales;
+                            pre.setMat(p);
+                            Gestor.updatePrestamo(pre);
+                            response.sendRedirect("listarPrestamos.jsp?accion=1");
+                        } else {
+                            error = "Demasiados_Materiales";
+                        }
+                    } else {
+                        error = "Fecha_pasada";
+                    }
+                } else {
+                    error = "NO_prestamo";
+                }
+            } else {
+                error = "no_existe";
             }
         }
     } else {

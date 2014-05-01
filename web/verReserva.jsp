@@ -87,7 +87,7 @@
                 <br>
                 <br>
                 <br>
-                <h5><b>Importante:</b> Tiene dos días de plazo para prestar los materiales con el monitor, la reserva <br>de materiales se inactivará automáticamente al 
+                <h5><b>Importante:</b> Tiene tres días de plazo para prestar los materiales con el monitor, la reserva <br>de materiales se inactivará automáticamente al 
                     finalizar dos días después de Guardar la reserva. </h5>
             </div>
         </div>

@@ -30,6 +30,93 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
+            var counter = 1;
+            var limit = 15;
+            function addInput(divName) {
+                if (counter === limit) {
+                    alert("Haz alcanzado el límite máximo de " + counter + " materiales");
+                    return false;
+                }
+                else {
+                    var newdiv = document.createElement('tr');
+                    newdiv.innerHTML = "<td><input type='text' name='mat" + (counter + 1) + "' id='mat"
+                            + (counter + 1) + "' onchange='return getMaterial" + (counter + 1)
+                            + "();'></td><td colspan='2'><table class='table table-hover'><tr id='r" + (counter + 1) + "'></tr></table>";
+                    document.getElementById(divName).appendChild(newdiv);
+                    counter++;
+                    return false;
+                }
+            }
+            function getMaterial2() {
+                var code = $("#mat2").val();
+                $("#r2").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial3() {
+                var code = $("#mat3").val();
+                $("#r3").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial4() {
+                var code = $("#mat4").val();
+                $("#r4").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial5() {
+                var code = $("#mat5").val();
+                $("#r5").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial6() {
+                var code = $("#mat6").val();
+                $("#r6").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial7() {
+                var code = $("#mat7").val();
+                $("#r7").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial8() {
+                var code = $("#mat8").val();
+                $("#r8").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial9() {
+                var code = $("#mat9").val();
+                $("#r9").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial10() {
+                var code = $("#mat10").val();
+                $("#r10").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial11() {
+                var code = $("#mat11").val();
+                $("#r11").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial12() {
+                var code = $("#mat12").val();
+                $("#r12").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial13() {
+                var code = $("#mat13").val();
+                $("#r13").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial14() {
+                var code = $("#mat14").val();
+                $("#r14").load("MaterialServlet", {id_material: code});
+                return false;
+            }
+            function getMaterial15() {
+                var code = $("#mat15").val();
+                $("#r15").load("MaterialServlet", {id_material: code});
+                return false;
+            }
             function fijarURL(url, form) {
                 if (form.codigo.value.length === 0) {
                     form.codigo.focus();
@@ -52,6 +139,7 @@
                 $("#nombre").load("UsuarioServlet", {Code: code});
                 $("#materiales").load("MaterialesPrestamoServlet", {Code: code});
                 $("#fechaPrestamo").load("FechaPrestamoServlet", {Code: code});
+                counter = 1;
                 return false;
             }
             <%if (error != null && error.length() > 0) {%>
@@ -134,11 +222,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">
-                                <table class="table table-striped">
+                            <td  colspan="4">
+                                <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Código elemento</th>
+                                            <th><button onClick="return addInput('materiales');" onkeypress=" if (event.keyCode == 13)
+                                                        event.returnValue = false;
+                                                    "><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código Elemento</label></th>
                                             <th>Tipo elemento</th>
                                             <th>Descripcion</th>
                                         </tr>
@@ -147,6 +237,11 @@
 
                                     </tbody>
                                 </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center">
+                                <button onclick="fijarURL('guardarPrestamo.jsp?accion=3', this.form)" class="btn btn-warning" style='width:150px;'>Actualizar Préstamo</button>
                             </td>
                         </tr>
                         <tr>
@@ -175,6 +270,6 @@
     </body>
 </html>
 <%}
-if (error != null && error.length() > 0) {
+    if (error != null && error.length() > 0) {
         response.sendRedirect("principal.jsp?error=" + error);
     }%>

@@ -283,7 +283,7 @@
                                     <tr>
                                         <td>
                                             <table class="table table-striped">
-                                                <tbody  id="dynamicInput">
+                                                <tbody id="dynamicInput">
                                                     <tr>
                                                         <td>
                                                             <input type="text" name="mat1" id="mat1" onchange="return getMaterial1();">

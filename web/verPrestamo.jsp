@@ -142,10 +142,7 @@
                             </td>
                             <td>
                                 <%
-                                    long tiempo = cal1.getTimeInMillis();
-                                    tiempo += 259200000;
-                                    Calendar cal2 = Calendar.getInstance();
-                                    cal2.setTimeInMillis(tiempo);
+                                    Calendar cal2 = pre.getFecha_devolucion();
                                     String fecha2 = cal2.get(Calendar.YEAR) + "-";
                                     int mes2 = cal2.get(Calendar.MONTH);
                                     mes2++;
