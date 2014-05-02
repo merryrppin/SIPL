@@ -139,6 +139,7 @@
                 $("#nombre").load("UsuarioServlet", {Code: code});
                 $("#materiales").load("MaterialesPrestamoServlet", {Code: code});
                 $("#fechaPrestamo").load("FechaPrestamoServlet", {Code: code});
+                $("#fechaDevolucion").load("FechaDevolucionServlet", {Code: code});
                 counter = 1;
                 return false;
             }
@@ -248,7 +249,15 @@
                             <td>
                                 <label class="control-label"> Fecha de préstamo</label>
                             </td>
-                            <td id="fechaPrestamo" colspan="2">
+                            <td id="fechaPrestamo" colspan="3">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label"> Fecha de devolución</label>
+                            </td>
+                            <td id="fechaDevolucion" colspan="2">
 
                             </td>
                             <td>
