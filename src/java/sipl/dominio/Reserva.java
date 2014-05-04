@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 import java.util.Calendar;
@@ -13,12 +12,13 @@ import java.util.Calendar;
  * @author Samy
  */
 public class Reserva {
-    private int codigo; 
+
+    private int codigo;
     private Usuario usu;
     private int estado;
     private Calendar fecha_reserva;
     private String mat;
-    
+
     public Reserva(int codigo, Usuario usu, int estado, Calendar fecha_reserva, String mat) {
         this.codigo = codigo;
         this.usu = usu;
@@ -66,6 +66,5 @@ public class Reserva {
     public void setMat(String mat) {
         this.mat = mat;
     }
-    
-    
+
 }

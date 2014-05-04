@@ -172,8 +172,8 @@
                                 </select>
                             </td>
                             <%
-                                }else{
-                                    out.print("<input hidden type='text' id='estado' name='estado' value='"+usu.getCorreo()+"'>");
+                                } else {
+                                    out.print("<input hidden type='text' id='estado' name='estado' value='" + usu.getCorreo() + "'>");
                                 }
                             %>
                         </tr>

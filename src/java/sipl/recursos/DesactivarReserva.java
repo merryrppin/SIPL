@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.recursos;
 
 import java.util.ArrayList;
@@ -23,14 +22,15 @@ import sipl.dominio.Usuario;
  * @author WM
  */
 public class DesactivarReserva {
-    public void desactivarRes(){
+
+    public void desactivarRes() {
         Conexion con = new Conexion();
         reservaDAO resDAO = new reservaDAO(con);
         usuarioDAO usuDAO = new usuarioDAO(con);
         materialDAO matDAO = new materialDAO(con);
         tipo_materialDAO tipDAO = new tipo_materialDAO(con);
         ArrayList<Reserva> data = resDAO.getReservasAct();
-        for(int i = 0; i< data.size(); i++){
+        for (int i = 0; i < data.size(); i++) {
             Calendar cal1 = data.get(i).getFecha_reserva();
             if (data.get(i).getEstado() == 0) {
                 Calendar hoy = Calendar.getInstance();
@@ -39,7 +39,7 @@ public class DesactivarReserva {
                 if (tiempo1 - tiempo2 >= 172800000) {
                     Reserva res = resDAO.getReservaCodUsu(data.get(i).getUsu().getCodigo());
                     res.setEstado(1);
-                    String [] materi = res.getMat().split(";");
+                    String[] materi = res.getMat().split(";");
                     for (String materi1 : materi) {
                         Material mat = matDAO.getMaterial(Integer.parseInt(materi1));
                         mat.setEstado(0);

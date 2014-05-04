@@ -122,8 +122,8 @@
                                 fecha += " " + cal.get(Calendar.HOUR_OF_DAY);
                                 fecha += ":" + cal.get(Calendar.MINUTE) + ":00";
                                 Calendar cal2 = Calendar.getInstance();
-                                long tiempo= cal.getTimeInMillis();
-                                tiempo+=259200000;
+                                long tiempo = cal.getTimeInMillis();
+                                tiempo += 259200000;
                                 cal2.setTimeInMillis(tiempo);
                                 String fecha2 = cal2.get(Calendar.YEAR) + "-";
                                 int mes2 = cal2.get(Calendar.MONTH);

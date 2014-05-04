@@ -44,8 +44,8 @@
             nombre += ".sql";
             Gestor.GenerarBackup(nombre);
             response.sendRedirect("backup.jsp?accion=2");%>
-        <%} else if (a == 2) {%>
-        <!DOCTYPE html>
+<%} else if (a == 2) {%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

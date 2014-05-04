@@ -37,8 +37,6 @@ public class Prestamo {
         this.estado = estado;
     }
 
-   
-
     public int getCodigo() {
         return codigo;
     }

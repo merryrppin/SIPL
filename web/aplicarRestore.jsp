@@ -16,7 +16,7 @@
     } catch (Exception e) {
         error = "sin_accion";
     }
-    String mov="restore.jsp";
+    String mov = "restore.jsp";
     String x = "";
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
@@ -28,11 +28,11 @@
             dir += "Backup\\";
             dir += resto;
             x = Gestor.AplicarRestore(dir);
-            if(x.equals("Restore aplicado satisfacoriamente")){
-                mov="logout.jsp";
+            if (x.equals("Restore aplicado satisfacoriamente")) {
+                mov = "logout.jsp";
             }
-        }else if(a == 2){
-            
+        } else if (a == 2) {
+
         }
         if (x != null && x.length() > 0) {
 %>

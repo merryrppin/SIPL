@@ -35,9 +35,6 @@ public class Gestor {
     TextoImagen tei = new TextoImagen();
     DesactivarMultas actM = new DesactivarMultas();
     DesactivarReserva actR = new DesactivarReserva();
-//    GenerarPDFListar pdfL = new GenerarPDFListar();
-//    GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
-//    GenerarPDFtipomaterial pdfT = new GenerarPDFtipomaterial();
     AplicarRestore aplR = new AplicarRestore();
 
     public Gestor() {
@@ -284,8 +281,8 @@ public class Gestor {
     public void desactivarReservas() {
         actR.desactivarRes();
     }
-    
-    public boolean addLaboratorio(Laboratorio lab){
+
+    public boolean addLaboratorio(Laboratorio lab) {
         return labDAO.addLaboratorio(lab);
     }
 }

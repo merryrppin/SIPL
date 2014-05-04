@@ -90,11 +90,11 @@
             </div>
             <div class="col-xs-12 col-sm-6" align="center">
                 <%
-                    String orden="";
-                    try{
+                    String orden = "";
+                    try {
                         orden = request.getParameter("orden");
-                    }catch(Exception e){
-                        error="no_orden";
+                    } catch (Exception e) {
+                        error = "no_orden";
                     }
                     if (orden.length() <= 0) {
                         error = "no_orden";
@@ -119,6 +119,11 @@
                         <tr>
                             <td align="center">
                                 <input id="btnNext" class="btn btn-info" type="button" value="Abrir PDF" onclick="window.open('<%out.print(orden);%>');" style='width:150px;'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>

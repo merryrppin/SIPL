@@ -39,11 +39,11 @@ public class MaterialServlet extends HttpServlet {
         String id_material = request.getParameter("id_material");
         Material mat = matDAO.getMaterial(Integer.parseInt(id_material));
         if (mat != null) {
-            if(mat.getDisponibilidad()!=0 || mat.getEstado()!=0){
+            if (mat.getDisponibilidad() != 0 || mat.getEstado() != 0) {
                 out.print("<td height='42px' colspan='2'>El material no está disponible</td>");
-            }else{
-            out.print("<td height='42px'>" + mat.getTipo_mat().getNombre() + "</td>");
-            out.print("<td>" + mat.getDescripcion() + "</td>");
+            } else {
+                out.print("<td height='42px'>" + mat.getTipo_mat().getNombre() + "</td>");
+                out.print("<td>" + mat.getDescripcion() + "</td>");
             }
         } else {
             out.print("<td height='42px' colspan='2'><b>Este material no existe, "

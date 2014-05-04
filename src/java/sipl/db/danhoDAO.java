@@ -92,17 +92,17 @@ public class danhoDAO {
     public boolean updateDanho(Danho dan) {
         boolean result = false;
         String sql = "update danho set estado=" + dan.getEstado() + ","
-                + " descripcion_d='" + dan.getDescripcion()+ "' where codigo=" + dan.getCodigo();
+                + " descripcion_d='" + dan.getDescripcion() + "' where codigo=" + dan.getCodigo();
         int registros = con.setQuery(sql);
         if (registros >= 1) {
             result = true;
         }
         return result;
     }
-    
+
     public ArrayList<Danho> getRangoFecha_danhos(String fecha1, String fecha2) {
         ArrayList<Danho> data = new ArrayList<>();
-        ResultSet rs = con.getQuery("select * from danho where fecha_d between '"+fecha1+"' and '"+fecha2+"'");
+        ResultSet rs = con.getQuery("select * from danho where fecha_d between '" + fecha1 + "' and '" + fecha2 + "'");
         try {
             while (rs.next()) {
                 int codigo = rs.getInt("codigo");

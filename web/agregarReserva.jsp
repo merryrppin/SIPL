@@ -31,12 +31,12 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 0) {
         Usuario usu = Gestor.getUsuario(user.getCodigo());
-        if( usu.getEstado()==2){
+        if (usu.getEstado() == 2) {
             error = "usuario_prestamo";
         }
         if (usu.getEstado() == 4) {
             error = "usuario_multa";
-        } 
+        }
         if (usu.getEstado() == 3) {
             error = "usuario_reserva";
         }

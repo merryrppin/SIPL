@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.servlets;
 
 import java.io.IOException;
@@ -42,15 +41,15 @@ public class MaterialesPrestamoServlet extends HttpServlet {
         prestamoDAO preDAO = new prestamoDAO(con);
         String codigo = request.getParameter("Code");
         Prestamo pre = preDAO.getPrestamoCodUsu(codigo);
-        if(pre!=null){
+        if (pre != null) {
             Material mat;
-            String [] materiales = pre.getMat().split(";");
+            String[] materiales = pre.getMat().split(";");
             for (String materiale : materiales) {
                 mat = matDAO.getMaterial(Integer.parseInt(materiale));
                 out.print("<tr>");
-                out.print("<td>"+mat.getCodigo()+"</td>");
-                out.print("<td>"+mat.getTipo_mat().getNombre()+"</td>");
-                out.print("<td>"+mat.getDescripcion()+"</td>");
+                out.print("<td>" + mat.getCodigo() + "</td>");
+                out.print("<td>" + mat.getTipo_mat().getNombre() + "</td>");
+                out.print("<td>" + mat.getDescripcion() + "</td>");
                 out.print("</tr>");
             }
         }

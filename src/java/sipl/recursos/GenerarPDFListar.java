@@ -89,7 +89,7 @@ public class GenerarPDFListar {
         } catch (FileNotFoundException | DocumentException e) {
         }
     }
-    
+
     private void addMetaData(Document document) {
         document.addTitle(Titulo);
         document.addSubject("Lista específica");

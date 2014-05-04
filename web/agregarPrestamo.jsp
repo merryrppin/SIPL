@@ -276,7 +276,9 @@
                             <td colspan="4" id="materRes">
                                 <table class="table table-striped" id="tablaMats">
                                     <tr>
-                                        <th><button onClick="return addInput('dynamicInput');" onkeypress=" if (event.keyCode == 13) event.returnValue = false; "><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
+                                        <th><button onClick="return addInput('dynamicInput');" onkeypress=" if (event.keyCode == 13)
+                                                    event.returnValue = false;
+                                                "><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
                                         <th><label class="control-label">Tipo de Elemento</label></th>
                                         <th><label class="control-label">Descripción del Elemento</label></th>
                                     </tr>
@@ -320,7 +322,9 @@
                         <tr>
                             <td colspan="4" align="center">
                                 <br><br>
-                                <button onkeypress=" if (event.keyCode === 13) event.returnValue = false; " type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
+                                <button onkeypress=" if (event.keyCode === 13)
+                                            event.returnValue = false;
+                                        " type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                                 <br><br>
                             </td>

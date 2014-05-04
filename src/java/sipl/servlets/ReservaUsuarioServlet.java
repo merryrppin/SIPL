@@ -64,7 +64,7 @@ public class ReservaUsuarioServlet extends HttpServlet {
                 out.print("</tr>");
             }
             out.print("</table>");
-        }else{
+        } else {
             out.print("<table class='table table-striped' id='tablaMats'>");
             out.print("<tr>");
             out.print("<th><button onClick=\"return addInput('dynamicInput');\"><span class=\"glyphicon glyphicon-plus-sign\"></span></button><label class=\"control-label\">Código del Elemento</label></th>");
@@ -93,7 +93,7 @@ public class ReservaUsuarioServlet extends HttpServlet {
             out.print("<tr id=\"r5\"></tr>");
             out.print("</tbody>");
             out.print("</table>");
-            out.print("</td>");              
+            out.print("</td>");
             out.print("</tr>");
             out.print("</table>");
         }

@@ -42,7 +42,7 @@ public class FileUploadServlet extends HttpServlet {
     private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3;  // 3MB
     private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
-    String nombre="";
+    String nombre = "";
 
     /**
      * Upon receiving file upload submission, parses the request to read upload
@@ -79,7 +79,7 @@ public class FileUploadServlet extends HttpServlet {
         Conexion con = new Conexion();
         variableSisDAO varDAO = new variableSisDAO(con);
         VariableSis var = varDAO.getTipo_variable(1);
-        String dir=var.getDatos();
+        String dir = var.getDatos();
 //        String uploadPath = getServletContext().getRealPath("")
 //                + File.separator + UPLOAD_DIRECTORY;
         String uploadPath = dir + UPLOAD_DIRECTORY;

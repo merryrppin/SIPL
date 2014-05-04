@@ -39,9 +39,7 @@
                 }
                 else {
                     var newdiv = document.createElement('tr');
-                    newdiv.innerHTML = "<td><input type='text' name='mat" + (counter + 1) + "' id='mat"
-                            + (counter + 1) + "' onchange='return getMaterial" + (counter + 1)
-                            + "();'></td><td colspan='2'><table class='table table-hover'><tr id='r" + (counter + 1) + "'></tr></table>";
+                    newdiv.innerHTML = "<td><input type='text' name='mat" + (counter + 1) + "' id='mat" + (counter + 1) + "' onchange='return getMaterial" + (counter + 1) + "();'></td>";
                     document.getElementById(divName).appendChild(newdiv);
                     counter++;
                     return false;
@@ -227,9 +225,9 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th><button onClick="return addInput('materiales');" onkeypress=" if (event.keyCode == 13)
+                                            <th><button onClick="return addInput('dynamicInput');" onkeypress=" if (event.keyCode == 13)
                                                         event.returnValue = false;
-                                                    "><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código Elemento</label></th>
+                                                        "><span class="glyphicon glyphicon-plus-sign"></span></button><label class="control-label">Código del Elemento</label></th>
                                             <th>Tipo elemento</th>
                                             <th>Descripcion</th>
                                         </tr>
@@ -237,6 +235,39 @@
                                     <tbody id="materiales">
 
                                     </tbody>
+                                </table>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td>
+                                            <table class="table table-striped">
+                                                <tbody id="dynamicInput">
+                                                    <tr>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td colspan="2">
+                                            <table class="table table-striped" id="materialito">
+                                                <tbody>
+                                                    <tr id="r1"></tr>
+                                                    <tr id="r2"></tr>
+                                                    <tr id="r3"></tr>
+                                                    <tr id="r4"></tr>
+                                                    <tr id="r5"></tr>
+                                                    <tr id="r6"></tr>
+                                                    <tr id="r7"></tr>
+                                                    <tr id="r8"></tr>
+                                                    <tr id="r9"></tr>
+                                                    <tr id="r10"></tr>
+                                                    <tr id="r11"></tr>
+                                                    <tr id="r12"></tr>
+                                                    <tr id="r13"></tr>
+                                                    <tr id="r14"></tr>
+                                                    <tr id="r15"></tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>

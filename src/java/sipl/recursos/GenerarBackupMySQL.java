@@ -23,13 +23,13 @@ public class GenerarBackupMySQL {
         VariableSis vs2 = gestor.getVariable(1);
         VariableSis vs3 = gestor.getVariable(3);
         VariableSis vs4 = gestor.getVariable(4);
-        String direccion=vs2.getDatos();
-        String mysql =vs.getDatos() +"\\mysqldump";
-        direccion+=nombre;
+        String direccion = vs2.getDatos();
+        String mysql = vs.getDatos() + "\\mysqldump";
+        direccion += nombre;
         try {
             int processComplete;
-            Process runtimeProcess = Runtime.getRuntime().exec(mysql 
-                    + " --opt --password="+vs4.getDatos()+" --user="+vs3.getDatos()+" --databases siprelab -r " + direccion);
+            Process runtimeProcess = Runtime.getRuntime().exec(mysql
+                    + " --opt --password=" + vs4.getDatos() + " --user=" + vs3.getDatos() + " --databases siprelab -r " + direccion);
             processComplete = runtimeProcess.waitFor();
             if (processComplete == 1) {
                 resultado = "Backup Fallido";

@@ -163,13 +163,13 @@
                             <td>
                                 <%
                                     String disp = "";
-                                    if (mat.getDisponibilidad()== 0) {
+                                    if (mat.getDisponibilidad() == 0) {
                                         disp = "Libre";
                                     } else if (mat.getDisponibilidad() == 1) {
                                         disp = "Prestado";
                                     } else if (mat.getDisponibilidad() == 2) {
                                         disp = "En Reserva";
-                                    }else {
+                                    } else {
                                         estado = "Error";
                                     }
                                 %>
@@ -203,9 +203,9 @@
                             </td>
                         </tr>
                         <tr>
-                        <td align="center" colspan="4">
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'listarMateriales.jsp'" style='width:150px;'>Atrás</button>
-                        </td>
+                            <td align="center" colspan="4">
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'listarMateriales.jsp'" style='width:150px;'>Atrás</button>
+                            </td>
                         </tr>
                     </table>
                 </form>

@@ -90,7 +90,6 @@
                             </td>
                             <td>
                                 <input hidden type="text" id="codigo" name="codigo" value="<%out.print(id);%>">
-                                <input disabled="disabled" type="text" value="<%out.print(id);%>">
                             </td>
 
                         </tr>

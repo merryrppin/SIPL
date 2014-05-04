@@ -18,7 +18,6 @@ import sipl.db.reservaDAO;
 import sipl.db.tipo_materialDAO;
 import sipl.db.usuarioDAO;
 import sipl.db.variableSisDAO;
-import sipl.dominio.Gestor;
 import sipl.dominio.Material;
 import sipl.dominio.Multa;
 import sipl.dominio.Prestamo;
@@ -33,15 +32,7 @@ import sipl.dominio.Usuario;
 @WebService(serviceName = "MobilWebService")
 public class MobilWebService {
 
-    Gestor gestor = new Gestor();
-    Conexion con = new Conexion();
-    usuarioDAO usuDAO = new usuarioDAO(con);
-    prestamoDAO preDAO = new prestamoDAO(con);
-    materialDAO matDAO = new materialDAO(con);
-    tipo_materialDAO tipDAO = new tipo_materialDAO(con);
-    variableSisDAO varDAO = new variableSisDAO(con);
-    multaDAO mulDAO = new multaDAO(con);
-    reservaDAO resDAO = new reservaDAO(con);
+    Encri encrip = new Encri();
 
     /**
      * Web service operation
@@ -56,6 +47,12 @@ public class MobilWebService {
     public String addPrestamo(@WebParam(name = "cod_materiales") String cod_materiales,
             @WebParam(name = "cod_usuario") String cod_usuario, @WebParam(name = "apiK") String apiK,
             @WebParam(name = "apiS") String apiS) {
+        Conexion con = new Conexion();
+        usuarioDAO usuDAO = new usuarioDAO(con);
+        prestamoDAO preDAO = new prestamoDAO(con);
+        materialDAO matDAO = new materialDAO(con);
+        tipo_materialDAO tipDAO = new tipo_materialDAO(con);
+        variableSisDAO varDAO = new variableSisDAO(con);
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
         if (cod_usuario != null && cod_usuario.length() > 0) {
@@ -127,16 +124,18 @@ public class MobilWebService {
                                     usuDAO.updateUsuario(usu);
                                     preDAO.addPrestamo(pre);
                                     rs = "Prestamo Agregado";
+                                } else {
+                                    rs = "Materiales no disponibles";
                                 }
                             } catch (NumberFormatException e) {
                                 rs = "Error";
                             }
                         }
                     } else {
-                        rs = "ApiS error";
+                        rs = "Error de usuario";
                     }
                 } else {
-                    rs = "Error de usuario";
+                    rs = "ApiS error";
                 }
             } else {
                 rs = "ApiK error";
@@ -158,10 +157,13 @@ public class MobilWebService {
     @WebMethod(operationName = "login")
     public String login(@WebParam(name = "user") String user, @WebParam(name = "password") String password,
             @WebParam(name = "apiK") String apiK) {
+        Conexion con = new Conexion();
+        usuarioDAO usuDAO = new usuarioDAO(con);
+        variableSisDAO varDAO = new variableSisDAO(con);
         String rs;
         String aK = varDAO.getTipo_variable(5).getDatos();
         if (aK.equals(apiK)) {
-            Usuario usu = usuDAO.getLogin(user, gestor.encriptar(password));
+            Usuario usu = usuDAO.getLogin(user, encrip.encriptarMD5(password));
             if (usu != null) {
                 rs = usu.getCodigo() + ";" + usu.getNombre() + ";" + usu.getApellido() + ";" + usu.getTipo_usuario() + ";"
                         + usu.getEstado() + ";" + usu.getClave();
@@ -185,7 +187,14 @@ public class MobilWebService {
     @WebMethod(operationName = "finalizarPrestamo")
     public String finalizarPrestamo(@WebParam(name = "cod_usuario") String cod_usuario,
             @WebParam(name = "apiK") String apiK, @WebParam(name = "apiS") String apiS) {
-        String rs = "";
+        Conexion con = new Conexion();
+        usuarioDAO usuDAO = new usuarioDAO(con);
+        prestamoDAO preDAO = new prestamoDAO(con);
+        materialDAO matDAO = new materialDAO(con);
+        tipo_materialDAO tipDAO = new tipo_materialDAO(con);
+        variableSisDAO varDAO = new variableSisDAO(con);
+        multaDAO mulDAO = new multaDAO(con);
+        String rs;
         String aK = varDAO.getTipo_variable(5).getDatos();
         if (aK.equals(apiK)) {
             Usuario usu = usuDAO.getUsuario(cod_usuario);
@@ -201,48 +210,62 @@ public class MobilWebService {
                     pre = preDAO.getPrestamoCodUsu(usu.getCodigo());
                     if (pre != null) {
                         String[] cadena = pre.getMat().split(";");
+                        int matError = 0;
                         for (String cadena1 : cadena) {
                             try {
-                                Material mat = matDAO.getMaterial(Integer.parseInt(cadena1));
-                                if (mat != null) {
-                                    mat.setDisponibilidad(0);
-                                    matDAO.updateMaterial(mat);
-                                    Tipo_material tip = mat.getTipo_mat();
-                                    int d = tip.getDisponibilidad();
-                                    d++;
-                                    tip.setDisponibilidad(d);
-                                    tipDAO.updateTipo_material(tip);
-                                }
+                                Integer.parseInt(cadena1);
                             } catch (NumberFormatException e) {
-                                rs = "error_material";
+                                matError++;
                             }
                         }
-                        usu.setEstado(0);
-                        Calendar cal = Calendar.getInstance();
-                        Calendar cal2 = pre.getFecha_prestamo();
-                        long time1 = cal.getTimeInMillis();
-                        long time2 = cal2.getTimeInMillis();
-                        long dias3 = 259200000;
-                        time1 -= dias3;
-                        int m = 0;
-                        if (time1 > time2) {
-                            usu.setEstado(4);
-                            Multa mul = new Multa(0, usu, cal, 0, 3);
-                            mulDAO.addMulta(mul);
-                            m++;
-                        }
-                        pre.setEstado(1);
-                        pre.setFecha_devolucion(cal);
-                        usuDAO.updateUsuario(usu);
-                        preDAO.updatePrestamo(pre);
-                        if (m > 0) {
-                            rs = "Multa generada";
+                        if (matError == 0) {
+                            for (String cadena1 : cadena) {
+                                try {
+                                    Material mat = matDAO.getMaterial(Integer.parseInt(cadena1));
+                                    if (mat != null) {
+                                        mat.setDisponibilidad(0);
+                                        matDAO.updateMaterial(mat);
+                                        Tipo_material tip = mat.getTipo_mat();
+                                        int d = tip.getDisponibilidad();
+                                        d++;
+                                        tip.setDisponibilidad(d);
+                                        tipDAO.updateTipo_material(tip);
+                                    }
+                                } catch (NumberFormatException e) {
+                                    matError++;
+                                }
+                            }
+                            usu.setEstado(0);
+                            Calendar cal = Calendar.getInstance();
+                            Calendar cal2 = pre.getFecha_prestamo();
+                            long time1 = cal.getTimeInMillis();
+                            long time2 = cal2.getTimeInMillis();
+                            long dias3 = 259200000;
+                            time1 -= dias3;
+                            int m = 0;
+                            if (time1 > time2) {
+                                usu.setEstado(4);
+                                Multa mul = new Multa(0, usu, cal, 0, 3);
+                                mulDAO.addMulta(mul);
+                                m++;
+                            }
+                            pre.setEstado(1);
+                            pre.setFecha_devolucion(cal);
+                            usuDAO.updateUsuario(usu);
+                            preDAO.updatePrestamo(pre);
+                            if (m > 0) {
+                                rs = "Multa generada";
+                            } else {
+                                rs = "Prestamo finalizado";
+                            }
                         } else {
-                            rs = "Prestamo finalizado";
+                            rs = "Error en Material";
                         }
                     } else {
                         rs = "Sin Prestamo";
                     }
+                } else {
+                    rs = "Sin Prestamo";
                 }
             } else {
                 rs = "ApiS error";
@@ -262,6 +285,9 @@ public class MobilWebService {
      */
     @WebMethod(operationName = "validarMaterial")
     public String validarMaterial(@WebParam(name = "apiK") String apiK, @WebParam(name = "idMaterial") String idMaterial) {
+        Conexion con = new Conexion();
+        materialDAO matDAO = new materialDAO(con);
+        variableSisDAO varDAO = new variableSisDAO(con);
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
         if (aK.equals(apiK)) {
@@ -282,14 +308,15 @@ public class MobilWebService {
                     } else if (mat.getEstado() == 2) {
                         rs = "1;Dañado";
                     }
+                } else {
+                    rs = "1;Material inexistente";
                 }
             } catch (NumberFormatException e) {
-                rs = "1;Error_CodigoMaterial";
+                rs = "1;Error Codigo Material";
             }
         } else {
-            rs = "1;ApiK_error";
+            rs = "1;ApiK error";
         }
-        System.out.print(rs);
         return rs;
     }
 
@@ -301,6 +328,9 @@ public class MobilWebService {
      */
     @WebMethod(operationName = "listarMateriales")
     public ArrayList<String> listarMateriales(@WebParam(name = "apiK") String apiK) {
+        Conexion con = new Conexion();
+        materialDAO matDAO = new materialDAO(con);
+        variableSisDAO varDAO = new variableSisDAO(con);
         ArrayList<String> data = new ArrayList();
         String aK = varDAO.getTipo_variable(5).getDatos();
         if (aK.equals(apiK)) {
@@ -321,30 +351,40 @@ public class MobilWebService {
      */
     @WebMethod(operationName = "getPrestamo")
     public String getPrestamo(@WebParam(name = "cod_usuario") String cod_usuario, @WebParam(name = "apiK") String apiK) {
+        Conexion con = new Conexion();
+        usuarioDAO usuDAO = new usuarioDAO(con);
+        prestamoDAO preDAO = new prestamoDAO(con);
+        materialDAO matDAO = new materialDAO(con);
+        variableSisDAO varDAO = new variableSisDAO(con);
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
+        Usuario usu = usuDAO.getUsuario(cod_usuario);
         if (aK.equals(apiK)) {
-            Prestamo pre = preDAO.getPrestamoCodUsu(cod_usuario);
-            if (pre != null) {
-                String materiales[] = pre.getMat().split(";");
-                for (String mat : materiales) {
-                    Material material = matDAO.getMaterial(Integer.parseInt(mat));
-                    rs += mat + ":" + material.getTipo_mat().getNombre() + "/";
+            if (usu != null) {
+                Prestamo pre = preDAO.getPrestamoCodUsu(cod_usuario);
+                if (pre != null) {
+                    String materiales[] = pre.getMat().split(";");
+                    for (String mat : materiales) {
+                        Material material = matDAO.getMaterial(Integer.parseInt(mat));
+                        rs += mat + ":" + material.getTipo_mat().getNombre() + "/";
+                    }
+                    Calendar cal1 = pre.getFecha_prestamo();
+                    String fecha = cal1.get(Calendar.YEAR) + "-";
+                    int mes = cal1.get(Calendar.MONTH);
+                    mes++;
+                    fecha += mes + "-";
+                    fecha += cal1.get(Calendar.DAY_OF_MONTH);
+                    fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
+                    fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
+                    rs += ";" + fecha;
+                } else {
+                    rs = "Sin prestamo";
                 }
-                Calendar cal1 = pre.getFecha_prestamo();
-                String fecha = cal1.get(Calendar.YEAR) + "-";
-                int mes = cal1.get(Calendar.MONTH);
-                mes++;
-                fecha += mes + "-";
-                fecha += cal1.get(Calendar.DAY_OF_MONTH);
-                fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-                fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
-                rs += ";" + fecha;
             } else {
-                rs = "sin Prestamo";
+                rs = "Usuario inexistente";
             }
         } else {
-            rs = "apiK Error";
+            rs = "ApiK Error";
         }
         return rs;
     }
@@ -360,6 +400,11 @@ public class MobilWebService {
     @WebMethod(operationName = "addReserva")
     public String addReserva(@WebParam(name = "apiK") String apiK, @WebParam(name = "materiales") String materiales,
             @WebParam(name = "cod_usuario") String cod_usuario) {
+        Conexion con = new Conexion();
+        usuarioDAO usuDAO = new usuarioDAO(con);
+        materialDAO matDAO = new materialDAO(con);
+        variableSisDAO varDAO = new variableSisDAO(con);
+        reservaDAO resDAO = new reservaDAO(con);
         String rs = "";
         String aK = varDAO.getTipo_variable(5).getDatos();
         if (aK.equals(apiK)) {
@@ -383,29 +428,28 @@ public class MobilWebService {
                                 cont++;
                             }
                         } catch (NumberFormatException e) {
-                            rs = "error materiales";
+                            cont++;
                         }
                     }
-                    if(cont == 0){
-                        Calendar cal = Calendar.getInstance();
-                        Reserva res = new Reserva(0, usu, 0, cal, materiales);
-                        usu.setEstado(3);
-                        usuDAO.updateUsuario(usu);
-                        resDAO.addReserva(res);
-                        rs="Reserva Agregada";
-                    }else{
-                        rs="Error en 1 o más materiales";
-                    }
-                    if (usu.getEstado() == 2) {
-                        rs = "Usuario con prestamo";
-                    } else if (usu.getEstado() == 3) {
-                        rs = "Usuario con reserva";
-                    } else if (usu.getEstado() == 4) {
-                        rs = "Usuario con multa";
-                    } else if (usu.getEstado() == 1) {
-                        rs = "Usuario inactivo";
-                    } else if (usu.getEstado() == 0) {
-
+                    if (cont == 0) {
+                        if (usu.getEstado() == 2) {
+                            rs = "Usuario con prestamo";
+                        } else if (usu.getEstado() == 3) {
+                            rs = "Usuario con reserva";
+                        } else if (usu.getEstado() == 4) {
+                            rs = "Usuario con multa";
+                        } else if (usu.getEstado() == 1) {
+                            rs = "Usuario inactivo";
+                        } else if (usu.getEstado() == 0) {
+                            Calendar cal = Calendar.getInstance();
+                            Reserva res = new Reserva(0, usu, 0, cal, materiales);
+                            usu.setEstado(3);
+                            usuDAO.updateUsuario(usu);
+                            resDAO.addReserva(res);
+                            rs = "Reserva Agregada";
+                        }
+                    } else {
+                        rs = "Error en 1 o más materiales";
                     }
                 } else {
                     rs = "Usuario inexistente";
@@ -418,5 +462,4 @@ public class MobilWebService {
         }
         return rs;
     }
-
 }

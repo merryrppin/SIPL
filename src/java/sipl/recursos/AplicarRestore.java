@@ -22,22 +22,21 @@ public class AplicarRestore {
         VariableSis vs4 = gestor.getVariable(4);
         String mysql = vs.getDatos() + "mysql";
 
-        String[] executeCmd = new String[]{mysql, "--user=" + vs3.getDatos(), "--password=" + vs4.getDatos()
-                , "-e", "source "+nombre};
- 
+        String[] executeCmd = new String[]{mysql, "--user=" + vs3.getDatos(), "--password=" + vs4.getDatos(), "-e", "source " + nombre};
+
         Process runtimeProcess;
         try {
- 
+
             runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
- 
+
             if (processComplete == 0) {
-                resultado="Restore aplicado satisfactoriamente";
+                resultado = "Restore aplicado satisfactoriamente";
             } else {
-                resultado="Ha ocurrido un error";
+                resultado = "Ha ocurrido un error";
             }
         } catch (Exception ex) {
-            resultado=ex.getMessage();
+            resultado = ex.getMessage();
         }
 
         return resultado;

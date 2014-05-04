@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sipl.dominio;
 
 /**
@@ -11,6 +10,7 @@ package sipl.dominio;
  * @author WM
  */
 public class VariableSis {
+
     private int id;
     private String Datos;
     private String Descripcion;
@@ -44,5 +44,5 @@ public class VariableSis {
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
     }
-    
+
 }

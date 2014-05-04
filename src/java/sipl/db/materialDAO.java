@@ -88,13 +88,13 @@ public class materialDAO {
     public boolean addMaterial(Material mat) {
         boolean result = false;
         Calendar cal1 = mat.getUlt_fecha_mante();
-        int year=cal1.get(Calendar.YEAR);
-        int mes=cal1.get(Calendar.MONTH);
+        int year = cal1.get(Calendar.YEAR);
+        int mes = cal1.get(Calendar.MONTH);
         mes++;
-        int dia=cal1.get(Calendar.DAY_OF_MONTH);
-        int hora=cal1.get(Calendar.HOUR_OF_DAY);
-        int min=cal1.get(Calendar.MINUTE);
-        String fecha=year+"-"+mes+"-"+dia+" "+hora+":"+min+":00";
+        int dia = cal1.get(Calendar.DAY_OF_MONTH);
+        int hora = cal1.get(Calendar.HOUR_OF_DAY);
+        int min = cal1.get(Calendar.MINUTE);
+        String fecha = year + "-" + mes + "-" + dia + " " + hora + ":" + min + ":00";
         String sql = "insert into material (descripcion, tipo_mat, marca, serial, foto_mat, num_inventario,"
                 + "estado, ult_fecha_mante, disponibilidad, codigo_lab, imagenqr) values ('" + mat.getDescripcion() + "',"
                 + "" + mat.getTipo_mat().getId() + ",'" + mat.getMarca() + "','" + mat.getSerial() + "','" + mat.getFoto_mat() + "',"

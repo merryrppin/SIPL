@@ -126,7 +126,7 @@
                         <td align="center">
                             <button type="button" class="btn btn-info" onclick="location.href = 'eliminarTemporales.jsp?accion=2'">Eliminar Backups Temporales</button>
                             <%
-                                int ver2=0;
+                                int ver2 = 0;
                                 sDirectorio = Gestor.getVariable(1).getDatos();
                                 sDirectorio += "//Backup";
                                 File f2 = new File(sDirectorio);
@@ -138,7 +138,8 @@
                         </td>
                         <td>
                             <span class="label label-default"><%if (ver2 == 0) {
-                                    out.print(ficheros2.length + " Backup");}%></span>
+                                    out.print(ficheros2.length + " Backup");
+                                }%></span>
                         </td>
                     </tr>
                     <%

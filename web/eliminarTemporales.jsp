@@ -58,7 +58,7 @@
             if (c == 0) {
                 response.sendRedirect("configuracion.jsp");
             }
-        }else if(a == 3){
+        } else if (a == 3) {
             String sDirectorio = Gestor.getVariable(1).getDatos();
             sDirectorio += "//PDF";
             File f = new File(sDirectorio);

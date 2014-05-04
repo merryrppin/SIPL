@@ -25,10 +25,10 @@
                 if (nombre != null && nombre.length() > 0) {
                     int c = Integer.parseInt(codigo);
                     Laboratorio lab = new Laboratorio(c, nombre, descripcion, ubicacion);
-                    if(Gestor.addLaboratorio(lab)==true){
+                    if (Gestor.addLaboratorio(lab) == true) {
                         response.sendRedirect("listarLaboratorios.jsp");
-                    }else{
-                        error="no_agrego";
+                    } else {
+                        error = "no_agrego";
                     }
                 }
             } else if (a == 2) {
