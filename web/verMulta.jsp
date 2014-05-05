@@ -31,7 +31,7 @@
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 0) {
         Usuario usu = Gestor.getUsuario(user.getCodigo());
-        if (usu.getEstado() == 3) {
+        if (usu.getEstado() == 4) {
             try {
 %>
 <!DOCTYPE html>
