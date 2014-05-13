@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import sipl.db.Conexion;
@@ -72,6 +73,11 @@ public class GenerarPDFtipomaterial {
             addContent(document);
             document.close();
         } catch (FileNotFoundException | DocumentException e) {
+        }
+        try {
+            con.Close_DB();
+        } catch (SQLException e) {
+            System.out.print("No cerró");
         }
     }
 

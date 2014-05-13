@@ -5,6 +5,7 @@
  */
 package sipl.recursos;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import sipl.db.Conexion;
@@ -56,6 +57,11 @@ public class DesactivarReserva {
                     resDAO.updateReserva(res);
                 }
             }
+        }
+        try{
+            con.Close_DB();
+        }catch(SQLException e){
+            System.out.print("No cerró");
         }
     }
 }

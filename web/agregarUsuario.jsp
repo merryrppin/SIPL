@@ -41,8 +41,8 @@
                     Usuario.nombre.focus();
                     alert('No has llenado el campo del nombre');
                     return false;
-                } else if (Usuario.apellido.value.length === 0 || /^\s+$/.test(Usuario.apellido.value)) {
-                    Usuario.apellido.focus();
+                } else if (Usuario.apellidos.value.length === 0 || /^\s+$/.test(Usuario.apellidos.value)) {
+                    Usuario.apellidos.focus();
                     alert('No has llenado el campo del apellido');
                     return false;
                 } else if (/^\s+$/.test(Usuario.telefono.value)) {

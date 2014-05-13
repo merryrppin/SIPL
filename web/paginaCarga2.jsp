@@ -122,7 +122,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td align="center"> - - - </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>

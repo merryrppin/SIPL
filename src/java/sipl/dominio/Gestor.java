@@ -7,6 +7,7 @@ package sipl.dominio;
 
 import com.itextpdf.text.BadElementException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import sipl.db.*;
 import sipl.recursos.*;

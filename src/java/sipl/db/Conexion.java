@@ -20,7 +20,9 @@ public class Conexion {
     private Connection con;
     private final String driver = "com.mysql.jdbc.Driver";
     private final String dbName = "siprelab";
+    //private final String url = "jdbc:mysql://172.16.20.79:3306/";
     private final String url = "jdbc:mysql://localhost:3306/";
+    //private final String user = "electronica";
     private final String user = "root";
     //private final String passwd = "q-j8$mr5.L";
     private final String passwd = "12345";
@@ -53,6 +55,10 @@ public class Conexion {
         return result;
     }
 
+    public void Close_DB() throws SQLException{
+        con.close();
+    }
+    
     public static void main(String[] args) {
         Conexion c = new Conexion();
     }
