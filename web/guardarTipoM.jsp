@@ -36,8 +36,8 @@
                 } else {
                     error = "faltan_Datos";
                 }
-            } else if (a == 2) {
-
+            } else {
+                error = "error_accion";
             }
         } catch (Exception e) {
 

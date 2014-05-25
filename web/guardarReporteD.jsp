@@ -104,6 +104,8 @@
                 } else {
                     error = "no_agrego";
                 }
+            }else{
+                error="error_accion";
             }
         } catch (Exception e) {
             error = "sin_accion";

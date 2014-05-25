@@ -118,9 +118,11 @@
                     int disp = 0;
                     int esta = 0;
                     String mates[] = cod_materiales.split(";");
+                    int matRepetido = 0;
                     try {
                         for (String mate : mates) {
-                            Material mat = Gestor.getMaterial(Integer.parseInt(mate));
+                            int x = Integer.parseInt(mate);
+                            Material mat = Gestor.getMaterial(x);
                             if (mat != null) {
                                 if (mat.getDisponibilidad() != 0) {
                                     disp++;
@@ -129,6 +131,14 @@
                                     esta++;
                                 }
                             }
+                            for (String cadena2 : mates) {
+                                if (x == Integer.parseInt(cadena2)) {
+                                    matRepetido++;
+                                }
+                            }
+                            if (matRepetido == 1) {
+                                matRepetido = 0;
+                            }
                         }
                         long fecha_act = cal2.getTimeInMillis();
                         int dias = Integer.parseInt(dia);
@@ -136,21 +146,25 @@
                         fecha_act += fecha2;
                         cal2.setTimeInMillis(fecha_act);
                         if (disp == 0 && esta == 0) {
-                            Prestamo pre = new Prestamo(0, cod_materiales, usu, cal, cal2, 0);
-                            for (String mate : mates) {
-                                Material mat = Gestor.getMaterial(Integer.parseInt(mate));
-                                mat.setDisponibilidad(1);
-                                Gestor.updateMaterial(mat);
-                                Tipo_material tip = mat.getTipo_mat();
-                                int d = tip.getDisponibilidad();
-                                d--;
-                                tip.setDisponibilidad(d);
-                                Gestor.updateTipoMat(tip);
+                            if (matRepetido == 0) {
+                                Prestamo pre = new Prestamo(0, cod_materiales, usu, cal, cal2, 0);
+                                for (String mate : mates) {
+                                    Material mat = Gestor.getMaterial(Integer.parseInt(mate));
+                                    mat.setDisponibilidad(1);
+                                    Gestor.updateMaterial(mat);
+                                    Tipo_material tip = mat.getTipo_mat();
+                                    int d = tip.getDisponibilidad();
+                                    d--;
+                                    tip.setDisponibilidad(d);
+                                    Gestor.updateTipoMat(tip);
+                                }
+                                usu.setEstado(2);
+                                Gestor.updateUsuario(usu);
+                                Gestor.addPrestamo(pre);
+                                response.sendRedirect("listarPrestamos.jsp?accion=1");
+                            } else {
+                                error = "error";
                             }
-                            usu.setEstado(2);
-                            Gestor.updateUsuario(usu);
-                            Gestor.addPrestamo(pre);
-                            response.sendRedirect("listarPrestamos.jsp?accion=1");
                         } else {
                             error = "materiales_Ndisp";
                         }
@@ -320,11 +334,56 @@
                         }
                         int total = contador + CantidadM;
                         if (total <= 15) {
-                            String p = pre.getMat();
-                            p += nMateriales;
-                            pre.setMat(p);
-                            Gestor.updatePrestamo(pre);
-                            response.sendRedirect("listarPrestamos.jsp?accion=1");
+                            int cont = 0;
+                            int matRepetido = 0;
+                            String[] mats = nMateriales.split(";");
+                            for (String m : mats) {
+                                try {
+                                    int x = Integer.parseInt(m);
+                                    Material mat = Gestor.getMaterial(x);
+                                    if (mat != null) {
+                                        if (mat.getEstado() == 0) {
+                                            if (mat.getDisponibilidad() != 0) {
+                                                cont++;
+                                            }
+                                        } else {
+                                            cont++;
+                                        }
+                                        for (String cadena2 : mats) {
+                                            if (x == Integer.parseInt(cadena2)) {
+                                                matRepetido++;
+                                            }
+                                        }
+                                        if (matRepetido == 1) {
+                                            matRepetido = 0;
+                                        }
+                                    } else {
+                                        cont++;
+                                    }
+                                    String[] mats2 = pre.getMat().split(";");
+                                    for (String materialAnterior : mats2) {
+                                        int y = Integer.parseInt(materialAnterior);
+                                        if (x == y) {
+                                            cont++;
+                                        }
+                                    }
+                                } catch (NumberFormatException e) {
+                                    cont++;
+                                }
+                            }
+                            if (cont == 0) {
+                                if (matRepetido == 0) {
+                                    String p = pre.getMat();
+                                    p += nMateriales;
+                                    pre.setMat(p);
+                                    Gestor.updatePrestamo(pre);
+                                    response.sendRedirect("listarPrestamos.jsp?accion=1");
+                                } else {
+                                    error = "error";
+                                }
+                            } else {
+                                error = "materiales_Ndisp";
+                            }
                         } else {
                             error = "Demasiados_Materiales";
                         }
@@ -337,6 +396,8 @@
             } else {
                 error = "no_existe";
             }
+        } else {
+            error = "error_accion";
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");

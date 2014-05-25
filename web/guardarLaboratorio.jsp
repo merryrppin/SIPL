@@ -44,6 +44,8 @@
                 } else {
                     error = "faltan_Datos";
                 }
+            }else{
+                error="error_accion";
             }
         } catch (Exception e) {
 

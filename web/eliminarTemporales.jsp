@@ -71,6 +71,8 @@
                 error = "no_directorio";
             }
             response.sendRedirect("configuracion.jsp");
+        }else{
+            error = "error_accion";
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");

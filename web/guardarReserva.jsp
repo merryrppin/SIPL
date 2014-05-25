@@ -236,6 +236,8 @@
             } else {
                 error = "usuario_inexistente";
             }
+        }else{
+            error = "error_accion";
         }
     } else {
         response.sendRedirect("principal.jsp?error=sin_permisos");

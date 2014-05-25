@@ -118,6 +118,8 @@
                 usu.setClave(c);
                 Gestor.updateUsuario(usu);
                 response.sendRedirect("configuracion.jsp");
+            }else{
+                error = "error_accion";
             }
         } catch (Exception e) {
             error = "error_accion";

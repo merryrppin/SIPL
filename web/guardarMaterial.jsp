@@ -199,6 +199,8 @@
                 mat.setFoto_mat(foto);
                 Gestor.updateMaterial(mat);
                 response.sendRedirect("listarMateriales.jsp?accion=1");
+            }else{
+                error="error_accion";
             }
         } catch (Exception e) {
             error = "sin_accion";
