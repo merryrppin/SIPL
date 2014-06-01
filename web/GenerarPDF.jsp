@@ -115,22 +115,22 @@
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 12) {
             String titulo = "Listar materiales";
-            Filex += titulo + " " + fecha + ".pdf";
+            Filex += titulo +" Completos"+ " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 13) {
             String titulo = "Listar usuarios";
-            Filex += titulo + " " + fecha + ".pdf";
+            Filex += titulo +" Completos"+ " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 14) {
             String titulo = "Listar reservas";
-            Filex += titulo + " " + fecha + ".pdf";
+            Filex += titulo+" Completos" + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 15) {
             String titulo = "Listar multas";
-            Filex += titulo + " " + fecha + ".pdf";
+            Filex += titulo +" Completos" + " " + fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 16) {
@@ -140,7 +140,7 @@
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else if (a == 17) {
             String titulo = "Listar Danho";
-            Filex += titulo + " " + fecha + ".pdf";
+            Filex += titulo +" Completos" + " " +  fecha + ".pdf";
             Gestor.GenerarPDFListar(titulo, img, usuario, vs.getDatos(), Filex);
             response.sendRedirect("paginaCarga2.jsp?orden=PDF/" + Filex);
         } else {
