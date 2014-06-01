@@ -46,6 +46,30 @@ public class usuarioDAO {
         return data;
     }
 
+    public ArrayList<Usuario> getUsuariosActivos() {
+        ArrayList<Usuario> data = new ArrayList<>();
+        ResultSet rs = con.getQuery("select * from usuario where estado=0 OR estado=2 OR estado=3 OR estado=4");
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                long telefono = rs.getLong("telefono");
+                String correo = rs.getString("correo");
+                int estado = rs.getInt("estado");
+                int tipo_usuario = rs.getInt("tipo_usuario");
+                String observaciones = rs.getString("observaciones");
+                String clave = rs.getString("clave");
+                Usuario usu = new Usuario(codigo, nombre, apellido, telefono, correo, estado, tipo_usuario, observaciones, clave);
+                data.add(usu);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            data = null;
+        }
+        return data;
+    }
+    
     public Usuario getUsuario(String codigo) {
         Usuario usu = null;
         ResultSet rs = con.getQuery("select * from usuario where codigo='" + codigo + "'");

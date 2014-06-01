@@ -333,7 +333,8 @@
                             contador++;
                         }
                         int total = contador + CantidadM;
-                        if (total <= 15) {
+                        int materialesMaximosPrestamo = Gestor.getCantidadMaximaMateriales();
+                        if (total <= materialesMaximosPrestamo) {
                             int cont = 0;
                             int matRepetido = 0;
                             String[] mats = nMateriales.split(";");

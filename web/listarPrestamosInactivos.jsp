@@ -1,6 +1,6 @@
 <%-- 
-    Document   : listarReporteD
-    Created on : 16/02/2014, 03:18:31 PM
+    Document   : listarPrestamos
+    Created on : 23/02/2014, 11:09:44 PM
     Author     : Samy
 --%>
 
@@ -10,6 +10,16 @@
 <%@page import="sipl.dominio.*"%>
 <jsp:useBean id="Gestor" scope="session" class="sipl.dominio.Gestor" />
 <%
+    String vs = "";
+    try {
+        vs = Gestor.getVariable(1).getDatos();
+    } catch (Exception e) {
+
+    }
+    if (vs != null && vs.length() > 0) {
+        Gestor.desactivarMultas();
+        Gestor.desactivarReservas();
+    }
     String error = "";
     Error_D er = null;
     try {
@@ -21,7 +31,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        ArrayList<Danho> data = Gestor.getDanhosActivos();
+        ArrayList<Prestamo> data = Gestor.getPrestamos();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -32,7 +42,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar Reporte de Daños en Materiales</title>
+        <title>Listar Préstamos</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -74,7 +84,7 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>Listar Reporte de Daños en Materiales</h1>
+                <h1>Listar Préstamos</h1>
             </div>
         </div>
         <br><br>
@@ -84,12 +94,12 @@
                 <table align="center">
                     <tr>
                         <td>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'listarPrestamos.jsp?accion=1'" style='width:150px;'>Atrás</button>
                         </td>
                     </tr>
                 </table>
                 <br>
-                <form action="modificarReporteD.jsp" method="POST">
+                <form action="modificarPrestamo.jsp" method="POST">
                     <table class="table table-striped" align="center">
                         <tr>
                             <%
@@ -97,37 +107,27 @@
                                     out.print("<td></td>");
                                 }
                             %>
-                            <td><b>Código</b></td>
-                            <td><b>Descripción</b></td>
-                            <td><b>Código Material</b></td>
-                            <td><b>Descripción Material</b></td>
-                            <td><b>Código Usuario</b></td>
+                            <td><b>Código Préstamo</b></td>
+                            <td><b>Códigos Materiales</b></td>
                             <td><b>Nombre Usuario</b></td>
-                            <td><b>Apellidos Usuario</b></td>
-                            <td><b>Fecha Daño</b></td>
-                            <td><b>Daño Reportado por</b></td>
-                            <td><b>Estado</b></td>
+                            <td><b>Apellido Usuario</b></td>
+                            <td><b>Fecha Préstamo</b></td>
+                            <td><b>Fecha Devolución</b></td>
+                            <td><b>Estado del Préstamo</b></td>
                         </tr>
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
-                                out.print("<td colspan='10' align='center'>No hay Reportes de Daños</td>");
+                                out.print("<td colspan='7' align='center'>No hay Préstamos</td>");
                                 out.print("</tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
                                     out.print("<tr>");
-                                    if (a == 2) {
-                                        out.print("<td><input type='radio' name='id' value='" + data.get(i).getCodigo() + "' ");
-                                        out.print("checked='checked'/></td>");
-                                    }
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getMat().getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getMat().getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu().getCodigo() + "</td>");
+                                    out.print("<td>" + data.get(i).getMat() + "</td>");
                                     out.print("<td>" + data.get(i).getUsu().getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getUsu().getApellido() + "</td>");
-                                    Calendar cal1 = data.get(i).getFecha_d();
+                                    Calendar cal1 = data.get(i).getFecha_prestamo();
                                     String fecha = cal1.get(Calendar.YEAR) + "-";
                                     int mes = cal1.get(Calendar.MONTH);
                                     mes++;
@@ -136,13 +136,23 @@
                                     fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
                                     fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
                                     out.print("<td>" + fecha + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu_rd().getCodigo() + ": " + Gestor.getUsuario(data.get(i).getUsu_rd().getCodigo()).getNombre() + "</td>");
+                                    Calendar cal2 = data.get(i).getFecha_devolucion();
+                                    String fecha1 = cal2.get(Calendar.YEAR) + "-";
+                                    int mes1 = cal2.get(Calendar.MONTH);
+                                    mes1++;
+                                    fecha1 += mes1 + "-";
+                                    fecha1 += cal2.get(Calendar.DAY_OF_MONTH);
+                                    fecha1 += " " + cal2.get(Calendar.HOUR_OF_DAY);
+                                    fecha1 += ":" + cal2.get(Calendar.MINUTE) + ":00";
                                     if (data.get(i).getEstado() == 0) {
-                                        out.print("<td>Dañado</td>");
+                                        out.print("<td>Sin devolver</td>");
+                                    } else {
+                                        out.print("<td>" + fecha1 + "</td>");
+                                    }
+                                    if (data.get(i).getEstado() == 0) {
+                                        out.print("<td>Activo</td>");
                                     } else if (data.get(i).getEstado() == 1) {
-                                        out.print("<td>Reparado</td>");
-                                    } else if (data.get(i).getEstado() == 2) {
-                                        out.print("<td>Dado de baja</td>");
+                                        out.print("<td>Inactivo</td>");
                                     } else {
                                         out.print("<td>Error</td>");
                                     }
@@ -151,23 +161,13 @@
                             }
                         %>
                         <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=7', this.form)" style='width:200px;'/>
+                            <td colspan="8" align="center">
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=16', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-success" type="button" value="Incluir inactivos" onclick="fijarURL('listarReporteDInactivos.jsp?accion=2', this.form)" style='width:200px;'/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" align="center">
-                                <%
-                                    if (a == 2) {%>
-                                <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
-                                <%}
-                                %>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            <td colspan="8" align="center">
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'listarPrestamos.jsp?accion=1'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>

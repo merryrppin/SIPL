@@ -30,7 +30,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        ArrayList<Usuario> data = Gestor.getUsuarios();
+        ArrayList<Usuario> data = Gestor.getUsuariosActivos();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -90,6 +90,14 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                        </td>
+                    </tr>
+                </table>
+                <br>
                 <form action="modificarUsuario.jsp" method="POST">
                     <table class="table table-striped" align="center">
                         <tr>
@@ -156,8 +164,11 @@
                         </tr>
                         <tr>
                             <td colspan="9" align="center">
-                                <br>
-                                <br>
+                                <input class="btn btn-success" type="button" value="Incluir inactivos" onclick="fijarURL('listarUsuariosInactivos.jsp?accion=2', this.form)" style='width:200px;'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="9" align="center">
                                 <%
                                     if (a == 2) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>

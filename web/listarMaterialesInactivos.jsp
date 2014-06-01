@@ -1,7 +1,7 @@
 <%-- 
-    Document   : listarReporteD
-    Created on : 16/02/2014, 03:18:31 PM
-    Author     : Samy
+    Document   : listarMateriales
+    Created on : 13-feb-2014, 23:17:20
+    Author     : WM
 --%>
 
 <%@page import="java.util.Calendar"%>
@@ -20,8 +20,8 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        ArrayList<Danho> data = Gestor.getDanhosActivos();
+    } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1 || user.getTipo_usuario() == 0) {
+        ArrayList<Material> data = Gestor.getMateriales();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -32,21 +32,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar Reporte de Daños en Materiales</title>
+        <style>
+            html,body{ background: #e0e0e0; }   
+        </style>
+        <title>Listar Materiales</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <script>
+        <script type="text/javascript">
+            function fijarURL(url, form) {
+                form.action = url;
+                form.submit();
+            }
             <%if (error != null && error.length() > 0) {%>
             $(document).ready(function() {
                 $("#myModal").modal('show');
             });
             <%}
             %>
-            function fijarURL(url, form) {
-                form.action = url;
-                form.submit();
-            }
+
         </script>
     </head>
     <body>
@@ -71,10 +75,7 @@
         <br>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <style>
-                    html,body{ background: #e0e0e0; }   
-                </style>
-                <h1>Listar Reporte de Daños en Materiales</h1>
+                <h1>Listar Materiales</h1>
             </div>
         </div>
         <br><br>
@@ -84,90 +85,79 @@
                 <table align="center">
                     <tr>
                         <td>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'listarMateriales.jsp?accion=1'" style='width:150px;'>Atrás</button>
                         </td>
                     </tr>
                 </table>
                 <br>
-                <form action="modificarReporteD.jsp" method="POST">
-                    <table class="table table-striped" align="center">
+                <form action="modificarMaterial.jsp" method="POST">
+                    <table class="table table-hover" align="center">
                         <tr>
-                            <%
-                                if (a == 2) {
-                                    out.print("<td></td>");
-                                }
-                            %>
+                            <td><b></b></td>
                             <td><b>Código</b></td>
+                            <td><b>Tipo</b></td>
                             <td><b>Descripción</b></td>
-                            <td><b>Código Material</b></td>
-                            <td><b>Descripción Material</b></td>
-                            <td><b>Código Usuario</b></td>
-                            <td><b>Nombre Usuario</b></td>
-                            <td><b>Apellidos Usuario</b></td>
-                            <td><b>Fecha Daño</b></td>
-                            <td><b>Daño Reportado por</b></td>
-                            <td><b>Estado</b></td>
+                            <td><b>Marca</b></td>
+                            <td><b>Serial</b></td>
+                            <td><b>Estado actual del elemento</b></td>
+                            <td><b>Nro Inventario</b></td>
+                            <td><b>Disponibilidad</b></td>
+                            <td colspan="2"><b>Foto</b></td>
                         </tr>
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
-                                out.print("<td colspan='10' align='center'>No hay Reportes de Daños</td>");
+                                out.print("<td colspan='10' align='center'>No hay Materiales</td>");
                                 out.print("</tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
                                     out.print("<tr>");
-                                    if (a == 2) {
-                                        out.print("<td><input type='radio' name='id' value='" + data.get(i).getCodigo() + "' ");
-                                        out.print("checked='checked'/></td>");
-                                    }
+                                    out.print("<td><input type='radio' name='id' value='" + data.get(i).getCodigo() + "' ");
+                                    out.print("checked='checked'/></td>");
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
+                                    out.print("<td>" + Gestor.getTipoM(data.get(i).getTipo_mat().getId()).getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getMat().getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getMat().getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu().getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu().getNombre() + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu().getApellido() + "</td>");
-                                    Calendar cal1 = data.get(i).getFecha_d();
-                                    String fecha = cal1.get(Calendar.YEAR) + "-";
-                                    int mes = cal1.get(Calendar.MONTH);
-                                    mes++;
-                                    fecha += mes + "-";
-                                    fecha += cal1.get(Calendar.DAY_OF_MONTH);
-                                    fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
-                                    fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
-                                    out.print("<td>" + fecha + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu_rd().getCodigo() + ": " + Gestor.getUsuario(data.get(i).getUsu_rd().getCodigo()).getNombre() + "</td>");
+                                    out.print("<td>" + data.get(i).getMarca() + "</td>");
+                                    out.print("<td>" + data.get(i).getSerial() + "</td>");
                                     if (data.get(i).getEstado() == 0) {
-                                        out.print("<td>Dañado</td>");
+                                        out.print("<td>Activo</td>");
                                     } else if (data.get(i).getEstado() == 1) {
-                                        out.print("<td>Reparado</td>");
-                                    } else if (data.get(i).getEstado() == 2) {
                                         out.print("<td>Dado de baja</td>");
+                                    } else if (data.get(i).getEstado() == 2) {
+                                        out.print("<td>Dañado</td>");
                                     } else {
                                         out.print("<td>Error</td>");
                                     }
+                                    out.print("<td>" + data.get(i).getNum_inventario() + "</td>");
+                                    if (data.get(i).getDisponibilidad() == 0) {
+                                        out.print("<td>Libre</td>");
+                                    } else if (data.get(i).getDisponibilidad() == 1) {
+                                        out.print("<td>Prestado</td>");
+                                    } else if (data.get(i).getDisponibilidad() == 2) {
+                                        out.print("<td>En Reserva</td>");
+                                    }
+                                    out.print("<td> <img src='Imagenes/" + data.get(i).getFoto_mat() + "' alt='...' width='50' height='50'></td>");
                                     out.print("</tr>");
                                 }
                             }
+                            if(user.getTipo_usuario() == 1 || user.getTipo_usuario() == 2){
                         %>
                         <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=7', this.form)" style='width:200px;'/>
+                            <td colspan="11" align="center">
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=12', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
+                        <%}%>
                         <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-success" type="button" value="Incluir inactivos" onclick="fijarURL('listarReporteDInactivos.jsp?accion=2', this.form)" style='width:200px;'/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" align="center">
+                            <td colspan="11" align="center">
                                 <%
-                                    if (a == 2) {%>
+                                    if (a == 2 && data.size() > 0) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                                 <%}
-                                %>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                    if (data.size() > 0) {%>
+                                <input class="btn btn-info" type="button" value="Ver Material" onclick="fijarURL('verMaterial.jsp', this.form)" style='width:200px;'/>
+                                <%}%>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'listarMateriales.jsp?accion=1'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>

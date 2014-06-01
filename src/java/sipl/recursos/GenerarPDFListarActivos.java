@@ -48,7 +48,7 @@ import sipl.dominio.Multa;
  *
  * @author WM
  */
-public class GenerarPDFListar {
+public class GenerarPDFListarActivos {
 
     private final Conexion con = new Conexion();
     private final materialDAO matDAO = new materialDAO(con);
@@ -138,7 +138,7 @@ public class GenerarPDFListar {
     private void createTable(Section subCatPart) {
         switch (Titulo) {
             case "Listar materiales": {
-                ArrayList<Material> materiales = matDAO.getMateriales();
+                ArrayList<Material> materiales = matDAO.getMaterialesActivos();
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell c1 = new PdfPCell(new Phrase("Código"));
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -192,7 +192,7 @@ public class GenerarPDFListar {
                 break;
             }
             case "Listar usuarios": {
-                ArrayList<Usuario> usuarios = usuDAO.getUsuarios();
+                ArrayList<Usuario> usuarios = usuDAO.getUsuariosActivos();
                 PdfPTable table = new PdfPTable(6);
                 PdfPCell c1 = new PdfPCell(new Phrase("Código"));
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -264,7 +264,7 @@ public class GenerarPDFListar {
                 break;
             }
             case "Listar reservas": {
-                ArrayList<Reserva> reservas = resDAO.getReservas();
+                ArrayList<Reserva> reservas = resDAO.getReservasAct();
                 PdfPTable table = new PdfPTable(6);
                 PdfPCell c1 = new PdfPCell(new Phrase("Código Reserva"));
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -314,7 +314,7 @@ public class GenerarPDFListar {
                 break;
             }
             case "Listar multas": {
-                ArrayList<Multa> multas = mulDAO.getMultas();
+                ArrayList<Multa> multas = mulDAO.getMultasAct();
                 PdfPTable table = new PdfPTable(6);
                 PdfPCell c1 = new PdfPCell(new Phrase("Código Usuario"));
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -364,7 +364,7 @@ public class GenerarPDFListar {
                 break;
             }
             case "Listar prestamos": {
-                ArrayList<Prestamo> prestamos = preDAO.getprestamos();
+                ArrayList<Prestamo> prestamos = preDAO.getprestamosActivos();
                 PdfPTable table = new PdfPTable(7);
                 PdfPCell c1 = new PdfPCell(new Phrase("Código Préstamo"));
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -390,6 +390,7 @@ public class GenerarPDFListar {
                 table.setHeaderRows(1);
                 for (int i = 0; i < prestamos.size(); i++){
                     Prestamo pre = prestamos.get(i);
+                if(pre.getEstado()==0){
                     table.addCell("" + pre.getCodigo());
                     table.addCell(pre.getMat());
                     table.addCell(pre.getUsu().getNombre());
@@ -420,11 +421,13 @@ public class GenerarPDFListar {
                         table.addCell("Error");
                     }
                 }
+            
+                }
                 subCatPart.add(table);
                 break;
             }
             case "Listar Danho": {
-                ArrayList<Danho> danhos = danDAO.getDanhos();
+                ArrayList<Danho> danhos = danDAO.getDanhosActivos();
                 PdfPTable table = new PdfPTable(9);
                 PdfPCell c1 = new PdfPCell(new Phrase("Descripción Daño"));
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);

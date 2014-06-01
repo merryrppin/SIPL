@@ -21,7 +21,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        ArrayList<Reserva> data = Gestor.getReservas();
+        ArrayList<Reserva> data = Gestor.getReservasActivas();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -77,10 +77,18 @@
                 <h1>Listar Reservas</h1>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                        </td>
+                    </tr>
+                </table>
+                <br>
                 <form action="modificarReserva.jsp" method="POST">
                     <table class="table table-striped" align="center">
                         <tr>
@@ -99,7 +107,7 @@
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
-                                out.print("<td colspan='4' align='center'>No hay Reservas</td>");
+                                out.print("<td colspan='6' align='center'>No hay Reservas</td>");
                                 out.print("</tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
@@ -135,6 +143,11 @@
                         <tr>
                             <td colspan="6" align="center">
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=4', this.form)" style='width:200px;'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" align="center">
+                                <input class="btn btn-success" type="button" value="Incluir inactivas" onclick="fijarURL('listarReservasInactivas.jsp?accion=1', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>

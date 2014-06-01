@@ -142,8 +142,12 @@
                                 }%></span>
                         </td>
                     </tr>
-                    <%
-                        }%>
+                    <tr>
+                        <td align="center">
+                            <button type="button" class="btn btn-info" onclick="location.href = 'variablesSistema.jsp'">Variables del Sistema</button>
+                        </td>
+                    </tr>
+                        <%}%>
                     <tr>
                         <%
                             String direccion = "principal.jsp";

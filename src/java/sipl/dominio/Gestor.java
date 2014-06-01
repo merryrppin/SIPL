@@ -71,6 +71,10 @@ public class Gestor {
     public ArrayList<Material> getMateriales() {
         return matDAO.getMateriales();
     }
+    
+    public ArrayList<Material> getMaterialesActivos() {
+        return matDAO.getMaterialesActivos();
+    }
 
     public ArrayList<Tipo_material> getTiposM() {
         return tipDAO.getTipo_material();
@@ -103,11 +107,19 @@ public class Gestor {
     public ArrayList<Usuario> getUsuarios() {
         return usuDAO.getUsuarios();
     }
+    
+    public ArrayList<Usuario> getUsuariosActivos() {
+        return usuDAO.getUsuariosActivos();
+    }
 
     public ArrayList<Danho> getDanhos() {
         return danDAO.getDanhos();
     }
 
+    public ArrayList<Danho> getDanhosActivos() {
+        return danDAO.getDanhosActivos();
+    }
+    
     public Danho getDanho(int codigo) {
         return danDAO.getDanho(codigo);
     }
@@ -151,6 +163,10 @@ public class Gestor {
     public ArrayList<Prestamo> getPrestamos() {
         return preDAO.getprestamos();
     }
+    
+    public ArrayList<Prestamo> getPrestamosActivos() {
+        return preDAO.getprestamosActivos();
+    }
 
     public ArrayList<Prestamo> getPrestamosFecha(String fecha1, String fecha2) {
         return preDAO.getRangoFecha_prestamo(fecha1, fecha2);
@@ -158,6 +174,10 @@ public class Gestor {
 
     public ArrayList<Multa> getMultas() {
         return mulDAO.getMultas();
+    }
+    
+    public ArrayList<Multa> getMultasActivas() {
+        return mulDAO.getMultasAct();
     }
 
     public void GraficarPrestamos(int[] values, int[] fecha, int n, String direccion, String tiempo, String titulo) {
@@ -235,6 +255,10 @@ public class Gestor {
     public ArrayList<Reserva> getReservas() {
         return resDAO.getReservas();
     }
+    
+    public ArrayList<Reserva> getReservasActivas() {
+        return resDAO.getReservasAct();
+    }
 
     public ArrayList<Multa> getMultasFecha(String fecha1, String fecha2) {
         return mulDAO.getRangoFecha_multa(fecha1, fecha2);
@@ -265,6 +289,11 @@ public class Gestor {
         pdfL.generarPDF(titulo, imagen, usu, dir, Filex);
     }
 
+    public void GenerarPDFListarActivos(String titulo, String imagen, Usuario usu, String dir, String Filex) throws BadElementException, IOException {
+        GenerarPDFListarActivos pdfL = new GenerarPDFListarActivos();
+        pdfL.generarPDF(titulo, imagen, usu, dir, Filex);
+    }
+    
     public void GenerarPDFGrafica(String titulo, String imagen, Usuario usu, String dir, String Fecha1, String Fecha2, String Rango, String Filex) throws BadElementException, IOException {
         GenerarPDFGrafica pdfG = new GenerarPDFGrafica();
         pdfG.generarPDF(titulo, imagen, usu, dir, Fecha1, Fecha2, Rango, Filex);
@@ -286,4 +315,13 @@ public class Gestor {
     public boolean addLaboratorio(Laboratorio lab) {
         return labDAO.addLaboratorio(lab);
     }
+    
+    public int getCantidadMaximaMateriales(){
+        return Integer.parseInt(varDAO.getTipo_variable(7).getDatos());
+    }
+    
+    public int getCantidadDiasPrestamo(){
+        return Integer.parseInt(varDAO.getTipo_variable(8).getDatos());
+    }
+    
 }

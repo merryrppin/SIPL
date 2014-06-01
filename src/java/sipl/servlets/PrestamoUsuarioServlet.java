@@ -47,8 +47,8 @@ public class PrestamoUsuarioServlet extends HttpServlet {
                 out.print("<b>" + usu.getNombre() + " " + usu.getApellido() + " identificado con el código "
                         + usu.getCodigo() + " no tiene préstamos activos" + "</b>");
             } else {
-                out.print("<b>" + usu.getNombre() + " " + usu.getApellido() + " identificado con el código "
-                        + usu.getCodigo() + " tiene un préstamo que aún no ha regresado</b>");
+                out.print("<font color=\"red\"><b>" + usu.getNombre() + " " + usu.getApellido() + " identificado con el código "
+                        + usu.getCodigo() + " tiene un préstamo que aún no ha regresado</b></font>");
             }
         }
     }

@@ -21,7 +21,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        ArrayList<Danho> data = Gestor.getDanhosActivos();
+        ArrayList<Danho> data = Gestor.getDanhos();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -84,7 +84,7 @@
                 <table align="center">
                     <tr>
                         <td>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'listarReporteD.jsp?accion=1'" style='width:150px;'>Atrás</button>
                         </td>
                     </tr>
                 </table>
@@ -151,23 +151,18 @@
                             }
                         %>
                         <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=7', this.form)" style='width:200px;'/>
+                            <td colspan="11" align="center">
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=17', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-success" type="button" value="Incluir inactivos" onclick="fijarURL('listarReporteDInactivos.jsp?accion=2', this.form)" style='width:200px;'/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" align="center">
+                            <td colspan="11" align="center">
                                 <%
                                     if (a == 2) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                                 <%}
                                 %>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'listarReporteD.jsp?accion=1'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>

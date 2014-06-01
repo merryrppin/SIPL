@@ -1,6 +1,6 @@
 <%-- 
-    Document   : listarReporteD
-    Created on : 16/02/2014, 03:18:31 PM
+    Document   : listarReservas
+    Created on : 8/03/2014, 07:23:24 PM
     Author     : Samy
 --%>
 
@@ -21,7 +21,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        ArrayList<Danho> data = Gestor.getDanhosActivos();
+        ArrayList<Reserva> data = Gestor.getReservas();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -32,7 +32,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar Reporte de Daños en Materiales</title>
+        <title>Listar Reservas</title>
         <script src="jquery/jquery-1.10.2.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -62,7 +62,7 @@
                         <p class="text-warning"><%out.print(er.getMensaje());%></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" onclick="location.href = 'principal.jsp'" data-dismiss="modal">Aceptar</button>
+                        <button type="button" class="btn btn-warning" onclick="location.href = 'listarReservas.jsp?accion=1'" data-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <style>
                     html,body{ background: #e0e0e0; }   
                 </style>
-                <h1>Listar Reporte de Daños en Materiales</h1>
+                <h1>Listar Reservas</h1>
             </div>
         </div>
         <br><br>
@@ -89,7 +89,7 @@
                     </tr>
                 </table>
                 <br>
-                <form action="modificarReporteD.jsp" method="POST">
+                <form action="modificarReserva.jsp" method="POST">
                     <table class="table table-striped" align="center">
                         <tr>
                             <%
@@ -97,21 +97,17 @@
                                     out.print("<td></td>");
                                 }
                             %>
-                            <td><b>Código</b></td>
-                            <td><b>Descripción</b></td>
-                            <td><b>Código Material</b></td>
-                            <td><b>Descripción Material</b></td>
-                            <td><b>Código Usuario</b></td>
+                            <td><b>Código Reserva</b></td>
                             <td><b>Nombre Usuario</b></td>
-                            <td><b>Apellidos Usuario</b></td>
-                            <td><b>Fecha Daño</b></td>
-                            <td><b>Daño Reportado por</b></td>
-                            <td><b>Estado</b></td>
+                            <td><b>Apellido Usuario</b></td>
+                            <td><b>Códigos Materiales</b></td>
+                            <td><b>Fecha Reserva</b></td>
+                            <td><b>Estado de la reserva</b></td>
                         </tr>
                         <%
                             if (data.size() == 0) {
                                 out.print("<tr>");
-                                out.print("<td colspan='10' align='center'>No hay Reportes de Daños</td>");
+                                out.print("<td colspan='6' align='center'>No hay Reservas</td>");
                                 out.print("</tr>");
                             } else {
                                 for (int i = 0; i < data.size(); i++) {
@@ -121,13 +117,10 @@
                                         out.print("checked='checked'/></td>");
                                     }
                                     out.print("<td>" + data.get(i).getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getMat().getCodigo() + "</td>");
-                                    out.print("<td>" + data.get(i).getMat().getDescripcion() + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu().getCodigo() + "</td>");
                                     out.print("<td>" + data.get(i).getUsu().getNombre() + "</td>");
                                     out.print("<td>" + data.get(i).getUsu().getApellido() + "</td>");
-                                    Calendar cal1 = data.get(i).getFecha_d();
+                                    out.print("<td>" + data.get(i).getMat() + "</td>");
+                                    Calendar cal1 = data.get(i).getFecha_reserva();
                                     String fecha = cal1.get(Calendar.YEAR) + "-";
                                     int mes = cal1.get(Calendar.MONTH);
                                     mes++;
@@ -136,13 +129,10 @@
                                     fecha += " " + cal1.get(Calendar.HOUR_OF_DAY);
                                     fecha += ":" + cal1.get(Calendar.MINUTE) + ":00";
                                     out.print("<td>" + fecha + "</td>");
-                                    out.print("<td>" + data.get(i).getUsu_rd().getCodigo() + ": " + Gestor.getUsuario(data.get(i).getUsu_rd().getCodigo()).getNombre() + "</td>");
                                     if (data.get(i).getEstado() == 0) {
-                                        out.print("<td>Dañado</td>");
+                                        out.print("<td>Activo</td>");
                                     } else if (data.get(i).getEstado() == 1) {
-                                        out.print("<td>Reparado</td>");
-                                    } else if (data.get(i).getEstado() == 2) {
-                                        out.print("<td>Dado de baja</td>");
+                                        out.print("<td>Inactivo</td>");
                                     } else {
                                         out.print("<td>Error</td>");
                                     }
@@ -151,23 +141,17 @@
                             }
                         %>
                         <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=7', this.form)" style='width:200px;'/>
+                            <td colspan="7" align="center">
+                                <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=14', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="10" align="center">
-                                <input class="btn btn-success" type="button" value="Incluir inactivos" onclick="fijarURL('listarReporteDInactivos.jsp?accion=2', this.form)" style='width:200px;'/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" align="center">
+                            <td colspan="7" align="center">
                                 <%
                                     if (a == 2) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                                 <%}
                                 %>
-                                <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'listarReservas.jsp?accion=1'" style='width:150px;'>Atrás</button>
                             </td>
                         </tr>
                     </table>

@@ -41,8 +41,10 @@
         <script src="js/bootstrap.min.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script type="text/javascript">
+            <%int cantidadMaterialesMax=Gestor.getCantidadMaximaMateriales();%>
             var counter = 1;
             var limit = 15;
+            //var limit = <%out.print(cantidadMaterialesMax);%>;
             function addInput(divName) {
                 if (counter === limit) {
                     alert("Haz alcanzado el límite máximo de " + counter + " materiales");
@@ -80,23 +82,26 @@
             }
             function getPrestamo() {
                 var code = $("#codigo").val();
-                $("#verificar").load("PrestamoUsuarioServlet", {Code: code});
+                $("#verificarP").load("PrestamoUsuarioServlet", {Code: code});
                 return false;
             }
             function getMulta() {
                 var code = $("#codigo").val();
-                $("#verificar").load("MultaUsuarioServlet", {Code: code});
+                $("#verificarM").load("MultaUsuarioServlet", {Code: code});
                 return false;
             }
             function getReserva() {
                 var code = $("#codigo").val();
-                $("#verificar").load("VerificarReservaUsuarioServlet", {Code: code});
+                $("#verificarR").load("VerificarReservaUsuarioServlet", {Code: code});
                 $("#materRes").load("ReservaUsuarioServlet", {Code: code});
                 return false;
             }
             function getUsuario() {
                 var code = $("#codigo").val();
                 $("#nombre").load("UsuarioServlet", {Code: code});
+                getReserva();
+                getPrestamo();
+                getMulta();
                 return false;
             }
             function getMaterial1() {
@@ -247,14 +252,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" align="center">
-                                <input class="btn btn-info" type="button" value="Verificar Multa" onclick="return getMulta();" style='width:200px;'/>
-                                <input class="btn btn-info" type="button" value="Verificar Reserva" onclick="return getReserva();" style='width:200px;'/>
-                                <input class="btn btn-info" type="button" value="Verificar Préstamo" onclick="return getPrestamo();" style='width:200px;'/>
+                            <td id="verificarM" colspan="1" align="center">
+
                             </td>
-                        </tr>
-                        <tr>
-                            <td id="verificar" colspan="4" align="center">
+                            <td id="verificarR" colspan="2" align="center">
+
+                            </td>
+                            <td id="verificarP" colspan="1" align="center">
 
                             </td>
                         </tr>
@@ -263,11 +267,13 @@
                                 <label class="control-label">Cantidad de días:</label>
                                 <label class="control-label">
                                     <select name="dia">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                        <%
+                                        int cantidadDiasPrestamo = Gestor.getCantidadDiasPrestamo();
+                                        for(int i=1;i<=cantidadDiasPrestamo;i++){%>
+                                            <option value="<%out.print(i);%>"><%out.print(i);%></option>
+                                        <%}
+                                        
+                                        %>
                                     </select>
                                 </label>
                             </td>

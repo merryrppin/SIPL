@@ -80,6 +80,14 @@
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                        </td>
+                    </tr>
+                </table>
+                <br>
                 <form action="modificarLaboratorio.jsp" method="POST">
                     <table class="table table-striped" align="center">
                         <tr>

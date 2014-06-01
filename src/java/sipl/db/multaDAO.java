@@ -48,6 +48,7 @@ public class multaDAO {
         }
         return data;
     }
+    
 
     public ArrayList<Multa> getMultasAct() {
         ArrayList<Multa> data = new ArrayList<>();

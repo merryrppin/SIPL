@@ -31,7 +31,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1) {
-        ArrayList<Multa> data = Gestor.getMultas();
+        ArrayList<Multa> data = Gestor.getMultasActivas();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -87,10 +87,18 @@
                 <h1>Listar Multas</h1>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                        </td>
+                    </tr>
+                </table>
+                <br>
                 <form action="DarbajaMulta.jsp" method="POST">
                     <table class="table table-striped" align="center">
                         <tr>
@@ -145,6 +153,11 @@
                         <tr>
                             <td colspan="6" align="center">
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=5', this.form)" style='width:200px;'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" align="center">
+                                <input class="btn btn-success" type="button" value="Incluir inactivas" onclick="fijarURL('listarMultasInactivas.jsp?accion=1', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
                         <tr>

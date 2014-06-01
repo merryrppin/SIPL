@@ -21,7 +21,7 @@
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
     } else if (user.getTipo_usuario() == 2 || user.getTipo_usuario() == 1 || user.getTipo_usuario() == 0) {
-        ArrayList<Material> data = Gestor.getMateriales();
+        ArrayList<Material> data = Gestor.getMaterialesActivos();
         String accion = request.getParameter("accion");
         int a = 0;
         if (accion != null) {
@@ -78,10 +78,18 @@
                 <h1>Listar Materiales</h1>
             </div>
         </div>
-        <br><br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-xs-6 col-sm-1"></div>
             <div class="col-xs-12 col-sm-10">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                        </td>
+                    </tr>
+                </table>
+                <br>
                 <form action="modificarMaterial.jsp" method="POST">
                     <table class="table table-hover" align="center">
                         <tr>
@@ -128,7 +136,6 @@
                                     } else if (data.get(i).getDisponibilidad() == 2) {
                                         out.print("<td>En Reserva</td>");
                                     }
-                                    //out.print("<td>" + data.get(i).getFoto_mat() + "</td>");
                                     out.print("<td> <img src='Imagenes/" + data.get(i).getFoto_mat() + "' alt='...' width='50' height='50'></td>");
                                     out.print("</tr>");
                                 }
@@ -140,6 +147,11 @@
                                 <input class="btn btn-info" type="button" value="Generar PDF" onclick="fijarURL('GenerarPDF.jsp?accion=1', this.form)" style='width:200px;'/>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="11" align="center">
+                                <input class="btn btn-success" type="button" value="Incluir inactivos" onclick="fijarURL('listarMaterialesInactivos.jsp?accion=2', this.form)" style='width:200px;'/>
+                            </td>
+                        </tr>
                         <%}%>
                         <tr>
                             <td colspan="11" align="center">
@@ -147,8 +159,6 @@
                                     if (a == 2 && data.size() > 0) {%>
                                 <button type="submit" class="btn btn-success" style='width:200px;'>Modificar</button>
                                 <%}
-                                %>
-                                <%
                                     if (data.size() > 0) {%>
                                 <input class="btn btn-info" type="button" value="Ver Material" onclick="fijarURL('verMaterial.jsp', this.form)" style='width:200px;'/>
                                 <%}

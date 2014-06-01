@@ -55,11 +55,11 @@ public class MultaUsuarioServlet extends HttpServlet {
                 cal2.setTimeInMillis(tiempo2);
                 int mes = cal2.get(Calendar.MONTH);
                 mes++;
-                out.print("<b>" + usu.getNombre() + " " + usu.getApellido() + " identificado con el código "
+                out.print("<font color=\"red\"><b>" + usu.getNombre() + " " + usu.getApellido() + " identificado con el código "
                         + usu.getCodigo() + " tiene una multa que caducara el " + cal2.get(Calendar.YEAR)
                         + "/" + mes + "/" + cal2.get(Calendar.DAY_OF_MONTH) + " "
                         + cal2.get(Calendar.HOUR_OF_DAY) + ":" + cal2.get(Calendar.MINUTE)
-                        + ":" + cal2.get(Calendar.SECOND) + "</b>");
+                        + ":" + cal2.get(Calendar.SECOND) + "</b></font>");
             }
         }
 

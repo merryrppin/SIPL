@@ -57,6 +57,35 @@ public class materialDAO {
         }
         return data;
     }
+    
+    public ArrayList<Material> getMaterialesActivos() {
+        ArrayList<Material> data = new ArrayList<>();
+        ResultSet rs = con.getQuery("select * from material where estado=0 OR estado=2");
+        try {
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String descripcion = rs.getString("descripcion");
+                int tipo_mat = rs.getInt("tipo_mat");
+                String marca = rs.getString("marca");
+                String serial = rs.getString("serial");
+                String foto_mat = rs.getString("foto_mat");
+                String num_inventario = rs.getString("num_inventario");
+                int estado = rs.getInt("estado");
+                Calendar cal1 = Calendar.getInstance();
+                Timestamp t1 = rs.getTimestamp("ult_fecha_mante");
+                cal1.setTimeInMillis(t1.getTime());
+                int disponibilidad = rs.getInt("disponibilidad");
+                int codigo_lab = rs.getInt("codigo_lab");
+                String imagenqr = rs.getString("imagenqr");
+                Material mat = new Material(codigo, descripcion, tipDAO.getTipo_material(tipo_mat), marca, serial, foto_mat, num_inventario, estado, cal1, disponibilidad, labDAO.getLaboratorio(codigo_lab), imagenqr);
+                data.add(mat);
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            data = null;
+        }
+        return data;
+    }
 
     public Material getMaterial(int codigo) {
         Material mat = null;
