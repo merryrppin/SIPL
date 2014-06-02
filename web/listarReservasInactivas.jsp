@@ -84,7 +84,7 @@
                 <table align="center">
                     <tr>
                         <td>
-                            <button class="btn btn-danger" type="button" onclick="location.href = 'principal.jsp'" style='width:150px;'>Atrás</button>
+                            <button class="btn btn-danger" type="button" onclick="location.href = 'listarReservas.jsp?accion=1'" style='width:150px;'>Atrás</button>
                         </td>
                     </tr>
                 </table>
