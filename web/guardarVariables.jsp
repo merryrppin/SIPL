@@ -12,7 +12,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp?error=No_usuario");
-    } else if (user.getTipo_usuario() == 1) {
+    } else if (user.getTipo_usuario() == 2) {
         String dias = request.getParameter("dias");
         String matMax = request.getParameter("matMax");
         String diasPre = request.getParameter("diasPre");
@@ -23,14 +23,12 @@
             VariableSis var = Gestor.getVariable(6);
             var.setDatos("" + d);
             Gestor.updateVariableSis(var);
-            var = Gestor.getVariable(7);
-            var.setDatos("" + matM);
-            var.setDatos("" + d);
-            Gestor.updateVariableSis(var);
-            var = Gestor.getVariable(8);
-            var.setDatos("" + dPre);
-            var.setDatos("" + d);
-            Gestor.updateVariableSis(var);
+            VariableSis var2 = Gestor.getVariable(7);
+            var2.setDatos("" + matM);
+            Gestor.updateVariableSis(var2);
+            VariableSis var3 = Gestor.getVariable(8);
+            var3.setDatos("" + dPre);
+            Gestor.updateVariableSis(var3);
             response.sendRedirect("configuracion.jsp");
         } catch (Exception e) {
             response.sendRedirect("configuracion.jsp?error=error");

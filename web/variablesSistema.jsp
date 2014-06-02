@@ -97,9 +97,7 @@
                         </tr>
                         <tr>
                             <td align="center" colspan="2">
-                                <br><br>
                                 <button class="btn btn-danger" type="button" onclick="location.href = 'configuracion.jsp'" style='width:150px;'>Atrás</button>
-                                <br><br>
                             </td>
                         </tr>
                     </table>

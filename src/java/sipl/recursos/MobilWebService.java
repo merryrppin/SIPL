@@ -25,6 +25,7 @@ import sipl.dominio.Prestamo;
 import sipl.dominio.Reserva;
 import sipl.dominio.Tipo_material;
 import sipl.dominio.Usuario;
+import sipl.dominio.VariableSis;
 
 /**
  *
@@ -271,7 +272,8 @@ public class MobilWebService {
                                 int m = 0;
                                 if (time1 > time2) {
                                     usu.setEstado(4);
-                                    Multa mul = new Multa(0, usu, cal, 0, 3);
+                                    VariableSis varTiempo = varDAO.getTipo_variable(6);
+                                    Multa mul = new Multa(0, usu, cal, 0, Integer.parseInt(varTiempo.getDatos()));
                                     mulDAO.addMulta(mul);
                                     m++;
                                 }

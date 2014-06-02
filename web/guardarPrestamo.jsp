@@ -66,59 +66,77 @@
                 } else if (usuario.getEstado() == 1) {
                     error = "usuario_inactivo";
                 } else if (usuario.getEstado() == 0) {
+                    int contador = 0;
                     Calendar cal = Calendar.getInstance();
                     Calendar cal2 = Calendar.getInstance();
                     Usuario usu = Gestor.getUsuario(codigo);
                     String cod_materiales = "";
                     if (m1 != null && m1.length() > 0) {
                         cod_materiales += m1 + ";";
+                        contador++;
                     }
                     if (m2 != null && m2.length() > 0) {
                         cod_materiales += m2 + ";";
+                        contador++;
                     }
                     if (m3 != null && m3.length() > 0) {
                         cod_materiales += m3 + ";";
+                        contador++;
                     }
                     if (m4 != null && m4.length() > 0) {
                         cod_materiales += m4 + ";";
+                        contador++;
                     }
                     if (m5 != null && m5.length() > 0) {
                         cod_materiales += m5 + ";";
+                        contador++;
                     }
                     if (m6 != null && m6.length() > 0) {
                         cod_materiales += m6 + ";";
+                        contador++;
                     }
                     if (m7 != null && m7.length() > 0) {
                         cod_materiales += m7 + ";";
+                        contador++;
                     }
                     if (m8 != null && m8.length() > 0) {
                         cod_materiales += m8 + ";";
+                        contador++;
                     }
                     if (m9 != null && m9.length() > 0) {
                         cod_materiales += m9 + ";";
+                        contador++;
                     }
                     if (m10 != null && m10.length() > 0) {
                         cod_materiales += m10 + ";";
+                        contador++;
                     }
                     if (m11 != null && m11.length() > 0) {
                         cod_materiales += m11 + ";";
+                        contador++;
                     }
                     if (m12 != null && m12.length() > 0) {
                         cod_materiales += m12 + ";";
+                        contador++;
                     }
                     if (m13 != null && m13.length() > 0) {
                         cod_materiales += m13 + ";";
+                        contador++;
                     }
                     if (m14 != null && m14.length() > 0) {
                         cod_materiales += m14 + ";";
+                        contador++;
                     }
                     if (m15 != null && m15.length() > 0) {
                         cod_materiales += m15 + ";";
+                        contador++;
                     }
                     int disp = 0;
                     int esta = 0;
                     String mates[] = cod_materiales.split(";");
                     int matRepetido = 0;
+                    int materialesMaximosPrestamo = Gestor.getCantidadMaximaMateriales();
+                    if(contador <= materialesMaximosPrestamo){
                     try {
                         for (String mate : mates) {
                             int x = Integer.parseInt(mate);
@@ -171,6 +189,9 @@
                     } catch (NumberFormatException e) {
                         error = "material_inexistente";
                     }
+                }else{
+                        error = "Demasiados_Materiales";
+                    }
                 } else {
                     error = "error";
                 }
@@ -208,7 +229,8 @@
                         int m = 0;
                         if (time1 > time2) {
                             usuario.setEstado(4);
-                            Multa mul = new Multa(0, usuario, cal, 0, 3);
+                            VariableSis varTiempo = Gestor.getVariable(6);
+                            Multa mul = new Multa(0, usuario, cal, 0, Integer.parseInt(varTiempo.getDatos()));
                             Gestor.addMulta(mul);
                             m++;
                         }

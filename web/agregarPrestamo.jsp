@@ -222,6 +222,11 @@
                 <form name="Material" class="form-horizontal" action="guardarPrestamo.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table class="table table-hover" align="center">
                         <tr>
+                            <td align="center" colspan="4">
+                                La cantidad máxima de materiales por cada préstamo es de: <%out.print(Gestor.getCantidadMaximaMateriales());%> materiales
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <label class="control-label" for="codigo">Codigo</label>
                             </td>
