@@ -1,60 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    <listener>
-        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-    </listener>
     <servlet>
         <servlet-name>MaterialServlet</servlet-name>
-        <servlet-class>sipl.servlets.MaterialServlet</servlet-class>
+        <servlet-class>silab.servlets.MaterialServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsuarioServlet</servlet-name>
-        <servlet-class>sipl.servlets.UsuarioServlet</servlet-class>
+        <servlet-class>silab.servlets.UsuarioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MaterialesPrestamoServlet</servlet-name>
-        <servlet-class>sipl.servlets.MaterialesPrestamoServlet</servlet-class>
+        <servlet-class>silab.servlets.MaterialesPrestamoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FechaPrestamoServlet</servlet-name>
-        <servlet-class>sipl.servlets.FechaPrestamoServlet</servlet-class>
+        <servlet-class>silab.servlets.FechaPrestamoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MultaUsuarioServlet</servlet-name>
-        <servlet-class>sipl.servlets.MultaUsuarioServlet</servlet-class>
+        <servlet-class>silab.servlets.MultaUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ReservaUsuarioServlet</servlet-name>
-        <servlet-class>sipl.servlets.ReservaUsuarioServlet</servlet-class>
+        <servlet-class>silab.servlets.ReservaUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FileUploadServlet</servlet-name>
-        <servlet-class>sipl.servlets.FileUploadServlet</servlet-class>
+        <servlet-class>silab.servlets.FileUploadServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MaterialesReservaServlet</servlet-name>
-        <servlet-class>sipl.servlets.MaterialesReservaServlet</servlet-class>
+        <servlet-class>silab.servlets.MaterialesReservaServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>VerificarReservaUsuarioServlet</servlet-name>
-        <servlet-class>sipl.servlets.VerificarReservaUsuarioServlet</servlet-class>
+        <servlet-class>silab.servlets.VerificarReservaUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PrestamoUsuarioServlet</servlet-name>
-        <servlet-class>sipl.servlets.PrestamoUsuarioServlet</servlet-class>
+        <servlet-class>silab.servlets.PrestamoUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetUbicacionServlet</servlet-name>
-        <servlet-class>sipl.servlets.GetUbicacionServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>MobilWebService</servlet-name>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <servlet-class>silab.servlets.GetUbicacionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FechaDevolucionServlet</servlet-name>
-        <servlet-class>sipl.servlets.FechaDevolucionServlet</servlet-class>
+        <servlet-class>silab.servlets.FechaDevolucionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MaterialServlet</servlet-name>
@@ -99,10 +91,6 @@
     <servlet-mapping>
         <servlet-name>GetUbicacionServlet</servlet-name>
         <url-pattern>/GetUbicacionServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MobilWebService</servlet-name>
-        <url-pattern>/MobilWebService</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FechaDevolucionServlet</servlet-name>
