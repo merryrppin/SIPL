@@ -70,7 +70,7 @@
         <div class="row">
             <div class="col-xs-6 col-sm-3"></div>
             <div class="col-xs-12 col-sm-6">
-                <form name="Material" class="form-horizontal" action="guardarVariables.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
+                <form name="Variables" class="form-horizontal" action="guardarVariables.jsp?accion=1" method="POST" onsubmit="return validarForm(this);">
                     <table class="table table-hover" align="center">
                         <tr>
                             <td><%out.print(Gestor.getVariable(6).getDescripcion());%></td>
@@ -89,7 +89,19 @@
                             <td>
                                 <input type="text" name="diasPre" id="diasPre" value="<%out.print(Gestor.getVariable(8).getDatos());%>">
                             </td>
-                        </tr>                        
+                        </tr>
+                        <tr>
+                        <td align="center" colspan="2">
+                                <button type="submit" class="btn btn-success" style='width:150px;'>Guardar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="2">
+                                <br><br>
+                                <button class="btn btn-danger" type="button" onclick="location.href = 'configuracion.jsp'" style='width:150px;'>Atrás</button>
+                                <br><br>
+                            </td>
+                        </tr>
                     </table>
                 </form>
                 

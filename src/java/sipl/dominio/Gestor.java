@@ -324,4 +324,8 @@ public class Gestor {
         return Integer.parseInt(varDAO.getTipo_variable(8).getDatos());
     }
     
+    public boolean updateVariableSis(VariableSis var){
+        return varDAO.updateTipo_variable(var);
+    }
+    
 }

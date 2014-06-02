@@ -199,8 +199,8 @@
                 mat.setFoto_mat(foto);
                 Gestor.updateMaterial(mat);
                 response.sendRedirect("listarMateriales.jsp?accion=1");
-            }else{
-                error="error_accion";
+            } else {
+                error = "error_accion";
             }
         } catch (Exception e) {
             error = "sin_accion";
@@ -209,6 +209,6 @@
         response.sendRedirect("principal.jsp?error=sin_permisos");
     }
     if (error != null && error.length() > 0) {
-        response.sendRedirect("agregarMaterial.jsp?" + error);
+        response.sendRedirect("principal.jsp?error=" + error);
     }
 %>
