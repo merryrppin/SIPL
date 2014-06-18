@@ -31,7 +31,7 @@ public class Gestor {
     QRCode qrC = new QRCode();
     Graficar gra = new Graficar();
     GenerarBackupMySQL gen = new GenerarBackupMySQL();
-    RestoreMySQL res = new RestoreMySQL();
+    //RestoreMySQL res = new RestoreMySQL();
     TextoImagen tei = new TextoImagen();
     DesactivarMultas actM = new DesactivarMultas();
     DesactivarReserva actR = new DesactivarReserva();
@@ -217,10 +217,6 @@ public class Gestor {
 
     public String GenerarBackup(String nombre) {
         return gen.GenerarBackupMySQL(nombre);
-    }
-
-    public String RestoreMysql(String direccion) throws InterruptedException {
-        return res.Restore(direccion);
     }
 
     public VariableSis getVariable(int id) {
